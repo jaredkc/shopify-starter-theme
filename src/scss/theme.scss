@@ -1,0 +1,8 @@
+@import './variables.scss';
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Roboto,Segoe UI,Helvetica Neue,sans-serif;
+  background: #eee;
+  color: $font-color;
+  padding: 2vw;
+}
