@@ -7,7 +7,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "theme-watch": "theme watch",
-    "theme-deploy": "webpack -p && theme deploy"
+    "theme-deploy": "webpack -p && theme deploy --dir theme"
   },
   "author": "",
   "license": "ISC",
