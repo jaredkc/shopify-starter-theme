@@ -1,4 +1,9 @@
 const path = require('path');
+const read = require('read-yaml');
+const config = read.sync('config.yml');
+const themeID = config.development.theme_id;
+const storeURL = config.development.store;
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -8,13 +13,38 @@ module.exports = {
     product: './src/js/product.js',
   },
   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    hot: true,
-  },
-  plugins: [new MiniCssExtractPlugin({
-    filename: '[name].bundle.css',
-  })],
+  plugins: [
+    new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
+    new BrowserSyncPlugin({
+      https: true,
+      port: 3000,
+      proxy: `https://${storeURL}?preview_theme_id=${themeID}`,
+      reloadDelay: 2000,
+      server: { baseDir: ['dist'] },
+      middleware: [
+        function (req, res, next) {
+          // Add url paramaters for Shopify theme preview.
+          // ?_fd=0 prevents domain forwarding, ?pb=0 hides the Shopify preview bar
+          const prefix = req.url.indexOf('?') > -1 ? '&' : '?';
+          const queryStringComponents = ['_ab=0&_fd=0&_sc=1&pb=0'];
+          req.url += prefix + queryStringComponents.join('&');
+          next();
+        }
+      ],
+      files: [{
+        match: [
+          '**/*.liquid',
+          '**/*.scss'
+        ],
+        fn: function(event, file) {
+          if (event === "change") {
+            const bs = require('browser-sync').get('bs-webpack-plugin');
+            bs.reload();
+          }
+        }
+      }]
+    })
+  ],
   module: {
     rules: [
       {
