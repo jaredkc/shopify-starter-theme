@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "theme-watch": "theme watch",
+    "theme-watch": "theme watch --dir theme",
     "theme-deploy": "webpack -p && theme deploy --dir theme"
   },
   "author": "",

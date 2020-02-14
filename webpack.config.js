@@ -20,7 +20,6 @@ module.exports = {
       port: 3000,
       proxy: `https://${storeURL}?preview_theme_id=${themeID}`,
       reloadDelay: 2000,
-      server: { baseDir: ['dist'] },
       middleware: [
         function (req, res, next) {
           // Add url paramaters for Shopify theme preview.

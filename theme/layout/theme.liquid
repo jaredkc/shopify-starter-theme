@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  {{ content_for_header }} <!-- Header hook for plugins -->
+  {{ content_for_header }} {% comment %} Header hook for plugins {% endcomment %}
   {{ 'theme.bundle.css' | asset_url | stylesheet_tag }}
   {{ 'theme.bundle.js' | asset_url | script_tag }}
   {% if template contains 'product' %}
@@ -16,7 +16,6 @@
   {% endif %}
 </head>
 <body>
-  <h1>From Theme Dir</h1>
   {% section 'site-header' %}
   <main role="main">
     {{ content_for_layout }}
