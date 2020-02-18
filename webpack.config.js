@@ -41,7 +41,17 @@ module.exports = {
             bs.reload();
           }
         }
-      }]
+      }],
+      // Move snippet injection to </body>,
+      // Shopify content_for_header causes injection to load in head and break scripts
+      snippetOptions: {
+        rule: {
+          match: /<\/body>/i,
+          fn: function (snippet, match) {
+            return snippet + match;
+          }
+        }
+      }
     })
   ],
   module: {
