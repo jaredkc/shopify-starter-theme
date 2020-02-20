@@ -66,18 +66,19 @@
   {{ image.width }}
 {%- endcapture -%}
 {%- assign image_widths = image_widths | strip -%}
-
-<img id="Image-{{ image.id }}-{{ responsive_image_counter }}"
-  class="responsive-image__image lazyload {{ image_class }}"
-  src="{{ image | img_url: '30x' }}"
-  data-src="{{ img_url }}"
-  data-widths="[{{ image_widths }}]"
-  data-aspectratio="{{ image.aspect_ratio }}"
-  data-sizes="auto"
-  tabindex="-1"
-  alt="{{ image.alt | escape }}"
-  {{ image_attributes }}
->
+<div id="ImageWrapper-{{ image.id }}-{{ responsive_image_counter }}" data-image-id="{{ image.id }}" class="responsive-image__wrapper {{ wrapper_class }}" {{ wrapper_attributes }}>
+  <img id="Image-{{ image.id }}-{{ responsive_image_counter }}"
+    class="responsive-image__image lazyload {{ image_class }}"
+    src="{{ image | img_url: '300x' }}"
+    data-src="{{ img_url }}"
+    data-widths="[{{ image_widths }}]"
+    data-aspectratio="{{ image.aspect_ratio }}"
+    data-sizes="auto"
+    tabindex="-1"
+    alt="{{ image.alt | escape }}"
+    {{ image_attributes }}
+  >
+</div>
 <noscript>
   <img class="{{ image_class }}" src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}">
 </noscript>
