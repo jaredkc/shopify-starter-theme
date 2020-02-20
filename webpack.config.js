@@ -43,6 +43,7 @@ module.exports = {
     ],
   },
   devtool: 'inline-source-map',
+  stats: { children: false },
   plugins: [
     // Extract CSS to external file to load styles in Shopify theme as normal
     new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
