@@ -1,0 +1,10 @@
+<footer id="colophon" class="site-footer" role="content-info">
+  <p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
+</footer>
+
+{% schema %}
+  {
+    "name": "Site Footer",
+    "settings": []
+  }
+{% endschema %}
