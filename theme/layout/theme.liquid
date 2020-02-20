@@ -10,13 +10,14 @@
   {{ content_for_header }} {% comment %} Header hook for plugins {% endcomment %}
   {{ 'theme.bundle.css' | asset_url | stylesheet_tag }}
   {{ 'theme.bundle.js' | asset_url | script_tag }}
-  {% if template contains 'product' %}
+  {%- if template contains 'product' -%}
   {{ 'product.bundle.css' | asset_url | stylesheet_tag }}
   {{ 'product.bundle.js' | asset_url | script_tag }}
-  {% endif %}
+  {%- endif -%}
+  {%- include 'social-meta-tags'  -%}
 </head>
 <body>
-  {% section 'site-header' %}
+  {%- section 'site-header' -%}
   <main role="main">
     {{ content_for_layout }}
   </main>
