@@ -7,14 +7,16 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  {{ content_for_header }} {% comment %} Header hook for plugins {% endcomment %}
+  <link rel="preload" href="{{ 'theme.bundle.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'theme.bundle.js' | asset_url }}" as="script">
   {{ 'theme.bundle.css' | asset_url | stylesheet_tag }}
-  {{ 'theme.bundle.js' | asset_url | script_tag }}
   {%- if template contains 'product' -%}
+  <link rel="preload" href="{{ 'product.bundle.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'product.bundle.js' | asset_url }}" as="script">
   {{ 'product.bundle.css' | asset_url | stylesheet_tag }}
-  {{ 'product.bundle.js' | asset_url | script_tag }}
   {%- endif -%}
   {%- include 'social-meta-tags'  -%}
+  {{ content_for_header }} {% comment %} Header hook for plugins {% endcomment %}
 </head>
 <body>
   {%- section 'site-header' -%}
@@ -22,5 +24,10 @@
     {{ content_for_layout }}
   </main>
   {%- section 'site-footer' -%}
+
+  {{ 'theme.bundle.js' | asset_url | script_tag }}
+  {%- if template contains 'product' -%}
+  {{ 'product.bundle.js' | asset_url | script_tag }}
+  {%- endif -%}
 </body>
 </html>
