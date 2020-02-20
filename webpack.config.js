@@ -44,7 +44,9 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   plugins: [
+    // Extract CSS to external file to load styles in Shopify theme as normal
     new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
+    // Remove unused css styles, checks against everything in the theme directory
     new PurgecssPlugin({
       paths: glob.sync(`${PATHS.theme}/**/*`, { nodir: true })
     }),
