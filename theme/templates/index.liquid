@@ -4,7 +4,7 @@
     {{ product.price | money }}
     {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
     <a href="{{ product.url | within: collection }}">
-      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      {% include 'responsive-image' with image: product.featured_image, max_width: 800, max_height: 800 %}
     </a>
   </div>
 {% endfor %}
