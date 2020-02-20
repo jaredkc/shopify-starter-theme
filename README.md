@@ -2,7 +2,7 @@
 
 A Shopify starter theme using [Shopify Theme Kit](https://shopify.github.io/) and [Webpack](https://webpack.js.org/) for local development.
 
-Built with: Webpack, Babel, Browsersync, Sass
+Built with: Webpack, Babel, Browsersync, Sass, PurgeCSS
 
 ## Quick Start
 

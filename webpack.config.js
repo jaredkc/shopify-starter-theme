@@ -1,10 +1,17 @@
 const path = require('path');
+const glob = require('glob');
 const read = require('read-yaml');
 const config = read.sync('config.yml');
 const themeID = config.development.theme_id;
 const storeURL = config.development.store;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+
+const PATHS = {
+  assets: path.resolve(__dirname, 'theme/assets'),
+  theme: path.join(__dirname, 'theme')
+}
 
 module.exports = {
   mode: 'development',
@@ -12,9 +19,35 @@ module.exports = {
     theme: './src/js/theme.js',
     product: './src/js/product.js',
   },
+  output: {
+    filename: '[name].bundle.js',
+    path: PATHS.assets,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-object-rest-spread']
+          }
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
   devtool: 'inline-source-map',
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
+    new PurgecssPlugin({
+      paths: glob.sync(`${PATHS.theme}/**/*`, { nodir: true })
+    }),
     new BrowserSyncPlugin({
       https: true,
       port: 3000,
@@ -54,27 +87,4 @@ module.exports = {
       }
     })
   ],
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-object-rest-spread']
-          }
-        }
-      },
-      {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-    ],
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'theme/assets'),
-  },
 };
