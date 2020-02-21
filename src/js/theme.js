@@ -7,4 +7,4 @@ import 'lazysizes';
 
 import '../scss/theme.scss';
 
-console.log('Hello from index.js');
+console.log('Hello from theme.js');

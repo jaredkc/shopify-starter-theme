@@ -38,7 +38,16 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            // Don't resolve url() in styles,
+            // styles and images in Shopify theme are in assets directory
+            options: { url: false },
+          },
+          'sass-loader'
+        ],
       },
     ],
   },
