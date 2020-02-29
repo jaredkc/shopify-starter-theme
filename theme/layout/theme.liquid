@@ -16,13 +16,16 @@
   {{ 'product.bundle.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
   {%- include 'social-meta-tags'  -%}
-  {{ content_for_header }} {% comment %} Header hook for plugins {% endcomment %}
+  {{ content_for_header }}
 </head>
 <body>
   {%- section 'site-header' -%}
+
   <main role="main">
+    <div id="vue-app">Content for SEO could go here.</div>
     {{ content_for_layout }}
   </main>
+
   {%- section 'site-footer' -%}
 
   {{ 'theme.bundle.js' | asset_url | script_tag }}

@@ -7,6 +7,7 @@ const storeURL = config.development.store;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const PATHS = {
   assets: path.resolve(__dirname, 'theme/assets'),
@@ -26,8 +27,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -35,6 +40,10 @@ module.exports = {
             plugins: ['@babel/plugin-proposal-object-rest-spread']
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'vue-style-loader', 'css-loader' ]
       },
       {
         test: /\.scss$/,
@@ -53,6 +62,7 @@ module.exports = {
   },
   stats: { children: false },
   plugins: [
+    new VueLoaderPlugin(),
     // Extract CSS to external file to load styles in Shopify theme as normal
     new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
     // Remove unused css styles, checks against everything in the theme directory
