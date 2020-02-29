@@ -14,4 +14,4 @@ Vue.config.productionTip = true;
 
 new Vue({
   render: h => h(App),
-}).$mount('#vue-app-example');
+}).$mount('#vue-app');
