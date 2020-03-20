@@ -6,7 +6,7 @@
     {% include 'responsive-image' with image: image, max_width: 100, max_height: 100 %}
   </a>
 {% endfor %}
-<h1>{{ product.title }}</h1>
+<h1 class="product-title">{{ product.title }}</h1>
 <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
   <select name="id" id="productSelect">
     {% for variant in product.variants %}

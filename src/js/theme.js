@@ -1,7 +1,7 @@
 /**
  * Scripts and styles used globally
  */
-import '../scss/theme.scss';
+import '../css/theme.css';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import 'lazysizes/plugins/rias/ls.rias';
 import 'lazysizes';

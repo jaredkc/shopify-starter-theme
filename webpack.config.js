@@ -4,9 +4,9 @@ const read = require('read-yaml');
 const config = read.sync('config.yml');
 const themeID = config.development.theme_id;
 const storeURL = config.development.store;
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const devMode = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const PATHS = {
@@ -43,32 +43,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 'vue-style-loader', 'css-loader' ]
-      },
-      {
-        test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            // Don't resolve url() in styles,
-            // styles and images in Shopify theme are in assets directory
-            options: { url: false },
-          },
-          'sass-loader'
-        ],
-      },
+          devMode ? MiniCssExtractPlugin.loader : 'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1, } },
+          { loader: 'postcss-loader' }
+        ]
+      }
     ],
   },
   stats: { children: false },
   plugins: [
     new VueLoaderPlugin(),
-    // Extract CSS to external file to load styles in Shopify theme as normal
+
+    // Extract CSS to external file for dev inspection
     new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
-    // Remove unused css styles, checks against everything in the theme directory
-    new PurgecssPlugin({
-      paths: glob.sync(`${PATHS.theme}/**/*`, { nodir: true })
-    }),
+
     new BrowserSyncPlugin({
       https: true,
       port: 3000,
@@ -87,7 +77,7 @@ module.exports = {
       files: [{
         match: [
           '**/*.liquid',
-          '**/*.scss'
+          '**/*.css'
         ],
         fn: function(event, file) {
           if (event === "change") {
