@@ -2,7 +2,7 @@
 
 A Shopify starter theme, complete with local development setup utilizing [Shopify Theme Kit](https://shopify.github.io/).
 
-Includes: [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Browsersync](https://browsersync.io/), [PostCSS ](https://postcss.org/), [TailwindCSS ](https://tailwindcss.com/), [PurgeCSS](https://purgecss.com/), [Lazysizes](https://github.com/aFarkas/lazysizes), and [Vue](https://vuejs.org/)
+Includes: [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Browsersync](https://browsersync.io/), [PostCSS ](https://postcss.org/), [TailwindCSS ](https://tailwindcss.com/), [PurgeCSS](https://purgecss.com/), [Stylelint](https://stylelint.io/), [Lazysizes](https://github.com/aFarkas/lazysizes), and [Vue](https://vuejs.org/)
 
 ## Quick Start
 

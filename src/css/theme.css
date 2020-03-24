@@ -1,8 +1,10 @@
-@tailwind base;
+/* Tailwind */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@tailwind components;
-
-@tailwind utilities;
+/* Custom styles */
+@import './global/header.css';
 
 .hero-title {
   font-size: 10em;

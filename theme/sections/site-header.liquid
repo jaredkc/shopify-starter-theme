@@ -2,10 +2,9 @@
 
   <div class="site-title">
     {% comment %}
-    Use the uploaded logo from theme settings if enabled.
     Site name gets precedence with `h1` tag on homepage, div on other pages.
     {% endcomment %}
-    {% if template.name == 'index' %}<h1 itemscope itemtype="http://schema.org/Organization">{% else %}<div itemscope itemtype="http://schema.org/Organization">{% endif %}
+    {% if template.name == 'index' %}<h1 itemscope itemtype="http://schema.org/Organization" class="m-0">{% else %}<div itemscope itemtype="http://schema.org/Organization">{% endif %}
       <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
     {% if template.name == 'index' %}</h1>{% else %}</div>{% endif %}
   </div>
@@ -30,19 +29,21 @@
     {% endfor %}
     </ul>
 
-    {% if shop.customer_accounts_enabled %}
-      <ul>
+  </nav>
+
+  <nav id="site-tools" class="site-nav" role="navigation">
+    <ul>
+      {% if shop.customer_accounts_enabled %}
         {% if customer %}
           <li><a href="/account">account</a></li>
-          <li>{{ 'log out'  | customer_logout_link }}</li>
+          <li>{{ 'log out' | customer_logout_link }}</li>
         {% else %}
           <li>{{ 'log in ' | customer_login_link }}</li>
           <li>{{ 'register' | customer_register_link }}</li>
         {% endif %}
-      </ul>
-    {% endif %}
-
-    <a href="/cart">cart</a>
+      {% endif %}
+      <li><a href="/cart">cart</a></li>
+    </ul>
 
   </nav>
 
