@@ -3,9 +3,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Custom styles */
+/* Fonts */
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
+
+/* Theme styles */
 @import './global/header.css';
 
 .hero-title {
-  font-size: 10em;
+  font-size: 8em;
 }
