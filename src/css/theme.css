@@ -1,3 +1,11 @@
+/* Variables */
+:root {
+  --primary: #2b6cb0;
+  --primary-dar: #2a4365;
+  --secondary: #dd6b20;
+  --secondary-dark: #9c4221;
+}
+
 /* Tailwind */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -7,8 +15,5 @@
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
 
 /* Theme styles */
-@import './global/header.css';
-
-.hero-title {
-  font-size: 8em;
-}
+@import './global/base.css';
+@import './global/site-header.css';

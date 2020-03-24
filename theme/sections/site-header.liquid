@@ -1,50 +1,36 @@
 <header data-section-id="{{ section.id }}" data-section-type="header-section" class="site-header" role="banner">
 
-  <div class="site-title">
-    {% comment %}
-    Site name gets precedence with `h1` tag on homepage, div on other pages.
-    {% endcomment %}
-    {% if template.name == 'index' %}<h1 itemscope itemtype="http://schema.org/Organization" class="m-0">{% else %}<div itemscope itemtype="http://schema.org/Organization">{% endif %}
-      <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
-    {% if template.name == 'index' %}</h1>{% else %}</div>{% endif %}
-  </div>
+  {% if template.name == 'index' %}<h1 class="site-title" itemscope itemtype="http://schema.org/Organization">{% else %}<div class="site-title" itemscope itemtype="http://schema.org/Organization">{% endif %}
+    <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
+  {% if template.name == 'index' %}</h1>{% else %}</div>{% endif %}
 
-  <nav id="site-navigation" class="site-nav" role="navigation">
+  <nav id="site-navigation" class="site-navigation" role="navigation">
 
-    <ul>
-    {% for link in linklists.main-menu.links %}
-      {% assign child_list_handle = link.title | handleize %}
-      {% if linklists[child_list_handle].links != blank %}
+    <ul class="nav-menu">
+    {%- for link in linklists.main-menu.links -%}
+      {%- assign child_list_handle = link.title | handleize -%}
+      {%- if linklists[child_list_handle].links != blank -%}
         <li>
           <a href="{{ link.url }}">{{ link.title }}</a>
-          <ul>
-            {% for childlink in linklists[child_list_handle].links %}
+          <ul class="nav-submemu">
+            {%- for childlink in linklists[child_list_handle].links -%}
             <li><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
-            {% endfor %}
+            {%- endfor -%}
           </ul>
         </li>
-      {% else %}
+      {%- else -%}
         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-      {% endif %}
-    {% endfor %}
+      {%- endif -%}
+    {%- endfor -%}
     </ul>
 
   </nav>
 
-  <nav id="site-tools" class="site-nav" role="navigation">
-    <ul>
-      {% if shop.customer_accounts_enabled %}
-        {% if customer %}
-          <li><a href="/account">account</a></li>
-          <li>{{ 'log out' | customer_logout_link }}</li>
-        {% else %}
-          <li>{{ 'log in ' | customer_login_link }}</li>
-          <li>{{ 'register' | customer_register_link }}</li>
-        {% endif %}
-      {% endif %}
-      <li><a href="/cart">cart</a></li>
-    </ul>
-
+  <nav id="site-actions" class="site-actions" role="navigation">
+    {%- if shop.customer_accounts_enabled -%}
+    <a href="/account"><i class="material-icons-outlined">person</i></a>
+    {%- endif -%}
+    <a href="/cart"><i class="material-icons-outlined">shopping_cart</i></a>
   </nav>
 
 </header>

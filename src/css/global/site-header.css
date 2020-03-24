@@ -1,0 +1,57 @@
+.site-header {
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  margin: 3px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.site-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-menu > li {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.nav-menu a {
+  white-space: nowrap;
+}
+
+/* Drop down menus */
+.nav-submemu {
+  background: #fff;
+  display: none;
+  left: 0;
+  list-style-type: none;
+  padding: 0.5rem 0;
+  position: absolute;
+  text-align-last: left;
+  top: 100%;
+}
+
+.nav-submemu a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+}
+
+.nav-menu > li:hover .nav-submemu {
+  display: block;
+}
+
+/* Site actions */
+.site-actions a {
+  margin-left: 1.4rem;
+}

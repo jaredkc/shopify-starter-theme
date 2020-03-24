@@ -1,4 +1,3 @@
-<h1 class="hero-title">Hero Title</h1>
 {% for product in collections.frontpage.products limit:4 %}
   <div>
     <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
