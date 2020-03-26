@@ -3,15 +3,13 @@
 </template>
 
 <script>
-console.log('from Vue');
-
 export default {
-  data () {
+  data() {
     return {
-      msg: 'Hello from a Vue app!'
-    }
-  }
-}
+      msg: 'Hello from a Vue app!',
+    };
+  },
+};
 </script>
 
 <style scoped>
