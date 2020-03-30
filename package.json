@@ -39,7 +39,9 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "core-js": "^3.6.4",
     "lazysizes": "^5.2.0",
+    "regenerator-runtime": "^0.13.5",
     "vue": "^2.6.11"
   }
 }
