@@ -1,18 +1,20 @@
 const path = require('path');
-const glob = require('glob');
 const read = require('read-yaml');
+const BrowserSync = require('browser-sync');
+// const glob = require('glob');
+
 const config = read.sync('config.yml');
 const themeID = config.development.theme_id;
 const storeURL = config.development.store;
 const devMode = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const PATHS = {
   assets: path.resolve(__dirname, 'theme/assets'),
-  theme: path.join(__dirname, 'theme')
-}
+  theme: path.join(__dirname, 'theme'),
+};
 
 module.exports = {
   mode: 'development',
@@ -28,7 +30,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
       },
       {
         test: /\.m?js$/,
@@ -37,19 +39,19 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-object-rest-spread']
-          }
-        }
+            plugins: ['@babel/plugin-proposal-object-rest-spread'],
+          },
+        },
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
           devMode ? MiniCssExtractPlugin.loader : 'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1, } },
-          { loader: 'postcss-loader' }
-        ]
-      }
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          { loader: 'postcss-loader' },
+        ],
+      },
     ],
   },
   stats: { children: false },
@@ -57,7 +59,7 @@ module.exports = {
     new VueLoaderPlugin(),
 
     // Extract CSS to external file for dev inspection
-    new MiniCssExtractPlugin({ filename: '[name].bundle.css', }),
+    new MiniCssExtractPlugin({ filename: '[name].bundle.css' }),
 
     new BrowserSyncPlugin({
       https: true,
@@ -65,37 +67,37 @@ module.exports = {
       proxy: `https://${storeURL}?preview_theme_id=${themeID}`,
       reloadDelay: 2000,
       middleware: [
-        function (req, res, next) {
+        (function mw(req, res, next) {
           // Add url paramaters for Shopify theme preview.
           // ?_fd=0 prevents domain forwarding, ?pb=0 hides the Shopify preview bar
           const prefix = req.url.indexOf('?') > -1 ? '&' : '?';
           const queryStringComponents = ['_ab=0&_fd=0&_sc=1&pb=0'];
           req.url += prefix + queryStringComponents.join('&');
           next();
-        }
+        }),
       ],
       files: [{
         match: [
           '**/*.liquid',
-          '**/*.css'
+          '**/*.css',
         ],
-        fn: function(event, file) {
-          if (event === "change") {
-            const bs = require('browser-sync').get('bs-webpack-plugin');
+        fn(event) {
+          if (event === 'change') {
+            const bs = BrowserSync.get('bs-webpack-plugin');
             bs.reload();
           }
-        }
+        },
       }],
       // Move snippet injection to </body>,
       // Shopify content_for_header causes injection to load in head and break scripts
       snippetOptions: {
         rule: {
           match: /<\/body>/i,
-          fn: function (snippet, match) {
+          fn(snippet, match) {
             return snippet + match;
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    }),
   ],
 };
