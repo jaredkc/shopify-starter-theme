@@ -4,7 +4,6 @@
         "es6": true
     },
     "extends": [
-        "plugin:vue/essential",
         "airbnb-base"
     ],
     "globals": {
@@ -16,7 +15,7 @@
         "sourceType": "module"
     },
     "plugins": [
-        "vue"
+        "svelte3"
     ],
     "rules": {
     }
