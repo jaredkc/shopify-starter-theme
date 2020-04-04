@@ -1,3 +1,24 @@
+:root {
+  --primary: #2b6cb0;
+  --primary-dark: #2a4365;
+  --secondary: #dd6b20;
+  --secondary-dark: #9c4221;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/* Needed for TailwindCSS, did not want the rest of preflight */
+[class^='border'],
+[class*=' border'] {
+  border-color: theme('borderColor.default', currentColor);
+  border-style: solid;
+  border-width: 0;
+}
+
 html {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   line-height: 1.4;
@@ -7,3 +28,9 @@ body { margin: 0; }
 
 a { color: var(--primary); }
 a:hover { color: var(--primary-dark); }
+
+input,
+select,
+button {
+  font-size: 1rem;
+}

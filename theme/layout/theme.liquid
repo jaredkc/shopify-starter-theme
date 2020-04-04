@@ -25,11 +25,12 @@
   {%- section 'site-header' -%}
 
   <main role="main">
-    <div id="vue-app">Content for SEO could go here.</div>
     {{ content_for_layout }}
   </main>
 
   {%- section 'site-footer' -%}
+
+  <aside id="app-cart"></aside>
 
   {{ 'theme.bundle.js' | asset_url | script_tag }}
   {%- if template contains 'product' -%}

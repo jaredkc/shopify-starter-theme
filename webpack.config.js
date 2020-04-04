@@ -31,7 +31,7 @@ module.exports = {
         test: /\.svelte$/,
         use: {
           loader: 'svelte-loader',
-          options: { emitCss: true },
+          options: { emitCss: false },
         },
       },
       {

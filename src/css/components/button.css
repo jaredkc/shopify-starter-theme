@@ -1,0 +1,36 @@
+.btn {
+  -webkit-appearance: button;
+  background-color: #fff;
+  border: 3px solid var(--primary);
+  border-radius: 6px;
+  color: var(--primary);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  padding: 1rem 2.5rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  border-color: var(--primary-dark);
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.btn--primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn--primary:hover,
+.btn--primary:focus,
+.btn--primary:active {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
+}
