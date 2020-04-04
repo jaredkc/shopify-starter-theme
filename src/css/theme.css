@@ -1,19 +1,19 @@
-/* Variables */
-:root {
-  --primary: #2b6cb0;
-  --primary-dar: #2a4365;
-  --secondary: #dd6b20;
-  --secondary-dark: #9c4221;
-}
-
-/* Tailwind */
+/**
+ * TailwindCSS
+ */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
 
-/* Fonts */
+/**
+ * Custom styles
+ */
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
-
-/* Theme styles */
 @import './global/base.css';
 @import './global/site-header.css';
+@import './components/button.css';
+
+/**
+ * TailwindCSS utilities
+ * Should be last for specificity priority
+ */
+@import 'tailwindcss/utilities';

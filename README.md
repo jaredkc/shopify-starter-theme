@@ -11,7 +11,7 @@ Resources:
 - [PurgeCSS](https://purgecss.com/)
 - [Stylelint](https://stylelint.io/)
 - [Lazysizes](https://github.com/aFarkas/lazysizes)
-- [Vue](https://vuejs.org/)
+- [Svelte](https://svelte.dev/)
 - [Material Design Icons](https://google.github.io/material-design-icons/#icon-font-for-the-web) for the web
 
 

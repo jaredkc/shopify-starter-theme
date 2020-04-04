@@ -30,7 +30,10 @@
     {%- if shop.customer_accounts_enabled -%}
     <a href="/account"><i class="material-icons-outlined">person</i></a>
     {%- endif -%}
-    <a href="/cart"><i class="material-icons-outlined">shopping_cart</i></a>
+    {% if template != 'cart' %}<a href="/cart" class="open-cart">{% else %}<a href="#cart">
+    {% endif %}
+      <i class="material-icons-outlined">shopping_cart</i></a>
+    </a>
   </nav>
 
 </header>

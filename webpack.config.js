@@ -9,7 +9,6 @@ const storeURL = config.development.store;
 const devMode = process.env.NODE_ENV === 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const PATHS = {
   assets: path.resolve(__dirname, 'theme/assets'),
@@ -29,8 +28,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
+        test: /\.svelte$/,
+        use: {
+          loader: 'svelte-loader',
+          options: { emitCss: false },
+        },
       },
       {
         test: /\.m?js$/,
@@ -56,8 +58,6 @@ module.exports = {
   },
   stats: { children: false },
   plugins: [
-    new VueLoaderPlugin(),
-
     // Extract CSS to external file for dev inspection
     new MiniCssExtractPlugin({ filename: '[name].bundle.css' }),
 
@@ -65,7 +65,7 @@ module.exports = {
       https: true,
       port: 3000,
       proxy: `https://${storeURL}?preview_theme_id=${themeID}`,
-      reloadDelay: 2000,
+      reloadDelay: 3000,
       middleware: [
         (function mw(req, res, next) {
           // Add url paramaters for Shopify theme preview.
