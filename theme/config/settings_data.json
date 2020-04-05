@@ -1,6 +1,23 @@
 {
   "current": "Default",
   "presets": {
-    "Default": { }
+    "Default": {
+      "sections": {
+        "hero": {
+          "type": "hero",
+          "settings": {
+            "image": "",
+            "title": "Hero Title",
+            "text": "Edit this content in the theme customizer.",
+            "button_label": "Shop Products",
+            "button_link": "/collections/all",
+            "overlay_position": "left",
+            "overlay_theme": "light",
+            "overlay_opacity": "0.5"
+          }
+        }
+      },
+      "content_for_index": ["hero"]
+    }
   }
 }

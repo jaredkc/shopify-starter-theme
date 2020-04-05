@@ -1,0 +1,4 @@
+/* Fallback SVG image when no image has been set */
+.placeholder-svg {
+  @apply bg-gray-300 fill-current text-gray-500;
+}

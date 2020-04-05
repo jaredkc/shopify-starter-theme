@@ -7,10 +7,16 @@
 /**
  * Custom styles
  */
+
+/* Base & global styles */
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
 @import './global/base.css';
 @import './global/site-header.css';
+@import './global/shopify-utilites.css';
+
+/* Components */
 @import './components/button.css';
+@import './components/hero.css';
 
 /**
  * TailwindCSS utilities

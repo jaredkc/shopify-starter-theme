@@ -1,0 +1,63 @@
+/* purgecss start ignore */
+
+.hero {
+  padding-bottom: 1px;
+  position: relative;
+}
+
+.hero__img {
+  height: auto;
+  max-height: 100vh;
+  object-fit: cover;
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.hero__position {
+  margin: -6% 3% 3% 3%;
+  max-width: 94%;
+  position: relative; /* To display on top of image with the negative margin */
+}
+
+.hero__overlay {
+  background: #fff;
+  padding: 24px;
+}
+
+.hero--dark .hero__overlay {
+  background: #2c2e2f;
+  color: #ffff;
+}
+
+@media (min-width: 680px) {
+  .hero {
+    padding-bottom: 0;
+  }
+
+  .hero__position {
+    left: 0;
+    margin: 0;
+    max-width: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+  }
+
+  .hero__position--right {
+    left: initial;
+    right: 0;
+  }
+
+  .hero__overlay {
+    background: rgba(255, 255, 255, 0.5);
+    border-top: 0;
+    padding: 30px;
+  }
+
+  .hero--dark .hero__overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* purgecss end ignore */
