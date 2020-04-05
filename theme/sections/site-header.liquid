@@ -1,8 +1,42 @@
+{%- if section.settings.announcement -%}
+  {%- if section.settings.announcement_only_home == false or template.name == 'index' -%}
+    <style>
+      .announcement { background-color: {{ section.settings.accouncement_color_bg }}; }
+      .announcement--link:hover {
+        {%- assign brightness = section.settings.accouncement_color_bg | color_brightness -%}
+        {%- if brightness <= 192 -%}
+          {%- assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 -%}
+          background-color: {{ section.settings.accouncement_color_bg | color_lighten: lightenAmount }};
+        {%- else -%}
+          {%- assign darkenAmount = 255 | divided_by: brightness | times: 8 -%}
+          background-color: {{ section.settings.accouncement_color_bg | color_darken: darkenAmount }};
+        {%- endif -%}
+      }
+      .announcement__message { color: {{ section.settings.accouncement_color_text }}; }
+    </style>
+
+    {%- if section.settings.announcement_link == blank -%}
+      <div class="announcement p-2 text-center">
+    {%- else -%}
+      <a href="{{ section.settings.announcement_link }}" class="announcement announcement--link">
+    {%- endif -%}
+
+      <div class="announcement__message text-sm">{{ section.settings.announcement_text | escape }}</div>
+
+    {%- if section.settings.announcement_link == blank -%}
+      </div>
+    {%- else -%}
+      </a>
+    {%- endif -%}
+
+  {%- endif -%}
+{%- endif -%}
+
 <header data-section-id="{{ section.id }}" data-section-type="header-section" class="site-header" role="banner">
 
-  {% if template.name == 'index' %}<h1 class="site-title" itemscope itemtype="http://schema.org/Organization">{% else %}<div class="site-title" itemscope itemtype="http://schema.org/Organization">{% endif %}
+  {%- if template.name == 'index' -%}<h1 class="site-title" itemscope itemtype="http://schema.org/Organization">{%- else -%}<div class="site-title" itemscope itemtype="http://schema.org/Organization">{%- endif -%}
     <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
-  {% if template.name == 'index' %}</h1>{% else %}</div>{% endif %}
+  {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
 
   <nav id="site-navigation" class="site-navigation" role="navigation">
 
@@ -30,9 +64,11 @@
     {%- if shop.customer_accounts_enabled -%}
     <a href="/account"><i class="material-icons-outlined">person</i></a>
     {%- endif -%}
-    {% if template != 'cart' %}<a href="/cart" class="open-cart">{% else %}<a href="#cart">
-    {% endif %}
-      <i class="material-icons-outlined">shopping_cart</i></a>
+    {%- if template != 'cart' -%}
+      <a href="/cart" class="open-cart">
+    {%- else -%}
+      <a href="#cart">
+    {%- endif -%}<i class="material-icons-outlined">shopping_cart</i></a>
     </a>
   </nav>
 
@@ -41,6 +77,47 @@
 {% schema %}
   {
     "name": "Site Header",
-    "settings": []
+    "settings": [
+			{
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement",
+        "label": "Show announcement",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_only_home",
+        "label": "Only show on home page",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "color",
+        "id": "accouncement_color_bg",
+        "label": "Bar",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "accouncement_color_text",
+        "label": "Text",
+        "default": "#fff"
+      }
+    ]
   }
 {% endschema %}
