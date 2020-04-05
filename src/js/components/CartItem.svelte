@@ -1,6 +1,6 @@
 <script>
-  import { formatMoney } from "@shopify/theme-currency";
-  import { createEventDispatcher } from "svelte";
+  import { formatMoney } from '@shopify/theme-currency';
+  import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
 

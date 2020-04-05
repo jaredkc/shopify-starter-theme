@@ -1,6 +1,6 @@
 <script>
-  import CartItem from "./components/CartItem.svelte";
-  import * as cart from "@shopify/theme-cart";
+  import * as cart from '@shopify/theme-cart';
+  import CartItem from './components/CartItem.svelte';
 
   let message;
   let cartData = { item_count: 0, items: [] };
@@ -8,14 +8,16 @@
   export let showCart = true;
 
   async function cartFetch() {
-    const response = await fetch(`/cart.js`);
+    const response = await fetch('/cart.js');
     return response.json();
   }
 
-  export function cartLoad(msg = "Loading...") {
+  export function cartLoad(msg = 'Loading...') {
     showCart = true;
     message = msg;
-    cartFetch().then(res => cartData = res).then((message = "Cart items loaded"));
+    cartFetch()
+      .then((res) => (cartData = res))
+      .then((message = 'Cart items loaded'));
   }
 
   function hideCart() {
@@ -24,9 +26,9 @@
 
   function handleUpdateQty(e, quantity = 0) {
     message = 'Updating...';
-    cart.updateItem(e.detail.key, { quantity }).then(res => {
+    cart.updateItem(e.detail.key, { quantity }).then((res) => {
       message = 'Product removed';
-      cartData = res
+      cartData = res;
     });
   }
 
