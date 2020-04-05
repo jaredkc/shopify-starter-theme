@@ -5,10 +5,11 @@
   "private": true,
   "scripts": {
     "build": "webpack",
+    "deploy": "NODE_ENV=production webpack -p && theme deploy --dir theme",
     "watch:assets": "webpack --watch",
     "watch:theme": "theme watch --dir theme",
     "prod:build": "NODE_ENV=production webpack -p",
-    "prod:deploy": "NODE_ENV=production webpack -p && theme deploy --dir theme"
+    "prod:deploy": "NODE_ENV=production webpack -p && theme deploy --env=production --dir theme"
   },
   "author": "",
   "license": "ISC",
