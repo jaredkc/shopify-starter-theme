@@ -1,14 +1,12 @@
 const path = require('path');
 const read = require('read-yaml');
 const BrowserSync = require('browser-sync');
-// const glob = require('glob');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = read.sync('config.yml');
-const themeID = config.development.theme_id;
 const storeURL = config.development.store;
-const devMode = process.env.NODE_ENV === 'development';
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const themeID = config.development.theme_id;
 
 const PATHS = {
   assets: path.resolve(__dirname, 'theme/assets'),
@@ -49,7 +47,7 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
-          devMode ? MiniCssExtractPlugin.loader : 'style-loader',
+          MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { importLoaders: 1 } },
           { loader: 'postcss-loader' },
         ],
@@ -58,7 +56,7 @@ module.exports = {
   },
   stats: { children: false },
   plugins: [
-    // Extract CSS to external file for dev inspection
+    // Extract CSS to external file to keep JS files smaller
     new MiniCssExtractPlugin({ filename: '[name].bundle.css' }),
 
     new BrowserSyncPlugin({
