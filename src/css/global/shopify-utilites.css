@@ -1,4 +1,64 @@
+/* purgecss start ignore */
+
 /* Fallback SVG image when no image has been set */
 .placeholder-svg {
-  @apply bg-gray-300 fill-current text-gray-500;
+  @apply bg-gray-300;
+  @apply fill-current;
+  @apply text-gray-500;
 }
+
+/**
+ * Form errors output by {{ form.errors | default_errors }}
+ * https://shopify.dev/docs/liquid/reference/objects/form#form-errors
+ */
+.errors {
+  @apply bg-red-200;
+  @apply border-red-800;
+
+  border-style: solid;
+  border-width: 1px;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+.errors p,
+.errors ul {
+  margin: 0.5em 0;
+}
+
+.errors ul {
+  padding-left: 1.5em;
+}
+
+/**
+ * Pagination output by {{ paginate | default_pagination }}
+ * https://shopify.dev/docs/liquid/reference/objects/paginate
+ */
+.prev a,
+.next a,
+.page a,
+.current,
+.deco {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.prev {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.next {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.current {
+  font-weight: bold;
+}
+
+.deco {
+  color: var(--c-text-light);
+}
+
+/* purgecss end ignore */

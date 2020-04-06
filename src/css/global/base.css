@@ -1,8 +1,8 @@
 :root {
-  --primary: #2b6cb0;
-  --primary-dark: #2a4365;
-  --secondary: #dd6b20;
-  --secondary-dark: #9c4221;
+  --c-primary: #2b6cb0;
+  --c-primary-dark: #2a4365;
+  --c-text: #333;
+  --c-text-light: #999;
 }
 
 *,
@@ -26,8 +26,8 @@ html {
 
 body { margin: 0; }
 
-a { color: var(--primary); }
-a:hover { color: var(--primary-dark); }
+a { color: var(--c-primary); }
+a:hover { color: var(--c-primary-dark); }
 
 input,
 select,

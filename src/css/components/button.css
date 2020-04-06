@@ -1,9 +1,9 @@
 .btn {
   -webkit-appearance: button;
   background-color: #fff;
-  border: 3px solid var(--primary);
+  border: 3px solid var(--c-primary);
   border-radius: 6px;
-  color: var(--primary);
+  color: var(--c-primary);
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
@@ -17,20 +17,20 @@
 .btn:hover,
 .btn:focus,
 .btn:active {
-  border-color: var(--primary-dark);
-  color: var(--primary-dark);
+  border-color: var(--c-primary-dark);
+  color: var(--c-primary-dark);
   cursor: pointer;
 }
 
 .btn--primary {
-  background-color: var(--primary);
+  background-color: var(--c-primary);
   color: #fff;
 }
 
 .btn--primary:hover,
 .btn--primary:focus,
 .btn--primary:active {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
+  background-color: var(--c-primary-dark);
+  border-color: var(--c-primary-dark);
   color: #fff;
 }

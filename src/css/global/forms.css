@@ -16,7 +16,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--primary);
+  border-color: var(--c-primary);
 }
 
 input[disabled],
@@ -122,23 +122,4 @@ select::-ms-expand {
 .input-error {
   @apply bg-red-200;
   @apply border-red-800;
-}
-
-.errors {
-  @apply bg-red-200;
-  @apply border-red-800;
-
-  border-style: solid;
-  border-width: 1px;
-  padding: 0.5em 1em;
-  text-align: left;
-}
-
-.errors p,
-.errors ul {
-  margin: 0.5em 0;
-}
-
-.errors ul {
-  padding-left: 1.5em;
 }
