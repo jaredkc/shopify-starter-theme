@@ -11,8 +11,10 @@
 /* Base & global styles */
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
 @import './global/base.css';
-@import './global/site-header.css';
+@import './global/forms.css';
+@import './global/layout.css';
 @import './global/shopify-utilites.css';
+@import './global/site-header.css';
 
 /* Components */
 @import './components/button.css';

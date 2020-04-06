@@ -1,5 +1,5 @@
-<footer id="colophon" class="site-footer" role="content-info">
-  <p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
+<footer id="colophon" class="site-footer border-t px-4 py-8 mt-8" role="content-info">
+  <p>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
 </footer>
 
 {% schema %}

@@ -1,0 +1,144 @@
+/* Basic defaults */
+input,
+textarea,
+select {
+  @apply border-gray-400;
+
+  border-style: solid;
+  border-width: 1px;
+  max-width: 100%;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+}
+
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  background-color: #cbd5e0;
+  border-color: #718096;
+  cursor: default;
+}
+
+button,
+input[type='submit'],
+label[for] {
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/* Basic form styles */
+.form-input,
+.form-select,
+.form-textarea {
+  background-color: #fff;
+  border-radius: 0;
+  min-width: 100px;
+}
+
+.form-input,
+.form-select {
+  height: 40px;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.8em;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 9px 6px;
+  padding-left: 0.8em;
+  padding-right: 1.5rem;
+}
+
+.form-label {
+  color: #999;
+  font-size: 0.9em;
+}
+
+/* Form block */
+.form-block {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.form-block .form-label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.form-block .form-input,
+.form-block .form-select,
+.form-block .form-textarea {
+  width: 100%;
+}
+
+/* Inline for label & input */
+.form-block-inline {
+  @apply border-gray-400;
+
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.form-block-inline .form-label {
+  font-size: initial;
+  max-width: 200px;
+  min-width: 100px;
+  overflow: hidden;
+  padding-left: 0.8em;
+  padding-right: 0.4em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.form-block-inline .form-input,
+.form-block-inline .form-select,
+.form-block-inline .form-textarea {
+  border: 0;
+  flex-grow: 1;
+}
+
+/* Errors */
+.input-error {
+  @apply bg-red-200;
+  @apply border-red-800;
+}
+
+.errors {
+  @apply bg-red-200;
+  @apply border-red-800;
+
+  border-style: solid;
+  border-width: 1px;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+.errors p,
+.errors ul {
+  margin: 0.5em 0;
+}
+
+.errors ul {
+  padding-left: 1.5em;
+}
