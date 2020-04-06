@@ -13,6 +13,17 @@
   width: 100%;
 }
 
+.hero__img--banner {
+  max-height: 600px;
+}
+
+.hero__copy {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .hero__position {
   margin: -6% 3% 3% 3%;
   max-width: 94%;
