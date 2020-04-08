@@ -17,6 +17,10 @@
     "plugins": [
         "svelte3"
     ],
+    "ignorePatterns": [
+        "*.bundle.js",
+        "node_modules/"
+    ],
     "rules": {
     }
 }

@@ -8,11 +8,6 @@ const config = read.sync('config.yml');
 const storeURL = config.development.store;
 const themeID = config.development.theme_id;
 
-const PATHS = {
-  assets: path.resolve(__dirname, 'theme/assets'),
-  theme: path.join(__dirname, 'theme'),
-};
-
 module.exports = {
   mode: 'development',
   entry: {
@@ -21,7 +16,8 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: PATHS.assets,
+    chunkFilename: '[name].bundle.[chunkhash:5].js',
+    path: path.resolve(__dirname, 'theme/assets'),
   },
   module: {
     rules: [

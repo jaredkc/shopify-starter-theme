@@ -7,13 +7,23 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  {{ 'theme.bundle.css' | asset_url | stylesheet_tag }}
+
+  {{- 'theme.bundle.css' | asset_url | stylesheet_tag -}}
+
+  {%- comment -%} Required for lazy-loading with Webpack on Shopify CDN {%- endcomment -%}
+  {%- capture randomFile -%}{{ 'theme.bundle.js' | asset_url }}{%- endcapture -%}
+  {%- assign assetsPath = randomFile | split: 'theme.bundle.js' | first -%}
+  <script>window.__webpack_public_path__ = "{{ assetsPath }}"</script>
+
   <link rel="preload" href="{{ 'theme.bundle.js' | asset_url }}" as="script">
+
   {%- if template contains 'product' -%}
-  {{ 'product.bundle.css' | asset_url | stylesheet_tag }}
-  <link rel="preload" href="{{ 'product.bundle.js' | asset_url }}" as="script">
+    {{- 'product.bundle.css' | asset_url | stylesheet_tag -}}
+    <link rel="preload" href="{{ 'product.bundle.js' | asset_url }}" as="script">
   {%- endif -%}
+
   {%- include 'social-meta-tags'  -%}
+
   {{ content_for_header }}
 </head>
 <body>
