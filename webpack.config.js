@@ -3,6 +3,7 @@ const read = require('read-yaml');
 const BrowserSync = require('browser-sync');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = read.sync('config.yml');
 const storeURL = config.development.store;
@@ -16,8 +17,14 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.[chunkhash:5].js',
+    chunkFilename: '[name].[chunkhash:5].bundle.js',
     path: path.resolve(__dirname, 'theme/assets'),
+  },
+  optimization: {
+    splitChunks: {
+      // Shopify does not allow "~"
+      automaticNameDelimiter: '-',
+    },
   },
   module: {
     rules: [
@@ -52,6 +59,12 @@ module.exports = {
   },
   stats: { children: false },
   plugins: [
+    // Only remove the bundle files generated,
+    // other Shopify theme assets will end that should not be lost
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['*.bundle.js'],
+    }),
+
     // Extract CSS to external file to keep JS files smaller
     new MiniCssExtractPlugin({ filename: '[name].bundle.css' }),
 
