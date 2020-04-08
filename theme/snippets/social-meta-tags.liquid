@@ -79,8 +79,8 @@
   <meta property="og:price:currency" content="{{ shop.currency }}">
 {%- endif -%}
 
-{{ og_image_tags }}
-{{ og_image_secure_url_tags }}
+{{- og_image_tags -}}
+{{- og_image_secure_url_tags -}}
 
 {%- unless settings.social_twitter_link == blank -%}
   <meta name="twitter:site" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
