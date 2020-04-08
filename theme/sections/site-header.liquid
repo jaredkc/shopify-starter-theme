@@ -1,6 +1,7 @@
 {%- if section.settings.announcement -%}
   {%- if section.settings.announcement_only_home == false or template.name == 'index' -%}
     <style>
+      /* stylelint-disable */
       .announcement { background-color: {{ section.settings.accouncement_color_bg }}; }
       .announcement--link:hover {
         {%- assign brightness = section.settings.accouncement_color_bg | color_brightness -%}
@@ -13,6 +14,7 @@
         {%- endif -%}
       }
       .announcement__message { color: {{ section.settings.accouncement_color_text }}; }
+      /* stylelint-enable */
     </style>
 
     {%- if section.settings.announcement_link == blank -%}
@@ -32,7 +34,7 @@
   {%- endif -%}
 {%- endif -%}
 
-<header data-section-id="{{ section.id }}" data-section-type="header-section" class="site-header" role="banner">
+<header data-section-id="{{ section.id }}" data-section-type="header-section" class="site-header copy-pad" role="banner">
 
   {%- if template.name == 'index' -%}<h1 class="site-title" itemscope itemtype="http://schema.org/Organization">{%- else -%}<div class="site-title" itemscope itemtype="http://schema.org/Organization">{%- endif -%}
     <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
