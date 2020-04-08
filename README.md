@@ -3,14 +3,12 @@
 A Shopify starter theme, complete with local development setup utilizing [Shopify Theme Kit](https://shopify.github.io/).
 
 Utilizing the following:
-
 - [Webpack](https://webpack.js.org/)
 - [Babel](https://babeljs.io/)
 - [Browsersync](https://browsersync.io/)
 - [Lazysizes](https://github.com/aFarkas/lazysizes)
 - [Svelte](https://svelte.dev/)
 - [ESLint](https://eslint.org/)
-
 - [PostCSS ](https://postcss.org/)
 - [TailwindCSS ](https://tailwindcss.com/)
 - [PurgeCSS](https://purgecss.com/)
