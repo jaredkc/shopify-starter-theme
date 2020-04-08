@@ -3,7 +3,8 @@
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   text-align: center;
 }
 
@@ -39,6 +40,7 @@
   position: absolute;
   text-align-last: left;
   top: 100%;
+  z-index: 1;
 }
 
 .nav-submemu a {
