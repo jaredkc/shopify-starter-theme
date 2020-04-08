@@ -1,6 +1,6 @@
 <script>
   import * as cart from '@shopify/theme-cart';
-  import CartItem from './components/CartItem.svelte';
+  import CartItem from '../components/CartItem.svelte';
 
   let message;
   let cartData = { item_count: 0, items: [] };

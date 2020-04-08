@@ -2,17 +2,21 @@
 
 A Shopify starter theme, complete with local development setup utilizing [Shopify Theme Kit](https://shopify.github.io/).
 
-Resources:
+Utilizing the following:
+
 - [Webpack](https://webpack.js.org/)
 - [Babel](https://babeljs.io/)
 - [Browsersync](https://browsersync.io/)
+- [Lazysizes](https://github.com/aFarkas/lazysizes)
+- [Svelte](https://svelte.dev/)
+- [ESLint](https://eslint.org/)
+
 - [PostCSS ](https://postcss.org/)
 - [TailwindCSS ](https://tailwindcss.com/)
 - [PurgeCSS](https://purgecss.com/)
+- [Material Design Icons](https://google.github.io/material-design-icons/#icon-font-for-the-web)
 - [Stylelint](https://stylelint.io/)
-- [Lazysizes](https://github.com/aFarkas/lazysizes)
-- [Svelte](https://svelte.dev/)
-- [Material Design Icons](https://google.github.io/material-design-icons/#icon-font-for-the-web) for the web
+
 
 
 ## Quick Start
@@ -46,3 +50,7 @@ production:
 - `src/`: JavaScript and Sass source files are compiled from here and added to `theme/assets/`.
 - `theme/`: Shopify ready theme files that are uploaded with Shopify Theme Kit.
 - `config.yml`: Contains the information needed for Shopify to authenticate requests and edit/update remote theme files.
+
+## Reference
+
+- Lazy, or on-demand, loading for JavaScript modules with Webpack. [Learn more](https://webpack.js.org/guides/lazy-loading/).
