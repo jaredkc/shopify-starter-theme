@@ -17,8 +17,34 @@
               </a>
             </td>
             <td>
-              <a href="{{ item.url }}">{{ item.product.title }}</a>
-              {{ item.variant.title }}
+              <h3 class="m-0"><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+
+              {% unless item.product.has_only_default_variant %}
+              <p class="mt-1">{{ item.variant.title }}</p>
+              {% endunless %}
+
+              {%- assign property_size = item.properties | size -%}
+
+              {% if property_size > 0 %}
+                <ul>
+                  {% for p in item.properties %}
+                    <li>
+                      {% unless p.last == blank %}
+                        {% if p.last contains '/uploads/' %}
+                          <a href="{{ p.last }}">{{ p.first }}</a>
+                        {% else %}
+                          {{ p.first }}: {{ p.last }}
+                        {% endif %}
+                      {% endunless %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              {% if item.message %}
+                <p>{{ item.message }}</p>
+              {% endif %}
+
               <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
             </td>
             <td>{{ item.price | money }}</td>
