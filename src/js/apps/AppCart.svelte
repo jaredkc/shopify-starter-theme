@@ -1,23 +1,24 @@
 <script>
   import * as cart from '@shopify/theme-cart';
+  import { onMount } from 'svelte';
+  import { fade, fly } from 'svelte/transition';
   import CartItem from '../components/CartItem.svelte';
 
-  let message;
   let cartData = { item_count: 0, items: [] };
-
-  export let showCart = true;
+  let message;
+  let showCart = false;
 
   async function cartFetch() {
     const response = await fetch('/cart.js');
     return response.json();
   }
 
-  export function cartLoad(msg = 'Loading...') {
+  export function cartLoad() {
     showCart = true;
-    message = msg;
+    message = 'Loading cart...';
     cartFetch()
       .then((res) => (cartData = res))
-      .then((message = 'Cart items loaded'));
+      .then((message = 'Cart loaded'));
   }
 
   function hideCart() {
@@ -32,7 +33,7 @@
     });
   }
 
-  cartLoad();
+  onMount(async () => cartLoad());
 </script>
 
 <style>
@@ -61,9 +62,9 @@
 
 {#if showCart}
 
-  <div class="modal-bg" on:click={hideCart} />
+  <div class="modal-bg" transition:fade="{{ duration: 250 }}" on:click={hideCart} />
 
-  <div class="modal-content">
+  <div class="modal-content" transition:fly="{{ x: 200, duration: 250, delay: 100 }}">
 
     {#if message}
       <div class="bg-orange-100 text-orange-700 p-4" role="alert">
