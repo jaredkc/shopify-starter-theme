@@ -1,7 +1,8 @@
 <script>
-  import * as cart from '@shopify/theme-cart';
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
+  import { trapFocus, removeTrapFocus } from '@shopify/theme-a11y';
+  import { updateItem } from '@shopify/theme-cart';
   import CartItem from '../components/CartItem.svelte';
 
   let cartData = { item_count: 0, items: [] };
@@ -18,16 +19,21 @@
     message = 'Loading cart...';
     cartFetch()
       .then((res) => (cartData = res))
-      .then((message = 'Cart loaded'));
+      .then(() => {
+        message = 'Cart loaded'
+        trapFocus(document.getElementById('modal-content'));
+      });
   }
 
   function hideCart() {
+    console.log('hide');
+    removeTrapFocus();
     showCart = false;
   }
 
   function handleUpdateQty(e, quantity = 0) {
     message = 'Updating...';
-    cart.updateItem(e.detail.key, { quantity }).then((res) => {
+    updateItem(e.detail.key, { quantity }).then((res) => {
       message = 'Product removed';
       cartData = res;
     });
@@ -64,13 +70,14 @@
 
   <div class="modal-bg" transition:fade="{{ duration: 250 }}" on:click={hideCart} />
 
-  <div class="modal-content" transition:fly="{{ x: 200, duration: 250, delay: 100 }}">
+  <div id="modal-content" class="modal-content" transition:fly="{{ x: 200, duration: 250, delay: 100 }}">
 
-    {#if message}
-      <div class="bg-orange-100 text-orange-700 p-4" role="alert">
+    <div class="flex justify-between items-center mb-4">
+      <div class="text-orange-700" role="alert">
         {message}
       </div>
-    {/if}
+      <button class="btn-icon" on:click={hideCart}><i class="material-icons-outlined">close</i></button>
+    </div>
 
     {#if cartData.item_count === 0}
       <div class="text-center py-16">Your cart is empty 😢</div>

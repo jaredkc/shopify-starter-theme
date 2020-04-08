@@ -34,3 +34,21 @@
   border-color: var(--c-primary-dark);
   color: #fff;
 }
+
+/* Icons buttons */
+.btn-icon {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* For material icons in button */
+.btn-icon i {
+  vertical-align: bottom;
+}
+
+.btn-icon:hover,
+.btn-icon:focus,
+.btn-icon:active {
+  color: var(--c-primary);
+}
