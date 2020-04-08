@@ -5,7 +5,7 @@ export default () => {
     window.cartApp.cartLoad();
   } else {
     const cartApp = new AppCart({
-      target: document.getElementById('app-cart')
+      target: document.getElementById('app-cart'),
     });
 
     window.cartApp = cartApp;

@@ -12,7 +12,7 @@ if (cartLinks) {
   cartLinks.forEach((cartLink) => {
     cartLink.addEventListener('click', (e) => {
       e.preventDefault();
-      import(/* webpackChunkName: "app-cart-init" */ './apps/app-cart-init').then(module => {
+      import(/* webpackChunkName: "app-cart-init" */ './apps/app-cart-init').then((module) => {
         const appcart = module.default;
         appcart();
       });
