@@ -3,6 +3,7 @@
   import { fade, fly } from 'svelte/transition';
   import { trapFocus, removeTrapFocus } from '@shopify/theme-a11y';
   import { updateItem } from '@shopify/theme-cart';
+  import { formatMoney } from '@shopify/theme-currency';
   import CartItem from '../components/CartItem.svelte';
 
   let cartData = { item_count: 0, items: [] };
@@ -54,8 +55,6 @@
     background: #fff;
     bottom: 0;
     max-width: 500px;
-    overflow-y: scroll;
-    padding: 2rem;
     position: fixed;
     right: 0;
     top: 0;
@@ -70,33 +69,46 @@
 
   <div id="modal-content" class="modal-content" transition:fly="{{ x: 200, duration: 250, delay: 100 }}">
 
-    <div class="flex justify-between items-center mb-4">
-      <div class="text-caps">Shopping Cart</div>
-      <button class="btn-icon" on:click={hideCart}><i class="material-icons-outlined">close</i></button>
-    </div>
+    <div class="flex flex-col justify-between h-screen">
 
-    {#if loading}
-      <div class="py-24 loading border-t border-b"></div>
-    {/if}
-
-    {#if cartData.item_count === 0}
-      <div class="text-center py-24 border-t border-b">Wah, your cart is empty</div>
-    {:else}
-      <div class="border-t">
-        {#each cartData.items as product (product.id)}
-          <CartItem on:updateQty={handleUpdateQty} {product} />
-        {/each}
+      <div class="cart-header p-4 md:px-8 border-b">
+        <div class="flex justify-between items-center">
+          <div class="text-caps">Shopping Cart</div>
+          <button class="btn-icon" on:click={hideCart}><i class="material-icons-outlined">close</i></button>
+        </div>
       </div>
 
-      <form action="/cart" method="post" class="mt-6 grid grid-cols-2 gap-4">
-        <a href="/cart" class="btn">View Cart</a>
-        <input
-          type="submit"
-          name="checkout"
-          value="Check Out"
-          class="btn btn--primary" />
-      </form>
-    {/if}
+      <div class="cart-contents flex-grow overflow-y-scroll px-4 md:px-8">
+
+        {#if loading}
+          <div class="py-24 loading"></div>
+        {/if}
+
+        {#if cartData.item_count === 0}
+          <div class="py-24 text-center">Wah, your cart is empty</div>
+        {:else}
+          {#each cartData.items as product (product.id)}
+            <CartItem on:updateQty={handleUpdateQty} {product} />
+          {/each}
+        {/if}
+
+      </div>
+
+      <div class="cart-footer p-4 md:p-8 border-t">
+        {#if cartData.item_count > 0}
+          <div class="flex justify-between items-center mb-4">
+            <div>Subtotal</div>
+            <div><b>{formatMoney(cartData.items_subtotal_price)}</b></div>
+          </div>
+
+          <form action="/cart" method="post" class="mt-6 grid grid-cols-2 gap-4">
+            <a href="/cart" class="btn">View Cart</a>
+            <input type="submit" name="checkout" value="Check Out" class="btn btn--primary" />
+          </form>
+        {/if}
+      </div>
+
+    </div>
 
   </div>
 

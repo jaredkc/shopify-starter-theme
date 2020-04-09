@@ -15,14 +15,11 @@
 
 <div class="flex justify-between py-4 border-b text-sm {loading ? 'loading' : ''}">
   <div>
-    <img
-      src={product.featured_image.url}
-      alt={product.featured_image.alt}
-      class="w-16" />
+    <a href={product.url}><img src={product.featured_image.url} alt={product.featured_image.alt} class="w-16" /></a>
   </div>
   <div class="flex-1 px-4">
     <div class="mb-4">
-      {product.title}
+      <a href={product.url}>{product.title}</a>
       <div class="mt-1 text-sm text-gray-700">
         Qty: {product.quantity}
       </div>
