@@ -55,6 +55,7 @@
     background: #fff;
     bottom: 0;
     max-width: 500px;
+    overflow-y: scroll;
     padding: 2rem;
     position: fixed;
     right: 0;
