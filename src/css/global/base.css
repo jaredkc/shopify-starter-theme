@@ -12,8 +12,7 @@
 }
 
 /* Needed for TailwindCSS, did not want the rest of preflight */
-[class^='border'],
-[class*=' border'] {
+[class*='border'] {
   border-color: theme('borderColor.default', currentColor);
   border-style: solid;
   border-width: 0;
