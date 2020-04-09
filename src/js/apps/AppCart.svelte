@@ -26,7 +26,6 @@
   }
 
   function hideCart() {
-    console.log('hide');
     removeTrapFocus();
     showCart = false;
   }
