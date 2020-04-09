@@ -3,13 +3,17 @@
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
+  let loading = false;
 
   export let product;
 
-  const updateQty = (key) => dispatch('updateQty', { key });
+  const updateQty = (key) => {
+    loading = true;
+    dispatch('updateQty', { key })
+  };
 </script>
 
-<div class="flex justify-between py-4 border-b text-sm">
+<div class="flex justify-between py-4 border-b text-sm {loading ? 'loading' : ''}">
   <div>
     <img
       src={product.featured_image.url}
@@ -17,13 +21,13 @@
       class="w-16" />
   </div>
   <div class="flex-1 px-4">
-    <div>
+    <div class="mb-4">
       {product.title}
-      <div class="mt-1 mb-4 text-sm text-gray-700">
+      <div class="mt-1 text-sm text-gray-700">
         Qty: {product.quantity}
       </div>
     </div>
-    <button class="btn-icon" on:click={() => updateQty(product.key)}><i class="material-icons-outlined">delete</i></button>
+    <button class="btn-text" role="button" on:click={() => updateQty(product.key)}>Remove</button>
   </div>
   <div>
     {formatMoney(product.price)}

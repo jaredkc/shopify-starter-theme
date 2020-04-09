@@ -36,6 +36,21 @@
 }
 
 /* Icons buttons */
+.btn-text {
+  background: transparent;
+  border: 0;
+  color: var(--c-text-light);
+  font-size: 12px;
+  padding: 0;
+}
+
+.btn-text:hover,
+.btn-text:focus,
+.btn-text:active {
+  color: var(--c-primary);
+}
+
+/* Icons buttons */
 .btn-icon {
   background: transparent;
   border: 0;

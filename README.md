@@ -15,8 +15,6 @@ Utilizing the following:
 - [Material Design Icons](https://google.github.io/material-design-icons/#icon-font-for-the-web)
 - [Stylelint](https://stylelint.io/)
 
-
-
 ## Quick Start
 
 1. [Setup Shopify Theme Kit](https://shopify.github.io/themekit/)

@@ -1,0 +1,54 @@
+/**
+ * CSS Loading Indicator
+ * No extra markup needed, just add a class of loading to an element.
+ */
+.loading {
+  min-height: 24px;
+  min-width: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading::before,
+.loading::after {
+  content: '';
+  display: block;
+}
+
+.loading::before {
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.8);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.loading::after {
+  animation: loading-spin 1s infinite linear;
+  border-color: rgba(26, 115, 232, 0.2);
+  border-bottom-color: rgba(26, 115, 232, 1);
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 4px;
+  height: 24px;
+  left: 50%;
+  margin-left: -12px;
+  margin-top: -12px;
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  z-index: 2;
+}
+
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

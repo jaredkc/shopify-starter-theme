@@ -6,7 +6,7 @@
   import CartItem from '../components/CartItem.svelte';
 
   let cartData = { item_count: 0, items: [] };
-  let message;
+  let loading = false;
   let showCart = false;
 
   async function cartFetch() {
@@ -16,11 +16,11 @@
 
   export function cartLoad() {
     showCart = true;
-    message = 'Loading cart...';
+    loading = true;
     cartFetch()
       .then((res) => (cartData = res))
       .then(() => {
-        message = 'Cart loaded'
+        loading = false
         trapFocus(document.getElementById('modal-content'));
       });
   }
@@ -32,9 +32,7 @@
   }
 
   function handleUpdateQty(e, quantity = 0) {
-    message = 'Updating...';
     updateItem(e.detail.key, { quantity }).then((res) => {
-      message = 'Product removed';
       cartData = res;
     });
   }
@@ -73,17 +71,19 @@
   <div id="modal-content" class="modal-content" transition:fly="{{ x: 200, duration: 250, delay: 100 }}">
 
     <div class="flex justify-between items-center mb-4">
-      <div class="text-orange-700" role="alert">
-        {message}
-      </div>
+      <div class="text-caps">Shopping Cart</div>
       <button class="btn-icon" on:click={hideCart}><i class="material-icons-outlined">close</i></button>
     </div>
 
+    {#if loading}
+      <div class="py-24 loading border-t border-b"></div>
+    {/if}
+
     {#if cartData.item_count === 0}
-      <div class="text-center py-16">Your cart is empty 😢</div>
+      <div class="text-center py-24 border-t border-b">Wah, your cart is empty</div>
     {:else}
       <div class="border-t">
-        {#each cartData.items as product}
+        {#each cartData.items as product (product.id)}
           <CartItem on:updateQty={handleUpdateQty} {product} />
         {/each}
       </div>
