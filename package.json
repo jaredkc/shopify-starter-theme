@@ -46,7 +46,6 @@
     "autoprefixer": "^9.7.6",
     "core-js": "^3.6.4",
     "lazysizes": "^5.2.0",
-    "regenerator-runtime": "^0.13.5",
     "tailwindcss": "^1.2.0"
   }
 }
