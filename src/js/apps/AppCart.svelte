@@ -39,6 +39,10 @@
     });
   }
 
+  function handleKeydown(e) {
+    if (e.keyCode === 27) showCart = false;
+	}
+
   onMount(async () => cartLoad());
 </script>
 
@@ -64,6 +68,8 @@
     z-index: 1000;
   }
 </style>
+
+<svelte:window on:keydown={handleKeydown}/>
 
 {#if showCart}
 
