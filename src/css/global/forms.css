@@ -123,3 +123,44 @@ select::-ms-expand {
   @apply bg-red-200;
   @apply border-red-800;
 }
+
+/* Qauntity increment */
+.qty-wrapper {
+  @apply border-gray-400;
+
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-flex;
+  padding-bottom: 1px;
+}
+
+.qty-increment {
+  border: 0;
+  color: var(--c-text-light);
+  padding: 3px 6px;
+}
+
+.qty-increment:hover {
+  color: var(--c-primary);
+}
+
+.qty-icon {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.qty-icon-delete {
+  font-size: 18px;
+}
+
+.qty-count {
+  border: 0;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.qty-input::-webkit-inner-spin-button,
+.qty-input::-webkit-outer-spin-button {
+  appearance: none;
+}

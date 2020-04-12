@@ -3,28 +3,44 @@
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
-  let loading = false;
 
   export let product;
 
-  const updateQty = (key) => {
-    loading = true;
-    dispatch('updateQty', { key })
+  const updateQty = (key, qty) => {
+    dispatch('updateQty', { key, qty })
   };
 </script>
 
-<div class="flex justify-between py-4 border-b text-sm {loading ? 'loading' : ''}">
+<div class="flex justify-between py-4 border-b">
   <div>
     <a href={product.url}><img src={product.featured_image.url} alt={product.featured_image.alt} class="w-16" /></a>
   </div>
   <div class="flex-1 px-4">
-    <div class="mb-4">
+    <div class="mb-6">
       <a href={product.url}>{product.title}</a>
-      <div class="mt-1 text-sm text-gray-700">
-        Qty: {product.quantity}
-      </div>
+      {#if product.message}
+        <div class="mt-1 text-sm text-green-700">
+          {product.message}
+        </div>
+      {/if}
+
     </div>
-    <button class="btn-text" role="button" on:click={() => updateQty(product.key)}>Remove</button>
+    <div class="qty-wrapper">
+      <button class="qty-increment" role="button" on:click={() => updateQty(product.key, product.quantity - 1)}>
+      {#if product.quantity === 1}
+        <i class="material-icons-outlined qty-icon qty-icon-delete">delete</i>
+      {:else}
+        <i class="material-icons-outlined qty-icon">remove</i>
+      {/if}
+
+      </button>
+      <div class="qty-count">
+        {product.quantity}
+      </div>
+      <button class="qty-increment" role="button" on:click={() => updateQty(product.key, product.quantity + 1)}>
+        <i class="material-icons-outlined qty-icon">add</i>
+      </button>
+    </div>
   </div>
   <div>
     {formatMoney(product.price)}

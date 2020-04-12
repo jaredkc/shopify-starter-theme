@@ -31,9 +31,11 @@
     showCart = false;
   }
 
-  function handleUpdateQty(e, quantity = 0) {
-    updateItem(e.detail.key, { quantity }).then((res) => {
+  function handleUpdateQty(e) {
+    loading = true;
+    updateItem(e.detail.key, { quantity: e.detail.qty }).then((res) => {
       cartData = res;
+      loading = false;
     });
   }
 
@@ -80,9 +82,6 @@
 
       <div class="cart-contents flex-grow overflow-y-scroll px-4 md:px-8">
 
-        {#if loading}
-          <div class="py-24 loading"></div>
-        {/if}
 
         {#if cartData.item_count === 0}
           <div class="py-24 text-center">Wah, your cart is empty</div>
@@ -94,7 +93,7 @@
 
       </div>
 
-      <div class="cart-footer p-4 md:p-8 border-t">
+      <div class="cart-footer p-4 md:p-8 border-t {loading ? 'loading' : ''}">
         {#if cartData.item_count > 0}
           <div class="flex justify-between items-center mb-4">
             <div>Subtotal</div>
