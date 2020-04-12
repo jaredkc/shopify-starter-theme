@@ -82,7 +82,6 @@
 
       <div class="cart-contents flex-grow overflow-y-scroll px-4 md:px-8">
 
-
         {#if cartData.item_count === 0}
           <div class="py-24 text-center">Wah, your cart is empty</div>
         {:else}
