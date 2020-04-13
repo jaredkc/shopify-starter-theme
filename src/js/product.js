@@ -6,7 +6,7 @@ import './utility/public-path';
 import openCart from './utility/open-cart';
 
 // TODO handle file uploads
-function logSubmit(e) {
+function submitToCart(e) {
   e.preventDefault();
 
   const btn = document.getElementById('AddToCart');
@@ -19,8 +19,13 @@ function logSubmit(e) {
     body: new URLSearchParams(new FormData(e.target)),
   }).then((res) => {
     btn.classList.remove(loadingClass);
+
     if (res.status === 200) {
-      openCart();
+      openCart().then((mRes) => {
+        if (mRes === false) {
+          window.location.href = '/cart';
+        }
+      });
     } else {
       // TODO handle bad requests
       alert('Oh no! There was an problem.');
@@ -33,4 +38,4 @@ function logSubmit(e) {
 }
 
 const form = document.getElementById('AddToCartForm');
-form.addEventListener('submit', logSubmit);
+form.addEventListener('submit', submitToCart);

@@ -13,7 +13,11 @@ if (cartLinks) {
   cartLinks.forEach((cartLink) => {
     cartLink.addEventListener('click', (e) => {
       e.preventDefault();
-      openCart();
+      openCart().then((res) => {
+        if (res === false) {
+          window.location.href = e.currentTarget.getAttribute('href');
+        }
+      });
     });
   });
 }
