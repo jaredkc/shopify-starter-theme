@@ -43,6 +43,7 @@
     "@shopify/theme-a11y": "^3.0.3",
     "@shopify/theme-cart": "^3.0.3",
     "@shopify/theme-currency": "^3.0.3",
+    "@shopify/theme-images": "^3.0.3",
     "autoprefixer": "^9.7.6",
     "core-js": "^3.6.4",
     "lazysizes": "^5.2.0",
