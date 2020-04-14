@@ -5,6 +5,10 @@ import '../css/product.css';
 import './utility/public-path';
 import openCart from './utility/open-cart';
 
+/**
+ * Ajax add to cart,
+ * then open cart module
+ */
 // TODO handle file uploads
 function submitToCart(e) {
   e.preventDefault();
@@ -37,5 +41,7 @@ function submitToCart(e) {
   });
 }
 
-const form = document.getElementById('AddToCartForm');
-form.addEventListener('submit', submitToCart);
+const addToCartForm = document.getElementById('AddToCartForm');
+if (addToCartForm) {
+  addToCartForm.addEventListener('submit', submitToCart);
+}
