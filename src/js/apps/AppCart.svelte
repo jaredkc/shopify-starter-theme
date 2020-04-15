@@ -9,6 +9,7 @@
   let cartData = { item_count: 0, items: [] };
   let loading = false;
   let showCart = false;
+  const body = document.body;
 
   async function cartFetch() {
     const response = await fetch('/cart.js');
@@ -18,6 +19,9 @@
   export function cartLoad() {
     showCart = true;
     loading = true;
+
+    body.classList.add('overflow-hidden');
+
     cartFetch()
       .then((res) => (cartData = res))
       .then(() => {
@@ -27,8 +31,9 @@
   }
 
   function hideCart() {
-    removeTrapFocus();
     showCart = false;
+    body.classList.remove('overflow-hidden');
+    removeTrapFocus();
   }
 
   function handleUpdateQty(e) {
@@ -40,7 +45,7 @@
   }
 
   function handleKeydown(e) {
-    if (e.keyCode === 27) showCart = false;
+    if (e.keyCode === 27) hideCart();
 	}
 
   onMount(async () => cartLoad());
@@ -73,11 +78,11 @@
 
 {#if showCart}
 
-  <div class="modal-bg" transition:fade="{{ duration: 250 }}" on:click={hideCart} />
+  <div class="modal-bg overflow-hidden" transition:fade="{{ duration: 250 }}" on:click={hideCart} />
 
   <div id="modal-content" class="modal-content" transition:fly="{{ x: 200, duration: 250, delay: 100 }}">
 
-    <div class="flex flex-col justify-between h-screen">
+    <div class="flex flex-col justify-between h-full relative">
 
       <div class="cart-header p-4 md:px-8 border-b">
         <div class="flex justify-between items-center">
@@ -98,7 +103,7 @@
 
       </div>
 
-      <div class="cart-footer p-4 md:p-8 border-t {loading ? 'loading' : ''}">
+      <div class="cart-footer p-4 md:p-8 border-t bottom-0 left-0 right-0 {loading ? 'loading' : ''}">
         {#if cartData.item_count > 0}
           <div class="flex justify-between items-center mb-4">
             <div>Subtotal</div>

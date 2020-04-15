@@ -1,5 +1,5 @@
 .btn {
-  -webkit-appearance: button;
+  appearance: none;
   background-color: #fff;
   border: 3px solid var(--c-primary);
   border-radius: 6px;
@@ -25,6 +25,12 @@
 .btn--primary {
   background-color: var(--c-primary);
   color: #fff;
+}
+
+.btn--sm {
+  @apply text-sm;
+
+  padding: 0.5rem 1rem;
 }
 
 .btn--primary:hover,
