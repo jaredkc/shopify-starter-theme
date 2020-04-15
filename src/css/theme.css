@@ -9,6 +9,7 @@
  */
 
 /* Base & global styles */
+@import '../../node_modules/normalize.css/normalize.css';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
 @import './global/base.css';
 @import './global/forms.css';
