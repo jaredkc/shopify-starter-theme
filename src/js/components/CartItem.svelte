@@ -1,7 +1,7 @@
 <script>
   import { formatMoney } from '@shopify/theme-currency';
-  import { getSizedImageUrl } from '@shopify/theme-images';
   import { createEventDispatcher } from 'svelte';
+  import CartImage from '../components/CartImage.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -14,7 +14,9 @@
 
 <div class="flex justify-between py-4 border-b">
   <div>
-    <a href={product.url}><img src={getSizedImageUrl(product.featured_image.url, 'small')} alt={product.featured_image.alt} class="w-20" /></a>
+    <a href={product.url}>
+      <CartImage bind:image={product.featured_image} />
+    </a>
   </div>
   <div class="flex-1 px-4">
     <div class="mb-6">
