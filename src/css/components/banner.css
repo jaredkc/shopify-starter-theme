@@ -1,0 +1,23 @@
+.banner {
+  @apply bg-gray-200;
+  @apply border-gray-600;
+
+  border-top-style: solid;
+  border-top-width: 3px;
+  padding: 0.2rem 1.2rem;
+  text-align: left;
+}
+
+.banner--error {
+  background-color: var(--c-error-bg);
+  border-top-color: var(--c-error);
+}
+
+.banner--success {
+  background-color: var(--c-success-bg);
+  border-top-color: var(--c-success);
+}
+
+.banner ul {
+  padding-left: 1.2rem;
+}

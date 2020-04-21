@@ -9,26 +9,29 @@
 
 /**
  * Form errors output by {{ form.errors | default_errors }}
+ * Aligns with .banner styles
  * https://shopify.dev/docs/liquid/reference/objects/form#form-errors
  */
 .errors {
-  @apply bg-red-200;
-  @apply border-red-800;
-
-  border-style: solid;
-  border-width: 1px;
-  padding: 0.5em 1em;
+  background-color: var(--c-error-bg);
+  border-top-color: var(--c-error);
+  border-top-style: solid;
+  border-top-width: 3px;
+  padding: 0.8rem 1.2rem;
   text-align: left;
 }
 
-.errors p,
 .errors ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.errors p,
+.errors li {
   margin: 0.5em 0;
 }
 
-.errors ul {
-  padding-left: 1.5em;
-}
 
 /**
  * Pagination output by {{ paginate | default_pagination }}

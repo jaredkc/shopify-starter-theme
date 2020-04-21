@@ -3,6 +3,10 @@
   --c-primary-dark: #2a4365;
   --c-text: theme('colors.gray.900');
   --c-text-light: theme('colors.gray.600');
+  --c-success: theme('colors.green.600');
+  --c-success-bg: theme('colors.green.200');
+  --c-error: theme('colors.red.600');
+  --c-error-bg: theme('colors.red.200');
 }
 
 *,

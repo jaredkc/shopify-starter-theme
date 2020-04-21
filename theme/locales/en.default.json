@@ -109,6 +109,12 @@
       "password": "Password",
       "submit": "Create",
       "cancel": "Return to Store"
+    },
+    "newsletter_form": {
+      "headline": "Sign up for updates",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "confirmation": "You're all set. Thanks for subscribing."
     }
   },
   "layout": {
