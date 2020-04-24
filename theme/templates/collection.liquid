@@ -17,7 +17,7 @@
         </div>
     </div>
     {%- if collection.description != blank -%}
-      <div class="copy-pad text-center py-12 mb-16 bg-gray-100 border-b">
+      <div class="page-pad text-center py-12 mb-16 bg-gray-100 border-b">
         <div class="copy">
           {{ collection.description }}
         </div>
@@ -26,7 +26,7 @@
 
   {%- else -%}
 
-    <div class="copy-pad text-center pt-16 pb-20">
+    <div class="page-pad text-center pt-16 pb-20">
       <div class="copy">
         <h1 class="m-0">{{ collection.title }}</h1>
         {%- if collection.description != blank -%}
@@ -39,7 +39,7 @@
 
   {%- endif -%}
 
-  <div class="copy-pad">
+  <div class="page-pad">
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       {%- for product in collection.products -%}
