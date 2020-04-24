@@ -1,36 +1,39 @@
 <footer id="colophon" class="site-footer border-t px-4 py-8 mt-8" role="content-info">
 
-  {% form 'customer' %}
-    <input type="hidden" name="contact[tags]" value="newsletter">
+  {% comment %}
+  Only show newsetter form if they have not already signed up
+  {% endcomment %}
+  {% unless customer.accepts_marketing %}
+    {% form 'customer' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
 
-    <label for="NewsletterEmail">
-      {{ 'customer.newsletter_form.headline' | t }}
-    </label>
+      <label for="NewsletterEmail">{{ 'customer.newsletter_form.headline' | t }}</label>
+      <input type="email"
+        id="NewsletterEmail"
+        name="contact[email]"
+        value="{% if customer %}{{ customer.email }}{% endif %}"
+        placeholder="{{ 'customer.newsletter_form.placeholder' | t }}"
+        aria-label="{{ 'customer.newsletter_form.placeholder' | t }}"
+        autocorrect="off"
+        autocapitalize="off"
+        required>
 
-    <input type="email"
-      id="NewsletterEmail"
-      name="contact[email]"
-      value="{% if customer %}{{ customer.email }}{% endif %}"
-      placeholder="{{ 'customer.newsletter_form.placeholder' | t }}"
-      aria-label="{{ 'customer.newsletter_form.placeholder' | t }}"
-      autocorrect="off"
-      autocapitalize="off"
-      required>
+        <button type="submit">
+          {{ 'customer.newsletter_form.button' | t }}
+        </button>
 
-    <button type="submit">
-      {{ 'customer.newsletter_form.button' | t }}
-    </button>
+        {% if form.posted_successfully? %}
+          <div class="banner banner--success" aria-role="alert">
+            <p>{{ 'customer.newsletter_form.confirmation' | t }}</p>
+          </div>
+        {% endif %}
 
-    {% if form.posted_successfully? %}
-      <div class="banner banner--success" aria-role="alert">
-        <p>{{ 'customer.newsletter_form.confirmation' | t }}</p>
-      </div>
-    {% endif %}
-
-    {{ form.errors | default_errors }}
-  {% endform %}
+      {{ form.errors | default_errors }}
+    {% endform %}
+  {% endunless %}
 
   <p>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
+
 </footer>
 
 {% schema %}
