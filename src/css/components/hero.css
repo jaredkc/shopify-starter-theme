@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.hero__img--banner {
+.hero__img--md {
   max-height: 600px;
 }
 
@@ -39,6 +39,7 @@
 
 @media (min-width: 680px) {
   .hero {
+    min-height: 400px;
     padding-bottom: 0;
   }
 
