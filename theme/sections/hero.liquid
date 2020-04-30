@@ -15,13 +15,7 @@
 
 <section class="hero hero--{{ section.id }} hero--{{ section.settings.overlay_theme }} bg-gray-200">
     {%- if section.settings.image != blank -%}
-      <img
-        data-src="{{ section.settings.image | img_url: '360x' }}"
-        data-srcset="{{ section.settings.image | img_url: '720x' }} 720w, {{ section.settings.image | img_url: '1260x' }} 1260w, {{ section.settings.image | img_url: '1600x' }} 1600w, {{ section.settings.image | img_url: '2400x' }} 2400w"
-        data-sizes="auto"
-        data-src="{{ section.settings.image | img_url: '600x', scale: 2 }}"
-        alt="{{ section.settings.image.alt | escape }}"
-        class="lazyload hero__img">
+      {% include 'responsive-image' with image: section.settings.image, image_class: 'hero__img', full_width: true %}
     {%- else -%}
       {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__img' }}
     {%- endif -%}

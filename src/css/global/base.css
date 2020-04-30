@@ -15,13 +15,6 @@
   box-sizing: border-box;
 }
 
-/* Needed for TailwindCSS, did not want the rest of preflight */
-[class*='border'] {
-  border-color: theme('borderColor.default', currentColor);
-  border-style: solid;
-  border-width: 0;
-}
-
 body { margin: 0; }
 
 a { color: var(--c-primary); }
@@ -31,4 +24,26 @@ input,
 select,
 button {
   font-size: 1rem;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.blur-up {
+  filter: blur(5px);
+  transition: filter 400ms;
+}
+
+/*! purgecss start ignore */
+.blur-up.lazyloaded {
+  filter: blur(0);
+}
+
+/* Needed for TailwindCSS, did not want the rest of preflight */
+[class*='border'] {
+  border-color: theme('borderColor.default', currentColor);
+  border-style: solid;
+  border-width: 0;
 }

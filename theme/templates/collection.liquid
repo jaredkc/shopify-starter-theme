@@ -41,12 +41,12 @@
 
   <div class="page-pad">
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
       {%- for product in collection.products -%}
 
         <div class="text-center">
           <a href="{{ product.url | within: collection }}">
-            <img src="{{ product.featured_image.src | img_url: '300x300' }}" alt="{{ product.featured_image.alt | escape }}">
+            {% include 'responsive-image' with image: product.featured_image, width: 600 %}
           </a>
           <h2 class="text-xl m-2">
             <a href="{{ product.url | within: collection }}">{{ product.title }}</a>

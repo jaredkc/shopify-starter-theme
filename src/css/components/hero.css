@@ -1,5 +1,3 @@
-/* purgecss start ignore */
-
 .hero {
   padding-bottom: 1px;
   position: relative;
@@ -7,7 +5,6 @@
 
 .hero__img {
   height: auto;
-  max-height: 100vh;
   object-fit: cover;
   vertical-align: bottom;
   width: 100%;

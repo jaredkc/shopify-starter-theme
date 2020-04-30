@@ -4,7 +4,6 @@
 import '../css/theme.css';
 import './utility/public-path';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-import 'lazysizes/plugins/rias/ls.rias';
 import 'lazysizes';
 import openCart from './utility/open-cart';
 
