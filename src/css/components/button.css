@@ -4,12 +4,12 @@
   border: 3px solid var(--c-primary);
   border-radius: 6px;
   color: var(--c-primary);
-  font-family: inherit;
+  display: inline-block;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.15;
   margin: 0;
-  padding: 1rem 2.5rem;
+  padding: 0.6rem 1.6rem;
   text-align: center;
   text-decoration: none;
 }

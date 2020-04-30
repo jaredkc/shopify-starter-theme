@@ -36,7 +36,7 @@ img {
   transition: filter 400ms;
 }
 
-/*! purgecss start ignore */
+/*! purgecss ignore */
 .blur-up.lazyloaded {
   filter: blur(0);
 }

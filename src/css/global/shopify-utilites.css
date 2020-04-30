@@ -1,4 +1,4 @@
-/* purgecss start ignore */
+/*! purgecss start ignore */
 
 /* Fallback SVG image when no image has been set */
 .placeholder-svg {
@@ -32,7 +32,6 @@
   margin: 0.5em 0;
 }
 
-
 /**
  * Pagination output by {{ paginate | default_pagination }}
  * https://shopify.dev/docs/liquid/reference/objects/paginate
@@ -64,4 +63,4 @@
   color: var(--c-text-light);
 }
 
-/* purgecss end ignore */
+/*! purgecss end ignore */
