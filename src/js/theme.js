@@ -3,6 +3,7 @@
  */
 import '../css/theme.css';
 import './utility/public-path';
+import './utility/newsletter-subscribe';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import 'lazysizes';
 import openCart from './utility/open-cart';

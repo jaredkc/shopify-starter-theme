@@ -29,6 +29,22 @@
         {% endif %}
 
       {{ form.errors | default_errors }}
+
+      {% comment %} Standard form submission {% endcomment %}
+      {% if form.posted_successfully? %}
+        <div class="note note--success" aria-role="alert">
+          {{ 'customer.newsletter_form.confirmation' | t }}
+        </div>
+      {% endif %}
+
+      {% comment %} JavaScript form submission {% endcomment %}
+      <div
+        id="form-response"
+        class="banner mt-4 hidden"
+        data-success="{{ 'customer.newsletter_form.confirmation' | t }}"
+        data-error="{{ 'customer.newsletter_form.submit_error' | t }}">
+      </div>
+
     {% endform %}
   {% endunless %}
 
