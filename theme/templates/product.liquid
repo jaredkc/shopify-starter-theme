@@ -1,46 +1,60 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
 
-<div>
-  {% include 'responsive-image' with image: featured_image, width: 1200 %}
-</div>
+<section class="page-pad">
+  <div id="overview" class="lg:grid lg:grid-cols-5 lg:gap-8">
 
-{% for image in product.images %}
-  <a href="{{ image.src | img_url: 'large' }}"><img data-src="{{ image | img_url: '50x50' }}" alt="{{ image.alt | escape }}" class="lazyload"></a>
-{% endfor %}
 
-<div class="copy">
-  <h1 class="product-title">{{ product.title }}</h1>
+    <div class="lg:col-span-3">
+      <div class="copy">
+        {% include 'responsive-image' with image: featured_image, width: 1200 %}
 
-  <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
-
-    <p class="form-block">
-      <select name="id" id="productSelect" class="form-select">
-        {% for variant in product.variants %}
-        {% if variant.available %}
-        <option value="{{ variant.id }}">
-          {{ variant.title }} - {{ variant.price | money_with_currency }}
-        </option>
-        {% else %}
-        <option disabled="disabled">
-          {{ variant.title }} - sold out
-        </option>
+        {% if product.images.size > 1 %}
+          {% for image in product.images %}
+            <a href="{{ image.src | img_url: 'large' }}"><img data-src="{{ image | img_url: '50x50' }}" alt="{{ image.alt | escape }}" class="lazyload"></a>
+          {% endfor %}
         {% endif %}
-        {% endfor %}
-      </select>
-    </p>
+      </div>
+    </div>
 
-    {{ current_variant.price | money }}
 
-    <p class="form-block-inline">
-      <label for="Quantity" class="form-label">Quantity</label>
-      <input type="number" id="Quantity" name="quantity" value="1" min="1" class="form-input">
-    </p>
+    <div class="lg:col-span-2">
+      <div class="copy">
+        <h1 class="product-title">{{ product.title }}</h1>
+        {{ current_variant.price | money }}
 
-    <p class="mt-8">
-      <button type="submit" name="add" id="AddToCart" class="btn btn--primary">Add to cart</button>
-    </p>
-  </form>
+        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="my-8">
 
-  <div>{{ product.description }}</div>
-</div>
+          <p class="form-block">
+            <select name="id[]" id="productSelect" class="form-select">
+              {% for variant in product.variants %}
+              {% if variant.available %}
+              <option value="{{ variant.id }}">
+                {{ variant.title }} - {{ variant.price | money_with_currency }}
+              </option>
+              {% else %}
+              <option disabled="disabled">
+                {{ variant.title }} - sold out
+              </option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </p>
+
+          <p class="form-block-inline">
+            <label for="Quantity" class="form-label">Quantity</label>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="form-input">
+          </p>
+
+          <p class="mt-8">
+            <button type="submit" name="add" id="AddToCart" class="btn btn--primary">Add to cart</button>
+          </p>
+        </form>
+
+        <div>{{ product.description }}</div>
+      </div>
+    </div>
+
+
+  </div> <!--.grid-->
+</section>
