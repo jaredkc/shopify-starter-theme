@@ -19,12 +19,12 @@ textarea:focus {
   border-color: var(--c-primary);
 }
 
+button[disabled],
 input[disabled],
-textarea[disabled],
-select[disabled] {
-  background-color: #cbd5e0;
-  border-color: #718096;
-  cursor: default;
+select[disabled],
+textarea[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 button,

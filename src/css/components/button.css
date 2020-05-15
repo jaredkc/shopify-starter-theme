@@ -19,7 +19,6 @@
 .btn:active {
   border-color: var(--c-primary-dark);
   color: var(--c-primary-dark);
-  cursor: pointer;
 }
 
 .btn--primary {

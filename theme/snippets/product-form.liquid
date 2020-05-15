@@ -1,0 +1,89 @@
+{% form 'product', product, class: 'my-8', data-product-form: '', data-product-handle: product.handle %}
+
+  {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+      <div class="js-enabled form-block-inline">
+        <label for="Option{{ option.position }}" class="form-label">{{ option.name }}</label>
+        {%- comment -%}
+          All inputs that have `name=options[Name]` will be picked up by
+          ProductForm, registered as an option input, and made available
+          at ProductForm.optionsInputs
+        {%- endcomment -%}
+        <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="form-select">
+          {% for value in option.values %}
+            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+              {{ value }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endfor %}
+  {% endunless %}
+
+  {%- comment -%}
+    In order for this form to submit, it needs to contain an input with name="id".
+    ProductForm() will automatically create this input (or make sure it has the
+    right value set if it already exists) on form submit based on the
+    currently selected variant. However, if JS is disabled we need a fallback.
+
+    Include a single <select> element which allows users to select all variants
+    as a fallback and present it only when JS is disabled. In addition,
+    make sure you hide the option inputs declared above, like we do with the
+    `.js-enabled` class which only shows its contents when JS is enabled.
+  {%- endcomment -%}
+  <noscript>
+    <select name="id">
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
+          {{ variant.title }}
+        </option>
+      {% endfor %}
+    </select>
+  </noscript>
+
+  {%- comment -%}
+    Any input with `name="quantity"` will be picked up by ProductForm and
+    registered as a quantity input. If a quantity input is not included, a
+    default quantity of 1 is assumed.
+  {%- endcomment -%}
+  <p class="form-block-inline">
+    <label for="Quantity" class="form-label">{{ 'products.product.quantity' | t }}</label>
+    <input type="number" id="Quantity" name="quantity" value="1" min="1" class="form-input">
+  </p>
+
+  {%- comment -%}
+    Line Item property inputs with `name="properties[NAME]"` will be picked up
+    by ProductForm and registered as a properties input.
+    <p class="form-block">
+      <label for="Details" class="form-label">Details</label>
+      <textarea id="Details" name="properties[Details]" class="form-textarea"></textarea>
+    </p>
+  {%- endcomment -%}
+
+  <button type="submit" class="btn btn--primary" {% unless current_variant.available %}disabled="disabled"{% endunless %} data-add-to-cart>
+    {{ 'products.product.add_to_cart' | t }}
+  </button>
+
+  {%- comment -%}
+    Don't forget about the Dynamic Checkout buttons!
+    https://help.shopify.com/en/themes/customization/store/dynamic-checkout-buttons
+    {{ form | payment_button }}
+  {%- endcomment -%}
+
+  {%- for variant in product.variants -%}
+    {% if variant.inventory_management == "shopify" %}
+      <div id="stock-message-{{ variant.id }}" class="bg-gray-200 text-sm mt-4 px-2 py-3 {% unless variant == current_variant %} hidden{% endunless %}" data-stock-message>
+        {% if variant.inventory_quantity > 0 %}
+          {{ variant.inventory_quantity }} {% if variant.title != "Default Title" %}{{ variant.title }}{% endif %} in stock.
+        {% else %}
+          {% if variant.title != "Default Title" %}{{ variant.title }}{% endif %} {{ 'products.product.sold_out' | t }}.
+        {% endif %}
+        {% if variant.inventory_policy == "continue" %}{{ 'products.product.backorder' | t }}.{% endif %}
+        {% if variant.incoming %}
+        {{ 'products.product.next_shipment' | t }} {{ variant.next_incoming_date | date: "%A, %B %d"}}.
+        {% endif %}
+      </div>
+    {% endif %}
+  {%- endfor -%}
+
+{% endform %}

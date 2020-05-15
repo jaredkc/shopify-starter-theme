@@ -5,6 +5,20 @@
       "subtext_html": "The page you were looking for does not exist"
     }
   },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "backorder": "Backorder Now",
+      "from_text_html": "From {{ price }}",
+      "next_shipmenbt": "Next shipment arrives",
+      "on_sale_from_html": "On Sale from {{ price }}",
+      "on_sale": "On Sale",
+      "quantity": "Quantity",
+      "regular_price": "Regular price",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable"
+    }
+  },
   "customer": {
     "account": {
       "title": "My Account",
