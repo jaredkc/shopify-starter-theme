@@ -1,5 +1,14 @@
 /*! purgecss start ignore */
 
+/* Account for JavaScript disabled */
+.js-enabled {
+  display: none;
+}
+
+.js .js-enabled {
+  display: inherit;
+}
+
 /* Fallback SVG image when no image has been set */
 .placeholder-svg {
   @apply bg-gray-300;

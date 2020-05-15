@@ -2,20 +2,22 @@
 
   {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
-      <div class="js-enabled form-block-inline">
-        <label for="Option{{ option.position }}" class="form-label">{{ option.name }}</label>
-        {%- comment -%}
+      <div class="js-enabled">
+        <div class="form-block-inline">
+          <label for="Option{{ option.position }}" class="form-label">{{ option.name }}</label>
+          {%- comment -%}
           All inputs that have `name=options[Name]` will be picked up by
           ProductForm, registered as an option input, and made available
           at ProductForm.optionsInputs
-        {%- endcomment -%}
-        <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="form-select">
-          {% for value in option.values %}
+          {%- endcomment -%}
+          <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="form-select">
+            {% for value in option.values %}
             <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
               {{ value }}
             </option>
-          {% endfor %}
-        </select>
+            {% endfor %}
+          </select>
+        </div>
       </div>
     {% endfor %}
   {% endunless %}
@@ -55,8 +57,8 @@
     Line Item property inputs with `name="properties[NAME]"` will be picked up
     by ProductForm and registered as a properties input.
     <p class="form-block">
-      <label for="Details" class="form-label">Details</label>
-      <textarea id="Details" name="properties[Details]" class="form-textarea"></textarea>
+      <label for="Engraving" class="form-label">Engraving</label>
+      <input type="text" id="Engraving" name="properties[Engraving]" class="form-input">
     </p>
   {%- endcomment -%}
 
