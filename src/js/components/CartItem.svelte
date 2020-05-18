@@ -46,6 +46,6 @@
     </div>
   </div>
   <div>
-    {formatMoney(product.price)}
+    {formatMoney(product.price, window.theme.moneyFormat)} -
   </div>
 </div>

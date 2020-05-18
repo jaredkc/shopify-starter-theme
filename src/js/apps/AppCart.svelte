@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import { trapFocus, removeTrapFocus } from '@shopify/theme-a11y';
-  import { updateItem } from '@shopify/theme-cart';
+  import { updateItem, clearItems } from '@shopify/theme-cart';
   import { formatMoney } from '@shopify/theme-currency';
   import CartItem from '../components/CartItem.svelte';
 
@@ -107,7 +107,7 @@
         {#if cartData.item_count > 0}
           <div class="flex justify-between items-center mb-4">
             <div>Subtotal</div>
-            <div><b>{formatMoney(cartData.items_subtotal_price)}</b></div>
+            <div><b>{formatMoney(cartData.items_subtotal_price, window.theme.moneyFormat)}</b></div>
           </div>
 
           <form action="/cart" method="post" class="mt-6 grid grid-cols-2 gap-4">

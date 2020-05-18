@@ -8,6 +8,7 @@
   "products": {
     "product": {
       "add_to_cart": "Add to Cart",
+      "available": "Available",
       "backorder": "Backorder Now",
       "from_text_html": "From {{ price }}",
       "next_shipmenbt": "Next shipment arrives",

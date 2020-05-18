@@ -2,10 +2,10 @@
  * Product specific scripts and styles
  */
 import { ProductForm } from '@shopify/theme-product-form';
+import { formatMoney } from '@shopify/theme-currency';
 import { addItem } from '@shopify/theme-cart';
 
 import '../css/product.css';
-import './utility/public-path';
 import openCart from './utility/open-cart';
 
 const addToCartBtn = document.querySelector('[data-add-to-cart]');
@@ -13,8 +13,15 @@ const featuredImage = document.querySelector('[data-featured-image]');
 const formElement = document.querySelector('[data-product-form]');
 const stockMessages = document.querySelectorAll('[data-stock-message]');
 const thumbnailLinks = document.querySelectorAll('[data-thumbnail-links]');
+const themeStrings = window.theme.strings;
+const themeMoneyFormat = window.theme.moneyFormat;
 
-// Update the featured image
+/**
+ * Updating the featured image
+ *
+ * @param {string} imgSrc - Image src url
+ * @param {string} imgAltText - Alt text for the image
+ */
 function handleFeaturedImage(imgSrc, imgAltText) {
   featuredImage.src = imgSrc;
   featuredImage.alt = imgAltText;
@@ -22,9 +29,28 @@ function handleFeaturedImage(imgSrc, imgAltText) {
   featuredImage.srcset = '';
 }
 
-// ProductForm callback to handle variants selection changes
+// Update featured image when you click on thumbnails
+if (thumbnailLinks) {
+  thumbnailLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      handleFeaturedImage(event.currentTarget.href, event.target.alt);
+    });
+  });
+}
+
+/**
+ * ProductForm callbacks
+ *
+ * onOptionChange - Callback for whenever an option input changes
+ * onQuantityChange - Callback for whenever an quantity input changes
+ * onPropertyChange - Callback for whenever a property input changes
+ * onFormSubmit - Callback for whenever the product form is submitted
+ */
+
 function onOptionChange(event) {
   const { variant } = event.dataset;
+  const price = formatMoney(variant.price, themeMoneyFormat);
 
   // Hide all stock message, then show for this variant
   stockMessages.forEach((stockMessage) => stockMessage.classList.add('hidden'));
@@ -38,16 +64,18 @@ function onOptionChange(event) {
   if (variant === null) {
     // The combination of selected options does not have a matching variant
     addToCartBtn.disabled = true;
+    addToCartBtn.innerHTML = themeStrings.unavailable;
   } else if (variant && !variant.available) {
     // The combination of selected options has a matching variant but it is currently unavailable
     addToCartBtn.disabled = true;
+    addToCartBtn.innerHTML = themeStrings.soldOut;
   } else if (variant && variant.available) {
     // The combination of selected options has a matching variant and it is available
     addToCartBtn.disabled = false;
+    addToCartBtn.innerHTML = `${themeStrings.addToCart} &middot; ${price}`;
   }
 }
 
-// ProductForm callback to handle AJAX form submit.
 function onFormSubmit(event) {
   event.preventDefault();
 
@@ -66,15 +94,10 @@ function onFormSubmit(event) {
     })
     .catch(() => {
       addToCartBtn.classList.remove('loading');
-      // Minimal error messages, so submit form
-      // for server and template logic as fallback.
+      // Minimal error messages, so try standard form submit.
       formElement.submit();
     });
 }
-
-// Additional callbacks available
-// function onQuantityChange(event) {}
-// function onPropertyChange(event) {}
 
 // Fetch the product data from the .js endpoint because it includes
 // more data than the .json endpoint. Alternatively, you could inline the output
@@ -89,14 +112,3 @@ fetch(`/products/${formElement.dataset.productHandle}.js`)
       onOptionChange, onFormSubmit,
     });
   });
-
-
-// Update featured image when you click on thumbnails
-if (thumbnailLinks) {
-  thumbnailLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      handleFeaturedImage(event.currentTarget.href, event.target.alt);
-    });
-  });
-}

@@ -6,9 +6,9 @@
         <div class="form-block-inline">
           <label for="Option{{ option.position }}" class="form-label">{{ option.name }}</label>
           {%- comment -%}
-          All inputs that have `name=options[Name]` will be picked up by
-          ProductForm, registered as an option input, and made available
-          at ProductForm.optionsInputs
+            All inputs that have `name=options[Name]` will be picked up by
+            ProductForm, registered as an option input, and made available
+            at ProductForm.optionsInputs
           {%- endcomment -%}
           <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="form-select">
             {% for value in option.values %}
@@ -75,14 +75,17 @@
   {%- for variant in product.variants -%}
     {% if variant.inventory_management == "shopify" %}
       <div id="stock-message-{{ variant.id }}" class="bg-gray-200 text-sm mt-4 px-2 py-3 {% unless variant == current_variant %} hidden{% endunless %}" data-stock-message>
+        {% if variant.title != "Default Title" %}{{ variant.title }} &middot; {% endif %}
         {% if variant.inventory_quantity > 0 %}
-          {{ variant.inventory_quantity }} {% if variant.title != "Default Title" %}{{ variant.title }}{% endif %} in stock.
+          {{ variant.inventory_quantity }} {{ 'products.product.available' | t }}
         {% else %}
-          {% if variant.title != "Default Title" %}{{ variant.title }}{% endif %} {{ 'products.product.sold_out' | t }}.
+          {{ 'products.product.sold_out' | t }}
         {% endif %}
-        {% if variant.inventory_policy == "continue" %}{{ 'products.product.backorder' | t }}.{% endif %}
+        {% if variant.inventory_policy == "continue" %}
+          &middot; {{ 'products.product.backorder' | t }}
+        {% endif %}
         {% if variant.incoming %}
-        {{ 'products.product.next_shipment' | t }} {{ variant.next_incoming_date | date: "%A, %B %d"}}.
+          &middot; {{ 'products.product.next_shipment' | t }} {{ variant.next_incoming_date | date: "%A, %B %d"}}.
         {% endif %}
       </div>
     {% endif %}

@@ -10,6 +10,20 @@
 
   {{- 'theme.bundle.css' | asset_url | stylesheet_tag -}}
 
+  {%- comment -%}
+    Make string translations and money formate available to scripts.
+  {%- endcomment -%}
+  <script>
+    window.theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    };
+  </script>
+
   {%- comment -%} Required for lazy-loading with Webpack on Shopify CDN {%- endcomment -%}
   {%- capture randomFile -%}{{ 'theme.bundle.js' | asset_url }}{%- endcapture -%}
   {%- assign assetsPath = randomFile | split: 'theme.bundle.js' | first -%}
