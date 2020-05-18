@@ -50,6 +50,7 @@
     "cssnano": "^4.1.10",
     "lazysizes": "^5.2.0",
     "normalize.css": "^8.0.1",
+    "regenerator-runtime": "^0.13.5",
     "tailwindcss": "^1.2.0"
   }
 }
