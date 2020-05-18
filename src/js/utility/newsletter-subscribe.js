@@ -4,18 +4,18 @@
 const newsletterForm = document.getElementById('contact_form');
 
 function newsletterResponse(success) {
-  const resElm = document.getElementById('form-response');
+  const formResponse = document.getElementById('form-response');
 
-  if (!resElm) return;
+  if (!formResponse) return;
 
   if (success) {
-    resElm.innerHTML = resElm.dataset.success;
-    resElm.classList.add('banner--success');
+    formResponse.innerHTML = formResponse.dataset.success;
+    formResponse.classList.add('banner--success');
   } else {
-    resElm.innerHTML = resElm.dataset.error;
-    resElm.classList.add('banner--error');
+    formResponse.innerHTML = formResponse.dataset.error;
+    formResponse.classList.add('banner--error');
   }
-  resElm.classList.remove('hidden');
+  formResponse.classList.remove('hidden');
   newsletterForm.classList.remove('loading');
 }
 
@@ -41,3 +41,20 @@ function newsletterSubmit(e) {
 }
 
 if (newsletterForm) newsletterForm.addEventListener('submit', newsletterSubmit);
+
+/*
+Example Responses
+
+Success returns empty object
+{}
+
+Not a robot challenge has been triggered:
+{
+  "ok": true,
+  "redirected": true,
+  "status": 200,
+  "statusText": "",
+  "type": "basic",
+  "url": "https://bb-staged.myshopify.com/challenge"
+}
+*/
