@@ -1,3 +1,7 @@
+{% comment %}
+  Product form for product page template
+  `data-product-form` and `data-product-handle` used by theme ProductForm scripts
+{% endcomment %}
 {% form 'product', product, class: 'my-8', data-product-form: '', data-product-handle: product.handle %}
 
   {% unless product.has_only_default_variant %}
