@@ -13,9 +13,9 @@
   /* stylelint-enable */
 </style>
 
-<section id="hero--{{ section.id }}" class="hero hero--{{ section.settings.content_theme }} bg-gray-200">
+<section id="hero--{{ section.id }}" class="hero hero--{{ section.settings.content_theme }}{% if section.settings.full_height %} hero--full{% endif %} bg-gray-200">
     {%- if section.settings.image != blank -%}
-      {% include 'responsive-image' with image: section.settings.image, image_class: 'hero__image', full_width: true %}
+      {% include 'responsive-image' with image: section.settings.image, image_class: 'hero__image' %}
     {%- else -%}
       {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
     {%- endif -%}
@@ -23,17 +23,16 @@
     <div class="hero__content {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
       <div class="hero__content-block">
         {%- if section.settings.title != blank -%}
-          <h1 class="text-4xl m-0">{{ section.settings.title | escape }}</h1>
+          <h1 class="text-3xl md:text-4xl m-0">{{ section.settings.title | escape }}</h1>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
           {{ section.settings.text }}
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <p class="mt-8 mb-0"><a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a></p>
+          <div class="mt-8"><a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a></div>
         {%- endif -%}
       </div>
     </div>
-
 </section>
 
 {% schema %}
@@ -44,6 +43,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_height",
+      "label": "Full height",
+      "info": "Adjust to the full height of the browser window. Image cropping occurs from the center. Does not apply to small screens.",
+      "default": false
     },
     {
       "type": "header",

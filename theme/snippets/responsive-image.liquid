@@ -7,7 +7,6 @@
   - image_class: {String} class name of the <img />
   - image_attributes: {String}  additional HTML attributes of the <img />
   - width: {Number} Max width of the image container
-  - full_width: {Boolean} To force full width image and scale it up if necessary
 
   Usage:
   {% include 'responsive-image' with image: featured_image, image_class: "css-class", width: 700 %}
@@ -43,7 +42,6 @@
   data-src="{{ image | img_url: '300x' }}"
   data-srcset="{{ image_sizes }}"
   class="lazyload blur-up {{ image_class }}"
-  {%- unless full_width == true -%}style="width: {{ max_width }}px;"{%- endunless -%}
   {{ image_attributes }} />
 
 <noscript>

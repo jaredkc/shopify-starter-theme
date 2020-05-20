@@ -22,15 +22,17 @@
   transform: translate(-50%, -50%);
 }
 
-.hero__position {
-  margin: -6% 3% 3% 3%;
-  max-width: 94%;
-  position: relative; /* To display on top of image with the negative margin */
+.hero__content {
+  margin-top: -1rem;
+  padding: 0 1rem 1rem 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .hero__content-block {
   background: #fff;
-  padding: 24px;
+  border-top: 3px solid var(--c-primary);
+  padding: 1rem;
 }
 
 .hero--dark .hero__content-block {
@@ -41,6 +43,10 @@
 @media (min-width: 768px) {
   .hero {
     display: flex;
+    max-height: 100vh;
+  }
+
+  .hero--full {
     height: 100vh;
   }
 
@@ -84,11 +90,13 @@
 
   .hero__content-block {
     background: rgba(255, 255, 255, 0.5);
+    border-top: 0;
     display: inline-block;
-    margin: 3%;
-    max-width: 600px;
+    margin: 2rem;
+    max-width: 520px;
+    padding: 1.5rem;
     position: sticky;
-    top: 3%;
+    top: 2rem;
   }
 
   .hero--dark .hero__content-block {

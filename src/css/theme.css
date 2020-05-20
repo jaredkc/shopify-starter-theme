@@ -21,8 +21,8 @@
 @import './global/site-header.css';
 
 /* Components */
-@import './components/button.css';
 @import './components/banner.css';
+@import './components/button.css';
 @import './components/hero.css';
 @import './components/loading.css';
 
