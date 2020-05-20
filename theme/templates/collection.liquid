@@ -4,15 +4,15 @@
 
     {%- assign hero_img = collection.image -%}
 
-    <div class="hero bg-gray-200">
+    <div class="hero hero--md bg-gray-200">
       <img
         data-src="{{ hero_img | img_url: '360x' }}"
         data-srcset="{{ hero_img | img_url: '720x' }} 720w, {{ hero_img | img_url: '1260x' }} 1260w, {{ hero_img | img_url: '1600x' }} 1600w, {{ hero_img | img_url: '2400x' }} 2400w"
         data-sizes="auto"
         data-src="{{ hero_img | img_url: '600x', scale: 2 }}"
         alt="{{ hero_img.alt | escape }}"
-        class="lazyload hero__img hero__img--md">
-        <div class="hero__copy">
+        class="lazyload hero__image">
+        <div class="hero__title">
           <h1 class="hero__title m-0">{{ collection.title }}</h1>
         </div>
     </div>

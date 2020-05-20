@@ -1,20 +1,21 @@
+/*! purgecss start ignore */
+
 .hero {
-  padding-bottom: 1px;
   position: relative;
 }
 
-.hero__img {
+.hero--md {
+  max-height: 600px;
+}
+
+.hero__image {
   height: auto;
   object-fit: cover;
   vertical-align: bottom;
   width: 100%;
 }
 
-.hero__img--md {
-  max-height: 600px;
-}
-
-.hero__copy {
+.hero__title {
   left: 50%;
   position: absolute;
   top: 50%;
@@ -27,44 +28,72 @@
   position: relative; /* To display on top of image with the negative margin */
 }
 
-.hero__overlay {
+.hero__content-block {
   background: #fff;
   padding: 24px;
 }
 
-.hero--dark .hero__overlay {
+.hero--dark .hero__content-block {
   background: #2c2e2f;
   color: #ffff;
 }
 
-@media (min-width: 680px) {
+@media (min-width: 768px) {
   .hero {
-    min-height: 400px;
-    padding-bottom: 0;
+    display: flex;
+    height: 100vh;
   }
 
-  .hero__position {
+  .hero__content {
+    align-items: flex-start;
+    display: flex;
+    height: 100%;
     left: 0;
     margin: 0;
-    max-width: 50%;
+    padding: 0;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 500px;
+    top: 0;
+    width: 100%;
   }
 
-  .hero__position--right {
-    left: initial;
-    right: 0;
+  /* Horizontal position */
+  .hero__content--left {
+    justify-content: flex-start;
   }
 
-  .hero__overlay {
+  .hero__content--center {
+    justify-content: center;
+  }
+
+  .hero__content--right {
+    justify-content: flex-end;
+  }
+
+  /* Vertical position */
+  .hero__content--top {
+    align-items: flex-start;
+  }
+
+  .hero__content--middle {
+    align-items: center;
+  }
+
+  .hero__content--bottom {
+    align-items: flex-end;
+  }
+
+  .hero__content-block {
     background: rgba(255, 255, 255, 0.5);
-    border-top: 0;
-    padding: 30px;
+    display: inline-block;
+    margin: 3%;
+    max-width: 600px;
+    position: sticky;
+    top: 3%;
   }
 
-  .hero--dark .hero__overlay {
+  .hero--dark .hero__content-block {
     background: rgba(0, 0, 0, 0.5);
   }
 }
+
+/*! purgecss end ignore */

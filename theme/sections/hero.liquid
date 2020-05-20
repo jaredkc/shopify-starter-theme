@@ -1,27 +1,27 @@
 <style>
   /* stylelint-disable */
   @media (min-width: 680px) {
-    .hero__overlay {
-      background: rgba(255, 255, 255, {{ section.settings.overlay_opacity }});
+    #hero--{{ section.id }} .hero__content-block {
+      background: rgba(255, 255, 255, {{ section.settings.background_opacity }});
     }
-    {%- if section.settings.overlay_theme == "dark" -%}
-    .hero--{{ section.id }}.hero--dark .hero__overlay {
-      background: rgba(0, 0, 0, {{ section.settings.overlay_opacity }});
+    {%- if section.settings.content_theme == "dark" -%}
+    #hero--{{ section.id }}.hero--dark .hero__content-block {
+      background: rgba(0, 0, 0, {{ section.settings.background_opacity }});
     }
     {%- endif -%}
   }
   /* stylelint-enable */
 </style>
 
-<section class="hero hero--{{ section.id }} hero--{{ section.settings.overlay_theme }} bg-gray-200">
+<section id="hero--{{ section.id }}" class="hero hero--{{ section.settings.content_theme }} bg-gray-200">
     {%- if section.settings.image != blank -%}
-      {% include 'responsive-image' with image: section.settings.image, image_class: 'hero__img', full_width: true %}
+      {% include 'responsive-image' with image: section.settings.image, image_class: 'hero__image', full_width: true %}
     {%- else -%}
-      {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__img' }}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
     {%- endif -%}
 
-    <div class="hero__position hero__position--{{ section.settings.overlay_position }}">
-      <div class="hero__overlay" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+    <div class="hero__content {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
+      <div class="hero__content-block">
         {%- if section.settings.title != blank -%}
           <h1 class="text-4xl m-0">{{ section.settings.title | escape }}</h1>
         {%- endif -%}
@@ -38,8 +38,7 @@
 
 {% schema %}
 {
-  "name": "Image with text overlay",
-  "class": "index-section index-section--image-with-text-overlay",
+  "name": "Hero",
   "settings": [
     {
       "type": "image_picker",
@@ -73,28 +72,52 @@
     },
     {
       "type": "header",
-      "content": "Overlay"
+      "content": "Content"
     },
     {
       "type": "select",
-      "id": "overlay_position",
-      "label": "Overlay position",
-      "default": "left",
+      "id": "horizontal_position",
+      "label": "Horizontal position",
+      "default": "hero__content--left",
       "options": [
         {
           "label": "Left",
-          "value": "left"
+          "value": "hero__content--left"
+        },
+        {
+          "label": "Center",
+          "value": "hero__content--center"
         },
         {
           "label": "Right",
-          "value": "right"
+          "value": "hero__content--right"
         }
       ]
     },
     {
       "type": "select",
-      "id": "overlay_theme",
-      "label": "Overlay Color",
+      "id": "vertical_position",
+      "label": "Vertical position",
+      "default": "hero__content--top",
+      "options": [
+        {
+          "label": "Top",
+          "value": "hero__content--top"
+        },
+        {
+          "label": "Middle",
+          "value": "hero__content--middle"
+        },
+        {
+          "label": "Bottom",
+          "value": "hero__content--bottom"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_theme",
+      "label": "Theme",
       "default": "light",
       "options": [
         {
@@ -109,8 +132,8 @@
     },
     {
       "type": "select",
-      "id": "overlay_opacity",
-      "label": "Overlay Opacity",
+      "id": "background_opacity",
+      "label": "Background Opacity",
       "default": "0.5",
       "options": [
         {
@@ -158,7 +181,7 @@
   ],
   "presets": [
     {
-      "name": "Image with text overlay",
+      "name": "Hero",
       "category": "Image"
     }
   ]
