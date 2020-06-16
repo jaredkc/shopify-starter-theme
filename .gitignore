@@ -1,3 +1,4 @@
-theme/assets/*.bundle.*
 config.yml
 node_modules/
+theme-ready.tmp
+theme/assets/*.bundle.*

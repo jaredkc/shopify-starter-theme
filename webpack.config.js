@@ -84,14 +84,20 @@ module.exports = {
         }),
       ],
       files: [{
+        // theme-ready.tmp is touched by theme-kit after uploaded to Shopify
+        // If file changed is CSS, inject changes
         match: [
-          '**/*.liquid',
           '**/*.css',
+          'theme-ready.tmp',
         ],
-        fn(event) {
+        fn(event, file) {
           if (event === 'change') {
             const bs = BrowserSync.get('bs-webpack-plugin');
-            bs.reload();
+            if (file.split('.').pop() === 'css') {
+              bs.reload('*.bundle.css');
+            } else {
+              bs.reload();
+            }
           }
         },
       }],
@@ -105,6 +111,9 @@ module.exports = {
           },
         },
       },
+    },
+    {
+      reload: false,
     }),
   ],
 };
