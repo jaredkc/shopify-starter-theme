@@ -50,6 +50,7 @@
 
 .nav-menu > li:hover .nav-submemu {
   display: block;
+  z-index: 100;
 }
 
 /* Site actions */
