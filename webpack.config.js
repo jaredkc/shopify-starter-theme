@@ -14,6 +14,7 @@ module.exports = {
   entry: {
     theme: './src/js/theme.js',
     product: './src/js/product.js',
+    customers: './src/js/customers.js',
   },
   output: {
     filename: '[name].bundle.js',

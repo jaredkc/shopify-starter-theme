@@ -40,6 +40,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@shopify/theme-a11y": "^3.1.0",
+    "@shopify/theme-addresses": "^4.0.0",
     "@shopify/theme-cart": "^3.1.0",
     "@shopify/theme-currency": "^3.1.0",
     "@shopify/theme-images": "^3.1.0",
