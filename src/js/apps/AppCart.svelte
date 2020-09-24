@@ -111,8 +111,8 @@
           </div>
 
           <form action="/cart" method="post" class="mt-6 grid grid-cols-2 gap-4">
-            <a href="/cart" class="btn">View Cart</a>
-            <input type="submit" name="checkout" value="Check Out" class="btn btn--primary" />
+            <a href="/cart" class="btn-outlined">View Cart</a>
+            <input type="submit" name="checkout" value="Check Out" class="btn" />
           </form>
         {/if}
       </div>

@@ -4,6 +4,7 @@ textarea,
 select {
   @apply border-gray-400;
 
+  border-radius: 4px;
   border-style: solid;
   border-width: 1px;
   max-width: 100%;
@@ -116,6 +117,16 @@ select::-ms-expand {
 .form-block-inline .form-textarea {
   border: 0;
   flex-grow: 1;
+}
+
+/* Vertical forms */
+
+.form-vertical .form-input,
+.form-vertical .form-select,
+.form-vertical .form-textarea {
+  display: block;
+  margin-bottom: 0.75rem;
+  width: 100%;
 }
 
 /* Errors */
