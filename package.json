@@ -38,7 +38,6 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^2.3.0",
     "@shopify/theme-a11y": "^3.1.0",
     "@shopify/theme-addresses": "^4.0.0",
     "@shopify/theme-cart": "^3.1.0",
@@ -52,6 +51,6 @@
     "lazysizes": "^5.2.2",
     "normalize.css": "^8.0.1",
     "regenerator-runtime": "^0.13.7",
-    "tailwindcss": "^1.8.6"
+    "tailwindcss": "^1.8.11"
   }
 }

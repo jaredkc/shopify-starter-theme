@@ -1,10 +1,14 @@
 module.exports = {
+  purge: [
+    './theme/**/*.liquid',
+    './src/**/*.vue',
+    './src/**/*.svelte',
+  ],
   corePlugins: {
     preflight: false,
   },
-  theme: {
-    extend: {},
+  future: {
+    purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
   },
-  variants: {},
-  plugins: [],
-}
+};

@@ -40,7 +40,6 @@ img {
   transition: filter 400ms;
 }
 
-/*! purgecss ignore */
 .blur-up.lazyloaded {
   filter: blur(0);
 }

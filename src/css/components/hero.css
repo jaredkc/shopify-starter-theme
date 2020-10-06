@@ -1,5 +1,3 @@
-/*! purgecss start ignore */
-
 .hero {
   position: relative;
 }
@@ -103,5 +101,3 @@
     background: rgba(0, 0, 0, 0.5);
   }
 }
-
-/*! purgecss end ignore */
