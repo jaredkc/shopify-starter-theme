@@ -1,7 +1,6 @@
 module.exports = {
   purge: [
     './theme/**/*.liquid',
-    './src/**/*.vue',
     './src/**/*.svelte',
   ],
   corePlugins: {
