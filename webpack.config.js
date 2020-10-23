@@ -3,6 +3,7 @@ const read = require('read-yaml');
 const BrowserSync = require('browser-sync');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = read.sync('config.yml');
@@ -60,6 +61,8 @@ module.exports = {
   },
   stats: { children: false },
   plugins: [
+    new BundleAnalyzerPlugin(),
+
     // Only remove the bundle files generated,
     // other Shopify theme assets will end that should not be lost
     new CleanWebpackPlugin({

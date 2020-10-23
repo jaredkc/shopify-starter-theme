@@ -35,6 +35,7 @@
     "svelte": "^3.24.1",
     "svelte-loader": "^2.13.6",
     "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
