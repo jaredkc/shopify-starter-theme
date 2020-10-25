@@ -25,6 +25,7 @@
 @import './components/button.css';
 @import './components/hero.css';
 @import './components/loading.css';
+@import './components/product-listing.css';
 
 /**
  * TailwindCSS utilities

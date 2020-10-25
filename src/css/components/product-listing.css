@@ -1,0 +1,17 @@
+.product-listing {
+  @apply shadow-none;
+
+  background: #fff;
+  display: block;
+  padding: 1rem;
+  position: relative;
+  text-align: center;
+  transition: all 3s ease;
+}
+
+.product-listing:hover {
+  @apply shadow-lg;
+
+  transform: scale(1.01);
+  z-index: 1;
+}
