@@ -1,3 +1,4 @@
+const isProduction = process.env.NODE_ENV === 'production';
 const path = require('path');
 const read = require('read-yaml');
 const BrowserSync = require('browser-sync');
@@ -11,7 +12,7 @@ const storeURL = config.development.store;
 const themeID = config.development.theme_id;
 
 module.exports = {
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
   entry: {
     theme: './src/js/theme.js',
     product: './src/js/product.js',
@@ -64,7 +65,7 @@ module.exports = {
     // Visualize size of webpack output files
     // 'static' mode works better with BrowserSync and Themekit deploy
     new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
+      analyzerMode: isProduction ? 'static' : 'disabled',
       reportFilename: '../../report.html',
     }),
 
