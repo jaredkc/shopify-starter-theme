@@ -61,7 +61,12 @@ module.exports = {
   },
   stats: { children: false },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // Visualize size of webpack output files
+    // 'static' mode works better with BrowserSync and Themekit deploy
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: '../../report.html',
+    }),
 
     // Only remove the bundle files generated,
     // other Shopify theme assets will end that should not be lost
