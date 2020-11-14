@@ -88,7 +88,6 @@ module.exports = {
       https: true,
       port: 3000,
       proxy: `https://${storeURL}?preview_theme_id=${themeID}`,
-      reloadDelay: 3000,
       middleware: [
         (function mw(req, res, next) {
           // Add url paramaters for Shopify theme preview.
@@ -100,22 +99,10 @@ module.exports = {
         }),
       ],
       files: [{
-        // theme-ready.tmp is touched by theme-kit after uploaded to Shopify
-        // If file changed is CSS, inject changes
-        match: [
-          '**/*.css',
-          'theme-ready.tmp',
-        ],
-        fn(event, file) {
-          if (event === 'change') {
-            const bs = BrowserSync.get('bs-webpack-plugin');
-            if (file.split('.').pop() === 'css') {
-              bs.reload('*.bundle.css');
-            } else {
-              bs.reload();
-            }
-          }
-        },
+        // theme-ready.tmp is touched by theme-kit after uploaded to Shopify,
+        // so the browser is ready to refresh.
+        match: ['theme-ready.tmp'],
+        fn() { BrowserSync.get('bs-webpack-plugin').reload(); },
       }],
       // Move snippet injection to </body>,
       // Shopify content_for_header causes injection to load in head and break scripts

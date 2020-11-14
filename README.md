@@ -39,7 +39,7 @@ production:
 ## Local Development
 
 1. `npm run watch-theme`, to start a process that will watch your directory for changes and upload them to Shopify
-2. `npm run watch`, to start [Browersync](https://browsersync.io/) and have your browser refresh as changes are saved
+2. `npm run watch`, to start [Browersync](https://browsersync.io/) and have your browser refresh as changes are uploaded to Shopify
 
 ## Structure
 
