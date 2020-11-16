@@ -92,7 +92,7 @@
     display: inline-block;
     margin: 2rem;
     max-width: 520px;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
     position: sticky;
     top: 2rem;
   }

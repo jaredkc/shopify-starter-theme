@@ -23,7 +23,7 @@
     <div class="hero__content {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
       <div class="hero__content-block">
         {%- if section.settings.title != blank -%}
-          <h1 class="text-3xl md:text-4xl m-0">{{ section.settings.title | escape }}</h1>
+          <h1 class="m-0 text-4xl md:text-5xl">{{ section.settings.title | escape }}</h1>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
           {{ section.settings.text }}
