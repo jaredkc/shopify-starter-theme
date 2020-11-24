@@ -10,7 +10,6 @@
 
 /* Third party */
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
-@import '../../node_modules/normalize.css/normalize.css';
 
 /* Base & global styles */
 @import './global/base.css';
