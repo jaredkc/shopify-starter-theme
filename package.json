@@ -8,7 +8,7 @@
     "deploy": "NODE_ENV=production webpack -p && theme deploy --dir=theme",
     "watch:assets": "webpack --watch",
     "watch:theme": "theme watch --notify=theme-ready.tmp --dir=theme",
-    "prod:build": "NODE_ENV=production webpack -p",
+    "prod:build": "NODE_ENV=production webpack --env=analyze -p",
     "prod:deploy": "NODE_ENV=production webpack -p && theme deploy --env=production --dir=theme"
   },
   "author": "",

@@ -11,7 +11,7 @@ const config = read.sync('config.yml');
 const storeURL = config.development.store;
 const themeID = config.development.theme_id;
 
-module.exports = {
+module.exports = (env) => ({
   mode: isProduction ? 'production' : 'development',
   entry: {
     theme: './src/js/theme.js',
@@ -71,7 +71,7 @@ module.exports = {
     // Visualize size of webpack output files
     // 'static' mode works better with BrowserSync and Themekit deploy
     new BundleAnalyzerPlugin({
-      analyzerMode: isProduction ? 'static' : 'disabled',
+      analyzerMode: env === 'analyze' ? 'static' : 'disabled',
       reportFilename: '../../report.html',
     }),
 
@@ -119,4 +119,4 @@ module.exports = {
       reload: false,
     }),
   ],
-};
+});
