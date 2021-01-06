@@ -18,7 +18,7 @@ A bit of what this starter theme is utilizing:
 ## Quick Start
 
 1. [Setup Shopify Theme Kit](https://shopify.github.io/themekit/)
-  - If you are new to Theme Kit be sure to follow the steps for [Installation](https://shopify.github.io/themekit/#installation), [Get API Access](https://shopify.github.io/themekit/#get-api-access). Then [Create a new theme])(https://shopify.github.io/themekit/#create-a-new-theme) or [Configure an existing theme](https://shopify.github.io/themekit/#configure-an-existing-theme).
+    - If you are new to Theme Kit be sure to follow the steps for [Installation](https://shopify.github.io/themekit/#installation), [Get API Access](https://shopify.github.io/themekit/#get-api-access). Then [Create a new theme](https://shopify.github.io/themekit/#create-a-new-theme) or [Configure an existing theme](https://shopify.github.io/themekit/#configure-an-existing-theme).
 2. Add [config file](https://shopify.github.io/themekit/configuration/) (config.yml) for your Shopify theme(s)
 3. From project directory run `npm install`
 
