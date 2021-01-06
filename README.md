@@ -24,7 +24,7 @@ A bit of what this starter theme is utilizing:
 
 ### Example config.yml
 
-Note: you can find your theme_id at this URL for your Shopify store: `https://yourstore.myshopify.com/admin/themes.xml`
+Note: you can find your `theme_id` at this URL for your Shopify store: `https://yourstore.myshopify.com/admin/themes.xml`
 
 ```yml
 development:
