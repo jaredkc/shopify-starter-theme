@@ -9,9 +9,9 @@
 
 /* Fallback SVG image when no image has been set */
 .placeholder-svg {
-  @apply bg-gray-300;
+  @apply bg-gray-200;
   @apply fill-current;
-  @apply text-gray-500;
+  @apply text-gray-400;
 }
 
 /**

@@ -13,6 +13,10 @@
   width: 100%;
 }
 
+.hero__image.placeholder-svg {
+  min-height: 600px;
+}
+
 .hero__title {
   left: 50%;
   position: absolute;
