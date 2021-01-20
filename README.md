@@ -32,7 +32,7 @@ development:
   theme_id: 0987654321
   store: yourstore.myshopify.com
 production:
-  password: 123456789012345678901`2345678901
+  password: 1234567890123456789012345678901
   theme_id: 1234567890
   store: yourstore.myshopify.com
   ignore_files:
