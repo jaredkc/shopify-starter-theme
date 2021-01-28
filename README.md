@@ -9,8 +9,8 @@ A bit of what this starter theme is utilizing:
 [Lazysizes](https://github.com/aFarkas/lazysizes),
 [Svelte](https://svelte.dev/),
 [ESLint](https://eslint.org/),
-[PostCSS ](https://postcss.org/),
-[TailwindCSS ](https://tailwindcss.com/),
+[PostCSS](https://postcss.org/),
+[TailwindCSS](https://tailwindcss.com/),
 [PurgeCSS](https://purgecss.com/),
 [Material Design Icons](https://google.github.io/material-design-icons/#icon-font-for-the-web),
 [Stylelint](https://stylelint.io/)
@@ -43,8 +43,8 @@ production:
 
 I'll run both of these same time, in two different Terminal windows.
 
-1. `npm run watch-theme`, to start a process that will watch your directory for changes and upload them to Shopify
-2. `npm run watch`, to start [Browersync](https://browsersync.io/) and have your browser refresh as changes are uploaded to Shopify
+1. `npm run watch:theme`, to start a process that will watch your directory for changes and upload them to Shopify
+2. `npm run watch:assets`, to start [Browersync](https://browsersync.io/) and build scripts and styles.
 
 ## Structure
 
