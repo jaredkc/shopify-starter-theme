@@ -51,10 +51,18 @@ if (thumbnailLinks) {
 
 function onOptionChange(event) {
   const { variant } = event.dataset;
-  const price = formatMoney(variant.price, themeMoneyFormat);
 
-  // Hide all stock message, then show for this variant
+  // Hide all stock message.
   stockMessages.forEach((stockMessage) => stockMessage.classList.add('hidden'));
+
+  // Return and reset if we don't have a variant,
+  if (!variant) {
+    addToCartBtn.disabled = true;
+    addToCartBtn.innerHTML = themeStrings.unavailable;
+    return;
+  }
+
+  // Show stock message for this variant.
   document.getElementById(`stock-message-${variant.id}`).classList.remove('hidden');
 
   // Update feature image
@@ -73,7 +81,7 @@ function onOptionChange(event) {
   } else if (variant && variant.available) {
     // The combination of selected options has a matching variant and it is available
     addToCartBtn.disabled = false;
-    addToCartBtn.innerHTML = `${themeStrings.addToCart} &middot; ${price}`;
+    addToCartBtn.innerHTML = `${themeStrings.addToCart} &middot; ${formatMoney(variant.price, themeMoneyFormat)}`;
   }
 }
 
