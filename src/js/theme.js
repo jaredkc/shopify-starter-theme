@@ -17,9 +17,10 @@ if (cartLinks) {
   cartLinks.forEach((cartLink) => {
     cartLink.addEventListener('click', (e) => {
       e.preventDefault();
+      const cartHref = e.currentTarget.getAttribute('href');
       openCart().then((res) => {
         if (res === false) {
-          window.location.href = e.currentTarget.getAttribute('href');
+          window.location.href = cartHref;
         }
       });
     });
