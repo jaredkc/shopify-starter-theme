@@ -9,7 +9,7 @@
     "watch:assets": "webpack --watch",
     "watch:theme": "theme watch --notify=theme-ready.tmp --dir=theme",
     "prod:build": "NODE_ENV=production webpack --env=analyze --mode=production",
-    "prod:deploy": "NODE_ENV=production webpack --mode=production && theme deploy --env=production --dir=theme"
+    "prod:deploy": "NODE_ENV=production webpack --mode=production && theme deploy --env=production --dir=theme --allow-live"
   },
   "author": "",
   "license": "ISC",
@@ -39,13 +39,13 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "@shopify/theme-a11y": "^3.1.0",
-    "@shopify/theme-addresses": "^4.1.0",
-    "@shopify/theme-cart": "^3.1.0",
-    "@shopify/theme-currency": "^3.1.0",
-    "@shopify/theme-images": "^3.1.0",
-    "@shopify/theme-product": "^4.1.0",
-    "@shopify/theme-product-form": "^4.1.0",
+    "@shopify/theme-a11y": "^4.1.1",
+    "@shopify/theme-addresses": "^4.1.1",
+    "@shopify/theme-cart": "^4.1.1",
+    "@shopify/theme-currency": "^4.1.1",
+    "@shopify/theme-images": "^4.1.1",
+    "@shopify/theme-product": "^4.1.1",
+    "@shopify/theme-product-form": "^4.1.1",
     "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^10.2.3",
     "core-js": "^3.8.3",
