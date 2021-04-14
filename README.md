@@ -46,6 +46,20 @@ I'll run both of these same time, in two different Terminal windows.
 1. `npm run watch:theme`, to start a process that will watch your directory for changes and upload them to Shopify
 2. `npm run watch:assets`, to start [Browersync](https://browsersync.io/) and build scripts and styles.
 
+### Theme Check
+
+[Theme Check](https://github.com/Shopify/theme-check) is a linter for themes.
+In order to run it you first need to install it through HomeBrew or RubyGems.
+Also useful is the [VSCode Theme Check](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension.
+
+```
+# Install via HomeBrew
+brew tap shopify/shopify
+brew install theme-check
+# Run it
+npm run theme-check
+```
+
 ## Structure
 
 - `src/`: JavaScript and CSS source files are compiled from here and added to `theme/assets/`.
