@@ -7,7 +7,7 @@
     <div class="lg:col-span-3">
       <div class="copy">
         <div class="text-center">
-          {% include 'responsive-image' with image: featured_image, width: 1200, image_attributes: "data-featured-image" %}
+          {% render 'responsive-image' with image: featured_image, width: 1200, image_attributes: "data-featured-image" %}
         </div>
         {% if product.images.size > 1 %}
           <div class="my-4">
@@ -30,7 +30,7 @@
           {% endif %}
         </p>
 
-        {% include 'product-form' %}
+        {% render 'product-form' %}
 
         <div>{{ product.description }}</div>
       </div>

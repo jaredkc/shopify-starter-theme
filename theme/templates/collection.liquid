@@ -46,7 +46,7 @@
 
         <div class="text-center">
           <a href="{{ product.url | within: collection }}">
-            {% include 'responsive-image' with image: product.featured_image, width: 600 %}
+            {% render 'responsive-image' with image: product.featured_image, width: 600 %}
           </a>
           <h2 class="text-xl m-2">
             <a href="{{ product.url | within: collection }}">{{ product.title }}</a>

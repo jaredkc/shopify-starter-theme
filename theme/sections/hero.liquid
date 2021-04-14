@@ -15,7 +15,7 @@
 
 <section id="hero--{{ section.id }}" class="hero hero--{{ section.settings.content_theme }}{% if section.settings.full_height %} hero--full{% endif %} bg-gray-200">
     {%- if section.settings.image != blank -%}
-      {% include 'responsive-image' with image: section.settings.image, image_class: 'hero__image' %}
+      {% render 'responsive-image' with image: section.settings.image, image_class: 'hero__image' %}
     {%- else -%}
       {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
     {%- endif -%}

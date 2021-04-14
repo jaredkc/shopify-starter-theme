@@ -20,13 +20,13 @@
 
     {%- if product.images.size > 0 -%}
       {%- capture og_image_tags -%}
-        {%- for image in product.images limit:3 -%}
+        {%- for image in product.images limit: 3 -%}
           <meta property="og:image" content="http:{{ image.src | product_img_url: '1200x1200' }}">
         {%- endfor -%}
       {%- endcapture -%}
 
       {%- capture og_image_secure_url_tags -%}
-        {%- for image in product.images limit:3 -%}
+        {%- for image in product.images limit: 3 -%}
           <meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: '1200x1200' }}">
         {%- endfor -%}
       {%- endcapture -%}

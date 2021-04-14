@@ -36,7 +36,7 @@
     <link rel="preload" href="{{ 'product.bundle.js' | asset_url }}" as="script">
   {%- endif -%}
 
-  {%- include 'social-meta-tags'  -%}
+  {%- render 'social-meta-tags' -%}
 
   {{ content_for_header }}
 </head>
