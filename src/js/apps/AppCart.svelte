@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import { trapFocus, removeTrapFocus } from '@shopify/theme-a11y';
-  import { updateItem, clearItems } from '@shopify/theme-cart';
+  import { updateItem } from '@shopify/theme-cart';
   import { formatMoney } from '@shopify/theme-currency';
   import CartItem from '../components/CartItem.svelte';
 
