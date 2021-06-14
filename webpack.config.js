@@ -20,7 +20,7 @@ module.exports = (env) => ({
   },
   output: {
     filename: '[name].bundle.js',
-    chunkFilename: '[name].[chunkhash:5].bundle.js',
+    chunkFilename: '[chunkhash:5].bundle.js',
     path: path.resolve(__dirname, 'theme/assets'),
   },
   optimization: {
