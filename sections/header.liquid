@@ -1,0 +1,132 @@
+{%- if section.settings.announcement -%}
+  {%- if section.settings.announcement_only_home == false or template.name == 'index' -%}
+    <style>
+      /* stylelint-disable */
+      .announcement { background-color: {{ section.settings.accouncement_color_bg }}; }
+      .announcement--link:hover {
+        {%- assign brightness = section.settings.accouncement_color_bg | color_brightness -%}
+        {%- if brightness <= 192 -%}
+          {%- assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 -%}
+          background-color: {{ section.settings.accouncement_color_bg | color_lighten: lightenAmount }};
+        {%- else -%}
+          {%- assign darkenAmount = 255 | divided_by: brightness | times: 8 -%}
+          background-color: {{ section.settings.accouncement_color_bg | color_darken: darkenAmount }};
+        {%- endif -%}
+      }
+      .announcement__message { color: {{ section.settings.accouncement_color_text }}; }
+      /* stylelint-enable */
+    </style>
+
+    {%- if section.settings.announcement_link == blank -%}
+      <div class="p-2 text-center announcement">
+    {%- else -%}
+      <a href="{{ section.settings.announcement_link }}" class="announcement announcement--link">
+    {%- endif -%}
+
+    <div class="text-sm announcement__message">{{ section.settings.announcement_text | escape }}</div>
+
+    {%- if section.settings.announcement_link == blank -%}
+      </div>
+    {%- else -%}
+      </a>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+<header
+  data-section-id="{{ section.id }}"
+  data-section-type="header-section"
+  class="site-header page-pad"
+  role="banner"
+>
+  {%- if template.name == 'index' -%}
+    <h1 class="site-title" itemscope itemtype="http://schema.org/Organization">
+  {%- else -%}
+    <div class="site-title" itemscope itemtype="http://schema.org/Organization">
+  {%- endif -%}
+  <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
+  {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+
+  <nav id="site-navigation" class="site-navigation" role="navigation">
+    <ul class="nav-menu">
+      {%- for link in linklists['main-menu'].links -%}
+        {%- assign child_list_handle = link.title | handleize -%}
+        {%- if linklists[child_list_handle].links != blank -%}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            <ul class="nav-submemu">
+              {%- for childlink in linklists[child_list_handle].links -%}
+                <li>
+                  <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- else -%}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <nav id="site-actions" class="site-actions" role="navigation">
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+        <i class="material-icons-outlined">person</i>
+      </a>
+    {%- endif -%}
+    <a href="{{ routes.cart_url }}">
+      <i class="material-icons-outlined">shopping_cart</i>
+    </a>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Site Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_only_home",
+      "label": "Only show on home page",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Announce something here"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link",
+      "info": "Optional"
+    },
+    {
+      "type": "color",
+      "id": "accouncement_color_bg",
+      "label": "Bar",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accouncement_color_text",
+      "label": "Text",
+      "default": "#fff"
+    }
+  ]
+}
+{% endschema %}
