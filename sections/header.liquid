@@ -74,11 +74,21 @@
   <nav id="site-actions" class="site-actions" role="navigation">
     {%- if shop.customer_accounts_enabled -%}
       <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
-        <i class="material-icons-outlined">person</i>
+        {%- render 'icon-user' -%}
+        <span class="sr-only">
+          {%- liquid
+            if customer
+              echo 'customer.account_fallback' | t
+            else
+              echo 'customer.log_in' | t
+            endif
+          -%}
+        </span>
       </a>
     {%- endif -%}
     <a href="{{ routes.cart_url }}">
-      <i class="material-icons-outlined">shopping_cart</i>
+      {%- render 'icon-cart' -%}
+      <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
     </a>
   </nav>
 </header>

@@ -9,10 +9,10 @@
       {%- if section.settings.heading != '' -%}
         <h2 class="text-center">{{ section.settings.heading }}</h2>
       {%- endif -%}
-      <ul class="flex flex-wrap">
+      <ul class="flex flex-wrap p-0 list-none">
         {%- for product in recommendations.products -%}
           <li class="w-1/2 md:w-1/4">
-            <a href="{{ product.url }}" class="relative block p-4 text-center transform hover:shadow-md hover:scale-50">
+            <a href="{{ product.url }}" class="block p-4 text-center transition duration-150 ease-in-out hover:scale-105 hover:shadow-md">
               <img
                 src="{{ product.featured_image | image_url: '300x300' }}"
                 alt="{{ product.featured_image.alt }}"

@@ -24,6 +24,7 @@
       "view_addresses": "View Addresses",
       "return": "Return to Account Details"
     },
+    "account_fallback": "Account",
     "activate_account": {
       "title": "Activate Account",
       "subtext": "Create your password to activate your account.",
@@ -55,6 +56,8 @@
       "delete": "Delete",
       "delete_confirm": "Are you sure you wish to delete this address?"
     },
+    "log_in": "Log in",
+    "log_out": "Log out",
     "login": {
       "title": "Login",
       "email": "Email",
@@ -153,6 +156,9 @@
     "month_day_year": "%B %d, %Y"
   },
   "templates": {
+    "cart": {
+      "cart": "Cart"
+    },
     "404": {
       "title": "Page not found",
       "subtext": "404"

@@ -35,7 +35,25 @@ img {
   max-width: 100%;
 }
 
-/* This are needed since "@tailwind base;" is not being used. See /assets/tailwind.css */
+/**
+ * These are needed since "@tailwind base;" is not being used.
+ * See /assets/tailwind.css
+ */
+*,
+::backdrop,
+:after,
+:before {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+}
+
 *,
 ::before,
 ::after {
@@ -407,11 +425,6 @@ select::-ms-expand {
   padding: 0;
 }
 
-/* For material icons in button */
-.btn-icon i {
-  vertical-align: bottom;
-}
-
 .btn-icon:hover,
 .btn-icon:focus,
 .btn-icon:active {
@@ -478,7 +491,7 @@ select::-ms-expand {
  * CSS Loading Indicator
  * No extra markup needed, just add a class of loading to an element.
  */
- .loading {
+.loading {
   min-height: 24px;
   min-width: 24px;
   overflow: hidden;
