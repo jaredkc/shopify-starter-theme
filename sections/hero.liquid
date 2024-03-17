@@ -16,25 +16,34 @@
 </style>
 
 <section id="hero--{{ section.id }}" class="hero hero--{{ section.settings.content_theme }}{% if section.settings.full_height %} hero--full{% endif %} bg-gray-200">
-    {%- if section.settings.image != blank -%}
-      {% render 'responsive-image' with image: section.settings.image, image_class: 'hero__image' %}
-    {%- else -%}
-      {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
-    {%- endif -%}
+  {%- if section.settings.image != blank -%}
+    {{
+      section.settings.image
+      | image_url: width: 3840
+      | image_tag:
+        width: section.settings.image.width,
+        class: 'hero__image',
+        sizes: '100vw',
+        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+        fetchpriority: 'auto'
+    }}
+  {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
+  {%- endif -%}
 
-    <div class="hero__content {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
-      <div class="hero__content-block">
-        {%- if section.settings.title != blank -%}
-          <h1 class="m-0 text-4xl md:text-5xl">{{ section.settings.title | escape }}</h1>
-        {%- endif -%}
-        {%- if section.settings.text != blank -%}
-          {{ section.settings.text }}
-        {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
-          <div class="mt-8"><a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a></div>
-        {%- endif -%}
-      </div>
+  <div class="hero__content {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
+    <div class="hero__content-block">
+      {%- if section.settings.title != blank -%}
+        <h1 class="m-0 text-4xl md:text-5xl">{{ section.settings.title | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        {{ section.settings.text }}
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <div class="mt-8"><a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
     </div>
+  </div>
 </section>
 
 {% schema %}
