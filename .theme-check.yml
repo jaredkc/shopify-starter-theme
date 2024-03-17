@@ -1,0 +1,7 @@
+ignore:
+  - snippets/locksmith-content-variables.liquid
+  - snippets/locksmith-variables.liquid
+  - snippets/locksmith.liquid
+  - node_modules/
+MatchingTranslations:
+  enabled: false

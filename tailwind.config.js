@@ -1,13 +1,8 @@
-const typography = require('@tailwindcss/typography');
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-  purge: [
-    './theme/**/*.liquid',
-    './src/**/*.svelte',
-  ],
-  corePlugins: {},
-  plugins: [
-    typography(),
-  ],
+  content: ['**/*.liquid'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };
