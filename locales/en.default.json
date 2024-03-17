@@ -1,9 +1,6 @@
 {
   "general": {
-    "404": {
-      "title": "Page not found",
-      "subtext_html": "The page you were looking for does not exist"
-    }
+    "continue_shopping": "Continue shopping"
   },
   "products": {
     "product": {
@@ -154,5 +151,16 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y"
+  },
+  "templates": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "404"
+    }
+  },
+  "sections": {
+    "main-page": {
+      "name": "Page"
+    }
   }
 }
