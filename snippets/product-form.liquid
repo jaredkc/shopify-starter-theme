@@ -7,7 +7,7 @@
   {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
       <div class="js-enabled">
-        <div class="form-block-inline">
+        <div class="form-block">
           <label for="Option{{ option.position }}" class="form-label">{{ option.name }}</label>
           {%- comment -%}
             All inputs that have `name=options[Name]` will be picked up by
@@ -52,7 +52,7 @@
     registered as a quantity input. If a quantity input is not included, a
     default quantity of 1 is assumed.
   {%- endcomment -%}
-  <p class="form-block-inline">
+  <p class="form-block">
     <label for="Quantity" class="form-label">{{ 'products.product.quantity' | t }}</label>
     <input type="number" id="Quantity" name="quantity" value="1" min="1" class="form-input">
   </p>

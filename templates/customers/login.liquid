@@ -1,29 +1,39 @@
-<div class="page-pad py-20">
+<div class="py-20 page-pad">
   <div class="copy copy--narrow">
-
-    <div class="form-success hidden" id="ResetSuccess">
+    <div class="hidden form-success" id="ResetSuccess">
       {{ 'customer.recover_password.success' | t }}
     </div>
 
     <div id="CustomerLoginForm">
       <h2>{{ 'customer.login.title' | t }}</h2>
 
-      {% form 'customer_login', class: 'form-vertical' %}
+      {% form 'customer_login' %}
         {{ form.errors | default_errors }}
 
         <p class="form-block">
           <label for="CustomerEmail" class="form-label">{{ 'customer.login.email' | t }}</label>
-          <input type="email" name="customer[email]" id="CustomerEmail"
-          class="form-input{% if form.errors contains 'email' %} input-error{% endif %}"
-          spellcheck="false" autocomplete="off" autocapitalize="off" autofocus>
+          <input
+            type="email"
+            name="customer[email]"
+            id="CustomerEmail"
+            class="form-input{% if form.errors contains 'email' %} input-error{% endif %}"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            autofocus
+          >
         </p>
 
         {%- if form.password_needed -%}
-        <p class="form-block">
-          <label for="CustomerPassword" class="form-label">{{ 'customer.login.password' | t }}</label>
-          <input type="password" name="customer[password]" id="CustomerPassword"
-            class="form-input {% if form.errors contains 'password' %} input-error{% endif %}">
-        </p>
+          <p class="form-block">
+            <label for="CustomerPassword" class="form-label">{{ 'customer.login.password' | t }}</label>
+            <input
+              type="password"
+              name="customer[password]"
+              id="CustomerPassword"
+              class="form-input {% if form.errors contains 'password' %} input-error{% endif %}"
+            >
+          </p>
         {%- endif -%}
 
         <p>
@@ -47,41 +57,45 @@
       <h2>{{ 'customer.recover_password.title' | t }}</h2>
       <p>{{ 'customer.recover_password.subtext' | t }}</p>
 
-      {% form 'recover_customer_password', class: 'form-vertical' %}
-      {{ form.errors | default_errors }}
+      {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
 
-      {% if form.posted_successfully? %}
-      <span class="hidden reset-password-success"></span>
-      {% endif %}
+        {% if form.posted_successfully? %}
+          <span class="hidden reset-password-success"></span>
+        {% endif %}
 
-      <p class="form-block">
-        <label for="RecoverEmail" class="form-label">{{ 'customer.recover_password.email' | t }}</label>
-        <input type="email" name="email" id="RecoverEmail" class="form-input"
-          spellcheck="false" autocomplete="off" autocapitalize="off">
-      </p>
+        <p class="form-block">
+          <label for="RecoverEmail" class="form-label">{{ 'customer.recover_password.email' | t }}</label>
+          <input
+            type="email"
+            name="email"
+            id="RecoverEmail"
+            class="form-input"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+          >
+        </p>
 
-      <p class="my-6">
-        <input type="submit" class="btn" value="{{ 'customer.recover_password.submit' | t }}">
-        &nbsp;
-        <button type="button" class="btn" id="HideRecoverPasswordLink">
-          {{ 'customer.recover_password.cancel' | t }}
-        </button>
-      </p>
-
+        <p class="my-6">
+          <input type="submit" class="btn" value="{{ 'customer.recover_password.submit' | t }}">
+          &nbsp;
+          <button type="button" class="btn" id="HideRecoverPasswordLink">
+            {{ 'customer.recover_password.cancel' | t }}
+          </button>
+        </p>
       {% endform %}
-
     </div>
 
     {%- if shop.checkout.guest_login -%}
       <h2>{{ 'customer.login.guest_title' | t }}</h2>
 
       {% form 'guest_login', class: 'form-vertical' %}
-      <p>
-        <input type="submit" class="btn" value="{{ 'customer.login.guest_continue' | t }}">
-      </p>
+        <p>
+          <input type="submit" class="btn" value="{{ 'customer.login.guest_continue' | t }}">
+        </p>
       {% endform %}
     {%- endif -%}
-
   </div>
 </div>
 

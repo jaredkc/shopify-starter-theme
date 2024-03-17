@@ -174,8 +174,24 @@
   flex-wrap: wrap
 }
 
+.items-center {
+  align-items: center
+}
+
+.justify-between {
+  justify-content: space-between
+}
+
+.gap-4 {
+  gap: 1rem
+}
+
 .gap-8 {
   gap: 2rem
+}
+
+.whitespace-nowrap {
+  white-space: nowrap
 }
 
 .rounded {
@@ -248,6 +264,11 @@
   padding-bottom: 3rem
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem
@@ -279,6 +300,10 @@
   text-align: center
 }
 
+.font-sans {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -289,6 +314,11 @@
   line-height: 2.5rem
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem
@@ -297,6 +327,10 @@
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem
+}
+
+.font-bold {
+  font-weight: 700
 }
 
 .font-light {
@@ -369,6 +403,16 @@
 
   .md\:p-6 {
     padding: 1.5rem
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+  }
+
+  .md\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem
   }
 
   .md\:text-5xl {
