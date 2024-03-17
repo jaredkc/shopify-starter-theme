@@ -1,0 +1,9 @@
+/* These are needed since "@tailwind base;" is not being used. See /assets/tailwind.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--c-border-light);
+}
