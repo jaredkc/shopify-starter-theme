@@ -8,7 +8,7 @@
       "available": "Available",
       "backorder": "Backorder Now",
       "from_text_html": "From {{ price }}",
-      "next_shipmenbt": "Next shipment arrives",
+      "next_shipment": "Next shipment arrives",
       "on_sale_from_html": "On Sale from {{ price }}",
       "on_sale": "On Sale",
       "quantity": "Quantity",
