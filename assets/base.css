@@ -1,9 +1,530 @@
-/* These are needed since "@tailwind base;" is not being used. See /assets/tailwind.css */
+:root {
+  --c-border: theme('colors.gray.300');
+  --c-error-bg: theme('colors.red.200');
+  --c-error: theme('colors.red.600');
+  --c-link-dark: theme('colors.blue.900');
+  --c-link: theme('colors.blue.600');
+  --c-primary-dark: #2a4365;
+  --c-primary: #2b6cb0;
+  --c-success-bg: theme('colors.green.200');
+  --c-success: theme('colors.green.600');
+  --c-text-light: theme('colors.gray.300');
+  --c-text-medium: theme('colors.gray.600');
+  --c-text: theme('colors.gray.900');
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--c-primary);
+}
+a:hover {
+  color: var(--c-primary-dark);
+}
+
+input,
+select,
+button {
+  font-size: 1rem;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* This are needed since "@tailwind base;" is not being used. See /assets/tailwind.css */
 *,
 ::before,
 ::after {
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
-  border-color: var(--c-border-light);
+  border-color: var(--c-border);
+}
+
+/* Typography */
+.text-caps {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Basic form styles */
+input,
+textarea,
+select {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  max-width: 100%;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--c-primary);
+}
+
+button[disabled],
+input[disabled],
+select[disabled],
+textarea[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button,
+input[type='submit'],
+label[for] {
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  background-color: #fff;
+  border-radius: 0;
+  min-width: 100px;
+}
+
+.form-input,
+.form-select {
+  height: 40px;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.8em;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 9px 6px;
+  padding-left: 0.8em;
+  padding-right: 1.5rem;
+}
+
+.form-label {
+  color: #999;
+  font-size: 0.9em;
+}
+
+/* Form block */
+.form-block {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.form-block .form-label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.form-block .form-input,
+.form-block .form-select,
+.form-block .form-textarea {
+  width: 100%;
+}
+
+/* Inline for label & input */
+.form-block-inline {
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.form-block-inline .form-label {
+  font-size: initial;
+  max-width: 200px;
+  min-width: 100px;
+  overflow: hidden;
+  padding-left: 0.8em;
+  padding-right: 0.4em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.form-block-inline .form-input,
+.form-block-inline .form-select,
+.form-block-inline .form-textarea {
+  border: 0;
+  flex-grow: 1;
+}
+
+/* Vertical forms */
+
+.form-vertical .form-input,
+.form-vertical .form-select,
+.form-vertical .form-textarea {
+  display: block;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+/* Errors */
+.input-error {
+  background-color: var(--c-error-bg);
+  border-color: var(--c-error);
+}
+
+/* Qauntity increment */
+.qty-wrapper {
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-flex;
+  padding-bottom: 1px;
+}
+
+.qty-increment {
+  border: 0;
+  color: var(--c-text-light);
+  padding: 3px 6px;
+}
+
+.qty-increment:hover {
+  color: var(--c-primary);
+}
+
+.qty-icon {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.qty-icon-delete {
+  font-size: 18px;
+}
+
+.qty-count {
+  border: 0;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.qty-input::-webkit-inner-spin-button,
+.qty-input::-webkit-outer-spin-button {
+  appearance: none;
+}
+
+/* Basic layout */
+.page-pad {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.copy {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 680px;
+}
+
+.copy--narrow {
+  max-width: 480px;
+}
+
+.copy--wide {
+  max-width: 1000px;
+}
+
+/* Site header */
+.site-header {
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.site-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-menu > li {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.nav-menu a {
+  white-space: nowrap;
+}
+
+/* Drop down menus */
+.nav-submemu {
+  background: #fff;
+  display: none;
+  left: 0;
+  list-style-type: none;
+  padding: 0.5rem 0;
+  position: absolute;
+  text-align-last: left;
+  top: 100%;
+  z-index: 1;
+}
+
+.nav-submemu a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+}
+
+.nav-menu > li:hover .nav-submemu {
+  display: block;
+  z-index: 100;
+}
+
+/* Site actions */
+.site-actions a {
+  margin-left: 1.4rem;
+}
+
+/* Account for JavaScript disabled */
+.js-enabled {
+  display: none;
+}
+
+.js .js-enabled {
+  display: inherit;
+}
+
+/* Fallback SVG image when no image has been set */
+.placeholder-svg {
+  background-color: #eee;
+  color: var(--c-text-light);
+  fill: currentColor;
+}
+
+/**
+ * Buttons
+ */
+.btn,
+.btn-outlined,
+.btn-text {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 1em 1.5em;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  user-select: none;
+  width: auto;
+}
+
+.btn {
+  background-color: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--c-primary-dark);
+  color: #fff;
+}
+
+.btn:disabled,
+.btn:disabled[disabled] {
+  background-color: theme('colors.gray.500');
+  border-color: theme('colors.gray.500');
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-outlined {
+  background-color: transparent;
+  border-color: var(--c-primary);
+  color: var(--c-link);
+}
+
+.btn-outlined:hover {
+  background-color: theme('colors.blue.100');
+  color: var(--c-link-dark);
+}
+
+.btn-text {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--c-link);
+}
+
+.btn-text:hover {
+  background-color: theme('colors.blue.100');
+  color: var(--c-link-dark);
+}
+
+.btn--sm {
+  font-size: 0.875rem;
+  padding: 0.6em 1em;
+}
+
+/* A button that looks like a link */
+
+.btn-link {
+  background-color: transparent;
+  color: var(--c-link);
+}
+
+.btn-link:hover {
+  color: var(--c-link-dark);
+}
+
+/* Icons buttons */
+.btn-icon {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* For material icons in button */
+.btn-icon i {
+  vertical-align: bottom;
+}
+
+.btn-icon:hover,
+.btn-icon:focus,
+.btn-icon:active {
+  color: var(--c-primary);
+}
+
+/**
+ * Form errors output by {{ form.errors | default_errors }}
+ * Aligns with .banner styles
+ * https://shopify.dev/docs/liquid/reference/objects/form#form-errors
+ */
+.errors {
+  background-color: var(--c-error-bg);
+  border-top-color: var(--c-error);
+  border-top-style: solid;
+  border-top-width: 3px;
+  padding: 0.8rem 1.2rem;
+  text-align: left;
+}
+
+.errors ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.errors p,
+.errors li {
+  margin: 0.5em 0;
+}
+
+/**
+ * Pagination output by {{ paginate | default_pagination }}
+ * https://shopify.dev/docs/liquid/reference/objects/paginate
+ */
+.prev a,
+.next a,
+.page a,
+.current,
+.deco {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.prev {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.next {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.current {
+  font-weight: bold;
+}
+
+.deco {
+  color: var(--c-text-light);
+}
+
+/**
+ * CSS Loading Indicator
+ * No extra markup needed, just add a class of loading to an element.
+ */
+ .loading {
+  min-height: 24px;
+  min-width: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading::before,
+.loading::after {
+  content: '';
+  display: block;
+}
+
+.loading::before {
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.8);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.loading::after {
+  animation: loading-spin 1s infinite linear;
+  border-color: rgba(26, 115, 232, 0.2);
+  border-bottom-color: rgba(26, 115, 232, 1);
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 4px;
+  height: 24px;
+  left: 50%;
+  margin-left: -12px;
+  margin-top: -12px;
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  z-index: 2;
+}
+
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
