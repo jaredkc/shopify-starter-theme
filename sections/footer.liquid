@@ -1,60 +1,58 @@
-<footer id="colophon" class="site-footer border-t px-4 py-8 mt-8" role="content-info">
-
+<footer id="colophon" class="px-4 py-8 mt-8 border-t site-footer" role="content-info">
   {% comment %}
-  Only show newsetter form if they have not already signed up
+    Only show newsetter form if they have not already signed up
   {% endcomment %}
   {% unless customer.accepts_marketing %}
     {% form 'customer' %}
       <input type="hidden" name="contact[tags]" value="newsletter">
 
       <label for="NewsletterEmail">{{ 'customer.newsletter_form.headline' | t }}</label>
-      <input type="email"
+      <input
+        type="email"
         id="NewsletterEmail"
+        type="email"
         name="contact[email]"
-        value="{% if customer %}{{ customer.email }}{% endif %}"
+        value="{{ form.email }}"
         placeholder="{{ 'customer.newsletter_form.placeholder' | t }}"
-        aria-label="{{ 'customer.newsletter_form.placeholder' | t }}"
+        aria-required="true"
         autocorrect="off"
         autocapitalize="off"
-        required>
-
-        <button type="submit">
-          {{ 'customer.newsletter_form.button' | t }}
-        </button>
-
-        {% if form.posted_successfully? %}
-          <div class="banner banner--success" aria-role="alert">
-            <p>{{ 'customer.newsletter_form.confirmation' | t }}</p>
-          </div>
+        autocomplete="email"
+        {% if form.errors %}
+          autofocus
+          aria-invalid="true"
+          aria-describedby="NewsletterError"
+        {% elsif form.posted_successfully? %}
+          aria-describedby="NewsletterSuccess"
         {% endif %}
+        required
+      >
 
-      {{ form.errors | default_errors }}
+      <button type="submit">
+        {{ 'customer.newsletter_form.button' | t }}
+      </button>
 
-      {% comment %} Standard form submission {% endcomment %}
+      {%- if form.errors -%}
+        <div id="NewsletterError" class="banner banner--error">
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </div>
+      {%- endif -%}
+
       {% if form.posted_successfully? %}
-        <div class="note note--success" aria-role="alert">
-          {{ 'customer.newsletter_form.confirmation' | t }}
+        <div id="NewsletterSuccess" class="banner banner--success">
+          <p>{{ 'customer.newsletter_form.confirmation' | t }}</p>
         </div>
       {% endif %}
-
-      {% comment %} JavaScript form submission {% endcomment %}
-      <div
-        id="form-response"
-        class="banner mt-4 hidden"
-        data-success="{{ 'customer.newsletter_form.confirmation' | t }}"
-        data-error="{{ 'customer.newsletter_form.submit_error' | t }}">
-      </div>
-
     {% endform %}
   {% endunless %}
 
   <p>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
-
 </footer>
 
 {% schema %}
-  {
-    "name": "Site Footer",
-    "settings": []
-  }
+{
+  "name": "Site Footer",
+  "settings": []
+}
 {% endschema %}
