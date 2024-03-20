@@ -150,6 +150,10 @@
   width: 50%
 }
 
+.w-60 {
+  width: 15rem
+}
+
 .w-8 {
   width: 2rem
 }
@@ -254,6 +258,11 @@
   padding-right: 1rem
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem
@@ -335,6 +344,10 @@
 
 .font-light {
   font-weight: 300
+}
+
+.capitalize {
+  text-transform: capitalize
 }
 
 .text-gray-700 {

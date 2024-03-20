@@ -15,9 +15,16 @@
             "overlay_theme": "light",
             "overlay_opacity": "0.5"
           }
+        },
+        "email_signup": {
+          "type": "email-signup",
+          "settings": {}
         }
       },
-      "content_for_index": ["hero"]
+      "content_for_index": [
+        "hero",
+        "email_signup"
+      ]
     }
   }
 }

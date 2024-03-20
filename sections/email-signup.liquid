@@ -1,0 +1,74 @@
+{% comment %}
+  Only show newsetter form if they have not already signed up
+{% endcomment %}
+{%- if request.design_mode -%}
+  <div class="mx-auto w-60">
+    <div class="alert">If the customer is logged in and already subscribed, this will now show.</div>
+  </div>
+{%- endif -%}
+
+{% unless customer.accepts_marketing %}
+  <div class="px-8 py-20">
+    <div class="mx-auto w-60 email-signup">
+      {% form 'customer' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        <label for="NewsletterEmail-{{ section.id }}">{{ 'email_signup.headline' | t }}</label>
+        <input
+          type="email"
+          id="NewsletterEmail-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          placeholder="{{ 'email_signup.placeholder' | t }}"
+          aria-required="true"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          {% if form.errors %}
+            autofocus
+            aria-invalid="true"
+            aria-describedby="NewsletterError"
+          {% elsif form.posted_successfully? %}
+            aria-describedby="NewsletterSuccess"
+          {% endif %}
+          required
+        >
+
+        <button type="submit">
+          {{ 'email_signup.button' | t }}
+        </button>
+
+        {%- if form.errors -%}
+          <div id="NewsletterError-{{ section.id }}" class="banner banner--error">
+            {{- form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email -}}
+          </div>
+        {%- endif -%}
+
+        {% if form.posted_successfully? %}
+          <div id="NewsletterSuccess-{{ section.id }}" class="banner banner--success">
+            <p>{{ 'email_signup.confirmation' | t }}</p>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "t:sections.email_signup.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:sections.email_signup.name"
+    }
+  ]
+}
+{% endschema %}

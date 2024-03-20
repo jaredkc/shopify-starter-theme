@@ -124,14 +124,14 @@
       "password": "Password",
       "submit": "Create",
       "cancel": "Return to Store"
-    },
-    "newsletter_form": {
-      "headline": "Sign up for updates",
-      "placeholder": "Enter your email",
-      "button": "Subscribe",
-      "confirmation": "You're all set. Thanks for subscribing.",
-      "submit_error": "So sorry! There was an error with your subscription request."
     }
+  },
+  "email_signup": {
+    "headline": "Sign up for updates",
+    "placeholder": "Enter your email",
+    "button": "Subscribe",
+    "confirmation": "You're all set. Thanks for subscribing.",
+    "submit_error": "So sorry! There was an error with your subscription request."
   },
   "layout": {
     "cart": {
