@@ -1,7 +1,7 @@
 {
   "name": "shopify-starter-theme",
-  "version": "0.1.0",
-  "description": "A Shopify starter theme using Theme Kit and Webpack",
+  "version": "1.0.0",
+  "description": "Using TailwindCSS in your Shopify theme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w",
@@ -10,6 +10,6 @@
   "author": "Jared Cornwall (https://github.com/jaredkc)",
   "license": "ISC",
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.3"
   }
 }
