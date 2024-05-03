@@ -2,6 +2,8 @@
 
 A Shopify 2.0 starter theme that focuses on performance, user experience, and simplicity.
 
+**Note:** This is a work in progress. An archive for the Shopify 1.0 starter theme is available in the `1.0-theme-archive` branch.
+
 ## Development
 
 *Prerequisites:* Install [Node](https://nodejs.org) (NPM used for TailwindCSS) and [Shopify CLI](https://shopify.dev/themes/tools/cli/installation)
