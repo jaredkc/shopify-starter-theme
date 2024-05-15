@@ -2,8 +2,7 @@
   Product form for product page template
   `data-product-form` and `data-product-handle` used by theme ProductForm scripts
 {% endcomment %}
-{% form 'product', product, class: 'my-8', data-product-form: '', data-product-handle: product.handle %}
-
+{%- form 'product', product, class: 'product-form', data-product-form: '', data-product-handle: product.handle -%}
   {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
       <div class="js-enabled">
@@ -15,11 +14,16 @@
             at ProductForm.optionsInputs
           {%- endcomment -%}
           <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="form-select">
-            {% for value in option.values %}
-            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
-              {{ value }}
-            </option>
-            {% endfor %}
+            {%- for value in option.values -%}
+              <option
+                value="{{ value | escape }}"
+                {%- if option.selected_value == value -%}
+                  selected="selected"
+                {%- endif -%}
+              >
+                {{- value -}}
+              </option>
+            {%- endfor -%}
           </select>
         </div>
       </div>
@@ -37,15 +41,26 @@
     make sure you hide the option inputs declared above, like we do with the
     `.js-enabled` class which only shows its contents when JS is enabled.
   {%- endcomment -%}
-  <noscript>
-    <select name="id">
-      {% for variant in product.variants %}
-        <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
-          {{ variant.title }}
+  {% comment %} <noscript> {% endcomment %}
+  <label for="AllOptions">
+    <span class="block form-label">Options</span>
+    <select id="AllOptions" name="id">
+      {%- for variant in product.variants -%}
+        <option
+          value="{{ variant.id }}"
+          {%- if variant == product.selected_or_first_available_variant -%}
+            selected="selected"
+          {%- endif -%}
+          {%- unless variant.available -%}
+            disabled="disabled"
+          {%- endunless -%}
+        >
+          {{- variant.title }} - {{ variant.price | money -}}
         </option>
-      {% endfor %}
+      {%- endfor -%}
     </select>
-  </noscript>
+  </label>
+  {% comment %} </noscript> {% endcomment %}
 
   {%- comment -%}
     Any input with `name="quantity"` will be picked up by ProductForm and
@@ -66,8 +81,15 @@
     </p>
   {%- endcomment -%}
 
-  <button type="submit" class="btn" {% unless current_variant.available %}disabled="disabled"{% endunless %} data-add-to-cart>
-    {{ 'products.product.add_to_cart' | t }}
+  <button
+    type="submit"
+    class="btn"
+    {%- unless product.selected_or_first_available_variant.available -%}
+      disabled="disabled"
+    {%- endunless -%}
+    data-add-to-cart
+  >
+    {{- 'products.product.add_to_cart' | t -}}
   </button>
 
   {%- comment -%}
@@ -76,23 +98,29 @@
     {{ form | payment_button }}
   {%- endcomment -%}
 
-  {%- for variant in product.variants -%}
-    {% if variant.inventory_management == "shopify" %}
-      <div id="stock-message-{{ variant.id }}" class="bg-gray-200 text-sm mt-4 px-2 py-3 {% unless variant == current_variant %} hidden{% endunless %}" data-stock-message>
-        {% if variant.title != "Default Title" %}{{ variant.title }} &middot; {% endif %}
-        {% if variant.inventory_quantity > 0 %}
-          {{ variant.inventory_quantity }} {{ 'products.product.available' | t }}
-        {% else %}
+  {% for variant in product.variants %}
+    {%- if variant.inventory_management == 'shopify' -%}
+      <div
+        id="stock-message-{{ variant.id }}"
+        class="bg-gray-200 text-sm mt-4 px-2 py-3 {% unless variant == product.selected_or_first_available_variant %} hidden{% endunless %}"
+        data-stock-message
+      >
+        {%- if variant.title != 'Default Title' -%}{{ variant.title }} &middot; {% endif -%}
+        {%- if variant.inventory_quantity > 0 -%}
+          {{ variant.inventory_quantity }}
+          {{- 'products.product.available' | t -}}
+        {%- else -%}
           {{ 'products.product.sold_out' | t }}
-        {% endif %}
-        {% if variant.inventory_policy == "continue" %}
+        {%- endif -%}
+        {%- if variant.inventory_policy == 'continue' -%}
           &middot; {{ 'products.product.backorder' | t }}
-        {% endif %}
-        {% if variant.incoming %}
-          &middot; {{ 'products.product.next_shipment' | t }} {{ variant.next_incoming_date | date: "%A, %B %d"}}.
-        {% endif %}
+        {%- endif -%}
+        {%- if variant.incoming -%}
+          &middot; {{ 'products.product.next_shipment' | t }}
+          {{- variant.next_incoming_date | date: '%A, %B %d' -}}
+          .
+        {%- endif -%}
       </div>
-    {% endif %}
-  {%- endfor -%}
-
-{% endform %}
+    {%- endif -%}
+  {% endfor %}
+{%- endform -%}
