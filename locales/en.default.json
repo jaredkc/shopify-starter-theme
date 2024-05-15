@@ -1,6 +1,10 @@
 {
   "general": {
-    "continue_shopping": "Continue shopping"
+    "continue_shopping": "Continue shopping",
+    "search": {
+      "search": "Search",
+      "reset": "Clear search term"
+    }
   },
   "products": {
     "product": {

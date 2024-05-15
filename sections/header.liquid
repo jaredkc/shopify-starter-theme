@@ -67,6 +67,23 @@
   </nav>
 
   <nav class="flex gap-4">
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+        <label class="sr-only" for="header-search">{{ 'general.search.search' | t }}</label>
+        <input
+          class="search__input field__input"
+          id="header-search"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.search' | t }}"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button class="search__button field__button">
+          {{ 'general.search.search' | t }}
+        </button>
+    </form>
+
     {%- if shop.customer_accounts_enabled -%}
       <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
         {%- render 'icon-user' -%}
