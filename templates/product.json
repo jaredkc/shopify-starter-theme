@@ -21,6 +21,8 @@
         "variant_select": {
           "type": "variant_select",
           "settings": {
+            "picker_type": "button",
+            "show_quantity_selector": false
           }
         },
         "recharge_subscriptions_subscription_widget_4HJdGb": {

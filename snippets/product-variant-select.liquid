@@ -26,32 +26,58 @@
     {% endif %}
     {{ block.shopify_attributes }}
   >
-    <label for="AllOptions" class="form-block">
-      <span class="form-label">
-        {%- for option in product.options_with_values -%}
-          {{- option.name -}}
-          {%- unless forloop.last %} / {% endunless -%}
-        {%- endfor -%}
-      </span>
-      <select id="AllOptions" name="id" class="form-select">
-        {%- for variant in product.variants -%}
-          <option
-            value="{{ variant.id }}"
-            {%- if variant == product.selected_or_first_available_variant -%}
-              selected="selected"
-            {%- endif -%}
-            {%- unless variant.available -%}
-              disabled="disabled"
-            {%- endunless -%}
-          >
-            {{- variant.title }} - {{ variant.price | money }}
+    {%- if block.settings.picker_type == 'button' -%}
+      {%- for variant in product.variants -%}
+        <fieldset>
+          <label>
+            <input
+              type="radio"
+              name="id"
+              value="{{ variant.id }}"
+              form="{{ product_form_id }}"
+              {%- if variant == product.selected_or_first_available_variant -%}
+                checked
+              {% endif %}
+              {%- unless variant.available -%}
+                disabled="disabled"
+              {%- endunless -%}
+            >
+            {{ variant.title -}}
+            - {{ variant.price | money }}
             {%- unless variant.available -%}
               &middot; {{ 'products.product.sold_out' | t }}
             {%- endunless -%}
-          </option>
-        {%- endfor -%}
-      </select>
-    </label>
+          </label>
+        </fieldset>
+      {%- endfor -%}
+    {%- elsif block.settings.picker_type == 'dropdown' -%}
+      <label class="form-block">
+        <span class="form-label">
+          {%- for option in product.options_with_values -%}
+            {{- option.name -}}
+            {%- unless forloop.last %} / {% endunless -%}
+          {%- endfor -%}
+        </span>
+        <select name="id" class="form-select">
+          {%- for variant in product.variants -%}
+            <option
+              value="{{ variant.id }}"
+              {%- if variant == product.selected_or_first_available_variant -%}
+                selected="selected"
+              {%- endif -%}
+              {%- unless variant.available -%}
+                disabled="disabled"
+              {%- endunless -%}
+            >
+              {{- variant.title }} - {{ variant.price | money }}
+              {%- unless variant.available -%}
+                &middot; {{ 'products.product.sold_out' | t }}
+              {%- endunless -%}
+            </option>
+          {%- endfor -%}
+        </select>
+      </label>
+    {% endif %}
     <script type="application/json">
       {{ product.variants | json }}
     </script>

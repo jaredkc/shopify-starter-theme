@@ -8,7 +8,6 @@ class VariantSelect extends HTMLElement {
   }
 
   onChange(event) {
-    console.log('Variant changed to', event.target.value);
     this.setCurrentVariant(event.target.value);
 
     if (!this.currentVariant) {
