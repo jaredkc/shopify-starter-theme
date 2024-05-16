@@ -1,0 +1,34 @@
+<div {{ block.shopify_attributes }}>
+  {%- form 'product',
+    product,
+    id: product_form_id,
+    class: 'form',
+    novalidate: 'novalidate',
+    data-type: 'add-to-cart-form'
+  -%}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ product.selected_or_first_available_variant.id }}"
+      {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+        disabled
+      {% endif %}
+      class="product-variant-id"
+    >
+
+    <button
+      type="submit"
+      class="btn"
+      {%- unless product.selected_or_first_available_variant.available -%}
+        disabled="disabled"
+      {%- endunless -%}
+      data-add-to-cart
+    >
+      {{- 'products.product.add_to_cart' | t -}}
+    </button>
+    <hr>
+    {%- if show_dynamic_checkout -%}
+      {{ form | payment_button }}
+    {%- endif -%}
+  {%- endform -%}
+</div>

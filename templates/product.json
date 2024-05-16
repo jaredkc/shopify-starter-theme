@@ -2,15 +2,67 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+          }
+        },
+        "variant_select": {
+          "type": "variant_select",
+          "settings": {
+          }
+        },
+        "recharge_subscriptions_subscription_widget_4HJdGb": {
+          "type": "shopify:\/\/apps\/recharge-subscriptions\/blocks\/subscription-widget\/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variant_select",
+        "recharge_subscriptions_subscription_widget_4HJdGb",
+        "buy_buttons"
+      ],
+      "settings": {
+      }
     },
     "recommendations": {
       "type": "product-recommendations",
-      "settings": {}
+      "settings": {
+        "show_product_recommendations": false,
+        "heading": "You might also like"
+      }
+    },
+    "1715788398f5a9d7ec": {
+      "type": "apps",
+      "settings": {
+      }
     }
   },
   "order": [
     "main",
-    "recommendations"
+    "recommendations",
+    "1715788398f5a9d7ec"
   ]
 }
