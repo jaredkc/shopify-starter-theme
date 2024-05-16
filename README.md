@@ -1,6 +1,6 @@
 # Shopify Starter Theme
 
-A Shopify 2.0 starter theme that focuses on performance, user experience, and simplicity.
+A Shopify 2.0 starter theme that focuses on performance, user experience, and simplicity. This theme uses the best practices from the [Shopify Dawn theme](https://github.com/Shopify/dawn) but with far less complexity. Making it easier to build your custom theme.
 
 **Note:** This is a work in progress. An archive for the Shopify 1.0 starter theme is available in the `1.0-theme-archive` branch.
 
