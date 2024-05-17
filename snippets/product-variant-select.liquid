@@ -27,8 +27,8 @@
     {{ block.shopify_attributes }}
   >
     {%- if block.settings.picker_type == 'button' -%}
-      {%- for variant in product.variants -%}
-        <fieldset>
+      <fieldset>
+        {%- for variant in product.variants -%}
           <label>
             <input
               type="radio"
@@ -48,8 +48,8 @@
               &middot; {{ 'products.product.sold_out' | t }}
             {%- endunless -%}
           </label>
-        </fieldset>
-      {%- endfor -%}
+        {%- endfor -%}
+      </fieldset>
     {%- elsif block.settings.picker_type == 'dropdown' -%}
       <label class="form-block">
         <span class="form-label">
