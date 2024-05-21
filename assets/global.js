@@ -1,6 +1,16 @@
 // JS is enabled
 document.querySelector('html').classList.add('js');
 
+/**
+ * VariantSelect
+ * This is for showing a single variant selector (select or radios).
+ * Works well when you want to show the price for each and only
+ * have one option per variant.
+ *
+ * Feature to come:
+ * If your product(s) have more than one option (size and color) you should use
+ * product.options_with_values and OptionSelect instead.
+ */
 class VariantSelect extends HTMLElement {
   constructor() {
     super();
