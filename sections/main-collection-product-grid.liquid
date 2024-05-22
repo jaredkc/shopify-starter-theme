@@ -1,39 +1,33 @@
 <div>
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="">
-      <div id="ProductGridContainer" class="product-grid-container">
+      <div id="ProductGridContainer">
         {%- if collection.products.size == 0 -%}
-          <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
-            <div class="loading-overlay gradient"></div>
-            <div class="title-wrapper center">
-              <h2 class="title title--primary">
-                {{ 'sections.collection_template.empty' | t -}}
-              </h2>
+          <div id="product-grid" data-id="{{ section.id }}">
+            <div>
+              <h2>{{ 'sections.collection_template.empty' | t -}}</h2>
             </div>
           </div>
         {%- else -%}
-          <div
-            class="collection"
-          >
-            <div class="loading-overlay gradient"></div>
+          <div>
             <ul
               id="product-grid"
               data-id="{{ section.id }}"
-              class=""
+              class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4"
             >
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
-                <li
-                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {% if settings.animations_reveal_on_scroll %}
-                    data-cascade
-                    style="--animation-order: {{ forloop.index }};"
-                  {% endif %}
-                >
-                  {{ product.title }}
+                <li>
+                  {% render 'card-product',
+                    card_product: product,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: section.settings.show_rating,
+                    lazy_load: lazy_load,
+                    section_id: section.id
+                  %}
                 </li>
               {%- endfor -%}
             </ul>
@@ -65,7 +59,7 @@
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "default": false,
+      "default": true,
       "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
     },
     {

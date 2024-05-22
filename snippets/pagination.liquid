@@ -13,12 +13,13 @@
 
 {%- if paginate.parts.size > 0 -%}
   <nav role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-    <ul>
+    <ul class="flex justify-center">
       {%- if paginate.previous -%}
         <li>
           <a
             href="{{ paginate.previous.url }}{{ anchor }}"
             aria-label="{{ 'general.pagination.previous' | t }}"
+            class="inline-flex items-center justify-center w-8 h-8 mr-4"
           >
             {% render 'icon-chevron-left' %}
           </a>
@@ -31,6 +32,7 @@
             <a
               href="{{ part.url }}{{ anchor }}"
               aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
+              class="inline-flex items-center justify-center w-8 h-8"
             >
               {{- part.title -}}
             </a>
@@ -41,6 +43,7 @@
                 aria-disabled="true"
                 aria-current="page"
                 aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
+                class="inline-flex items-center justify-center w-8 h-8 underline"
               >
                 {{- part.title -}}
               </a>
@@ -56,6 +59,7 @@
           <a
             href="{{ paginate.next.url }}{{ anchor }}"
             aria-label="{{ 'general.pagination.next' | t }}"
+            class="inline-flex items-center justify-center w-8 h-8 ml-4"
           >
             {% render 'icon-chevron-right' %}
           </a>

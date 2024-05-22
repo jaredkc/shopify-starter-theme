@@ -1,4 +1,14 @@
 {
+  "settings_schema": {
+    "layout": {
+      "name": "Layout",
+      "settings": {
+        "page_width": {
+          "label": "Page width"
+        }
+      }
+    }
+  },
   "sections": {
     "email_signup": {
       "name": "Email signup"

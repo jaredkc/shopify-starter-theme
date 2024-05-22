@@ -8,6 +8,28 @@
       "previous": "Previous page"
     }
   },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "skip_to_product_info": "Skip to product information",
+    "close": "Close",
+    "unit_price_separator": "per",
+    "vendor": "Vendor:",
+    "error": "Error",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "link_messages": {
+      "new_window": "Opens in a new window.",
+      "external": "Opens external website."
+    },
+    "loading": "Loading...",
+    "total_reviews": "total reviews",
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "collapsible_content_title": "Collapsible content",
+    "complementary_products": "Complementary products"
+  },
+  "onboarding": {
+    "product_title": "Example product title",
+    "collection_title": "Your collection's name"
+  },
   "products": {
     "product": {
       "add_to_cart": "Add to Cart",
@@ -20,7 +42,8 @@
       "quantity": "Quantity",
       "regular_price": "Regular price",
       "sold_out": "Sold Out",
-      "unavailable": "Unavailable"
+      "unavailable": "Unavailable",
+      "vendor": "Vendor"
     }
   },
   "customer": {
