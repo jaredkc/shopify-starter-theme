@@ -1,6 +1,12 @@
 {
   "general": {
-    "continue_shopping": "Continue shopping"
+    "continue_shopping": "Continue shopping",
+    "pagination": {
+      "label": "Pagination",
+      "page": "Page {{ number }}",
+      "next": "Next page",
+      "previous": "Previous page"
+    }
   },
   "products": {
     "product": {
@@ -165,6 +171,10 @@
     }
   },
   "sections": {
+    "collection_template": {
+      "empty": "No products found",
+      "title": "Collection"
+    },
     "main-page": {
       "name": "Page"
     }
