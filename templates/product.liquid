@@ -41,13 +41,7 @@
     <div class="lg:col-span-2">
       <div class="copy">
         <h1 class="product-title">{{ product.title }}</h1>
-        <p>
-          {% if product.price_varies %}
-            {{ product.price_min | money }} - {{ product.price_max | money }}
-          {% else %}
-            {{ product.price | money }}
-          {% endif %}
-        </p>
+        {% render 'price', product: product  %}
 
         {% render 'product-form' %}
 
