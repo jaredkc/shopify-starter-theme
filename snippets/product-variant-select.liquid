@@ -1,0 +1,85 @@
+{% comment %}
+  Renders product variant-select
+
+  Using a single variant selector where each option represents a variant.
+  Works well for products with a single option and showing the price of each variant.
+
+  However, products may have more than one option. You many want to consider
+  presenting each of these options separately in the UI.
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant select is associated.
+  - update_url: {Boolean} whether or not to update url when changing variants. If false, the url isn't updated. Default: true (optional).
+
+  Usage:
+  {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+<div {{ block.shopify_attributes }}>
+  <variant-select
+    id="variant-select-{{ section.id }}"
+    data-section="{{ section.id }}"
+    data-url="{{ product.url }}"
+    {% if update_url == false %}
+      data-update-url="false"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.picker_type == 'button' -%}
+      <fieldset>
+        {%- for variant in product.variants -%}
+          <label>
+            <input
+              type="radio"
+              name="id"
+              value="{{ variant.id }}"
+              form="{{ product_form_id }}"
+              {%- if variant == product.selected_or_first_available_variant -%}
+                checked
+              {% endif %}
+              {%- unless variant.available -%}
+                disabled="disabled"
+              {%- endunless -%}
+            >
+            {{ variant.title -}}
+            - {{ variant.price | money }}
+            {%- unless variant.available -%}
+              &middot; {{ 'products.product.sold_out' | t }}
+            {%- endunless -%}
+          </label>
+        {%- endfor -%}
+      </fieldset>
+    {%- elsif block.settings.picker_type == 'dropdown' -%}
+      <label class="form-block">
+        <span class="form-label">
+          {%- for option in product.options_with_values -%}
+            {{- option.name -}}
+            {%- unless forloop.last %} / {% endunless -%}
+          {%- endfor -%}
+        </span>
+        <select name="id" class="form-select">
+          {%- for variant in product.variants -%}
+            <option
+              value="{{ variant.id }}"
+              {%- if variant == product.selected_or_first_available_variant -%}
+                selected="selected"
+              {%- endif -%}
+              {%- unless variant.available -%}
+                disabled="disabled"
+              {%- endunless -%}
+            >
+              {{- variant.title }} - {{ variant.price | money }}
+              {%- unless variant.available -%}
+                &middot; {{ 'products.product.sold_out' | t }}
+              {%- endunless -%}
+            </option>
+          {%- endfor -%}
+        </select>
+      </label>
+    {% endif %}
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </variant-select>
+</div>
