@@ -13,16 +13,15 @@
           "settings": {
           }
         },
-        "description": {
-          "type": "description",
+        "variant_picker": {
+          "type": "variant_picker",
           "settings": {
+            "picker_type": "button"
           }
         },
-        "variant_select": {
-          "type": "variant_select",
+        "quantity_selector": {
+          "type": "quantity_selector",
           "settings": {
-            "picker_type": "button",
-            "show_quantity_selector": false
           }
         },
         "recharge_subscriptions_subscription_widget_4HJdGb": {
@@ -42,7 +41,8 @@
       "block_order": [
         "title",
         "price",
-        "variant_select",
+        "variant_picker",
+        "quantity_selector",
         "recharge_subscriptions_subscription_widget_4HJdGb",
         "buy_buttons"
       ],

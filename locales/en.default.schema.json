@@ -55,8 +55,19 @@
         "quantity_selector": {
           "name": "Quantity selector"
         },
-        "variant_select": {
-          "name": "Variant select"
+        "variant_picker": {
+          "name": "Variant select",
+          "settings": {
+            "picker_type": {
+              "label": "Type",
+              "options__1": {
+                "label": "Dropdown"
+              },
+              "options__2": {
+                "label": "Pills"
+              }
+            }
+          }
         },
         "buy_buttons": {
           "name": "Buy buttons",
