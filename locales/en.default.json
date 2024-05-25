@@ -6,6 +6,10 @@
       "page": "Page {{ number }}",
       "next": "Next page",
       "previous": "Previous page"
+    },
+    "search": {
+      "search": "Search",
+      "reset": "Clear search term"
     }
   },
   "accessibility": {
