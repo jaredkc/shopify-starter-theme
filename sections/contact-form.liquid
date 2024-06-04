@@ -1,0 +1,47 @@
+{% form 'contact' %}
+  <div class="space-y-4">
+    {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+    {{ form.errors | default_errors }}
+    <div>
+      <label for="ContactFormName">name</label>
+      <input type="text" id="ContactFormName" name="contact[name]">
+    </div>
+    <div>
+      <label for="ContactFormEmail">email</label>
+      <input type="email" id="ContactFormEmail" name="contact[email]">
+    </div>
+    <div>
+      <label for="ContactFormPhone">phone</label>
+      <input type="tel" id="ContactFormPhone" name="contact[phone]">
+    </div>
+    <div>
+      <label for="ContactFormMessage">message</label>
+      <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
+    </div>
+    <input type="submit" value="send">
+  </div>
+{% endform %}
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}
