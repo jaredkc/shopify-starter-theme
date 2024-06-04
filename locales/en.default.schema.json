@@ -10,9 +10,6 @@
     }
   },
   "sections": {
-    "email_signup": {
-      "name": "Email signup"
-    },
     "main-collection-banner": {
       "name": "Collection banner",
       "settings": {
