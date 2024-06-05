@@ -171,19 +171,19 @@ select::-ms-expand {
   padding-right: 5%;
 }
 
-.copy {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 680px;
+.content-sm {
+  max-width: 40rem; /* 640px */
+}
+.content-md {
+  max-width: 46rem; /* 736px */
+}
+.content-lg {
+  max-width: 50rem; /* 800px */
+}
+.content-xl {
+  max-width: 70rem; /* 1120px */
 }
 
-.copy--narrow {
-  max-width: 480px;
-}
-
-.copy--wide {
-  max-width: 1000px;
-}
 
 /* Nav menu */
 
@@ -220,13 +220,6 @@ select::-ms-expand {
 /* Site actions */
 .site-actions a {
   margin-left: 1.4rem;
-}
-
-/* Fallback SVG image when no image has been set */
-.placeholder-svg {
-  background-color: #f3f4f6;
-  color: #9ca3af;
-  fill: currentColor;
 }
 
 /**
@@ -436,7 +429,7 @@ select::-ms-expand {
  * Additional utility classes
  */
 
-.list-reset {
+.list-unstyled {
   list-style-type: none;
   margin: 0;
   padding: 0;
