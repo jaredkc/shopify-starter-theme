@@ -1,24 +1,11 @@
-:root {
-  --c-border: theme('colors.gray.300');
-  --c-error-bg: theme('colors.red.200');
-  --c-error: theme('colors.red.600');
-  --c-link-dark: theme('colors.blue.900');
-  --c-link: theme('colors.blue.600');
-  --c-primary-dark: #2a4365;
-  --c-primary: #2b6cb0;
-  --c-success-bg: theme('colors.green.200');
-  --c-success: theme('colors.green.600');
-  --c-text-light: theme('colors.gray.300');
-  --c-text-medium: theme('colors.gray.600');
-  --c-text: theme('colors.gray.900');
-}
+/* See /assets/tailwind.css for variables */
 
 body {
   margin: 0;
 }
 
 a {
-  color: var(--c-primary);
+  color: var(--c-primary-medium);
 }
 a:hover {
   color: var(--c-primary-dark);
@@ -88,7 +75,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--c-primary);
+  border-color: var(--c-primary-medium);
 }
 
 button[disabled],
@@ -244,8 +231,8 @@ select::-ms-expand {
 }
 
 .btn {
-  background-color: var(--c-primary);
-  border-color: var(--c-primary);
+  background-color: var(--c-primary-medium);
+  border-color: var(--c-primary-medium);
   color: #fff;
 }
 
@@ -258,20 +245,20 @@ select::-ms-expand {
 .btn:disabled,
 .btn:disabled[disabled],
 .btn[aria-disabled="true"] {
-  background-color: theme('colors.gray.500');
-  border-color: theme('colors.gray.500');
+  background-color: var(--c-disabled);
+  border-color: var(--c-disabled);
   cursor: not-allowed;
   opacity: 0.5;
 }
 
 .btn-outlined {
   background-color: transparent;
-  border-color: var(--c-primary);
+  border-color: var(--c-primary-medium);
   color: var(--c-link);
 }
 
 .btn-outlined:hover {
-  background-color: theme('colors.blue.100');
+  background-color: var(--c-primary-light);
   color: var(--c-link-dark);
 }
 
@@ -282,7 +269,7 @@ select::-ms-expand {
 }
 
 .btn-text:hover {
-  background-color: theme('colors.blue.100');
+  background-color: var(--c-primary-light);
   color: var(--c-link-dark);
 }
 
@@ -312,7 +299,7 @@ select::-ms-expand {
 .btn-icon:hover,
 .btn-icon:focus,
 .btn-icon:active {
-  color: var(--c-primary);
+  color: var(--c-primary-medium);
 }
 
 /**
