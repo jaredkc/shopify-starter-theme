@@ -23,4 +23,9 @@
 
   --c-error-bg: theme('colors.red.200');
   --c-error: theme('colors.red.600');
+
+  --duration-short: 100ms;
+  --duration-default: 200ms;
+  --duration-medium: 300ms;
+  --duration-long: 500ms;
 }

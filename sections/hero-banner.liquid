@@ -21,11 +21,11 @@
   {%- endif -%}
 </style>
 
-<section
+<div
   id="hero--{{ section.id }}"
   class="relative md:flex hero hero--{{ section.settings.content_theme }}"
 >
-  <div class="relative flex w-full {{ section.settings.height }}">
+  <div class="relative flex w-full {{ section.settings.height }} animate--zoom-in overflow-hidden">
     {%- if section.settings.image != blank -%}
       {{
         section.settings.image
@@ -73,11 +73,12 @@
       {%- endfor -%}
     </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "Hero banner",
+  "tag": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },

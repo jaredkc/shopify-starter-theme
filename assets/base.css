@@ -412,3 +412,17 @@ select::-ms-expand {
 .js .js-enabled {
   display: inherit;
 }
+
+/**
+ * Animations
+ */
+
+ .animate--zoom-in {
+  --zoom-in-ratio: 1;
+}
+
+.animate--zoom-in > img,
+.animate--zoom-in > svg {
+  transition: scale var(--duration-short) linear;
+  scale: var(--zoom-in-ratio);
+}
