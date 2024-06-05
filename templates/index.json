@@ -17,10 +17,25 @@
       "type": "email-signup",
       "settings": {
       }
+    },
+    "hero_VHkgEJ": {
+      "type": "hero",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/person-sitting-with-large-cardboard-boxes.jpg",
+        "height": "md:h-dvh",
+        "title": "Hero Title",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "desktop_content_position": "md:justify-center md:items-center",
+        "content_theme": "light",
+        "background_opacity": 0
+      }
     }
   },
   "order": [
     "hero",
-    "email_signup"
+    "email_signup",
+    "hero_VHkgEJ"
   ]
 }
