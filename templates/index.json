@@ -1,7 +1,7 @@
 {
   "sections": {
     "hero": {
-      "type": "hero",
+      "type": "hero-banner",
       "settings": {
         "height": "h-[450px] md:h-[650px]",
         "title": "Hero Title",
@@ -20,7 +20,7 @@
       }
     },
     "hero_VHkgEJ": {
-      "type": "hero",
+      "type": "hero-banner",
       "settings": {
         "image": "shopify:\/\/shop_images\/person-sitting-with-large-cardboard-boxes.jpg",
         "height": "md:h-dvh",

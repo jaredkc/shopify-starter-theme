@@ -4,7 +4,7 @@
     "Default": {
       "sections": {
         "hero": {
-          "type": "hero",
+          "type": "hero-banner",
           "settings": {
             "image": "",
             "height": "md:h-dvh",
