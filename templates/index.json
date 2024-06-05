@@ -3,13 +3,12 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "",
-        "height": "h-[300px] md:h-[500px]",
+        "height": "h-[450px] md:h-[650px]",
         "title": "Hero Title",
-        "text": "<p>Hello from the hero section.</p>",
+        "text": "<p>Hello from the hero section.<\/p>",
         "button_label": "Shop products",
-        "button_link": "/collections/all",
-        "desktop_content_position": "md:justify-end md:items-start",
+        "button_link": "\/collections\/all",
+        "desktop_content_position": "md:justify-start md:items-center",
         "content_theme": "dark",
         "background_opacity": 50
       }
