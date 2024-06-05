@@ -2,31 +2,7 @@
   "current": "Default",
   "presets": {
     "Default": {
-      "sections": {
-        "hero": {
-          "type": "hero-banner",
-          "settings": {
-            "image": "",
-            "height": "md:h-dvh",
-            "title": "Hero Title",
-            "description": "<p>Edit this content in the theme customizer.<\/p>",
-            "button_label": "Shop Products",
-            "button_link": "/collections/all",
-            "desktop_content_position": "md:justify-start md:items-start",
-            "content_theme": "light",
-            "content_background_opacity": 70,
-            "content_max_width": 520
-          }
-        },
-        "email_signup": {
-          "type": "email-signup",
-          "settings": {}
-        }
-      },
-      "content_for_index": [
-        "hero",
-        "email_signup"
-      ]
+      "sections": {}
     }
   }
 }

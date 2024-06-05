@@ -23,9 +23,9 @@
 
 <section
   id="hero--{{ section.id }}"
-  class="bg-red-100 relative md:flex hero hero--{{ section.settings.content_theme }}"
+  class="relative md:flex hero hero--{{ section.settings.content_theme }}"
 >
-  <div class="relative flex w-full bg-teal-200 {{ section.settings.height }}">
+  <div class="relative flex w-full {{ section.settings.height }}">
     {%- if section.settings.image != blank -%}
       {{
         section.settings.image
@@ -43,20 +43,34 @@
   </div>
 
   <div class="md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }}">
-    <div class="p-4 hero__content md:max-w-lg md:p-6 md:m-6 md:sticky md:top-8">
-      {%- if section.settings.title != blank -%}
-        <h1 class="m-0 text-4xl md:text-5xl">
-          {{ section.settings.title | escape }}
-        </h1>
-      {%- endif -%}
-      {%- if section.settings.description != blank -%}
-        {{ section.settings.description }}
-      {%- endif -%}
-      {%- if section.settings.button_label != blank -%}
-        <div class="mt-8">
-          <a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a>
-        </div>
-      {%- endif -%}
+    <div class="p-8 space-y-4 hero__content md:max-w-lg md:m-6 md:sticky md:top-8">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            <h2 class="m-0 {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+              {{- block.settings.heading -}}
+            </h2>
+          {%- when 'text' -%}
+            <div class="{{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+              <p class="m-0">{{ block.settings.text }}</p>
+            </div>
+          {%- when 'button' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  {% if block.settings.button_link == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_link }}"
+                  {% endif %}
+                  class="btn"
+                >
+                  {{- block.settings.button_label | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -64,6 +78,9 @@
 {% schema %}
 {
   "name": "Hero banner",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "image_picker",
@@ -94,27 +111,6 @@
           "value": "adapt"
         }
       ]
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Hero Title"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
     },
     {
       "type": "select",
@@ -198,9 +194,107 @@
       "unit": "px"
     }
   ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Hero Banner"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "text-xl",
+          "options": [
+            {
+              "value": "text-xl",
+              "label": "Small"
+            },
+            {
+              "value": "text-3xl",
+              "label": "Medium"
+            },
+            {
+              "value": "text-5xl",
+              "label": "Large"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "Provide a catchy description to capture customers attention."
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "label": "Text style",
+          "default": "text-base",
+          "options": [
+            {
+              "value": "text-base",
+              "label": "Body"
+            },
+            {
+              "value": "text-lg",
+              "label": "Subtitle"
+            },
+            {
+              "value": "text-sm",
+              "label": "Caption"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Learn more",
+          "label": "Button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Hero banner"
+      "name": "Hero banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
     }
   ]
 }

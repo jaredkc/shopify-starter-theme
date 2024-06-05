@@ -256,7 +256,8 @@ select::-ms-expand {
 }
 
 .btn:disabled,
-.btn:disabled[disabled] {
+.btn:disabled[disabled],
+.btn[aria-disabled="true"] {
   background-color: theme('colors.gray.500');
   border-color: theme('colors.gray.500');
   cursor: not-allowed;

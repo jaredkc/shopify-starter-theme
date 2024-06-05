@@ -1,16 +1,40 @@
 {
   "sections": {
-    "hero": {
+    "hero_banner": {
       "type": "hero-banner",
+      "blocks": {
+        "heading_74dpCk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Hero Banner",
+            "heading_size": "text-3xl"
+          }
+        },
+        "text_jpAPVk": {
+          "type": "text",
+          "settings": {
+            "text": "Provide a catchy description to capture customers attention.",
+            "text_style": "text-base"
+          }
+        },
+        "button_kajMGD": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn more",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_74dpCk",
+        "text_jpAPVk",
+        "button_kajMGD"
+      ],
       "settings": {
         "height": "h-[450px] md:h-[650px]",
-        "title": "Hero Title",
-        "description": "<p>Hello from the hero section.<\/p>",
-        "button_label": "Shop products",
-        "button_link": "\/collections\/all",
-        "desktop_content_position": "md:justify-start md:items-center",
-        "content_theme": "dark",
-        "content_background_opacity": 50,
+        "desktop_content_position": "md:justify-start md:items-start",
+        "content_theme": "light",
+        "content_background_opacity": 90,
         "content_max_width": 520
       }
     },
@@ -18,25 +42,10 @@
       "type": "email-signup",
       "settings": {
       }
-    },
-    "hero_VHkgEJ": {
-      "type": "hero-banner",
-      "settings": {
-        "image": "shopify:\/\/shop_images\/person-sitting-with-large-cardboard-boxes.jpg",
-        "height": "md:h-dvh",
-        "title": "Hero Title",
-        "text": "",
-        "button_label": "",
-        "button_link": "",
-        "desktop_content_position": "md:justify-center md:items-center",
-        "content_theme": "light",
-        "background_opacity": 0
-      }
     }
   },
   "order": [
-    "hero",
-    "email_signup",
-    "hero_VHkgEJ"
+    "hero_banner",
+    "email_signup"
   ]
 }
