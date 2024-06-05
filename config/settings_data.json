@@ -7,13 +7,14 @@
           "type": "hero",
           "settings": {
             "image": "",
+            "height": "md:h-dvh",
             "title": "Hero Title",
             "text": "Edit this content in the theme customizer.",
             "button_label": "Shop Products",
             "button_link": "/collections/all",
-            "overlay_position": "left",
-            "overlay_theme": "light",
-            "overlay_opacity": "0.5"
+            "desktop_content_position": "md:justify-start md:items-start",
+            "content_theme": "light",
+            "background_opacity": 70
           }
         },
         "email_signup": {

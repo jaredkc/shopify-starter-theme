@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image": "",
+        "height": "h-[300px] md:h-[500px]",
+        "title": "Hero Title",
+        "text": "<p>Hello from the hero section.</p>",
+        "button_label": "Shop products",
+        "button_link": "/collections/all",
+        "desktop_content_position": "md:justify-end md:items-start",
+        "content_theme": "dark",
+        "background_opacity": 50
+      }
+    },
+    "email_signup": {
+      "type": "email-signup",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "email_signup"
+  ]
+}

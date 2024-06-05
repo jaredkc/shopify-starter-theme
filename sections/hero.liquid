@@ -1,46 +1,61 @@
-{{ 'component-hero.css' | asset_url | stylesheet_tag }}
-
 <style>
-  /* stylelint-disable */
-  @media (min-width: 768px) {
-    #hero--{{ section.id }} .hero__content-block {
-      background: rgba(255, 255, 255, {{ section.settings.background_opacity }});
+  {%- if section.settings.content_theme == "dark" -%}
+    #hero--{{ section.id }} .hero__content {
+      color: #fff;
+      background: #000;
     }
-    {%- if section.settings.content_theme == "dark" -%}
-    #hero--{{ section.id }}.hero--dark .hero__content-block {
-      background: rgba(0, 0, 0, {{ section.settings.background_opacity }});
+    @media (min-width: 768px) {
+      #hero--{{ section.id }} .hero__content {
+        background: rgba(0, 0, 0, {{ section.settings.background_opacity | divided_by: 100.0 }});
+      }
     }
-    {%- endif -%}
-  }
-  /* stylelint-enable */
+  {%- else -%}
+    #hero--{{ section.id }} .hero__content {
+      background: #fff;
+    }
+    @media (min-width: 768px) {
+      #hero--{{ section.id }} .hero__content {
+        background: rgba(255, 255, 255, {{ section.settings.background_opacity | divided_by: 100.0 }});
+      }
+    }
+  {%- endif -%}
 </style>
 
-<section id="hero--{{ section.id }}" class="hero hero--{{ section.settings.content_theme }}{% if section.settings.full_height %} hero--full{% endif %} bg-gray-200">
-  {%- if section.settings.image != blank -%}
-    {{
-      section.settings.image
-      | image_url: width: 3840
-      | image_tag:
-        width: section.settings.image.width,
-        class: 'hero__image',
-        sizes: '100vw',
-        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
-        fetchpriority: 'auto'
-    }}
-  {%- else -%}
-    {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
-  {%- endif -%}
+<section
+  id="hero--{{ section.id }}"
+  class="bg-red-100 relative md:flex hero hero--{{ section.settings.content_theme }}"
+>
+  <div class="relative flex w-full bg-teal-200 {{ section.settings.height }}">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3840
+        | image_tag:
+          width: section.settings.image.width,
+          class: 'object-cover w-full h-full',
+          sizes: '100vw',
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+          fetchpriority: 'auto'
+      }}
+    {%- else -%}
+      {{ 'hero-apparel-1' | placeholder_svg_tag: 'object-cover w-full h-full' }}
+    {%- endif -%}
+  </div>
 
-  <div class="hero__content {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
-    <div class="hero__content-block">
+  <div class="md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }}">
+    <div class="p-4 hero__content md:max-w-lg md:p-6 md:m-6 md:sticky md:top-8">
       {%- if section.settings.title != blank -%}
-        <h1 class="m-0 text-4xl md:text-5xl">{{ section.settings.title | escape }}</h1>
+        <h1 class="m-0 text-4xl md:text-5xl">
+          {{ section.settings.title | escape }}
+        </h1>
       {%- endif -%}
       {%- if section.settings.text != blank -%}
         {{ section.settings.text }}
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
-        <div class="mt-8"><a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a></div>
+        <div class="mt-8">
+          <a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_label }}</a>
+        </div>
       {%- endif -%}
     </div>
   </div>
@@ -56,11 +71,28 @@
       "label": "Image"
     },
     {
-      "type": "checkbox",
-      "id": "full_height",
-      "label": "Full height",
-      "info": "Adjust to the full height of the browser window. Image cropping occurs from the center. Does not apply to small screens.",
-      "default": false
+      "type": "select",
+      "id": "height",
+      "label": "Hero height",
+      "default": "md:h-dvh",
+      "options": [
+        {
+          "label": "Small",
+          "value": "h-[300px] md:h-[500px]"
+        },
+        {
+          "label": "Medium",
+          "value": "h-[450px] md:h-[650px]"
+        },
+        {
+          "label": "Large",
+          "value": "md:h-dvh"
+        },
+        {
+          "label": "Adapt to image",
+          "value": "adapt"
+        }
+      ]
     },
     {
       "type": "header",
@@ -93,41 +125,45 @@
     },
     {
       "type": "select",
-      "id": "horizontal_position",
-      "label": "Horizontal position",
-      "default": "hero__content--left",
+      "id": "desktop_content_position",
+      "label": "Desktop content position",
+      "default": "md:justify-start md:items-start",
       "options": [
         {
-          "label": "Left",
-          "value": "hero__content--left"
+          "label": "Top left",
+          "value": "md:justify-start md:items-start"
         },
         {
-          "label": "Center",
-          "value": "hero__content--center"
+          "label": "Top center",
+          "value": "md:justify-center md:items-start"
         },
         {
-          "label": "Right",
-          "value": "hero__content--right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "vertical_position",
-      "label": "Vertical position",
-      "default": "hero__content--top",
-      "options": [
-        {
-          "label": "Top",
-          "value": "hero__content--top"
+          "label": "Top right",
+          "value": "md:justify-end md:items-start"
         },
         {
-          "label": "Middle",
-          "value": "hero__content--middle"
+          "label": "Middle left",
+          "value": "md:justify-start md:items-center"
         },
         {
-          "label": "Bottom",
-          "value": "hero__content--bottom"
+          "label": "Middle center",
+          "value": "md:justify-center md:items-center"
+        },
+        {
+          "label": "Middle right",
+          "value": "md:justify-end md:items-center"
+        },
+        {
+          "label": "Bottom left",
+          "value": "md:justify-start md:items-end"
+        },
+        {
+          "label": "Bottom center",
+          "value": "md:justify-center md:items-end"
+        },
+        {
+          "label": "Bottom right",
+          "value": "md:justify-end md:items-end"
         }
       ]
     },
@@ -148,52 +184,14 @@
       ]
     },
     {
-      "type": "select",
+      "type": "range",
       "id": "background_opacity",
       "label": "Background Opacity",
-      "default": "0.9",
-      "options": [
-        {
-          "label": "90%",
-          "value": "0.9"
-        },
-        {
-          "label": "80%",
-          "value": "0.8"
-        },
-        {
-          "label": "70%",
-          "value": "0.7"
-        },
-        {
-          "label": "60%",
-          "value": "0.6"
-        },
-        {
-          "label": "50%",
-          "value": "0.5"
-        },
-        {
-          "label": "40%",
-          "value": "0.4"
-        },
-        {
-          "label": "30%",
-          "value": "0.3"
-        },
-        {
-          "label": "20%",
-          "value": "0.2"
-        },
-        {
-          "label": "10%",
-          "value": "0.1"
-        },
-        {
-          "label": "0%",
-          "value": "0"
-        }
-      ]
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 90
     }
   ],
   "presets": [
