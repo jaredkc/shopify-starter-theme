@@ -22,25 +22,6 @@ img {
   max-width: 100%;
 }
 
-/**
- * These are needed since "@tailwind base;" is not being used.
- * See /assets/tailwind.css
- */
-*,
-::backdrop,
-:after,
-:before {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-}
-
 *,
 ::before,
 ::after {
