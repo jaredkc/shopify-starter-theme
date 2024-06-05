@@ -1,4 +1,13 @@
 <style>
+  #hero--{{ section.id }} .hero__content {
+    background: #fff;
+  }
+  @media (min-width: 768px) {
+    #hero--{{ section.id }} .hero__content {
+      background: rgba(255, 255, 255, {{ section.settings.content_background_opacity | divided_by: 100.0 }});
+      max-width: {{ section.settings.content_max_width }}px;
+    }
+  }
   {%- if section.settings.content_theme == "dark" -%}
     #hero--{{ section.id }} .hero__content {
       color: #fff;
@@ -6,16 +15,7 @@
     }
     @media (min-width: 768px) {
       #hero--{{ section.id }} .hero__content {
-        background: rgba(0, 0, 0, {{ section.settings.background_opacity | divided_by: 100.0 }});
-      }
-    }
-  {%- else -%}
-    #hero--{{ section.id }} .hero__content {
-      background: #fff;
-    }
-    @media (min-width: 768px) {
-      #hero--{{ section.id }} .hero__content {
-        background: rgba(255, 255, 255, {{ section.settings.background_opacity | divided_by: 100.0 }});
+        background: rgba(0, 0, 0, {{ section.settings.content_background_opacity | divided_by: 100.0 }});
       }
     }
   {%- endif -%}
@@ -49,8 +49,8 @@
           {{ section.settings.title | escape }}
         </h1>
       {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        {{ section.settings.text }}
+      {%- if section.settings.description != blank -%}
+        {{ section.settings.description }}
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
         <div class="mt-8">
@@ -74,7 +74,8 @@
       "type": "select",
       "id": "height",
       "label": "Hero height",
-      "default": "md:h-dvh",
+      "info": "For best results, use an image with a 3:2 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)",
+      "default": "adapt",
       "options": [
         {
           "label": "Small",
@@ -95,10 +96,6 @@
       ]
     },
     {
-      "type": "header",
-      "content": "Text"
-    },
-    {
       "type": "text",
       "id": "title",
       "label": "Heading",
@@ -106,8 +103,8 @@
     },
     {
       "type": "richtext",
-      "id": "text",
-      "label": "Text"
+      "id": "description",
+      "label": "Description"
     },
     {
       "type": "text",
@@ -118,10 +115,6 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
-    },
-    {
-      "type": "header",
-      "content": "Content"
     },
     {
       "type": "select",
@@ -185,13 +178,24 @@
     },
     {
       "type": "range",
-      "id": "background_opacity",
+      "id": "content_background_opacity",
       "label": "Background Opacity",
       "min": 0,
       "max": 100,
       "step": 10,
       "unit": "%",
       "default": 90
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "info": "If the content is smaller than the max width, this has no effect.",
+      "default": 520,
+      "max": 900,
+      "min": 300,
+      "step": 10,
+      "unit": "px"
     }
   ],
   "presets": [

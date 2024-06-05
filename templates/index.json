@@ -5,12 +5,13 @@
       "settings": {
         "height": "h-[450px] md:h-[650px]",
         "title": "Hero Title",
-        "text": "<p>Hello from the hero section.<\/p>",
+        "description": "<p>Hello from the hero section.<\/p>",
         "button_label": "Shop products",
         "button_link": "\/collections\/all",
         "desktop_content_position": "md:justify-start md:items-center",
         "content_theme": "dark",
-        "background_opacity": 50
+        "content_background_opacity": 50,
+        "content_max_width": 520
       }
     },
     "email_signup": {
