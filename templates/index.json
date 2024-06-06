@@ -31,7 +31,7 @@
         "button_kajMGD"
       ],
       "settings": {
-        "height": "h-[450px] md:h-[650px]",
+        "height": "h-[600px] md:h-[750px]",
         "desktop_content_position": "md:justify-start md:items-start",
         "content_theme": "light",
         "content_background_opacity": 90,

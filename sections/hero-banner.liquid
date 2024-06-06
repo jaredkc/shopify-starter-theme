@@ -23,9 +23,9 @@
 
 <div
   id="hero--{{ section.id }}"
-  class="relative md:flex hero hero--{{ section.settings.content_theme }}"
+  class="relative flex flex-col md:flex hero hero--{{ section.settings.content_theme }} {{ section.settings.height }}"
 >
-  <div class="relative flex w-full {{ section.settings.height }} animate--zoom-in overflow-hidden">
+  <div class="relative flex flex-1 w-full overflow-hidden animate--zoom-in">
     {%- if section.settings.image != blank -%}
       {{
         section.settings.image
@@ -42,7 +42,7 @@
     {%- endif -%}
   </div>
 
-  <div class="md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }}">
+  <div class="flex-0 md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }}">
     <div class="p-8 space-y-4 hero__content md:max-w-lg md:m-6 md:sticky md:top-6">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -97,15 +97,15 @@
       "options": [
         {
           "label": "Small",
-          "value": "h-[300px] md:h-[500px]"
+          "value": "h-[450px] md:h-[600px]"
         },
         {
           "label": "Medium",
-          "value": "h-[450px] md:h-[650px]"
+          "value": "h-[600px] md:h-[750px]"
         },
         {
           "label": "Large",
-          "value": "md:h-dvh"
+          "value": "h-dvh"
         },
         {
           "label": "Adapt to image",
