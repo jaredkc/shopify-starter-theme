@@ -26,14 +26,15 @@ function initializeScrollZoomAnimationTrigger() {
         if (!elementIsVisible) return;
 
         element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
+        element.style.setProperty('--transform-out-ratio', percentageSeen(element, true));
       }),
       { passive: true }
     );
   });
 }
 
-function percentageSeen(element) {
-  const viewportHeight = window.innerHeight;
+function percentageSeen(element, fromTop = false) {
+  const viewportHeight = fromTop ? 0 : window.innerHeight;
   const scrollY = window.scrollY;
   const elementPositionY = element.getBoundingClientRect().top + scrollY;
   const elementHeight = element.offsetHeight;

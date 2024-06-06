@@ -152,7 +152,6 @@ select::-ms-expand {
   max-width: 70rem; /* 1120px */
 }
 
-
 /* Nav menu */
 
 .nav-menu > li {
@@ -225,7 +224,7 @@ select::-ms-expand {
 
 .btn:disabled,
 .btn:disabled[disabled],
-.btn[aria-disabled="true"] {
+.btn[aria-disabled='true'] {
   background-color: var(--c-disabled);
   border-color: var(--c-disabled);
   cursor: not-allowed;
@@ -417,12 +416,14 @@ select::-ms-expand {
  * Animations
  */
 
- .animate--zoom-in {
+.animate--zoom-in {
   --zoom-in-ratio: 1;
+  --transform-out-ratio: 0;
 }
 
 .animate--zoom-in > img,
 .animate--zoom-in > svg {
   transition: scale var(--duration-short) linear;
   scale: var(--zoom-in-ratio);
+  transform: translateY(calc(var(--transform-out-ratio) * 1px));
 }
