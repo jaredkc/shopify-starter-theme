@@ -1,0 +1,26 @@
+{% comment %}
+  Renders a search dialog modal.
+
+  Usage:
+  {% render 'search-dialog-modal' %}
+{% endcomment %}
+
+<dialog class="search-dialog">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+    <input type="hidden" name="options[prefix]" value="last">
+    <label class="sr-only" for="search-dialog-modal">{{ 'general.search.search' | t }}</label>
+    <input
+      class="form-input"
+      id="search-dialog-modal"
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'general.search.search' | t }}"
+    >
+    <button>{{ 'general.search.search' | t }}</button>
+  </form>
+
+  <form method="dialog" class="mt-4 text-center">
+    <button>Close</button>
+  </form>
+</dialog>

@@ -6,11 +6,11 @@
       .announcement--link:hover {
         {%- assign brightness = section.settings.accouncement_color_bg | color_brightness -%}
         {%- if brightness <= 192 -%}
-          {%- assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 -%}
-          background-color: {{ section.settings.accouncement_color_bg | color_lighten: lightenAmount }};
+          {%- assign lighten_amount = 255 | minus: brightness | divided_by: 255 | times: 16 -%}
+          background-color: {{ section.settings.accouncement_color_bg | color_lighten: lighten_amount }};
         {%- else -%}
-          {%- assign darkenAmount = 255 | divided_by: brightness | times: 8 -%}
-          background-color: {{ section.settings.accouncement_color_bg | color_darken: darkenAmount }};
+          {%- assign darken_amount = 255 | divided_by: brightness | times: 8 -%}
+          background-color: {{ section.settings.accouncement_color_bg | color_darken: darken_amount }};
         {%- endif -%}
       }
       .announcement__message { color: {{ section.settings.accouncement_color_text }}; }
@@ -32,6 +32,8 @@
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
+
+{% render 'search-dialog-modal' %}
 
 <header class="flex items-center justify-between px-4 py-2 text-center border-b md:py-4 md:px-8">
   {%- if template.name == 'index' -%}
@@ -67,22 +69,10 @@
   </nav>
 
   <nav class="flex gap-4">
-    <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-      <label class="sr-only" for="header-search">{{ 'general.search.search' | t }}</label>
-      <input
-        class="search__input field__input"
-        id="header-search"
-        type="search"
-        name="q"
-        value="{{ search.terms | escape }}"
-        placeholder="{{ 'general.search.search' | t }}"
-      >
-      <input type="hidden" name="options[prefix]" value="last">
-      <button class="search__button field__button">
-        {{ 'general.search.search' | t }}
-      </button>
-    </form>
-
+    <button class="btn-link open-search">
+      <span class="sr-only">Open Search</span>
+      {%- render 'icon-search' -%}
+    </button>
     {%- if shop.customer_accounts_enabled -%}
       <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
         {%- render 'icon-user' -%}
