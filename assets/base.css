@@ -160,6 +160,28 @@ select::-ms-expand {
   max-width: 70rem; /* 1120px */
 }
 
+/* Header */
+.section-header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.sticky-header-hidden,
+.sticky-header-stuck {
+  transition: all var(--duration-medium) ease-out;
+}
+
+.sticky-header-hidden {
+  transform: translateY(-100%);
+}
+
+.sticky-header-stuck {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+}
+
 /* Nav menu */
 
 .nav-menu > li {

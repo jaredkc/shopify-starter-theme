@@ -35,68 +35,71 @@
 
 {% render 'search-dialog-modal' %}
 
-<header class="flex items-center justify-between px-4 py-2 text-center border-b md:py-4 md:px-8">
-  {%- if template.name == 'index' -%}
-    <h1 class="m-0 text-base font-bold" itemscope itemtype="http://schema.org/Organization">
-  {%- else -%}
-    <div class="m-0 text-base font-bold" itemscope itemtype="http://schema.org/Organization">
-  {%- endif -%}
-  <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
-  {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
-
-  <nav id="site-navigation" class="site-navigation">
-    <ul class="nav-menu">
-      {%- for link in linklists['main-menu'].links -%}
-        {%- assign child_list_handle = link.title | handleize -%}
-        {%- if linklists[child_list_handle].links != blank -%}
-          <li>
-            <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-            <ul class="nav-submemu">
-              {%- for childlink in linklists[child_list_handle].links -%}
-                <li>
-                  <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
-                </li>
-              {%- endfor -%}
-            </ul>
-          </li>
-        {%- else -%}
-          <li>
-            <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-          </li>
-        {%- endif -%}
-      {%- endfor -%}
-    </ul>
-  </nav>
-
-  <nav class="flex gap-4">
-    <button class="btn-link open-search">
-      <span class="sr-only">Open Search</span>
-      {%- render 'icon-search' -%}
-    </button>
-    {%- if shop.customer_accounts_enabled -%}
-      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
-        {%- render 'icon-user' -%}
-        <span class="sr-only">
-          {%- liquid
-            if customer
-              echo 'customer.account_fallback' | t
-            else
-              echo 'customer.log_in' | t
-            endif
-          -%}
-        </span>
-      </a>
+<sticky-header>
+  <header class="flex items-center justify-between px-4 py-2 text-center border-b md:py-4 md:px-8">
+    {%- if template.name == 'index' -%}
+      <h1 class="m-0 text-base font-bold" itemscope itemtype="http://schema.org/Organization">
+    {%- else -%}
+      <div class="m-0 text-base font-bold" itemscope itemtype="http://schema.org/Organization">
     {%- endif -%}
-    <a href="{{ routes.cart_url }}">
-      {%- render 'icon-cart' -%}
-      <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
-    </a>
-  </nav>
-</header>
+    <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
+    {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+
+    <nav id="site-navigation" class="site-navigation">
+      <ul class="nav-menu">
+        {%- for link in linklists['main-menu'].links -%}
+          {%- assign child_list_handle = link.title | handleize -%}
+          {%- if linklists[child_list_handle].links != blank -%}
+            <li>
+              <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+              <ul class="nav-submemu">
+                {%- for childlink in linklists[child_list_handle].links -%}
+                  <li>
+                    <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </li>
+          {%- else -%}
+            <li>
+              <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <nav class="flex gap-4">
+      <button class="btn-link open-search">
+        <span class="sr-only">Open Search</span>
+        {%- render 'icon-search' -%}
+      </button>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+          {%- render 'icon-user' -%}
+          <span class="sr-only">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}">
+        {%- render 'icon-cart' -%}
+        <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
+      </a>
+    </nav>
+  </header>
+</sticky-header>
 
 {% schema %}
 {
   "name": "Site Header",
+  "class": "section-header",
   "settings": [
     {
       "type": "header",
