@@ -1,38 +1,3 @@
-{%- if section.settings.announcement -%}
-  {%- if section.settings.announcement_only_home == false or template.name == 'index' -%}
-    <style>
-      /* stylelint-disable */
-      .announcement { background-color: {{ section.settings.accouncement_color_bg }}; }
-      .announcement--link:hover {
-        {%- assign brightness = section.settings.accouncement_color_bg | color_brightness -%}
-        {%- if brightness <= 192 -%}
-          {%- assign lighten_amount = 255 | minus: brightness | divided_by: 255 | times: 16 -%}
-          background-color: {{ section.settings.accouncement_color_bg | color_lighten: lighten_amount }};
-        {%- else -%}
-          {%- assign darken_amount = 255 | divided_by: brightness | times: 8 -%}
-          background-color: {{ section.settings.accouncement_color_bg | color_darken: darken_amount }};
-        {%- endif -%}
-      }
-      .announcement__message { color: {{ section.settings.accouncement_color_text }}; }
-      /* stylelint-enable */
-    </style>
-
-    {%- if section.settings.announcement_link == blank -%}
-      <div class="p-2 text-center announcement">
-    {%- else -%}
-      <a href="{{ section.settings.announcement_link }}" class="announcement announcement--link">
-    {%- endif -%}
-
-    <div class="text-sm announcement__message">{{ section.settings.announcement_text | escape }}</div>
-
-    {%- if section.settings.announcement_link == blank -%}
-      </div>
-    {%- else -%}
-      </a>
-    {%- endif -%}
-  {%- endif -%}
-{%- endif -%}
-
 {% render 'search-dialog-modal' %}
 
 <sticky-header>
@@ -45,29 +10,31 @@
     <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
     {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
 
-    <nav id="site-navigation" class="site-navigation">
-      <ul class="nav-menu">
-        {%- for link in linklists['main-menu'].links -%}
-          {%- assign child_list_handle = link.title | handleize -%}
-          {%- if linklists[child_list_handle].links != blank -%}
-            <li>
-              <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-              <ul class="nav-submemu">
-                {%- for childlink in linklists[child_list_handle].links -%}
-                  <li>
-                    <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
-                  </li>
-                {%- endfor -%}
-              </ul>
-            </li>
-          {%- else -%}
-            <li>
-              <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-    </nav>
+    {%- if section.settings.menu != blank -%}
+      <nav id="site-navigation" class="site-navigation">
+        <ul class="nav-menu">
+          {%- for link in section.settings.menu.links -%}
+            {%- assign child_list_handle = link.title | handleize -%}
+            {%- if linklists[child_list_handle].links != blank -%}
+              <li>
+                <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+                <ul class="nav-submemu">
+                  {%- for childlink in linklists[child_list_handle].links -%}
+                    <li>
+                      <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </li>
+            {%- else -%}
+              <li>
+                <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
 
     <nav class="flex gap-4">
       <button class="btn-link open-search">
@@ -98,48 +65,14 @@
 
 {% schema %}
 {
-  "name": "Site Header",
+  "name": "Header",
   "class": "section-header",
   "settings": [
     {
-      "type": "header",
-      "content": "Announcement bar"
-    },
-    {
-      "type": "checkbox",
-      "id": "announcement",
-      "label": "Show announcement",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "announcement_only_home",
-      "label": "Only show on home page",
-      "default": false
-    },
-    {
-      "type": "text",
-      "id": "announcement_text",
-      "label": "Announcement text",
-      "default": "Announce something here"
-    },
-    {
-      "type": "url",
-      "id": "announcement_link",
-      "label": "Announcement link",
-      "info": "Optional"
-    },
-    {
-      "type": "color",
-      "id": "accouncement_color_bg",
-      "label": "Bar",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "accouncement_color_text",
-      "label": "Text",
-      "default": "#fff"
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
     }
   ]
 }
