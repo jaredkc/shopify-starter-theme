@@ -1,0 +1,15 @@
+{% comment %}
+  Renders product intro with option to display on desktop and mobile.
+
+  Built to allow displahing above the image gallery on mobile and to the side on desktop.
+
+  Accepts:
+  - product: {Object} product object
+  - display_on: {String} 'desktop' or 'mobile' (optional)
+{% endcomment %}
+
+<div class="product-intro {% if display_on == 'desktop' %} hidden md:block{% else %} md:hidden{% endif %}">
+  <h1>{{ product.title | escape }}</h1>
+  <p>{{ product.metafields.descriptors.subtitle.value }}</p>
+  <div>TODO: connect stars</div>
+</div>

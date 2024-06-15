@@ -1,5 +1,10 @@
 <section class="page-pad">
-  <div id="overview" class="lg:grid lg:grid-cols-5 lg:gap-8">
+  {%- assign product_intro = section.blocks | where: 'type', 'intro' %}
+  {%- for block in product_intro -%}
+    {% render 'product-intro', product: product, display_on: 'mobile' %}
+  {%- endfor -%}
+
+  <div class="lg:grid lg:grid-cols-5 lg:gap-8">
     <div class="lg:col-span-3">
       <div class="copy">
         <div class="text-center">
@@ -46,6 +51,11 @@
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
+
+            {%- when 'intro' -%}
+              <div {{ block.shopify_attributes }}>
+                {% render 'product-intro', product: product, display_on: 'desktop' %}
+              </div>
 
             {%- when 'title' -%}
               <div class="product__title" {{ block.shopify_attributes }}>
@@ -117,6 +127,18 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "intro",
+      "name": "Product intro",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Title, subtitle, and reviews summary",
+          "info": "Displays above the product images on mobile, to the side on desktop."
+        }
+      ]
     },
     {
       "type": "title",

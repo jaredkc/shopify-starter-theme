@@ -3,8 +3,8 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "title": {
-          "type": "title",
+        "intro": {
+          "type": "intro",
           "settings": {
           }
         },
@@ -39,7 +39,7 @@
         }
       },
       "block_order": [
-        "title",
+        "intro",
         "price",
         "variant_picker",
         "quantity_selector",
