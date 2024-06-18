@@ -43,7 +43,7 @@
   </div>
 
   <div class="flex-0 md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }} {{ section.settings.content_text_align }}">
-    <div class="p-8 space-y-4 hero__content md:max-w-lg md:m-6 md:sticky md:top-6">
+    <div class="p-8 space-y-4 hero__content md:max-w-lg md:m-6 md:sticky{% if section.settings.desktop_content_position contains 'items-end' %} md:bottom-6{% else %} md:top-6{% endif %}">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
@@ -104,7 +104,7 @@
           "value": "h-[600px] md:h-[750px]"
         },
         {
-          "label": "Large",
+          "label": "Browser height",
           "value": "h-dvh"
         },
         {
