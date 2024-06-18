@@ -1,0 +1,46 @@
+{% comment %}
+  Shopify Placeholder SVGs
+
+  Outputs every Shopify placeholder_svg_tag available. A simple reference to use during theme development.
+  https://shopify.dev/docs/api/liquid/filters/placeholder_svg_tag
+{% endcomment %}
+{%- liquid
+  assign outline_illustrations = 'product-1,product-2,product-3,product-4,product-5,product-6,collection-1,collection-2,collection-3,collection-4,collection-5,collection-6,lifestyle-1,lifestyle-2,image'
+  assign color_illustrations = 'product-apparel-1,product-apparel-2,product-apparel-3,product-apparel-4,collection-apparel-1,collection-apparel-2,collection-apparel-3,collection-apparel-4,hero-apparel-1,hero-apparel-2,hero-apparel-3,blog-apparel-1,blog-apparel-2,blog-apparel-3,detailed-apparel-1'
+
+  assign outline_illustrations_array = outline_illustrations | split: ','
+  assign color_illustrations_array = color_illustrations | split: ','
+-%}
+
+<style>
+  .placeholder-svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<div class="px-2 py-8 bg-slate-50 md:px-4 md:py-12 lg:px-8">
+  <h2 class="mt-0">Outline Illustrations</h2>
+  <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-4">
+    {% for illustration in outline_illustrations_array %}
+      <div class="flex items-center justify-center bg-white">
+        {{ illustration | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endfor %}
+  </div>
+  <h2 class="mt-12">Color Illustrations</h2>
+  <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-4">
+    {% for illustration in color_illustrations_array %}
+      <div class="flex items-center justify-center bg-white">
+        {{ illustration | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Placeholder SVGs",
+  "settings": []
+}
+{% endschema %}
