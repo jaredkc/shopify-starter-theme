@@ -10,6 +10,8 @@
 
 <div class="product-intro {% if display_on == 'desktop' %} hidden md:block{% else %} md:hidden{% endif %}">
   <h1>{{ product.title | escape }}</h1>
-  <p>{{ product.metafields.descriptors.subtitle.value }}</p>
+  {% if product.metafields.descriptors.subtitle.value != blank %}
+    <p>{{ product.metafields.descriptors.subtitle.value }}</p>
+  {% endif %}
   <div>TODO: connect stars</div>
 </div>
