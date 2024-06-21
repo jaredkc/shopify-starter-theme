@@ -39,6 +39,19 @@
         "content_max_width": 520
       }
     },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured collection",
+        "description": "<p>From the customizer<\/p>",
+        "show_description": true,
+        "collection": "test-products",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "show_vendor": true,
+        "show_rating": false
+      }
+    },
     "email_signup": {
       "type": "email-signup",
       "settings": {
@@ -47,6 +60,7 @@
   },
   "order": [
     "hero_banner",
+    "featured_collection",
     "email_signup"
   ]
 }

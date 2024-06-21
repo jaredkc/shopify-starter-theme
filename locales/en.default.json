@@ -224,6 +224,10 @@
       "empty": "No products found",
       "title": "Collection"
     },
+    "featured_collection": {
+      "view_all": "View all",
+      "view_all_label": "View all products in the {{ collection_name }} collection"
+    },
     "main-page": {
       "name": "Page"
     }

@@ -1,0 +1,119 @@
+{%- liquid
+  if section.settings.collection.all_products_count > section.settings.products_to_show
+    assign more_in_collection = true
+  endif
+-%}
+
+<div>
+  {%- if section.settings.title != blank -%}
+    <h2>{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  {%- if section.settings.description != blank
+    or section.settings.show_description
+    and section.settings.collection.description != empty
+  -%}
+    <div>
+      {%- if section.settings.show_description -%}
+        {{ section.settings.collection.description }}
+      {%- else -%}
+        {{ section.settings.description -}}
+      {%- endif %}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_view_all and more_in_collection -%}
+    <a
+      href="{{ section.settings.collection.url }}"
+      aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title | escape }}"
+    >
+      {{ 'sections.featured_collection.view_all' | t }}
+    </a>
+  {%- endif -%}
+
+  <ul class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled">
+    {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+      <li>
+        {% render 'card-product',
+          card_product: product,
+          show_vendor: section.settings.show_vendor,
+          show_rating: section.settings.show_rating,
+          lazy_load: true,
+          section_id: section.id
+        %}
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description from the admin",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 4,
+      "label": "Maximum number of products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Enable View all if collection has more products than shown"
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": true,
+      "label": "t:product-card.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:product-card.settings.show_rating.label",
+      "info": "t:product-card.settings.show_rating.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

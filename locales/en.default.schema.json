@@ -9,6 +9,20 @@
       }
     }
   },
+  "product-card": {
+    "settings": {
+      "products_per_page": {
+        "label": "Products per page"
+      },
+      "show_vendor": {
+        "label": "Show vendor"
+      },
+      "show_rating": {
+        "label": "Show product rating",
+        "info": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
+      }
+    }
+  },
   "sections": {
     "main-collection-banner": {
       "name": "Collection banner",
@@ -26,19 +40,7 @@
       }
     },
     "main-collection-product-grid": {
-      "name": "Product grid",
-      "settings": {
-        "products_per_page": {
-          "label": "Products per page"
-        },
-        "show_vendor": {
-          "label": "Show vendor"
-        },
-        "show_rating": {
-          "label": "Show product rating",
-          "info": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
-        }
-      }
+      "name": "Product grid"
     },
     "main-product": {
       "name": "Product information",
