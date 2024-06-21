@@ -1,6 +1,8 @@
-/* See /assets/tailwind.css for variables */
-
-body {
+/**
+ * Defaults and resets
+ */
+body,
+figure {
   margin: 0;
 }
 
@@ -39,7 +41,9 @@ dialog::backdrop {
   border-color: var(--c-border);
 }
 
-/* Typography */
+/**
+ * Typography
+ */
 .text-caps {
   font-size: 12px;
   font-weight: 700;
@@ -47,7 +51,9 @@ dialog::backdrop {
   text-transform: uppercase;
 }
 
-/* Basic form styles */
+/**
+ * Basic form styles
+ */
 input,
 textarea,
 select {
@@ -214,11 +220,6 @@ select::-ms-expand {
   z-index: 100;
 }
 
-/* Site actions */
-.site-actions a {
-  margin-left: 1.4rem;
-}
-
 /**
  * Buttons
  */
@@ -288,8 +289,6 @@ select::-ms-expand {
   padding: 0.6em 1em;
 }
 
-/* A button that looks like a link */
-
 .btn-link {
   background-color: transparent;
   color: var(--c-link);
@@ -300,19 +299,6 @@ select::-ms-expand {
 
 .btn-link:hover {
   color: var(--c-link-dark);
-}
-
-/* Icons buttons */
-.btn-icon {
-  background: transparent;
-  border: 0;
-  padding: 0;
-}
-
-.btn-icon:hover,
-.btn-icon:focus,
-.btn-icon:active {
-  color: var(--c-primary-medium);
 }
 
 /**
@@ -459,4 +445,21 @@ select::-ms-expand {
   transition: scale var(--duration-short) linear;
   scale: var(--zoom-in-ratio);
   transform: translateY(calc(var(--transform-out-ratio) * 1px));
+}
+
+/**
+ * Iframes for video embeds
+ */
+.iframe-video {
+  overflow: hidden;
+  padding-top: var(--aspect-ratio, 56.25%);
+  position: relative;
+}
+.iframe-video iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
