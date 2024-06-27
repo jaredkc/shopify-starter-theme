@@ -409,11 +409,6 @@
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -730,8 +725,8 @@
     justify-content: center;
   }
 
-  .md\:gap-4 {
-    gap: 1rem;
+  .md\:gap-6 {
+    gap: 1.5rem;
   }
 
   .md\:p-6 {
