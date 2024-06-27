@@ -19,17 +19,17 @@ button {
   font-size: 1rem;
 }
 
+button {
+  -webkit-appearance: button;
+}
+
 img {
   height: auto;
   max-width: 100%;
 }
 
-dialog[open] {
-  margin-top: 2rem;
-}
-
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 *,
@@ -415,6 +415,12 @@ select::-ms-expand {
 /**
  * Additional utility classes
  */
+.button-unstyled {
+  margin: 0;
+  background-color: transparent;
+  background-image: none;
+  padding: 0;
+}
 
 .list-unstyled {
   list-style-type: none;

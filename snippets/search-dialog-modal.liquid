@@ -5,7 +5,7 @@
   {% render 'search-dialog-modal' %}
 {% endcomment %}
 
-<dialog class="search-dialog">
+<dialog id="search-dialog" class="p-10 ralative">
   <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
     <input type="hidden" name="options[prefix]" value="last">
     <label class="sr-only" for="search-dialog-modal">{{ 'general.search.search' | t }}</label>
@@ -20,7 +20,10 @@
     <button>{{ 'general.search.search' | t }}</button>
   </form>
 
-  <form method="dialog" class="mt-4 text-center">
-    <button>Close</button>
+  <form method="dialog" class="absolute top-0 right-0">
+    <button class="flex items-center justify-center w-10 h-10 button-unstyled">
+      <span class="sr-only">{{ 'accessibility.close' | t }}</span>
+      {%- render 'icon-close' -%}
+    </button>
   </form>
 </dialog>

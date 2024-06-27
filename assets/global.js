@@ -2,21 +2,34 @@
 document.querySelector('html').classList.add('js');
 
 //
-// Site search in dialog modal
+// Modals via <dialog>
+// super lightweight and accessible
 //
-const searchDialog = document.querySelector('.search-dialog');
-const openSearch = document.querySelectorAll('.open-search');
+const openModal = document.querySelectorAll('[data-open-modal]');
+const dialogs = document.querySelectorAll('dialog');
 
-openSearch.forEach((element) => {
+openModal.forEach((element) => {
+  console.log(element.dataset.openModal);
   element.addEventListener('click', () => {
-    searchDialog.showModal();
+    document.getElementById(element.dataset.openModal).showModal();
   });
 });
 
-searchDialog.addEventListener('click', (event) => {
-  if (event.target === searchDialog) {
-    searchDialog.close();
-  }
+// Close the modals if you click on the background
+dialogs.forEach((dialog) => {
+  dialog.addEventListener('click', (event) => {
+    const x = event.clientX;
+    const y = event.clientY;
+    const rect = event.target.getBoundingClientRect();
+    if (
+      x < rect.left ||
+      x > rect.right ||
+      y < rect.top ||
+      y > rect.bottom
+    ) {
+      dialog.close();
+    }
+  });
 });
 
 /**
