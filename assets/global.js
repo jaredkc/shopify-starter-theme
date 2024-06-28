@@ -9,7 +9,6 @@ const openModal = document.querySelectorAll('[data-open-modal]');
 const dialogs = document.querySelectorAll('dialog');
 
 openModal.forEach((element) => {
-  console.log(element.dataset.openModal);
   element.addEventListener('click', () => {
     document.getElementById(element.dataset.openModal).showModal();
   });
