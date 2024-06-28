@@ -28,10 +28,6 @@ img {
   max-width: 100%;
 }
 
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 *,
 ::before,
 ::after {
@@ -468,4 +464,43 @@ select::-ms-expand {
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+/**
+ * Dialog modals animation
+ */
+dialog[open] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+dialog {
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 250ms ease-out, transform 250ms ease-out, overlay 250ms ease-out allow-discrete,
+    display 250ms ease-out allow-discrete;
+  /* Equivalent to: transition: all 250ms allow-discrete; */
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: display 250ms allow-discrete, overlay 250ms allow-discrete, background-color 250ms;
+  /* Equivalent to: transition: all 250ms allow-discrete; */
+}
+
+dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+}
+
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
 }
