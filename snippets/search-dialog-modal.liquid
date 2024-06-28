@@ -5,7 +5,7 @@
   {% render 'search-dialog-modal' %}
 {% endcomment %}
 
-<dialog id="search-dialog" class="relative p-10">
+<dialog id="search-dialog" class="p-10">
   <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
     <input type="hidden" name="options[prefix]" value="last">
     <label class="sr-only" for="search-dialog-modal">{{ 'general.search.search' | t }}</label>
