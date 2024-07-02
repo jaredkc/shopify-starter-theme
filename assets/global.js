@@ -56,11 +56,20 @@ class DialogModal extends HTMLElement {
     if (this.content && this.load && !this.loaded) {
       this.content.classList.add(this.loadingClass);
       fetch(this.load)
-        .then((response) => response.text())
+        .then((response) => {
+          if (!response.ok) throw new Error(response.statusText);
+          return response.text();
+        })
         .then((text) => {
           this.content.innerHTML = text;
-          this.content.classList.remove(this.loadingClass);
           this.loaded = true;
+        })
+        .catch((error) => {
+          this.content.innerHTML = 'Failed to load content';
+          console.error(error);
+        })
+        .finally(() => {
+          this.content.classList.remove(this.loadingClass);
         });
     }
   }
