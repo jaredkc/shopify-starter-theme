@@ -1,6 +1,27 @@
 <footer id="colophon" class="px-4 py-8 border-t site-footer" role="content-info">
-  <p>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
+  <div class="flex items-center justify-between">
+    <p>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</p>
+    <dialog-opener data-dialog="#contact-dialog">
+      <button>Contact</button>
+    </dialog-opener>
+  </div>
 </footer>
+
+{% comment %}
+  Content is loaded using the section rendering API when the dialog is opened.
+  This is for an example only. Loading the contact form would be more efficient using liquid.
+{% endcomment %}
+<dialog-modal id="contact-dialog" data-load="/?section_id=contact-form">
+  <dialog>
+    <div class="dialog-content"></div>
+    <form method="dialog" class="dialog-close">
+      <button>
+        <span class="sr-only">{{ 'accessibility.close' | t }}</span>
+        {%- render 'icon-close' -%}
+      </button>
+    </form>
+  </dialog>
+</dialog-modal>
 
 {% schema %}
 {

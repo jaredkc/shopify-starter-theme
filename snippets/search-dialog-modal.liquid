@@ -5,25 +5,28 @@
   {% render 'search-dialog-modal' %}
 {% endcomment %}
 
-<dialog id="search-dialog" class="p-10">
-  <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-    <input type="hidden" name="options[prefix]" value="last">
-    <label class="sr-only" for="search-dialog-modal">{{ 'general.search.search' | t }}</label>
-    <input
-      class="form-input"
-      id="search-dialog-modal"
-      type="search"
-      name="q"
-      value="{{ search.terms | escape }}"
-      placeholder="{{ 'general.search.search' | t }}"
-    >
-    <button>{{ 'general.search.search' | t }}</button>
-  </form>
-
-  <form method="dialog" class="absolute top-0 right-0">
-    <button class="flex items-center justify-center w-10 h-10 button-unstyled">
-      <span class="sr-only">{{ 'accessibility.close' | t }}</span>
-      {%- render 'icon-close' -%}
-    </button>
-  </form>
-</dialog>
+<dialog-modal id="search-dialog">
+  <dialog>
+    <div class="dialog-content">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+        <input type="hidden" name="options[prefix]" value="last">
+        <label class="sr-only" for="search-dialog-modal">{{ 'general.search.search' | t }}</label>
+        <input
+          class="form-input"
+          id="search-dialog-modal"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.search' | t }}"
+        >
+        <button>{{ 'general.search.search' | t }}</button>
+      </form>
+    </div>
+    <form method="dialog" class="dialog-close">
+      <button>
+        <span class="sr-only">{{ 'accessibility.close' | t }}</span>
+        {%- render 'icon-close' -%}
+      </button>
+    </form>
+  </dialog>
+</dialog-modal>

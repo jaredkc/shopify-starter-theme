@@ -37,10 +37,12 @@
     {%- endif -%}
 
     <nav class="flex gap-4">
-      <button class="btn-link" data-open-modal="search-dialog">
-        <span class="sr-only">Open Search</span>
-        {%- render 'icon-search' -%}
-      </button>
+      <dialog-opener data-dialog="#search-dialog">
+        <button class="btn-link">
+          <span class="sr-only">Open Search</span>
+          {%- render 'icon-search' -%}
+        </button>
+      </dialog-opener>
       {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
           {%- render 'icon-user' -%}

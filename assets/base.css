@@ -467,8 +467,29 @@ select::-ms-expand {
 }
 
 /**
- * Dialog modals animation
+ * Dialog modals
  */
+ dialog {
+  max-height: 90dvh;
+  max-width: 90dvw;
+  padding: 0;
+  width: 40rem;
+}
+
+.dialog-content {
+  max-height: 90dvh;
+  max-width: 95dvw;
+  overflow: auto;
+  padding: 3rem 1rem;
+}
+
+.dialog-close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  z-index: 1;
+}
+
 dialog[open] {
   opacity: 1;
   transform: translateY(0);

@@ -1,35 +1,72 @@
 // JS is enabled
 document.querySelector('html').classList.add('js');
 
-//
-// Modals via <dialog>
-// super lightweight and accessible
-//
-const openModal = document.querySelectorAll('[data-open-modal]');
-const dialogs = document.querySelectorAll('dialog');
+/**
+ * Modals with the native <dialog> element
+ *
+ * Allows to load content from an external URL when opened.
+ * Suggested use with the Shopify Section Rendering API.
+ */
+class DialogOpener extends HTMLElement {
+  constructor() {
+    super();
 
-openModal.forEach((element) => {
-  element.addEventListener('click', () => {
-    document.getElementById(element.dataset.openModal).showModal();
-  });
-});
+    const button = this.querySelector('button');
 
-// Close the modals if you click on the background
-dialogs.forEach((dialog) => {
-  dialog.addEventListener('click', (event) => {
+    if (!button) return;
+    button.addEventListener('click', () => {
+      const dialog = document.querySelector(this.getAttribute('data-dialog'));
+      if (dialog) dialog.show(button);
+    });
+  }
+}
+
+customElements.define('dialog-opener', DialogOpener);
+
+class DialogModal extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.dialog = this.querySelector('dialog');
+    this.content = this.querySelector('.dialog-content');
+    this.load = this.getAttribute('data-load');
+    this.loaded = false;
+    this.loadingClass = 'loading';
+
+    this.dialog.addEventListener('click', this.handleClick.bind(this));
+  }
+
+  show() {
+    this.dialog.showModal();
+    this.loadContent();
+  }
+
+  handleClick(event) {
     const x = event.clientX;
     const y = event.clientY;
     const rect = event.target.getBoundingClientRect();
-    if (
-      x < rect.left ||
-      x > rect.right ||
-      y < rect.top ||
-      y > rect.bottom
-    ) {
-      dialog.close();
+    if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+      this.dialog.close();
     }
-  });
-});
+  }
+
+  loadContent() {
+    if (this.content && this.load && !this.loaded) {
+      this.content.classList.add(this.loadingClass);
+      fetch(this.load)
+        .then((response) => response.text())
+        .then((text) => {
+          this.content.innerHTML = text;
+          this.content.classList.remove(this.loadingClass);
+          this.loaded = true;
+        });
+    }
+  }
+}
+
+customElements.define('dialog-modal', DialogModal);
 
 /**
  * StickyHeader
