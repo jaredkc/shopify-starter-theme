@@ -1,89 +1,99 @@
+<script src="{{ 'product.js' | asset_url }}" defer="defer"></script>
+
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
 
-<div class="page-pad">
-  {%- assign product_intro = section.blocks | where: 'type', 'intro' %}
-  {%- for block in product_intro -%}
-    {% render 'product-intro', product: product, display_on: 'mobile' %}
-  {%- endfor -%}
+<product-info
+  id="MainProduct-{{ section.id }}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+>
+  <div class="page-pad">
+    {%- assign product_intro = section.blocks | where: 'type', 'intro' %}
+    {%- for block in product_intro -%}
+      {% render 'product-intro', product: product, display_on: 'mobile' %}
+    {%- endfor -%}
 
-  <div class="lg:grid lg:grid-cols-5 lg:gap-8">
-    <div class="text-center lg:col-span-3">
-      {% render 'product-gallery' %}
-    </div>
+    <div class="lg:grid lg:grid-cols-5 lg:gap-8">
+      <div class="text-center lg:col-span-3">
+        {% render 'product-gallery' %}
+      </div>
 
-    <div class="lg:col-span-2">
-      <div class="sticky space-y-4 copy top-8">
-        {%- assign product_form_id = 'product-form-' | append: section.id -%}
+      <div class="lg:col-span-2">
+        <div class="sticky space-y-4 copy top-8">
+          {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when '@app' -%}
-              {% render block %}
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                {% render block %}
 
-            {%- when 'intro' -%}
-              <div {{ block.shopify_attributes }}>
-                {% render 'product-intro', product: product, display_on: 'desktop' %}
-              </div>
-
-            {%- when 'title' -%}
-              <div class="product__title" {{ block.shopify_attributes }}>
-                <h1>{{ product.title | escape }}</h1>
-              </div>
-
-            {%- when 'price' -%}
-              <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                <p>
-                  {% if product.price_varies %}
-                    {{ product.price_min | money }} - {{ product.price_max | money }}
-                  {% else %}
-                    {{ product.price | money }}
-                  {% endif %}
-                </p>
-              </div>
-              <div {{ block.shopify_attributes }}>
-                {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
-                {%- form 'product', product, id: product_form_installment_id, class: 'installment' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                  {{ form | payment_terms }}
-                {%- endform -%}
-              </div>
-
-            {%- when 'quantity_select' -%}
-              <input
-                type="number"
-                name="quantity"
-                min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                  max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                {% endif %}
-                step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                form="{{ product_form_id }}"
-              >
-
-            {%- when 'variant_select' -%}
-              {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
-
-            {%- when 'buy_buttons' -%}
-              {%- render 'buy-buttons',
-                block: block,
-                product: product,
-                product_form_id: product_form_id,
-                section_id: section.id
-              -%}
-
-            {%- when 'description' -%}
-              {%- if product.description != blank -%}
-                <div class="rte" {{ block.shopify_attributes }}>
-                  {{ product.description }}
+              {%- when 'intro' -%}
+                <div {{ block.shopify_attributes }}>
+                  {% render 'product-intro', product: product, display_on: 'desktop' %}
                 </div>
-              {%- endif -%}
-          {%- endcase -%}
-        {%- endfor -%}
+
+              {%- when 'title' -%}
+                <div class="product__title" {{ block.shopify_attributes }}>
+                  <h1>{{ product.title | escape }}</h1>
+                </div>
+
+              {%- when 'price' -%}
+                <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <p>
+                    {% if product.price_varies %}
+                      {{ product.price_min | money }} - {{ product.price_max | money }}
+                    {% else %}
+                      {{ product.price | money }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div {{ block.shopify_attributes }}>
+                  {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+                  {%- form 'product', product, id: product_form_installment_id, class: 'installment' -%}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    {{ form | payment_terms }}
+                  {%- endform -%}
+                </div>
+
+              {%- when 'quantity_select' -%}
+                <input
+                  type="number"
+                  name="quantity"
+                  min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                  {% endif %}
+                  step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                  value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  form="{{ product_form_id }}"
+                >
+
+              {%- when 'variant_select' -%}
+                {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
+
+              {%- when 'buy_buttons' -%}
+                {%- render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  section_id: section.id
+                -%}
+
+              {%- when 'description' -%}
+                {%- if product.description != blank -%}
+                  <div class="rte" {{ block.shopify_attributes }}>
+                    {{ product.description }}
+                  </div>
+                {%- endif -%}
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </div>
-</div>
+</product-info>
 
 {% render 'schema-product', product: product %}
 
