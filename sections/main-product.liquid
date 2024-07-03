@@ -1,5 +1,6 @@
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-<section class="page-pad">
+
+<div class="page-pad">
   {%- assign product_intro = section.blocks | where: 'type', 'intro' %}
   {%- for block in product_intro -%}
     {% render 'product-intro', product: product, display_on: 'mobile' %}
@@ -47,7 +48,7 @@
                 {%- endform -%}
               </div>
 
-            {%- when 'quantity_selector' -%}
+            {%- when 'quantity_select' -%}
               <input
                 type="number"
                 name="quantity"
@@ -60,8 +61,8 @@
                 form="{{ product_form_id }}"
               >
 
-            {%- when 'variant_picker' -%}
-              {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+            {%- when 'variant_select' -%}
+              {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
 
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons',
@@ -82,7 +83,7 @@
       </div>
     </div>
   </div>
-</section>
+</div>
 
 {% render 'schema-product', product: product %}
 
@@ -123,30 +124,31 @@
       "limit": 1
     },
     {
-      "type": "quantity_selector",
-      "name": "t:sections.main-product.blocks.quantity_selector.name",
+      "type": "quantity_select",
+      "name": "t:sections.main-product.blocks.quantity_select.name",
       "limit": 1
     },
     {
-      "type": "variant_picker",
-      "name": "t:sections.main-product.blocks.variant_picker.name",
+      "type": "variant_select",
+      "name": "t:sections.main-product.blocks.variant_select.name",
       "limit": 1,
       "settings": [
         {
           "type": "select",
-          "id": "picker_type",
+          "id": "select_type",
+          "info": "Single variant selector. (Use Options select if your product(s) have multiple options)",
           "options": [
             {
               "value": "dropdown",
-              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
+              "label": "t:sections.main-product.blocks.variant_select.settings.select_type.options__1.label"
             },
             {
               "value": "button",
-              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+              "label": "t:sections.main-product.blocks.variant_select.settings.select_type.options__2.label"
             }
           ],
-          "default": "button",
-          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+          "default": "dropdown",
+          "label": "t:sections.main-product.blocks.variant_select.settings.select_type.label"
         }
       ]
     },

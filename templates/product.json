@@ -22,14 +22,14 @@
           "settings": {
           }
         },
-        "variant_picker": {
-          "type": "variant_picker",
+        "variant_select": {
+          "type": "variant_select",
           "settings": {
-            "picker_type": "button"
+            "select_type": "dropdown"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
+        "quantity_select": {
+          "type": "quantity_select",
           "settings": {
           }
         },
@@ -50,8 +50,8 @@
       "block_order": [
         "intro",
         "price",
-        "variant_picker",
-        "quantity_selector",
+        "variant_select",
+        "quantity_select",
         "recharge_subscriptions_subscription_widget_4HJdGb",
         "buy_buttons"
       ],

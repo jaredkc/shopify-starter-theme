@@ -11,7 +11,6 @@
   - product: {Object} product object.
   - block: {Object} passing the block information.
   - product_form_id: {String} Id of the product form to which the variant select is associated.
-  - update_url: {Boolean} whether or not to update url when changing variants. If false, the url isn't updated. Default: true (optional).
 
   Usage:
   {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
@@ -21,12 +20,9 @@
     id="variant-select-{{ section.id }}"
     data-section="{{ section.id }}"
     data-url="{{ product.url }}"
-    {% if update_url == false %}
-      data-update-url="false"
-    {% endif %}
     {{ block.shopify_attributes }}
   >
-    {%- if block.settings.picker_type == 'button' -%}
+    {%- if block.settings.select_type == 'button' -%}
       <fieldset>
         {%- for variant in product.variants -%}
           <label>
@@ -50,7 +46,7 @@
           </label>
         {%- endfor -%}
       </fieldset>
-    {%- elsif block.settings.picker_type == 'dropdown' -%}
+    {%- elsif block.settings.select_type == 'dropdown' -%}
       <label class="form-block">
         <span class="form-label">
           {%- for option in product.options_with_values -%}
@@ -65,9 +61,9 @@
               {%- if variant == product.selected_or_first_available_variant -%}
                 selected="selected"
               {%- endif -%}
-              {%- unless variant.available -%}
+              {% comment %} {%- unless variant.available -%}
                 disabled="disabled"
-              {%- endunless -%}
+              {%- endunless -%} {% endcomment %}
             >
               {{- variant.title }} - {{ variant.price | money }}
               {%- unless variant.available -%}

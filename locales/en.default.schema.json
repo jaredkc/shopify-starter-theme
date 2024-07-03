@@ -51,13 +51,13 @@
         "price": {
           "name": "Price"
         },
-        "quantity_selector": {
+        "quantity_select": {
           "name": "Quantity selector"
         },
-        "variant_picker": {
+        "variant_select": {
           "name": "Variant select",
           "settings": {
-            "picker_type": {
+            "select_type": {
               "label": "Type",
               "options__1": {
                 "label": "Dropdown"
