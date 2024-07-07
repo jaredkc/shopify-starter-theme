@@ -2,7 +2,7 @@
 
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
 
-<product-info
+<product-purchase
   id="MainProduct-{{ section.id }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
@@ -93,7 +93,7 @@
       </div>
     </div>
   </div>
-</product-info>
+</product-purchase>
 
 {% render 'schema-product', product: product %}
 

@@ -10,7 +10,6 @@ const PUB_SUB_EVENTS = {
 let subscribers = {};
 
 function subscribe(eventName, callback) {
-  console.log('SUBSCRIBE', eventName, callback);
   if (subscribers[eventName] === undefined) {
     subscribers[eventName] = [];
   }
@@ -25,7 +24,6 @@ function subscribe(eventName, callback) {
 }
 
 function publish(eventName, data) {
-  console.log('PUBLISH', eventName, data);
   if (subscribers[eventName]) {
     subscribers[eventName].forEach((callback) => {
       callback(data);
