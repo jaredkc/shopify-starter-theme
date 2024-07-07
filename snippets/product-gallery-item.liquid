@@ -1,0 +1,36 @@
+{% comment %}
+  Renders a single item in product media gallery.
+
+  Accepts:
+  - media: {Object} The media attached to the product
+
+  Usage:
+  {% render 'product-gallery-item', media: media %}
+{% endcomment %}
+
+<li class="border product-gallery__item product-gallery__{{ media.media_type }}" data-media-id="{{ media.id }}">
+  <figure>
+    {% case media.media_type %}
+      {% when 'image' %}
+        {{ media | image_url: width: 2048 | image_tag }}
+      {% when 'external_video' %}
+        <div class="iframe-video" style="--aspect-ratio: {{ 1 | divided_by: media.aspect_ratio | times: 100}}%">
+          {{ media | external_video_tag }}
+        </div>
+      {% when 'video' %}
+        {{ media | video_tag: controls: true }}
+      {% when 'model' %}
+        {{ media | model_viewer_tag }}
+      {% else %}
+        {{ media | media_tag }}
+    {% endcase %}
+    {% comment %} Image caption for alt text in parentheses {% endcomment %}
+    {%- if media.alt contains '(' -%}
+      {%- liquid
+        assign alt_text = media.alt | split: ')' | first
+        assign alt_text = alt_text | split: '(' | last
+      %}
+      <figcaption>{{ alt_text }}</figcaption>
+    {%- endif -%}
+  </figure>
+</li>

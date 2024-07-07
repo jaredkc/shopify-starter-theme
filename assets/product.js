@@ -42,11 +42,15 @@ if (!customElements.get('product-gallery')) {
       super();
     }
 
+    connectedCallback() {
+      this.gallery = this.querySelector('.product-gallery');
+    }
+
     setActiveMedia(mediaId) {
       const activeMedia = this.querySelector(`[data-media-id="${mediaId}"]`);
       if (!activeMedia) return;
-      this.prepend(activeMedia);
-      this.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      activeMedia.parentElement.firstChild !== activeMedia && activeMedia.parentElement.prepend(activeMedia);
+      this.gallery.scrollTo({ left: activeMedia.offsetLeft, behavior: 'smooth' });
     }
   }
 

@@ -1,31 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --c-text-light: theme('colors.gray.300');
-  --c-text-medium: theme('colors.gray.600');
-  --c-text-dark: theme('colors.gray.900');
-
-  --c-primary-light: theme('colors.blue.100');
-  --c-primary-medium: theme('colors.blue.600');
-  --c-primary-dark: theme('colors.blue.900');
-
-  --c-link-dark: theme('colors.blue.900');
-  --c-link: theme('colors.blue.600');
-
-  --c-border: theme('colors.gray.300');
-
-  --c-disabled: theme('colors.gray.500');
-
-  --c-success-bg: theme('colors.green.200');
-  --c-success: theme('colors.green.600');
-
-  --c-error-bg: theme('colors.red.200');
-  --c-error: theme('colors.red.600');
-
-  --duration-short: 100ms;
-  --duration-default: 200ms;
-  --duration-medium: 300ms;
-  --duration-long: 500ms;
-}

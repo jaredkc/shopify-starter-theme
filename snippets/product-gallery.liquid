@@ -8,40 +8,17 @@
   {% render 'product-gallery' %}
 {% endcomment %}
 
-<product-gallery class="product-gallery">
-  {%- if product.selected_or_first_available_variant.featured_media != null -%}
-    {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
-    <figure data-media-id="{{ featured_media.id }}">
-      {{ featured_media | image_url: width: 2048, height: 2048 | image_tag }}
-    </figure>
-  {%- endif -%}
+<product-gallery>
+  <ul class="product-gallery list-unstyled">
+    {%- if product.selected_or_first_available_variant.featured_media != null -%}
+      {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+      {% render 'product-gallery-item', media: featured_media %}
+    {%- endif -%}
 
-  {% for media in product.media %}
-    {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-      <figure class="product-gallery__{{ media.media_type }}" data-media-id="{{ media.id }}">
-        {% case media.media_type %}
-          {% when 'image' %}
-            {{ media | image_url: width: 2048, height: 2048 | image_tag }}
-          {% when 'external_video' %}
-            <div class="iframe-video" style="--aspect-ratio: {{ 1 | divided_by: media.aspect_ratio | times: 100}}%">
-              {{ media | external_video_tag }}
-            </div>
-          {% when 'video' %}
-            {{ media | video_tag: controls: true }}
-          {% when 'model' %}
-            {{ media | model_viewer_tag }}
-          {% else %}
-            {{ media | media_tag }}
-        {% endcase %}
-        {% comment %} Image caption for alt text in parentheses {% endcomment %}
-        {%- if media.alt contains '(' -%}
-          {%- liquid
-            assign alt_text = media.alt | split: ')' | first
-            assign alt_text = alt_text | split: '(' | last
-          %}
-          <figcaption class="mt-2 text-sm">{{ alt_text }}</figcaption>
-        {%- endif -%}
-      </figure>
-    {%- endunless -%}
-  {% endfor %}
+    {% for media in product.media %}
+      {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+        {% render 'product-gallery-item', media: media %}
+      {%- endunless -%}
+    {% endfor %}
+  </ul>
 </product-gallery>
