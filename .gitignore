@@ -5,6 +5,11 @@
 # For more information on this .gitignore files, see GitHub's
 # documentation: https://help.github.com/articles/ignoring-files/
 
+
+# Reference files #
+###################
+reference
+
 # Compiled source #
 ###################
 *.com
