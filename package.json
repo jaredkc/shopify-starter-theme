@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Using TailwindCSS in your Shopify theme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "shopify theme check",
     "dev": "concurrently \"shopify theme dev\" \"npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w\"",
     "shop-dev": "shopify theme dev",
     "tw-dev": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w",
