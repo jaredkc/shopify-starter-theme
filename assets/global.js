@@ -43,7 +43,6 @@ class DialogModal extends HTMLElement {
     this.loadContent();
   }
 
-
   // Close when clicked outside the dialog.
   // <form method="dialog"> used for close button.
   handleClose(event) {
