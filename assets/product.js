@@ -1,3 +1,6 @@
+/**
+ * Variant select
+ */
 if (!customElements.get('variant-select')) {
   class VariantSelect extends HTMLElement {
     constructor() {
@@ -36,6 +39,9 @@ if (!customElements.get('variant-select')) {
   customElements.define('variant-select', VariantSelect);
 }
 
+/**
+ * Product gallery
+ */
 if (!customElements.get('product-gallery')) {
   class ProductGallery extends HTMLElement {
     constructor() {
@@ -57,6 +63,9 @@ if (!customElements.get('product-gallery')) {
   customElements.define('product-gallery', ProductGallery);
 }
 
+/**
+ * Product purchase
+ */
 if (!customElements.get('product-purchase')) {
   class ProductPurchase extends HTMLElement {
     constructor() {
@@ -73,9 +82,7 @@ if (!customElements.get('product-purchase')) {
     handleOptionValueChange({ data: { event, target, variant } }) {
       if (!this.contains(event.target)) return;
 
-      const productUrl = target.dataset.productUrl || this.pendingRequestUrl || this.dataset.url;
-
-      this.updateURL(productUrl, target.value);
+      this.updateURL(this.dataset.url, target.value);
       this.updateMedia(variant.featured_media.id);
     }
 
