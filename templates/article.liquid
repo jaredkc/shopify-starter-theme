@@ -18,6 +18,10 @@
   </div>
 </article>
 
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
 {% if blog.comments_enabled? %}
   <h2>{{ number_of_comments }} comments</h2>
   {% paginate article.comments by 5 %}
