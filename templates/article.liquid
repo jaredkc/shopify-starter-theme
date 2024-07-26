@@ -1,14 +1,7 @@
-{% assign number_of_comments = article.comments_count %}
-{% if comment and comment.created_at %}
-  {% assign number_of_comments = article.comments_count %}
-{% endif %}
-
 <article role="article" class="max-w-4xl px-4 py-10 mx-auto sm:px-6 sm:py-12 lg:py-16 lg:px-8">
   <div class="text-center">
     <h1 class="text-4xl md:text-5xl">{{ article.title }}</h1>
     <p class="mt-2">
-      {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
-      {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
       {{ article.author }} @ {{ article.created_at }}
     </p>
   </div>
@@ -23,7 +16,7 @@
 </script>
 
 {% if blog.comments_enabled? %}
-  <h2>{{ number_of_comments }} comments</h2>
+  <h2>{{ article.comments_count }} comments</h2>
   {% paginate article.comments by 5 %}
     {% for comment in article.comments %}
       <div>
