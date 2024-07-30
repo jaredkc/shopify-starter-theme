@@ -13,15 +13,30 @@
           <tr>
             <td>
               <a href="{{ item.url | within: collections.all }}">
-                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                <img
+                  src="{{ item.image | image_url: width: 300 }}"
+                  class="cart-item__image"
+                  alt="{{ item.image.alt | escape }}"
+                  loading="lazy"
+                  width="150"
+                  height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
+                >
               </a>
             </td>
             <td>
-              <h3 class="m-0"><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+              <h3 class="m-0">
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+              </h3>
 
               {% unless item.product.has_only_default_variant %}
-              <p class="mt-1">{{ item.variant.title }}</p>
+                <p class="mt-1">{{ item.variant.title }}</p>
               {% endunless %}
+
+              {% if item.selling_plan_allocation %}
+                <p>
+                  {{ item.selling_plan_allocation.selling_plan.name }}
+                </p>
+              {% endif %}
 
               {%- assign property_size = item.properties | size -%}
 
@@ -54,7 +69,9 @@
             <td>
               {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
               {{ item.line_price | money }}
-              {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+              {% for discount in item.discounts -%}
+                {{- discount.title -}}
+              {%- endfor %}
             </td>
           </tr>
         {% endfor %}
