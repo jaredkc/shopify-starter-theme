@@ -47,14 +47,14 @@
         {%- endfor -%}
       </fieldset>
     {%- elsif block.settings.select_type == 'dropdown' -%}
-      <label class="form-block">
-        <span class="form-label">
+      <label class="field-block">
+        <span class="field-label">
           {%- for option in product.options_with_values -%}
             {{- option.name -}}
             {%- unless forloop.last %} / {% endunless -%}
           {%- endfor -%}
         </span>
-        <select name="id" class="form-select">
+        <select name="id" class="field-select">
           {%- for variant in product.variants -%}
             <option
               value="{{ variant.id }}"

@@ -7,14 +7,14 @@
   {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
       <div class="js-enabled">
-        <div class="form-block">
-          <label for="Option{{ option.position }}" class="form-label">{{ option.name }}</label>
+        <div class="field-block">
+          <label for="Option{{ option.position }}" class="field-label">{{ option.name }}</label>
           {%- comment -%}
             All inputs that have `name=options[Name]` will be picked up by
             ProductForm, registered as an option input, and made available
             at ProductForm.optionsInputs
           {%- endcomment -%}
-          <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="form-select">
+          <select id="Option{{ option.position }}" name="options[{{ option.name | escape }}]" class="field-select">
             {% for value in option.values %}
             <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
               {{ value }}
@@ -52,17 +52,17 @@
     registered as a quantity input. If a quantity input is not included, a
     default quantity of 1 is assumed.
   {%- endcomment -%}
-  <p class="form-block">
-    <label for="Quantity" class="form-label">{{ 'products.product.quantity' | t }}</label>
-    <input type="number" id="Quantity" name="quantity" value="1" min="1" class="form-input">
+  <p class="field-block">
+    <label for="Quantity" class="field-label">{{ 'products.product.quantity' | t }}</label>
+    <input type="number" id="Quantity" name="quantity" value="1" min="1" class="field-input">
   </p>
 
   {%- comment -%}
     Line Item property inputs with `name="properties[NAME]"` will be picked up
     by ProductForm and registered as a properties input.
-    <p class="form-block">
-      <label for="Engraving" class="form-label">Engraving</label>
-      <input type="text" id="Engraving" name="properties[Engraving]" class="form-input">
+    <p class="field-block">
+      <label for="Engraving" class="field-label">Engraving</label>
+      <input type="text" id="Engraving" name="properties[Engraving]" class="field-input">
     </p>
   {%- endcomment -%}
 

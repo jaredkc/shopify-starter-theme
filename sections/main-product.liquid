@@ -68,6 +68,7 @@
                   step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
                   value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
                   form="{{ product_form_id }}"
+                  class="field-input"
                 >
 
               {%- when 'variant_select' -%}

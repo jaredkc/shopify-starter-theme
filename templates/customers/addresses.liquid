@@ -38,129 +38,129 @@
             {% form 'customer_address', address %}
               <div data-address-fields class="address-form">
                 <div>
-                  <label for="AddressFirstName_{{ form.id }}" class="form-label">
+                  <label for="AddressFirstName_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.first_name' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[first_name]"
                     id="AddressFirstName_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.first_name }}"
                     autocapitalize="words"
                   >
                 </div>
                 <div>
-                  <label for="AddressLastName_{{ form.id }}" class="form-label">
+                  <label for="AddressLastName_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.last_name' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[last_name]"
                     id="AddressLastName_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.last_name }}"
                     autocapitalize="words"
                   >
                 </div>
                 <div>
-                  <label for="AddressCompany_{{ form.id }}" class="form-label">
+                  <label for="AddressCompany_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.company' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[company]"
                     id="AddressCompany_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.company }}"
                     autocapitalize="words"
                   >
                 </div>
                 <div>
-                  <label for="AddressAddress1_{{ form.id }}" class="form-label">
+                  <label for="AddressAddress1_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.address1' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[address1]"
                     id="AddressAddress1_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.address1 }}"
                     autocapitalize="words"
                   >
                 </div>
                 <div>
-                  <label for="AddressAddress2_{{ form.id }}" class="form-label">
+                  <label for="AddressAddress2_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.address2' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[address2]"
                     id="AddressAddress2_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.address2 }}"
                     autocapitalize="words"
                   >
                 </div>
                 <div>
-                  <label for="AddressCity_{{ form.id }}" class="form-label">
+                  <label for="AddressCity_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.city' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[city]"
                     id="AddressCity_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.city }}"
                     autocapitalize="words"
                   >
                 </div>
                 <div>
-                  <label for="AddressCountry_{{ form.id }}" class="form-label">
+                  <label for="AddressCountry_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.country' | t }}
                   </label>
                   <select
                     name="address[country]"
                     id="AddressCountry_{{ form.id }}"
-                    class="address-country-option form-select"
+                    class="address-country-option field-select"
                     data-form-id="{{ form.id }}"
                     data-default="{{ form.country }}"
                   ></select>
 
                   <div>
-                    <label for="AddressProvince_{{ form.id }}" class="form-label">
+                    <label for="AddressProvince_{{ form.id }}" class="field-label">
                       {{ 'customer.addresses.province' | t }}
                     </label>
                     <select
                       name="address[province]"
                       id="AddressProvince_{{ form.id }}"
-                      class="form-select"
+                      class="field-select"
                       data-default="{{ form.province }}"
                     ></select>
                   </div>
                 </div>
                 <div>
-                  <label for="AddressZip_{{ form.id }}" class="form-label">
+                  <label for="AddressZip_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.zip' | t }}
                   </label>
                   <input
                     type="text"
                     name="address[zip]"
                     id="AddressZip_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.zip }}"
                     autocapitalize="characters"
                   >
                 </div>
                 <div>
-                  <label for="AddressPhone_{{ form.id }}" class="form-label">
+                  <label for="AddressPhone_{{ form.id }}" class="field-label">
                     {{ 'customer.addresses.phone' | t }}
                   </label>
                   <input
                     type="tel"
                     name="address[phone]"
                     id="AddressPhone_{{ form.id }}"
-                    class="form-input"
+                    class="field-input"
                     value="{{ form.phone }}"
                     pattern="[0-9\-]*"
                   >
@@ -208,127 +208,127 @@
           {% form 'customer_address', customer.new_address %}
             <div data-address-fields class="address-form">
               <div>
-                <label for="AddressFirstNameNew" class="form-label">
+                <label for="AddressFirstNameNew" class="field-label">
                   {{ 'customer.addresses.first_name' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[first_name]"
                   id="AddressFirstNameNew"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.first_name }}"
                   autocapitalize="words"
                 >
               </div>
               <div>
-                <label for="AddressLastNameNew" class="form-label">
+                <label for="AddressLastNameNew" class="field-label">
                   {{ 'customer.addresses.last_name' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[last_name]"
                   id="AddressLastNameNew"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.last_name }}"
                   autocapitalize="words"
                 >
               </div>
               <div>
-                <label for="AddressCompanyNew" class="form-label">
+                <label for="AddressCompanyNew" class="field-label">
                   {{ 'customer.addresses.company' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[company]"
                   id="AddressCompanyNew"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.company }}"
                   autocapitalize="words"
                 >
               </div>
               <div>
-                <label for="AddressAddress1New" class="form-label">
+                <label for="AddressAddress1New" class="field-label">
                   {{ 'customer.addresses.address1' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[address1]"
                   id="AddressAddress1New"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.address1 }}"
                   autocapitalize="words"
                 >
               </div>
               <div>
-                <label for="AddressAddress2New" class="form-label">
+                <label for="AddressAddress2New" class="field-label">
                   {{ 'customer.addresses.address2' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[address2]"
                   id="AddressAddress2New"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.address2 }}"
                   autocapitalize="words"
                 >
               </div>
               <div>
-                <label for="AddressCityNew" class="form-label">
+                <label for="AddressCityNew" class="field-label">
                   {{ 'customer.addresses.city' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[city]"
                   id="AddressCityNew"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.city }}"
                   autocapitalize="words"
                 >
               </div>
               <div>
-                <label for="AddressCountryNew" class="form-label">
+                <label for="AddressCountryNew" class="field-label">
                   {{ 'customer.addresses.country' | t }}
                 </label>
                 <select
                   name="address[country]"
                   id="AddressCountryNew"
-                  class="form-select"
+                  class="field-select"
                   data-default="{{ form.country }}"
                 ></select>
               </div>
               <div>
-                <label for="AddressProvinceNew" class="form-label">
+                <label for="AddressProvinceNew" class="field-label">
                   {{ 'customer.addresses.province' | t }}
                 </label>
                 <select
                   name="address[province]"
                   id="AddressProvinceNew"
-                  class="form-select"
+                  class="field-select"
                   data-default="{{ form.province }}"
                 ></select>
               </div>
               <div>
-                <label for="AddressZipNew" class="form-label">
+                <label for="AddressZipNew" class="field-label">
                   {{ 'customer.addresses.zip' | t }}
                 </label>
                 <input
                   type="text"
                   name="address[zip]"
                   id="AddressZipNew"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.zip }}"
                   autocapitalize="characters"
                 >
               </div>
               <div>
-                <label for="AddressPhoneNew" class="form-label">
+                <label for="AddressPhoneNew" class="field-label">
                   {{ 'customer.addresses.phone' | t }}
                 </label>
                 <input
                   type="tel"
                   name="address[phone]"
                   id="AddressPhoneNew"
-                  class="form-input"
+                  class="field-input"
                   value="{{ form.phone }}"
                   pattern="[0-9\-]*"
                 >

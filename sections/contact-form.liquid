@@ -1,24 +1,32 @@
 {% form 'contact' %}
-  <div class="space-y-4">
+  <div class="max-w-md p-4 mx-auto space-y-4">
     {% if form.posted_successfully? %} Thank you for your contact {% endif %}
     {{ form.errors | default_errors }}
-    <div>
-      <label for="ContactFormName">name</label>
-      <input type="text" id="ContactFormName" name="contact[name]">
-    </div>
-    <div>
-      <label for="ContactFormEmail">email</label>
-      <input type="email" id="ContactFormEmail" name="contact[email]">
-    </div>
-    <div>
-      <label for="ContactFormPhone">phone</label>
-      <input type="tel" id="ContactFormPhone" name="contact[phone]">
-    </div>
-    <div>
-      <label for="ContactFormMessage">message</label>
-      <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
-    </div>
-    <input type="submit" value="send">
+    <p>
+      <label for="ContactFormName" class="field-label field-block">
+        Name
+        <input type="text" id="ContactFormName" name="contact[name]" class="field-input">
+      </label>
+    </p>
+    <p>
+      <label for="ContactFormEmail" class="field-label field-block">
+        Email
+        <input type="email" id="ContactFormEmail" name="contact[email]" class="field-input">
+      </label>
+    </p>
+    <p>
+      <label for="ContactFormPhone" class="field-label field-block">
+        Phone
+        <input type="tel" id="ContactFormPhone" name="contact[phone]" class="field-input">
+      </label>
+    </p>
+    <p>
+      <label for="ContactFormMessage" class="field-label field-block">
+        Message
+        <textarea rows="10" id="ContactFormMessage" name="contact[body]" class="field-textarea"></textarea>
+      </label>
+    </p>
+    <input type="submit" value="send" class="btn">
   </div>
 {% endform %}
 

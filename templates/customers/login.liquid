@@ -10,13 +10,13 @@
       {% form 'customer_login' %}
         {{ form.errors | default_errors }}
 
-        <p class="form-block">
-          <label for="CustomerEmail" class="form-label">{{ 'customer.login.email' | t }}</label>
+        <p class="field-block">
+          <label for="CustomerEmail" class="field-label">{{ 'customer.login.email' | t }}</label>
           <input
             type="email"
             name="customer[email]"
             id="CustomerEmail"
-            class="form-input{% if form.errors contains 'email' %} input-error{% endif %}"
+            class="field-input{% if form.errors contains 'email' %} input-error{% endif %}"
             spellcheck="false"
             autocomplete="off"
             autocapitalize="off"
@@ -25,13 +25,13 @@
         </p>
 
         {%- if form.password_needed -%}
-          <p class="form-block">
-            <label for="CustomerPassword" class="form-label">{{ 'customer.login.password' | t }}</label>
+          <p class="field-block">
+            <label for="CustomerPassword" class="field-label">{{ 'customer.login.password' | t }}</label>
             <input
               type="password"
               name="customer[password]"
               id="CustomerPassword"
-              class="form-input {% if form.errors contains 'password' %} input-error{% endif %}"
+              class="field-input {% if form.errors contains 'password' %} input-error{% endif %}"
             >
           </p>
         {%- endif -%}
@@ -64,13 +64,13 @@
           <span class="hidden reset-password-success"></span>
         {% endif %}
 
-        <p class="form-block">
-          <label for="RecoverEmail" class="form-label">{{ 'customer.recover_password.email' | t }}</label>
+        <p class="field-block">
+          <label for="RecoverEmail" class="field-label">{{ 'customer.recover_password.email' | t }}</label>
           <input
             type="email"
             name="email"
             id="RecoverEmail"
-            class="form-input"
+            class="field-input"
             spellcheck="false"
             autocomplete="off"
             autocapitalize="off"
