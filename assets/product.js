@@ -82,8 +82,15 @@ if (!customElements.get('product-purchase')) {
     handleOptionValueChange({ data: { event, target, variant } }) {
       if (!this.contains(event.target)) return;
 
+      this.updateVariantId(variant.id);
       this.updateURL(this.dataset.url, target.value);
       this.updateMedia(variant.featured_media.id);
+    }
+
+    updateVariantId(variantId) {
+      document.querySelectorAll('[name="id"]').forEach((input) => {
+        input.value = variantId;
+      });
     }
 
     updateURL(url, variantId) {
