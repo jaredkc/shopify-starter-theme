@@ -50,6 +50,7 @@ button {
 img {
   height: auto;
   max-width: 100%;
+  vertical-align: middle;
 }
 
 *,
@@ -467,10 +468,12 @@ select::-ms-expand {
 }
 
 .animate--zoom-in > img,
+.animate--zoom-in > picture,
 .animate--zoom-in > svg {
-  transition: scale var(--duration-short) linear;
+  display: block;
   scale: var(--zoom-in-ratio);
   transform: translateY(calc(var(--transform-out-ratio) * 1px));
+  transition: scale var(--duration-short) linear;
 }
 
 /**

@@ -1,0 +1,97 @@
+{%- liquid
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+-%}
+
+<div id="hero-image--{{ section.id }}" class="border">
+  <div class="relative w-full overflow-hidden animate--zoom-in">
+    <picture>
+      {%- if section.settings.desktop_image != blank -%}
+        <source
+          srcset="{{ section.settings.desktop_image | image_url: width: 1536 }}"
+          media="(min-width: 1536px)"
+        >
+        <source
+          srcset="{{ section.settings.desktop_image | image_url: width: 1280 }}"
+          media="(min-width: 1280px)"
+        >
+        <source
+          srcset="{{ section.settings.desktop_image | image_url: width: 1024 }}"
+          media="(min-width: 1024px)"
+        >
+        <source
+          srcset="{{ section.settings.desktop_image | image_url: width: 768 }}"
+          media="(min-width: 768px)"
+        >
+      {%- endif -%}
+      {%- if section.settings.mobile_image != blank -%}
+        <source
+          srcset="{{ section.settings.mobile_image | image_url: width: 640 }}"
+          media="(min-width: 640px)"
+        >
+        <source srcset="{{ section.settings.mobile_image | image_url: width: 390 }}">
+      {%- endif -%}
+      {%- if section.settings.desktop_image != blank -%}
+        {{
+          section.settings.desktop_image
+          | image_url: width: 3840
+          | image_tag: widths: null, srcset: null, class: 'object-cover w-full h-full', fetchpriority: fetch_priority
+        }}
+      {%- elsif section.settings.mobile_image != blank -%}
+        {{
+          section.settings.mobile_image
+          | image_url: width: 3840
+          | image_tag: widths: null, srcset: null, class: 'object-cover w-full h-full', fetchpriority: fetch_priority
+        }}
+
+      {%- else -%}
+        {{ 'hero-apparel-2' | placeholder_svg_tag: 'object-cover w-full h-full' }}
+      {%- endif -%}
+    </picture>
+    {% if section.settings.link != blank %}
+      <a href="{{ section.settings.link }}" class="absolute inset-0">
+        <span class="sr-only">{{ section.settings.link_text }}</span>
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero image",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Image link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text for accessibility",
+      "default": "Learn more"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero image"
+    }
+  ]
+}
+{% endschema %}
