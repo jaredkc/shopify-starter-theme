@@ -14,6 +14,7 @@
               id="product-grid"
               data-id="{{ section.id }}"
               class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
+              role="list"
             >
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
