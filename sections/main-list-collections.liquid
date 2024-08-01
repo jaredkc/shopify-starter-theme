@@ -1,8 +1,8 @@
-<div class="">
+<div class="page-width">
   <h1>{{ section.settings.title }}</h1>
   {%- paginate collections by 16 -%}
     <ul
-      class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
+      class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
       role="list"
     >
       {%- for collection in collections -%}
@@ -42,7 +42,7 @@
             {%- endif -%}
           </a>
           {%- if collection.featured_image != null -%}
-            <h2 class='text-base'>
+            <h2 class="text-base">
               <a href="{{ collection.url }}">
                 {{ collection.title | escape }}
               </a>

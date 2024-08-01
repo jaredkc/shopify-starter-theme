@@ -9,7 +9,7 @@
   data-update-url="true"
   data-url="{{ product.url }}"
 >
-  <div class="page-pad">
+  <div class="page-width">
     {%- assign product_intro = section.blocks | where: 'type', 'intro' %}
     {%- for block in product_intro -%}
       {% render 'product-intro', product: product, display_on: 'mobile' %}

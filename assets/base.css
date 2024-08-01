@@ -94,7 +94,7 @@ img {
 /**
  * Common layout
  */
-.page-pad {
+.page-width {
   padding-left: var(--page-pad);
   padding-right: var(--page-pad);
 }
