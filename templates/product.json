@@ -58,13 +58,6 @@
       "settings": {
       }
     },
-    "recommendations": {
-      "type": "product-recommendations",
-      "settings": {
-        "show_product_recommendations": true,
-        "heading": "You might also like"
-      }
-    },
     "1715788398f5a9d7ec": {
       "type": "apps",
       "blocks": {
@@ -80,11 +73,18 @@
       ],
       "settings": {
       }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_product_recommendations": true,
+        "heading": "You might also like"
+      }
     }
   },
   "order": [
     "main",
-    "recommendations",
-    "1715788398f5a9d7ec"
+    "1715788398f5a9d7ec",
+    "recommendations"
   ]
 }
