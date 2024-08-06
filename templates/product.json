@@ -61,7 +61,7 @@
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "show_product_recommendations": false,
+        "show_product_recommendations": true,
         "heading": "You might also like"
       }
     },
