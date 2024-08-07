@@ -95,21 +95,21 @@ img {
  * Common layout
  */
 .page-width {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: var(--page-pad);
   padding-right: var(--page-pad);
 }
 
 .content-sm {
-  max-width: 40rem; /* 640px */
+  max-width: 30rem; /* 480px */
 }
 .content-md {
-  max-width: 46rem; /* 736px */
+  max-width: 42.5rem; /* 680 */
 }
 .content-lg {
   max-width: 50rem; /* 800px */
-}
-.content-xl {
-  max-width: 70rem; /* 1120px */
 }
 
 /**
