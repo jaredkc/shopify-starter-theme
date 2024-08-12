@@ -1,0 +1,69 @@
+{% comment %}
+  Renders an article card for a given blog with settings to either show the image or not.
+
+  Accepts:
+  - blog: {Object} Blog object
+  - article: {Object} Article object
+  - show_date: {String} The setting either show the article date or not. If it's not included it will not show the image by default
+  - show_author: {String} The setting either show the article author or not. If it's not included it will not show the author by default
+  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+
+  Usage:
+  {% render 'article-card' blog: blog, article: article %}
+{% endcomment %}
+
+{%- if article and article != empty -%}
+  <div class="card article-card">
+    <a
+      href="{{ article.url }}"
+      class="flex items-center justify-center border aspect-square bg-slate-50 card__image"
+    >
+      {%- if article.image -%}
+        {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+        <img
+          srcset="
+            {%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if article.image.src.width >= 360 -%}{{ article.image.src | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if article.image.src.width >= 533 -%}{{ article.image.src | image_url: width: 533 }} 533w,{%- endif -%}
+            {%- if article.image.src.width >= 720 -%}{{ article.image.src | image_url: width: 720 }} 720w,{%- endif -%}
+            {%- if article.image.src.width >= 1000 -%}{{ article.image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+            {%- if article.image.src.width >= 1500 -%}{{ article.image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ article.image.src | image_url }} {{ article.image.src.width }}w
+          "
+          src="{{ article.image.src | image_url: width: 533 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+          alt="{{ article.image.src.alt | escape }}"
+          {% unless lazy_load == false %}
+            loading="lazy"
+          {% endunless %}
+          width="{{ article.image.width }}"
+          height="{{ article.image.height }}"
+          class="object-contain aspect-square"
+        >
+        {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+      {%- else -%}
+        <h3 class="w-full p-4 card__heading">
+          {{ article.title | truncate: 50 | escape }}
+        </h3>
+      {%- endif -%}
+    </a>
+    <div class="px-4 py-2 card__content">
+      {%- if article.image != null -%}
+        <h3 class="card__heading">
+          <a href="{{ article.url }}">
+            {{ article.title | truncate: 50 | escape }}
+          </a>
+        </h3>
+      {%- endif -%}
+      {%- if show_author -%}
+        <span>{{ article.author }}</span>
+      {%- endif -%}
+      {%- if show_date and show_author %}
+        &middot;
+      {% endif -%}
+      {%- if show_date -%}
+        <span>{{ article.published_at | time_tag: format: 'date' }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

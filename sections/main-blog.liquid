@@ -1,0 +1,52 @@
+{%- paginate blog.articles by 12 -%}
+  <div class="page-width">
+    <h1>
+      {{ blog.title | escape }}
+    </h1>
+
+    <ul
+      class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
+      role="list"
+    >
+      {%- for article in blog.articles -%}
+        <li>
+          {%- render 'article-card',
+            article: article,
+            media_height: section.settings.image_height,
+            media_aspect_ratio: article.image.aspect_ratio,
+            show_image: section.settings.show_image,
+            show_date: section.settings.show_date,
+            show_author: section.settings.show_author,
+            show_excerpt: true
+          -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {% if paginate.pages > 1 %}
+      {{ paginate | default_pagination }}
+    {% endif %}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    }
+  ]
+}
+{% endschema %}

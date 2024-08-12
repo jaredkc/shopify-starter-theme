@@ -12,10 +12,10 @@
   {% render 'product-card', product: product, show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 {%- if product and product != empty -%}
-  <div class="product-card">
+  <div class="card product-card">
     <a
       href="{{ product.url }}"
-      class="flex items-center justify-center border aspect-square bg-slate-50 product-card__image"
+      class="flex items-center justify-center border aspect-square bg-slate-50 card__image"
     >
       {%- if product.featured_media -%}
         {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
@@ -41,14 +41,14 @@
         >
         {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
       {%- else -%}
-        <h3 class="w-full p-4">
+        <h3 class="w-full p-4 card__heading">
           {{ product.title | escape }}
         </h3>
       {%- endif -%}
     </a>
-    <div class="px-4 py-2 product-card__content">
+    <div class="px-4 py-2 card__content">
       {%- if product.featured_media != null -%}
-        <h3>
+        <h3 class="card__heading">
           <a href="{{ product.url }}">
             {{ product.title | escape }}
           </a>
@@ -117,11 +117,11 @@
     </div>
   </div>
 {%- else -%}
-  <div class="product-card">
-    <div class="flex items-center justify-center border aspect-square bg-slate-50 product-card__image">
+  <div class="card product-card">
+    <div class="flex items-center justify-center border aspect-square bg-slate-50 card__image">
       {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
     </div>
-    <div class="px-4 py-2 product-card__content">
+    <div class="px-4 py-2 card__content">
       <h3>
         <a role="link" aria-disabled="true">
           {{ 'onboarding.product_title' | t }}
