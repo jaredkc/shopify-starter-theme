@@ -26,6 +26,12 @@
 
     {{ content_for_header }}
 
+    {% style %}
+      :root {
+        --page-width: {{ settings.page_width }}px;
+      }
+    {% endstyle %}
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
 
