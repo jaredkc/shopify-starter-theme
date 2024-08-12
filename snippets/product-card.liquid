@@ -2,68 +2,68 @@
   Renders a product card
 
   Accepts:
-  - card_product: {Object} Product Liquid object (optional)
+  - product: {Object} Product Liquid object (optional)
   - show_vendor: {Boolean} Show the product vendor. Default: false
   - show_rating: {Boolean} Show the product rating. Default: false
   - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
   - section_id: {String} The ID of the section that contains this card.
 
   Usage:
-  {% render 'card-product', show_vendor: section.settings.show_vendor %}
+  {% render 'product-card', product: product, show_vendor: section.settings.show_vendor %}
 {% endcomment %}
-{%- if card_product and card_product != empty -%}
+{%- if product and product != empty -%}
   <div class="product-card">
     <a
-      href="{{ card_product.url }}"
+      href="{{ product.url }}"
       class="flex items-center justify-center border aspect-square bg-slate-50 product-card__image"
     >
-      {%- if card_product.featured_media -%}
+      {%- if product.featured_media -%}
         {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
         <img
           srcset="
-            {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
-            {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
-            {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
-            {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
-            {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
-            {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
-            {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
+            {%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+            {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+            {%- if product.featured_media.width >= 940 -%}{{ product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+            {%- if product.featured_media.width >= 1066 -%}{{ product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+            {{ product.featured_media | image_url }} {{ product.featured_media.width }}w
           "
-          src="{{ card_product.featured_media | image_url: width: 533 }}"
+          src="{{ product.featured_media | image_url: width: 533 }}"
           sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-          alt="{{ card_product.featured_media.alt | escape }}"
+          alt="{{ product.featured_media.alt | escape }}"
           {% unless lazy_load == false %}
             loading="lazy"
           {% endunless %}
-          width="{{ card_product.featured_media.width }}"
-          height="{{ card_product.featured_media.height }}"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
           class="object-contain aspect-square"
         >
         {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
       {%- else -%}
         <h3 class="w-full p-4">
-          {{ card_product.title | escape }}
+          {{ product.title | escape }}
         </h3>
       {%- endif -%}
     </a>
     <div class="px-4 py-2 product-card__content">
-      {%- if card_product.featured_media != null -%}
+      {%- if product.featured_media != null -%}
         <h3>
-          <a href="{{ card_product.url }}">
-            {{ card_product.title | escape }}
+          <a href="{{ product.url }}">
+            {{ product.title | escape }}
           </a>
         </h3>
       {%- endif -%}
 
       {%- if show_vendor -%}
         <span class="sr-only">{{ 'accessibility.vendor' | t }}</span>
-        <div>{{ card_product.vendor }}</div>
+        <div>{{ product.vendor }}</div>
       {%- endif -%}
 
-      {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
+      {%- if show_rating and product.metafields.reviews.rating.value != blank -%}
         {% liquid
           assign rating_decimal = 0
-          assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
+          assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
           if decimal >= 0.3 and decimal <= 0.7
             assign rating_decimal = 0.5
           elsif decimal > 0.7
@@ -72,42 +72,42 @@
         %}
         <div
           role="img"
-          aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
+          aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
         >
           <span
             aria-hidden="true"
             class="rating-star"
-            style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+            style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
           ></span>
         </div>
         <p class="rating-text">
           <span aria-hidden="true">
-            {{- card_product.metafields.reviews.rating.value }} /
-            {{ card_product.metafields.reviews.rating.value.scale_max -}}
+            {{- product.metafields.reviews.rating.value }} /
+            {{ product.metafields.reviews.rating.value.scale_max -}}
           </span>
         </p>
         <p class="rating-count">
-          <span aria-hidden="true">({{ card_product.metafields.reviews.rating_count }})</span>
+          <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
           <span class="sr-only">
-            {{- card_product.metafields.reviews.rating_count }}
+            {{- product.metafields.reviews.rating_count }}
             {{ 'accessibility.total_reviews' | t -}}
           </span>
         </p>
       {%- endif -%}
 
-      {% render 'price', product: card_product %}
+      {% render 'price', product: product %}
 
       <div class="card__badge">
-        {%- if card_product.available == false -%}
+        {%- if product.available == false -%}
           <span
-            id="Badge-{{ section_id }}-{{ card_product.id }}"
+            id="Badge-{{ section_id }}-{{ product.id }}"
             class="badge badge--bottom-left"
           >
             {{- 'products.product.sold_out' | t -}}
           </span>
-        {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+        {%- elsif product.compare_at_price > product.price and product.available -%}
           <span
-            id="Badge-{{ section_id }}-{{ card_product.id }}"
+            id="Badge-{{ section_id }}-{{ product.id }}"
             class="badge badge--bottom-left"
           >
             {{- 'products.product.on_sale' | t -}}

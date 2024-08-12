@@ -21,8 +21,8 @@
                 {%- assign lazy_load = true -%}
               {%- endif -%}
               <li>
-                {% render 'card-product',
-                  card_product: product,
+                {% render 'product-card',
+                  product: product,
                   show_vendor: section.settings.show_vendor,
                   show_rating: section.settings.show_rating,
                   lazy_load: lazy_load,

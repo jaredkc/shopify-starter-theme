@@ -34,8 +34,8 @@
   <ul class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled">
     {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
       <li>
-        {% render 'card-product',
-          card_product: product,
+        {% render 'product-card',
+          product: product,
           show_vendor: section.settings.show_vendor,
           show_rating: section.settings.show_rating,
           lazy_load: true,
