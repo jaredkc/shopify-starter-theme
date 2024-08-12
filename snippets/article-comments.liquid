@@ -1,0 +1,171 @@
+{% comment %}
+  Renders comments for an article.
+
+  Accepts:
+  - article: {Object} article object.
+
+  Usage:
+  {% render 'article-comments', article: article %}
+{% endcomment %}
+<div id="comments">
+  {%- if article.comments_count > 0 -%}
+    {%- assign anchor_id = '#Comments-' | append: article.id -%}
+    <h2 id="{{ anchor_id }}" tabindex="-1">
+      {{ 'blogs.article.comments' | t: count: article.comments_count }}
+    </h2>
+    {% paginate article.comments by 5 %}
+      <div>
+        {%- if comment.status == 'pending' and comment.content -%}
+          <article id="{{ comment.id }}">
+            {{ comment.content }}
+            <footer>
+              <span>{{ comment.author }}</span>
+            </footer>
+          </article>
+        {%- endif -%}
+
+        {%- for comment in article.comments -%}
+          <article id="{{ comment.id }}">
+            {{ comment.content }}
+            <footer>
+              <span>{{ comment.author }}</span> &middot;
+              <span>
+                {{- comment.created_at | time_tag: format: 'date' -}}
+              </span>
+            </footer>
+          </article>
+        {%- endfor -%}
+        {% render 'pagination', paginate: paginate, anchor: anchor_id %}
+      </div>
+    {% endpaginate %}
+  {%- endif -%}
+  {% form 'new_comment', article %}
+    {%- liquid
+      assign post_message = 'blogs.article.success'
+      if blog.moderated? and comment.status == 'unapproved'
+        assign post_message = 'blogs.article.success_moderated'
+      endif
+    -%}
+    <h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
+    {%- if form.errors -%}
+      <div class="errors" role="alert">
+        <h3 tabindex="-1" autofocus>
+          {{ 'templates.contact.form.error_heading' | t }}
+        </h3>
+        <ul>
+          {%- for field in form.errors -%}
+            <li>
+              <a href="#CommentForm-{{ field }}">
+                {%- if form.errors.translated_fields[field] contains 'author' -%}
+                  {{ 'blogs.article.name' | t }}
+                {%- elsif form.errors.translated_fields[field] contains 'body' -%}
+                  {{ 'blogs.article.message' | t }}
+                {%- else -%}
+                  {{ form.errors.translated_fields[field] }}
+                {%- endif -%}
+                {{ form.errors.messages[field] }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- elsif form.posted_successfully? -%}
+      <div role="status">
+        <h3 tabindex="-1" autofocus>
+          {{ post_message | t }}
+        </h3>
+      </div>
+    {%- endif -%}
+
+    <div
+      class="flex flex-col gap-4{% if blog.moderated? == false %} article-template__comments-fields{% endif %}"
+    >
+      <div class="field-block">
+        <label class="field-label" for="CommentForm-author">
+          {{- 'blogs.article.name' | t }}
+          <span aria-hidden="true">*</span>
+        </label>
+        <input
+          type="text"
+          name="comment[author]"
+          id="CommentForm-author"
+          class="field-input"
+          autocomplete="name"
+          value="{{ form.author }}"
+          aria-required="true"
+          required
+          {% if form.errors contains 'author' %}
+            aria-invalid="true"
+            aria-describedby="CommentForm-author-error"
+          {% endif %}
+          placeholder="{{ 'blogs.article.name' | t }}"
+        >
+        {%- if form.errors contains 'author' -%}
+          <small id="CommentForm-author-error">
+            {{- 'blogs.article.name' | t }}
+            {{ form.errors.messages.author }}.
+          </small>
+        {%- endif -%}
+      </div>
+      <div class="field-block">
+        <label class="field-label" for="CommentForm-email">
+          {{- 'blogs.article.email' | t }}
+          <span aria-hidden="true">*</span></label
+        >
+        <input
+          type="email"
+          name="comment[email]"
+          id="CommentForm-email"
+          autocomplete="email"
+          class="field-input"
+          value="{{ form.email }}"
+          autocorrect="off"
+          autocapitalize="off"
+          aria-required="true"
+          required
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="CommentForm-email-error"
+          {% endif %}
+          placeholder="{{ 'blogs.article.email' | t }}"
+        >
+        {%- if form.errors contains 'email' -%}
+          <small id="CommentForm-email-error" class="field-help field-error">
+            {{- 'blogs.article.email' | t }}
+            {{ form.errors.messages.email }}.
+          </small>
+        {%- endif -%}
+      </div>
+
+      <div class="field-block">
+        <label class="field-label" for="CommentForm-body">
+          {{- 'blogs.article.message' | t }}
+          <span aria-hidden="true">*</span></label
+        >
+        <textarea
+          rows="5"
+          name="comment[body]"
+          id="CommentForm-body"
+          class="field-textarea"
+          aria-required="true"
+          required
+          {% if form.errors contains 'body' %}
+            aria-invalid="true"
+            aria-describedby="CommentForm-body-error"
+          {% endif %}
+          placeholder="{{ 'blogs.article.message' | t }}"
+        >{{ form.body }}</textarea>
+      </div>
+      {%- if form.errors contains 'body' -%}
+        <small id="CommentForm-body-error">
+          {{- 'blogs.article.message' | t }}
+          {{ form.errors.messages.body }}.
+        </small>
+      {%- endif -%}
+    </div>
+    {%- if blog.moderated? -%}
+      <p>{{ 'blogs.article.moderated' | t }}</p>
+    {%- endif -%}
+    <input type="submit" class="btn" value="{{ 'blogs.article.post' | t }}">
+  {% endform %}
+</div>

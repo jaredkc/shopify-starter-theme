@@ -72,6 +72,12 @@ img {
   vertical-align: middle;
 }
 
+pre {
+  background-color: rgba(0, 0, 0, 10%);
+  padding: 0.5rem;
+  overflow: scroll;
+}
+
 *,
 ::before,
 ::after {
@@ -102,6 +108,12 @@ img {
   padding-right: var(--page-pad);
 }
 
+.content-sm,
+.content-md,
+.content-lg {
+  margin-left: auto;
+  margin-right: auto;
+}
 .content-sm {
   max-width: 30rem; /* 480px */
 }
@@ -311,6 +323,16 @@ label:has(.field-radio) {
   padding-bottom: 0.25rem;
 }
 
+.field-error {
+  color: var(--input-error);
+}
+.field-input[aria-invalid],
+.field-textarea[aria-invalid],
+.field-select[aria-invalid] {
+  border-color: var(--input-error);
+  background-color: var(--input-error-background);
+}
+
 /* Shared focus styles */
 .btn:active,
 .btn:focus,
@@ -362,22 +384,18 @@ legend {
  */
 .errors {
   background-color: var(--c-error-bg);
-  border-top-color: var(--c-error);
-  border-top-style: solid;
-  border-top-width: 3px;
-  padding: 0.8rem 1.2rem;
-  text-align: left;
+  border-left-color: var(--c-error);
+  border-left-style: solid;
+  border-left-width: 3px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 1.2rem;
 }
-
-.errors ul {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 0;
+.errors *:first-child {
+  margin-top: 0;
 }
-
-.errors p,
-.errors li {
-  margin: 0.5em 0;
+.errors *:last-child {
+  margin-bottom: 0;
 }
 
 /**
