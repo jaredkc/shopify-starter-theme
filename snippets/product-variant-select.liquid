@@ -54,7 +54,7 @@
             {%- unless forloop.last %} / {% endunless -%}
           {%- endfor -%}
         </span>
-        <select name="id" class="field-select">
+        <select name="id" class="field-select" form="{{ product_form_id }}">
           {%- for variant in product.variants -%}
             <option
               value="{{ variant.id }}"
