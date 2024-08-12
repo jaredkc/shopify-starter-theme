@@ -15,7 +15,7 @@
   <div class="card product-card">
     <a
       href="{{ product.url }}"
-      class="flex items-center justify-center border aspect-square bg-slate-50 card__image"
+      class="flex items-center justify-center border aspect-square card__image"
     >
       {%- if product.featured_media -%}
         {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
@@ -118,7 +118,7 @@
   </div>
 {%- else -%}
   <div class="card product-card">
-    <div class="flex items-center justify-center border aspect-square bg-slate-50 card__image">
+    <div class="flex items-center justify-center border aspect-square card__image">
       {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
     </div>
     <div class="px-4 py-2 card__content">
