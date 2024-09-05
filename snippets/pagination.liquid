@@ -21,7 +21,7 @@
             aria-label="{{ 'general.pagination.previous' | t }}"
             class="inline-flex items-center justify-center w-8 h-8 mr-4"
           >
-            {% render 'icon-chevron-left' %}
+            {{- 'icon-chevron-left.svg' | inline_asset_content -}}
           </a>
         </li>
       {%- endif -%}
@@ -61,7 +61,7 @@
             aria-label="{{ 'general.pagination.next' | t }}"
             class="inline-flex items-center justify-center w-8 h-8 ml-4"
           >
-            {% render 'icon-chevron-right' %}
+            {{- 'icon-chevron-right.svg' | inline_asset_content -}}
           </a>
         </li>
       {%- endif -%}

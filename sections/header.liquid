@@ -40,12 +40,12 @@
       <dialog-opener data-dialog="#search-dialog">
         <button class="btn-link">
           <span class="sr-only">Open Search</span>
-          {%- render 'icon-search' -%}
+          {{- 'icon-search.svg' | inline_asset_content -}}
         </button>
       </dialog-opener>
       {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
-          {%- render 'icon-user' -%}
+          {{- 'icon-user.svg' | inline_asset_content -}}
           <span class="sr-only">
             {%- liquid
               if customer
@@ -58,7 +58,7 @@
         </a>
       {%- endif -%}
       <a href="{{ routes.cart_url }}">
-        {%- render 'icon-cart' -%}
+        {{- 'icon-cart.svg' | inline_asset_content -}}
         <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
       </a>
     </nav>
