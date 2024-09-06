@@ -1,0 +1,195 @@
+{% liquid
+  assign justify_items = 'justify-center'
+  if section.settings.text_align == 'text-left'
+    assign justify_items = 'justify-start'
+  elsif section.settings.text_align == 'text-right'
+    assign justify_items = 'justify-end'
+  endif
+%}
+<div class="{{ section.settings.background }} section-pt-{{ section.settings.padding_top }} section-pb-{{ section.settings.padding_bottom }}{% if section.settings.border %} section-border{% endif %}">
+  <div class="page-width {{ section.settings.text_align }}">
+    {%- if section.settings.subtitle != blank -%}
+      <h2 class="m-0 text-caps">{{ section.settings.subtitle }}</h2>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h1 class="m-0">{{ section.settings.title }}</h1>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="mt-4 text-pretty rte">
+        {{ section.settings.text }}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank or section.settings.secondary_button_label != blank -%}
+      <div class="flex items-center gap-4 mt-8 bg-transparent {{ justify_items }}">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_button_label != blank -%}
+          <a href="{{ section.settings.secondary_button_link }}" class="btn btn--outlined">
+            {{ section.settings.secondary_button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Text block",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Copy Block Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description",
+      "default": "<p>Text block description...</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "Button(s)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Learn more",
+      "label": "Primary button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "default": "Learn more",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "text-center",
+      "options": [
+        {
+          "label": "Text left",
+          "value": "text-left"
+        },
+        {
+          "label": "Text center",
+          "value": "text-center"
+        },
+        {
+          "label": "Text right",
+          "value": "text-right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "section-full",
+          "label": "Full width"
+        },
+        {
+          "value": "page-width",
+          "label": "Page width"
+        }
+      ],
+      "default": "section-full"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Padding top",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "checkbox",
+      "id": "border",
+      "label": "Show section border",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text block"
+    }
+  ]
+}
+{% endschema %}

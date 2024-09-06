@@ -55,6 +55,11 @@ a {
 a:hover {
   color: var(--c-primary-dark);
 }
+a:not([href]),
+a[href=''] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 
 input,
 select,
@@ -100,6 +105,50 @@ pre {
 /**
  * Common layout
  */
+.section-pt-sm {
+  padding-top: 2rem;
+}
+.section-pt-md {
+  padding-top: 3rem;
+}
+.section-pt-lg {
+  padding-top: 4rem;
+}
+.section-pb-sm {
+  padding-bottom: 2rem;
+}
+.section-pb-md {
+  padding-bottom: 3rem;
+}
+.section-pb-lg {
+  padding-bottom: 4rem;
+}
+
+.section-border {
+  border-bottom: 1px solid var(--c-border);
+}
+
+@media (min-width: 1024px) {
+  .section-pt-sm {
+    padding-top: 3rem;
+  }
+  .section-pt-md {
+    padding-top: 4.5rem;
+  }
+  .section-pt-lg {
+    padding-top: 6rem;
+  }
+  .section-pb-sm {
+    padding-bottom: 3rem;
+  }
+  .section-pb-md {
+    padding-bottom: 4.5rem;
+  }
+  .section-pb-lg {
+    padding-bottom: 6rem;
+  }
+}
+
 .page-width {
   max-width: var(--page-width, 1440px);
   margin-left: auto;
@@ -108,20 +157,64 @@ pre {
   padding-right: var(--page-pad);
 }
 
-.content-sm,
-.content-md,
-.content-lg {
-  margin-left: auto;
-  margin-right: auto;
+.content-2xl {
+  max-width: 70rem; /* 1120px */
 }
-.content-sm {
-  max-width: 30rem; /* 480px */
-}
-.content-md {
-  max-width: 42.5rem; /* 680 */
+.content-xl {
+  max-width: 60rem; /* 960px */
 }
 .content-lg {
   max-width: 50rem; /* 800px */
+}
+.content-md {
+  max-width: 46rem; /* 736px */
+}
+.content-sm {
+  max-width: 40rem; /* 640px */
+}
+
+/**
+ * RTE - Wrapper for rich text editor
+ */
+.rte h1,
+.rte h2,
+.rte h3,
+.rte h4,
+.rte h5,
+.rte h6 {
+  margin-top: 1.25em;
+  margin-bottom: 1rem;
+}
+
+.rte > p:first-child {
+  margin-top: 0;
+}
+
+.rte > p:last-child {
+  margin-bottom: 0;
+}
+
+.rte ul,
+.rte ol {
+  padding-left: 1.5rem;
+}
+
+.rte li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  list-style: inherit;
+}
+
+/* Account for editor adding paragraphs to li */
+.rte li > p:first-child {
+  margin-top: 0;
+}
+.rte li > p:last-child {
+  margin-bottom: 0;
+}
+
+.rte hr {
+  margin: 3em 0;
 }
 
 /**
@@ -191,6 +284,7 @@ pre {
   border-width: var(--input-border-width);
   color: var(--input-accent-light);
   cursor: pointer;
+  display: inline-block;
   font-family: inherit;
   font-size: var(--input-text-md);
   line-height: var(--input-line-height);
