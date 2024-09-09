@@ -20,7 +20,7 @@
       </div>
     {%- endif -%}
     {%- if section.settings.button_label != blank or section.settings.secondary_button_label != blank -%}
-      <div class="flex items-center gap-4 mt-8 bg-transparent {{ justify_items }}">
+      <div class="flex items-center gap-4 mt-8 {{ justify_items }}">
         {%- if section.settings.button_label != blank -%}
           <a href="{{ section.settings.button_link }}" class="btn">
             {{ section.settings.button_label | escape }}
@@ -55,7 +55,7 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Copy Block Title"
+      "default": "Text Block Title"
     },
     {
       "type": "richtext",
