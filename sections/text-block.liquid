@@ -1,11 +1,3 @@
-{% liquid
-  assign justify_items = 'justify-center'
-  if section.settings.content_alignment == 'text-left'
-    assign justify_items = 'justify-start'
-  elsif section.settings.content_alignment == 'text-right'
-    assign justify_items = 'justify-end'
-  endif
-%}
 <div class="{{ section.settings.background }} section-pt-{{ section.settings.padding_top }} section-pb-{{ section.settings.padding_bottom }}{% if section.settings.border %} section-border{% endif %}">
   <div class="page-width {{ section.settings.content_alignment }}">
     {%- if section.settings.subtitle != blank -%}
@@ -19,16 +11,16 @@
         {{ section.settings.text }}
       </div>
     {%- endif -%}
-    {%- if section.settings.button_label != blank or section.settings.secondary_button_label != blank -%}
-      <div class="flex items-center gap-4 mt-8 {{ justify_items }}">
+    {%- if section.settings.button_label != blank or section.settings.button_2_label != blank -%}
+      <div class="mt-8 space-x-4">
         {%- if section.settings.button_label != blank -%}
           <a href="{{ section.settings.button_link }}" class="btn">
             {{ section.settings.button_label | escape }}
           </a>
         {%- endif -%}
-        {%- if section.settings.secondary_button_label != blank -%}
-          <a href="{{ section.settings.secondary_button_link }}" class="btn btn--outlined">
-            {{ section.settings.secondary_button_label | escape }}
+        {%- if section.settings.button_2_label != blank -%}
+          <a href="{{ section.settings.button_2_link }}" class="btn btn--outlined">
+            {{ section.settings.button_2_label | escape }}
           </a>
         {%- endif -%}
       </div>
@@ -55,7 +47,7 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Text Block Title"
+      "default": "Text block title"
     },
     {
       "type": "richtext",
@@ -101,13 +93,13 @@
     },
     {
       "type": "text",
-      "id": "secondary_button_label",
+      "id": "button_2_label",
       "default": "Learn more",
       "label": "Secondary button label"
     },
     {
       "type": "url",
-      "id": "secondary_button_link",
+      "id": "button_2_link",
       "label": "Secondary button link"
     },
 
