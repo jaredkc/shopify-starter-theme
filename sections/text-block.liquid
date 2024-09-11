@@ -9,10 +9,10 @@
 <div class="{{ section.settings.background }} section-pt-{{ section.settings.padding_top }} section-pb-{{ section.settings.padding_bottom }}{% if section.settings.border %} section-border{% endif %}">
   <div class="page-width {{ section.settings.text_align }}">
     {%- if section.settings.subtitle != blank -%}
-      <h2 class="m-0 text-caps">{{ section.settings.subtitle }}</h2>
+      <p class="m-0 text-caps">{{ section.settings.subtitle }}</p>
     {%- endif -%}
     {%- if section.settings.title != blank -%}
-      <h1 class="m-0">{{ section.settings.title }}</h1>
+      <h2 class="m-0">{{ section.settings.title }}</h2>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
       <div class="mt-4 text-pretty rte">
