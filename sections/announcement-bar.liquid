@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-px text-xs text-slate-50 {{ section.settings.text_align }}">
+<div class="flex flex-col gap-px text-xs text-slate-50">
   {%- for block in section.blocks -%}
     <div class="p-2 bg-slate-800" {{ block.shopify_attributes }}>
       {%- if block.settings.text != blank -%}
@@ -25,28 +25,7 @@
   "enabled_on": {
     "groups": ["header"]
   },
-  "settings": [
-    {
-      "type": "select",
-      "id": "text_align",
-      "label": "Text alignment",
-      "default": "text-center",
-      "options": [
-        {
-          "label": "Text left",
-          "value": "text-left"
-        },
-        {
-          "label": "Text center",
-          "value": "text-center"
-        },
-        {
-          "label": "Text right",
-          "value": "text-right"
-        }
-      ]
-    }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "announcement",

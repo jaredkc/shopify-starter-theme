@@ -1,13 +1,13 @@
 {% liquid
   assign justify_items = 'justify-center'
-  if section.settings.text_align == 'text-left'
+  if section.settings.content_alignment == 'text-left'
     assign justify_items = 'justify-start'
-  elsif section.settings.text_align == 'text-right'
+  elsif section.settings.content_alignment == 'text-right'
     assign justify_items = 'justify-end'
   endif
 %}
 <div class="{{ section.settings.background }} section-pt-{{ section.settings.padding_top }} section-pb-{{ section.settings.padding_bottom }}{% if section.settings.border %} section-border{% endif %}">
-  <div class="page-width {{ section.settings.text_align }}">
+  <div class="page-width {{ section.settings.content_alignment }}">
     {%- if section.settings.subtitle != blank -%}
       <p class="m-0 text-caps">{{ section.settings.subtitle }}</p>
     {%- endif -%}
@@ -63,6 +63,26 @@
       "label": "Description",
       "default": "<p>Text block description...</p>"
     },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "default": "text-center",
+      "options": [
+        {
+          "label": "Left",
+          "value": "text-left"
+        },
+        {
+          "label": "Center",
+          "value": "text-center"
+        },
+        {
+          "label": "Right",
+          "value": "text-right"
+        }
+      ]
+    },
 
     {
       "type": "header",
@@ -94,42 +114,6 @@
     {
       "type": "header",
       "content": "Container"
-    },
-    {
-      "type": "select",
-      "id": "text_align",
-      "label": "Text alignment",
-      "default": "text-center",
-      "options": [
-        {
-          "label": "Text left",
-          "value": "text-left"
-        },
-        {
-          "label": "Text center",
-          "value": "text-center"
-        },
-        {
-          "label": "Text right",
-          "value": "text-right"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "width",
-      "label": "Section width",
-      "options": [
-        {
-          "value": "section-full",
-          "label": "Full width"
-        },
-        {
-          "value": "page-width",
-          "label": "Page width"
-        }
-      ],
-      "default": "section-full"
     },
     {
       "type": "select",

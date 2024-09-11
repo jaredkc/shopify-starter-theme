@@ -4,9 +4,7 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "settings": {
-        "text_align": "text-center"
-      },
+      "settings": {},
       "blocks": {
         "announcement-bar-0": {
           "type": "announcement",

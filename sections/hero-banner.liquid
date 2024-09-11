@@ -42,7 +42,7 @@
     {%- endif -%}
   </div>
 
-  <div class="flex-0 md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }} {{ section.settings.text_align }}">
+  <div class="flex-0 md:flex md:h-full md:w-full md:absolute md:inset-0 {{ section.settings.desktop_content_position }} {{ section.settings.content_alignment }}">
     <div class="p-8 space-y-4 hero__content md:max-w-lg md:m-6 md:sticky{% if section.settings.desktop_content_position contains 'items-end' %} md:bottom-6{% else %} md:top-6{% endif %}">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -159,20 +159,20 @@
     },
     {
       "type": "select",
-      "id": "text_align",
-      "label": "Text alignment",
+      "id": "content_alignment",
+      "label": "Content alignment",
       "default": "text-left",
       "options": [
         {
-          "label": "Text left",
+          "label": "Left",
           "value": "text-left"
         },
         {
-          "label": "Text center",
+          "label": "Center",
           "value": "text-center"
         },
         {
-          "label": "Text right",
+          "label": "Right",
           "value": "text-right"
         }
       ]

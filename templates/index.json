@@ -33,7 +33,7 @@
       "settings": {
         "height": "h-[600px] md:h-[750px]",
         "desktop_content_position": "md:justify-start md:items-start",
-        "content_text_align": "text-center",
+        "content_alignment": "text-center",
         "content_theme": "light",
         "content_background_opacity": 90,
         "content_max_width": 520
