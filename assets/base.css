@@ -644,7 +644,7 @@ legend {
 }
 
 /**
- * Additional resets
+ * Additional utility classes
  */
 .button-unstyled {
   margin: 0;
@@ -657,6 +657,12 @@ legend {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.placeholder-svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Account for JavaScript disabled */
