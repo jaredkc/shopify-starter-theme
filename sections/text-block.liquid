@@ -4,10 +4,10 @@
       <p class="m-0 text-caps">{{ section.settings.subtitle }}</p>
     {%- endif -%}
     {%- if section.settings.title != blank -%}
-      <h2 class="m-0">{{ section.settings.title }}</h2>
+      <h2 class="m-0 {{ section.settings.title_size }}">{{ section.settings.title }}</h2>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
-      <div class="mt-4 text-pretty rte">
+      <div class="mt-4 text-pretty rte {{ section.settings.text_style }}">
         {{ section.settings.text }}
       </div>
     {%- endif -%}
@@ -50,10 +50,50 @@
       "default": "Text block title"
     },
     {
+      "type": "select",
+      "id": "title_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Small"
+        },
+        {
+          "value": "h2",
+          "label": "Medium"
+        },
+        {
+          "value": "h1",
+          "label": "Large"
+        },
+        {
+          "value": "h0",
+          "label": "Extra large"
+        }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
       "type": "richtext",
       "id": "text",
-      "label": "Description",
-      "default": "<p>Text block description...</p>"
+      "label": "Text",
+      "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "text-base",
+          "label": "Body"
+        },
+        {
+          "value": "text-bse",
+          "label": "Large"
+        }
+      ],
+      "default": "text-base",
+      "label": "Text style"
     },
     {
       "type": "select",
