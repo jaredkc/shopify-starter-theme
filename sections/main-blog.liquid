@@ -12,12 +12,8 @@
         <li>
           {%- render 'article-card',
             article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
-            show_excerpt: true
           -%}
         </li>
       {%- endfor -%}
