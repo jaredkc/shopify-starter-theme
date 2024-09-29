@@ -3,6 +3,7 @@
 
   Accepts:
   - article: {Object} Article object
+  - show_image: {String} The setting either show the article image or not. If it's not included it will show the image by default
   - show_date: {String} The setting either show the article date or not. If it's not included it will not show the image by default
   - show_author: {String} The setting either show the article author or not. If it's not included it will not show the author by default
   - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
@@ -17,7 +18,7 @@
       href="{{ article.url }}"
       class="flex items-center justify-center border aspect-square card__image"
     >
-      {%- if article.image -%}
+      {%- if show_image == true and article.image -%}
         {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
         <img
           srcset="
@@ -54,15 +55,28 @@
           </a>
         </h3>
       {%- endif -%}
-      {%- if show_author -%}
-        <span>{{ article.author }}</span>
+      {%- if show_excerpt -%}
+        {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+          <p class="mt-2 mb-0 text-sm">
+            {%- if article.excerpt.size > 0 -%}
+              {{ article.excerpt | strip_html | truncatewords: 12 }}
+            {%- else -%}
+              {{ article.content | strip_html | truncatewords: 12 }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
       {%- endif -%}
-      {%- if show_date and show_author %}
-        &middot;
-      {% endif -%}
-      {%- if show_date -%}
-        <span>{{ article.published_at | time_tag: format: 'date' }}</span>
-      {%- endif -%}
+      <div class="mt-4 text-xs">
+        {%- if show_author -%}
+          <span>{{ article.author }}</span>
+        {%- endif -%}
+        {%- if show_date and show_author %}
+          &middot;
+        {% endif -%}
+        {%- if show_date -%}
+          <span>{{ article.published_at | time_tag: format: 'date' }}</span>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 {%- endif -%}

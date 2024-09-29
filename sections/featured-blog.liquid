@@ -7,27 +7,26 @@
       class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
       role="list"
     >
-      {% for block in section.blocks %}
-        {%- case block.type -%}
-          {%- when 'article' -%}
-            <li>
-              {%- render 'article-card',
-                article: block.settings.article,
-                show_image: section.settings.show_image,
-                show_date: section.settings.show_date,
-                show_author: section.settings.show_author,
-                show_excerpt: section.settings.show_excerpt
-              -%}
-            </li>
-        {%- endcase -%}
-      {% endfor %}
+      {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
+        {%- for article in section.settings.blog.articles limit: section.settings.articles_to_show -%}
+          <li>
+            {%- render 'article-card',
+              article: article,
+              show_image: section.settings.show_image,
+              show_date: section.settings.show_date,
+              show_author: section.settings.show_author,
+              show_excerpt: section.settings.show_excerpt
+            -%}
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
     </ul>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Featured articles",
+  "name": "Featured blog",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -39,7 +38,21 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Featured articles"
+      "default": "Recent blog posts"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Articles to show"
     },
     {
       "type": "checkbox",
@@ -139,7 +152,7 @@
   ],
   "presets": [
     {
-      "name": "Featured articles",
+      "name": "Featured blog",
       "blocks": [
         {
           "type": "article"
