@@ -6,7 +6,7 @@
 -%}
 
 <div class="section-pt-{{ section.settings.padding_top }} section-pb-{{ section.settings.padding_bottom }}{% if section.settings.border %} section-border{% endif %}">
-  <div class="{{ section.settings.content_width }}">
+  <div class="page-width">
     {% comment %}
       So TailwindCSS classes from schema settings are not stripped from the build.
       <div class="md:flex-row md:flex-row-reverse"></div>
@@ -34,7 +34,7 @@
           <p class="m-0 text-caps">{{ section.settings.subtitle }}</p>
         {%- endif -%}
         {%- if section.settings.title != blank -%}
-          <h2 class="m-0 {{ section.settings.title_size }}">{{ section.settings.title }}</h2>
+          <h2 class="m-0 text-balance {{ section.settings.title_size }}">{{ section.settings.title }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
           <div class="mt-4 text-pretty rte {{ section.settings.text_style }}">
@@ -245,22 +245,6 @@
     {
       "type": "header",
       "content": "Container"
-    },
-    {
-      "type": "select",
-      "id": "content_width",
-      "label": "Section width",
-      "options": [
-        {
-          "value": "section-full",
-          "label": "Full width"
-        },
-        {
-          "value": "page-width",
-          "label": "Page width"
-        }
-      ],
-      "default": "section-full"
     },
     {
       "type": "select",
