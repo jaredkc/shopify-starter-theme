@@ -355,12 +355,12 @@ h5,
   line-height: var(--input-line-height);
   padding: var(--input-pad-y) calc(var(--input-pad-x) * 2);
   text-decoration: none;
+  transition: all var(--input-transition-speed) ease-in-out;
 }
 .btn:hover,
 .btn:focus,
 .btn:active {
   background-color: var(--input-accent-dark);
-  transition: all var(--input-transition-speed) ease-in-out;
 }
 
 .btn--outlined {
@@ -390,7 +390,6 @@ h5,
 /**
  * Form elements
  */
-[class^='btn'],
 [class^='field'] {
   /* Using transition all here causes CLS */
   transition: box-shadow var(--input-transition-speed) ease, outline var(--input-transition-speed) ease,
