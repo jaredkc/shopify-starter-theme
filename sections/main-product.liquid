@@ -40,36 +40,43 @@
                 </div>
 
               {%- when 'price' -%}
-                <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  <p>
-                    {% if product.price_varies %}
-                      {{ product.price_min | money }} - {{ product.price_max | money }}
-                    {% else %}
-                      {{ product.price | money }}
-                    {% endif %}
-                  </p>
-                </div>
                 <div {{ block.shopify_attributes }}>
-                  {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
-                  {%- form 'product', product, id: product_form_installment_id, class: 'installment' -%}
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    {{ form | payment_terms }}
-                  {%- endform -%}
+                  <div id="price-{{ section.id }}" role="status">
+                    <p>
+                      {% if product.price_varies %}
+                        {{ product.price_min | money }} - {{ product.price_max | money }}
+                      {% else %}
+                        {{ product.price | money }}
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div>
+                    {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+                    {%- form 'product', product, id: product_form_installment_id, class: 'installment' -%}
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      {{ form | payment_terms }}
+                    {%- endform -%}
+                  </div>
                 </div>
 
               {%- when 'quantity_select' -%}
-                <input
-                  type="number"
-                  name="quantity"
-                  min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                  {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                  {% endif %}
-                  step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                  value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                  form="{{ product_form_id }}"
-                  class="field-input"
-                >
+                <div {{ block.shopify_attributes }}>
+                  <label>
+                    <span class="field-label">Quantity</span>
+                    <input
+                      class="field-input"
+                      type="number"
+                      name="quantity"
+                      min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                        max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                      {% endif %}
+                      step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                      value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      form="{{ product_form_id }}"
+                    >
+                  </label>
+                </div>
 
               {%- when 'variant_select' -%}
                 {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
