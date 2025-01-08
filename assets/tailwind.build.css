@@ -196,6 +196,10 @@
   margin-bottom: 2rem
 }
 
+.mb-0 {
+  margin-bottom: 0px
+}
+
 .mb-8 {
   margin-bottom: 2rem
 }
@@ -214,10 +218,6 @@
 
 .mt-0 {
   margin-top: 0px
-}
-
-.mt-1 {
-  margin-top: 0.25rem
 }
 
 .mt-12 {
@@ -254,10 +254,6 @@
 
 .inline-flex {
   display: inline-flex
-}
-
-.table {
-  display: table
 }
 
 .grid {
@@ -388,6 +384,10 @@
   white-space: nowrap
 }
 
+.text-balance {
+  text-wrap: balance
+}
+
 .text-pretty {
   text-wrap: pretty
 }
@@ -418,12 +418,12 @@
 
 .bg-gray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1))
 }
 
 .bg-slate-800 {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity))
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1))
 }
 
 .object-contain {
@@ -560,12 +560,12 @@
 
 .text-gray-700 {
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1))
 }
 
 .text-slate-50 {
   --tw-text-opacity: 1;
-  color: rgb(248 250 252 / var(--tw-text-opacity))
+  color: rgb(248 250 252 / var(--tw-text-opacity, 1))
 }
 
 .underline {
@@ -601,7 +601,7 @@
 
 .hover\:bg-blue-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(219 234 254 / var(--tw-bg-opacity))
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1))
 }
 
 .hover\:shadow-md:hover {
