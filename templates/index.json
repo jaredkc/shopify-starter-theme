@@ -36,7 +36,8 @@
         "content_alignment": "text-center",
         "content_theme": "light",
         "content_background_opacity": 90,
-        "content_max_width": 520
+        "content_max_width": 520,
+        "accessibility_label": "This is a hero banner"
       }
     },
     "featured_collection": {

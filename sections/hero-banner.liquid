@@ -24,6 +24,7 @@
 <div
   id="hero--{{ section.id }}"
   class="relative flex flex-col md:flex hero hero--{{ section.settings.content_theme }} {{ section.settings.height }}"
+  aria-label="{{ section.settings.accessibility_label }}"
 >
   <div class="relative flex flex-1 w-full overflow-hidden animate--zoom-in">
     {%- if section.settings.image != blank -%}
@@ -213,6 +214,12 @@
       "min": 300,
       "step": 10,
       "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility info",
+      "info": "This text will be read by screen readers to describe the hero banner to visually impaired users."
     }
   ],
   "blocks": [
