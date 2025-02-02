@@ -535,6 +535,49 @@ legend {
   gap: 0.25rem;
 }
 
+/*
+Field stack
+- To have label appear as placeholder, and transition when the input is focused or has content
+- Require the input to have a placeholder attribute and the label to come after the input
+*/
+.field-stack {
+  position: relative;
+}
+
+.field-stack input ~ .field-label,
+.field-stack textarea ~ .field-label,
+.field-stack select ~ .field-label {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 0.25rem;
+  font-size: var(--input-text-md);
+  line-height: var(--input-line-height);
+  padding: var(--input-pad-y) var(--input-pad-x);
+  transform: translateY(0);
+  transition: all var(--input-transition-speed) ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.field-stack input:focus ~ .field-label,
+.field-stack input:not(:placeholder-shown) ~ .field-label,
+.field-stack input:-webkit-autofill ~ .field-label,
+.field-stack textarea:focus ~ .field-label,
+.field-stack textarea:not(:placeholder-shown) ~ .field-label,
+.field-stack textarea:-webkit-autofill ~ .field-label,
+.field-stack select ~ .field-label {
+  background: var(--input-background);
+  font-size: var(--input-text-xs);
+  left: calc(var(--input-pad-x) - 0.25rem + var(--input-border-width));
+  padding: 0 0.25rem;
+  transform: translateY(-55%);
+}
+
+.field-stack input::placeholder,
+.field-stack textarea::placeholder {
+  opacity: 0;
+}
+
 /**
  * Form errors output by {{ form.errors | default_errors }}
  * Aligns with .banner styles
