@@ -2,40 +2,48 @@
   Only show newsetter form if they have not already signed up
 {% endcomment %}
 {%- if request.design_mode -%}
-  <div class="mx-auto w-60">
+  <div class="mx-auto">
     <div class="alert">If the customer is logged in and already subscribed, this will not show.</div>
   </div>
 {%- endif -%}
 
 {% unless customer.accepts_marketing %}
-  <div class="px-8 py-20">
-    <div class="mx-auto w-60 email-signup">
+  <div class="px-4 py-20">
+    <div class="max-w-md mx-auto text-center">
+      {% if section.settings.headline != blank %}
+        <h2 class="mt-0 mb-4 text-2xl">{{ section.settings.headline }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <div class="mb-6 -mt-2 rte">{{ section.settings.description }}</div>
+      {% endif %}
+
       {% form 'customer' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
-
-        <label for="NewsletterEmail-{{ section.id }}">{{ 'email_signup.headline' | t }}</label>
-        <div class="flex gap-2 mt-2">
-          <input
-            type="email"
-            id="NewsletterEmail-{{ section.id }}"
-            class="field-input"
-            type="email"
-            name="contact[email]"
-            value="{{ form.email }}"
-            placeholder="{{ 'email_signup.placeholder' | t }}"
-            aria-required="true"
-            autocorrect="off"
-            autocapitalize="off"
-            autocomplete="email"
-            {% if form.errors %}
-              autofocus
-              aria-invalid="true"
-              aria-describedby="NewsletterError"
-            {% elsif form.posted_successfully? %}
-              aria-describedby="NewsletterSuccess"
-            {% endif %}
-            required
-          >
+        <div class="flex gap-2">
+          <label for="NewsletterEmail-{{ section.id }}" class="flex-grow field-block field-stack">
+            <input
+              type="email"
+              id="NewsletterEmail-{{ section.id }}"
+              class="w-full field-input"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+              placeholder="{{ 'email_signup.placeholder' | t }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+                autofocus
+                aria-invalid="true"
+                aria-describedby="NewsletterError"
+              {% elsif form.posted_successfully? %}
+                aria-describedby="NewsletterSuccess"
+              {% endif %}
+              required
+            >
+            <span class="field-label">{{ 'email_signup.placeholder' | t }}</span>
+          </label>
 
           <button type="submit" class="btn">
             {{ 'email_signup.button' | t }}
@@ -67,7 +75,19 @@
   "disabled_on": {
     "groups": ["header"]
   },
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Subscribe to our emails"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
   "presets": [
     {
       "name": "Email signup"
