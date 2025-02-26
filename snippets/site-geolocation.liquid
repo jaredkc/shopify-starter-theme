@@ -1,0 +1,59 @@
+<script src="{{ 'site-geolocation.js' | asset_url }}" defer="defer"></script>
+
+<div class="flex items-center justify-between gap-8 p-4 bg-slate-100">
+  <div class="flex w-full gap-4">
+    <div class="flex flex-col gap-2">
+      <button id="proxy-1" class="text-sm btn btn--outlined whitespace-nowrap">Geolocation via Proxy</button>
+      <button id="proxy-2" class="text-sm btn btn--outlined whitespace-nowrap">Another Proxy</button>
+    </div>
+    <textarea
+      id="api-response"
+      class="w-full font-mono text-sm bg-transparent field-textarea"
+      placeholder="App proxy response will go here..."
+    ></textarea>
+  </div>
+  <dialog-opener data-dialog="#location-dialog">
+    <button class="btn btn--outlined">Country</button>
+  </dialog-opener>
+</div>
+
+<dialog-modal id="location-dialog">
+  <dialog>
+    <div class="flex flex-col items-center justify-center gap-4 p-8 mb-8 dialog-content">
+      <h2 class="text-lg">Are you in the right place?</h2>
+      <ul class="flex flex-col gap-4 p-0 m-0 list-none">
+        <li>
+          <a class="block p-2" href="/?set-location=CA">
+            <b>Canada</b> <span class="block text-xs opacity-75">ca.example.com</span>
+          </a>
+        </li>
+        <li>
+          <a class="block p-2" href="/?set-location=JP">
+            <b>Japan</b> <span class="block text-xs opacity-75">jp.example.com</span>
+          </a>
+        </li>
+        <li>
+          <a class="block p-2" href="/?set-location=KR">
+            <b>Korea</b> <span class="block text-xs opacity-75">example.co.kr</span>
+          </a>
+        </li>
+        <li>
+          <a class="block p-2" href="/?set-location=GB">
+            <b>United Kingdom</b> <span class="block text-xs opacity-75">gb.example.com</span>
+          </a>
+        </li>
+        <li>
+          <a class="block p-2" href="/?set-location=US">
+            <b>United States</b> <span class="block text-xs opacity-75">example.com</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <form method="dialog" class="dialog-close">
+      <button>
+        <span class="sr-only">{{ 'accessibility.close' | t }}</span>
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </button>
+    </form>
+  </dialog>
+</dialog-modal>
