@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_banner": {
@@ -33,7 +42,7 @@
       "settings": {
         "height": "h-[600px] md:h-[750px]",
         "desktop_content_position": "md:justify-start md:items-start",
-        "content_alignment": "text-center",
+        "content_alignment": "text-left",
         "content_theme": "light",
         "content_background_opacity": 90,
         "content_max_width": 520,
@@ -44,7 +53,7 @@
       "type": "featured-collection",
       "settings": {
         "title": "Featured collection",
-        "description": "<p>From the customizer<\/p>",
+        "description": "<p>From the customizer</p>",
         "show_description": true,
         "collection": "test-products",
         "products_to_show": 8,
