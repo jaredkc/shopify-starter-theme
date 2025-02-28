@@ -2,6 +2,9 @@ const locationCookie = 'bb_location';
 const locationDialog = '#location-dialog';
 const shopCountry = window.Shopify.country;
 
+/**
+ * Show the location dialog
+ */
 function showLocationDialog() {
   const dialog = document.querySelector(locationDialog);
   if (dialog) dialog.show();
@@ -35,8 +38,8 @@ function getLocationFromUrl() {
 }
 
 /**
- * Get users location from IP address
- * @returns {string | null}
+ * Get users location from IP address through app proxy
+ * @returns {string | null} The country code (US, CA, JP, KR, GB)
  */
 async function getLocationFromIp() {
   const request = await fetch('/apps/bb-api/v1/geolocation', {
@@ -52,6 +55,33 @@ async function getLocationFromIp() {
   }
 
   return null;
+}
+
+/**
+ * Get the location from the Shopify API
+ * @returns {string | null} The country code (US, CA, JP, KR, GB)
+ */
+async function getLocationFromShopify() {
+  // [Detect and set a visitor’s optimal localization](https://shopify.dev/docs/storefronts/themes/markets/localization-discovery)
+  // Example response:
+  // {
+  //   "detected_values": {
+  //       "country_name": "Canada",
+  //       "country": { "handle": "CA", "name": "Canada" }
+  //   },
+  //   "features": {},
+  //   "suggestions": []
+  // }
+  const response = await fetch(
+    window.Shopify.routes.root +
+      'browsing_context_suggestions.json' +
+      '?country[enabled]=true' +
+      '&language[enabled]=true'
+    // `&country[exclude]=${window.Shopify.country}` +
+    // `&language[exclude]=${window.Shopify.language}`
+  ).then((r) => r.json());
+
+  return response?.detected_values?.country?.handle || null;
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -78,18 +108,18 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // No location set, get country from geolocation.
-  const locationFromIp = await getLocationFromIp();
-  if (locationFromIp) {
-    if (locationFromIp === shopCountry) {
+  const usersLocation = await getLocationFromShopify();
+  console.log(usersLocation);
+  if (usersLocation) {
+    if (usersLocation === shopCountry) {
       // Location matches shop country, set the cookie so we don't have to do this again.
-      console.log(`IP Location of ${locationFromIp} matches shop country of ${shopCountry}, setting cookie.`);
-      setLocationCookie(locationFromIp);
+      console.log(`IP Location of ${usersLocation} matches shop country of ${shopCountry}, setting cookie.`);
+      setLocationCookie(usersLocation);
     } else {
       // Location does not match shop country. Show dialog.
-      console.log(`IP Location of ${locationFromIp} does not match shop country of ${shopCountry}, showing dialog.`);
+      console.log(`IP Location of ${usersLocation} does not match shop country of ${shopCountry}, showing dialog.`);
       showLocationDialog();
     }
-    return;
   }
 });
 
