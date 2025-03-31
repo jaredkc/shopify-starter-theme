@@ -287,7 +287,6 @@ h5,
  */
 .section-header {
   background-color: #fff;
-  position: sticky;
   top: 0;
   z-index: 10;
 }
@@ -303,6 +302,7 @@ h5,
 
 .sticky-header-stuck {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
   transform: translateY(0);
 }
 
