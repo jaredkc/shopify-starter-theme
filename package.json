@@ -5,9 +5,9 @@
   "scripts": {
     "test": "shopify theme check",
     "dev": "concurrently \"shopify theme dev\" \"npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w\"",
-    "shop-dev": "shopify theme dev",
-    "tw-dev": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w",
-    "tw-build": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m && npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.build.css"
+    "shop:dev": "shopify theme dev",
+    "tw:dev": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w",
+    "tw:build": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m && npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.build.css"
   },
   "author": "Jared Cornwall (https://github.com/jaredkc)",
   "license": "ISC",
