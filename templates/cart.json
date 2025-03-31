@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "placeholder": {
+      "type": "main-placeholder"
+    }
+  },
+  "order": [
+    "placeholder"
+  ]
+}
