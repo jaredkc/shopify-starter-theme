@@ -1,0 +1,56 @@
+<div class="page-width">
+  {% paginate search.results by section.settings.results_per_page %}
+    <div class="px-4 py-8 text-center border-b">
+      <form action="/search" method="get" role="search">
+        <input type="search" name="q" value="{{ search.terms | escape }}" class="field-input">
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+
+    {% if search.performed %}
+      {% for item in search.results %}
+        {% if item.featured_image %}
+          <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+            {{ item.featured_image.src | image_url: width: 150 | image_tag }}
+          </a>
+        {% endif %}
+        <h5>{{ item.title | link_to: item.url }}</h5>
+        <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+      {% else %}
+        no results
+      {% endfor %}
+    {% endif %}
+
+    {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+{
+  "name": "Main search",
+  "settings": [
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16,
+      "label": "Results per page"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": true,
+      "label": "t:product-card.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:product-card.settings.show_rating.label",
+      "info": "t:product-card.settings.show_rating.info"
+    }
+  ]
+}
+{% endschema %}
