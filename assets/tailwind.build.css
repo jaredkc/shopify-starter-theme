@@ -196,8 +196,20 @@
   margin-bottom: 2rem
 }
 
+.-mt-2 {
+  margin-top: -0.5rem
+}
+
 .mb-0 {
   margin-bottom: 0px
+}
+
+.mb-4 {
+  margin-bottom: 1rem
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem
 }
 
 .mb-8 {
@@ -276,6 +288,10 @@
   height: 2rem
 }
 
+.h-96 {
+  height: 24rem
+}
+
 .h-\[450px\] {
   height: 450px
 }
@@ -352,12 +368,24 @@
   align-items: center
 }
 
+.justify-start {
+  justify-content: flex-start
+}
+
+.justify-end {
+  justify-content: flex-end
+}
+
 .justify-center {
   justify-content: center
 }
 
 .justify-between {
   justify-content: space-between
+}
+
+.justify-around {
+  justify-content: space-around
 }
 
 .gap-2 {
@@ -426,12 +454,12 @@
 
 .bg-gray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1))
 }
 
 .bg-slate-800 {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity))
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1))
 }
 
 .object-contain {
@@ -568,12 +596,12 @@
 
 .text-gray-700 {
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1))
 }
 
 .text-slate-50 {
   --tw-text-opacity: 1;
-  color: rgb(248 250 252 / var(--tw-text-opacity))
+  color: rgb(248 250 252 / var(--tw-text-opacity, 1))
 }
 
 .underline {
@@ -609,7 +637,7 @@
 
 .hover\:bg-blue-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(219 234 254 / var(--tw-bg-opacity))
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1))
 }
 
 .hover\:shadow-md:hover {

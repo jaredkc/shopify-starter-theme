@@ -1,0 +1,139 @@
+<div
+  class="flex {{ block.settings.horizontal_alignment }} {{ block.settings.vertical_alignment }} {{ block.settings.content_direction }} {{ block.settings.content_direction_mobile }}"
+  style="gap: {{ block.settings.gap }}px;"
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Flex container",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "content_direction",
+      "label": "Content direction",
+      "options": [
+        {
+          "value": "md:flex-row",
+          "label": "Row"
+        },
+        {
+          "value": "md:flex-col",
+          "label": "Column"
+        }
+      ],
+      "default": "md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "content_direction_mobile",
+      "label": "Mobile content direction",
+      "options": [
+        {
+          "value": "flex-row",
+          "label": "Row"
+        },
+        {
+          "value": "flex-col",
+          "label": "Column"
+        }
+      ],
+      "default": "flex-col"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment",
+      "label": "Horizontal alignment",
+      "options": [
+        {
+          "value": "justify-start",
+          "label": "Left"
+        },
+        {
+          "value": "justify-center",
+          "label": "Center"
+        },
+        {
+          "value": "justify-end",
+          "label": "Right"
+        },
+        {
+          "value": "justify-between",
+          "label": "Space between"
+        },
+        {
+          "value": "justify-around",
+          "label": "Space around"
+        }
+      ],
+      "default": "justify-start"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "items-start",
+          "label": "Top"
+        },
+        {
+          "value": "items-center",
+          "label": "Middle"
+        },
+        {
+          "value": "items-end",
+          "label": "Bottom"
+        },
+        {
+          "value": "items-stretch",
+          "label": "Stretch"
+        }
+      ],
+      "default": "items-start"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between items",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "flex_wrap",
+      "label": "Wrap items",
+      "options": [
+        {
+          "value": "flex-wrap",
+          "label": "Wrap"
+        },
+        {
+          "value": "flex-nowrap",
+          "label": "No wrap"
+        }
+      ],
+      "default": "flex-wrap"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flex container"
+    }
+  ]
+}
+{% endschema %}

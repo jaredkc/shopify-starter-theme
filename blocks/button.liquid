@@ -1,0 +1,53 @@
+<a
+  class="btn btn--{{ block.settings.button_style }}"
+  {% if block.settings.button_link == blank %}
+    role="link" aria-disabled="true"
+  {% else %}
+    href="{{ block.settings.button_link }}"
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  {{ block.settings.button_label | escape }}
+</a>
+
+{% schema %}
+{
+  "name": "Button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "default": "primary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Button"
+    }
+  ]
+}
+{% endschema %}

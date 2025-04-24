@@ -363,14 +363,14 @@ h5,
   background-color: var(--input-accent-dark);
 }
 
-.btn--outlined {
+.btn--secondary {
   background-color: transparent;
   border-color: var(--input-accent-medium);
   color: var(--input-accent-medium);
 }
-.btn--outlined:hover,
-.btn--outlined:focus,
-.btn--outlined:active {
+.btn--secondary:hover,
+.btn--secondary:focus,
+.btn--secondary:active {
   background-color: var(--input-accent-light);
   border-color: var(--input-accent-dark);
   color: var(--input-accent-dark);
