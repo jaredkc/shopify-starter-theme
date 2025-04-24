@@ -172,6 +172,18 @@
   top: 2rem
 }
 
+.isolate {
+  isolation: isolate
+}
+
+.z-0 {
+  z-index: 0
+}
+
+.z-10 {
+  z-index: 10
+}
+
 .m-0 {
   margin: 0px
 }
@@ -348,12 +360,20 @@
   grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
+.flex-row {
+  flex-direction: row
+}
+
 .flex-col {
   flex-direction: column
 }
 
 .flex-wrap {
   flex-wrap: wrap
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap
 }
 
 .items-start {
@@ -366,6 +386,10 @@
 
 .items-center {
   align-items: center
+}
+
+.items-stretch {
+  align-items: stretch
 }
 
 .justify-start {
@@ -552,6 +576,11 @@
   line-height: 2.25rem
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem
+}
+
 .text-5xl {
   font-size: 3rem;
   line-height: 1
@@ -594,6 +623,11 @@
   text-transform: capitalize
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1))
+}
+
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1))
@@ -602,6 +636,11 @@
 .text-slate-50 {
   --tw-text-opacity: 1;
   color: rgb(248 250 252 / var(--tw-text-opacity, 1))
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1))
 }
 
 .underline {
@@ -731,6 +770,10 @@
     flex-direction: row-reverse
   }
 
+  .md\:flex-col {
+    flex-direction: column
+  }
+
   .md\:items-start {
     align-items: flex-start
   }
@@ -831,6 +874,10 @@
 
   .lg\:gap-8 {
     gap: 2rem
+  }
+
+  .lg\:p-16 {
+    padding: 4rem
   }
 
   .lg\:px-8 {

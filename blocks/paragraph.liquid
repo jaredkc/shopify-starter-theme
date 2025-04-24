@@ -1,0 +1,43 @@
+<p class="m-0 {{ block.settings.size }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</p>
+
+{% schema %}
+{
+  "name": "Paragraph",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Insert your catchphrase here (or something else)."
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "text-base",
+          "label": "Base"
+        },
+        {
+          "value": "text-lg",
+          "label": "Lg"
+        },
+        {
+          "value": "text-xl",
+          "label": "Xl"
+        }
+      ],
+      "default": "text-lg"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Paragraph"
+    }
+  ]
+}
+{% endschema %}

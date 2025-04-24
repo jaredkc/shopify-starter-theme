@@ -1,0 +1,43 @@
+<h2 class="m-0 {{ block.settings.size }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</h2>
+
+{% schema %}
+{
+  "name": "Heading",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Welcome to our store"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "text-2xl",
+          "label": "2xl"
+        },
+        {
+          "value": "text-3xl",
+          "label": "3xl"
+        },
+        {
+          "value": "text-4xl",
+          "label": "4xl"
+        }
+      ],
+      "default": "text-2xl"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Heading"
+    }
+  ]
+}
+{% endschema %}

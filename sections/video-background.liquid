@@ -1,0 +1,141 @@
+{% comment %}
+  For background videos that autoplay
+{% endcomment %}
+{{ 'video-background.css' | asset_url | stylesheet_tag }}
+
+<div class="{{ section.settings.width }} mx-auto">
+  <div class="relative bg-video overflow-hidden w-full {{ section.settings.media_height }}">
+    {%- if section.settings.video -%}
+      {{
+        section.settings.video
+        | video_tag:
+          image_size: '1100x',
+          autoplay: true,
+          loop: true,
+          controls: false,
+          muted: true,
+          class: 'bg-video__media mx-auto'
+      }}
+    {%- endif -%}
+    <div
+      class="absolute inset-0 isolate z-0"
+      style="background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }})"
+    ></div>
+    <div class="absolute inset-0 z-10 p-8 lg:p-16 flex flex-col gap-4 items-center isolate {{ section.settings.content_position }} {{ section.settings.text_color }}">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video background",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 25
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color",
+      "options": [
+        {
+          "value": "text-white",
+          "label": "White"
+        },
+        {
+          "value": "text-black",
+          "label": "Black"
+        }
+      ],
+      "default": "text-white"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "value": "justify-start",
+          "label": "Top"
+        },
+        {
+          "value": "justify-center",
+          "label": "Center"
+        },
+        {
+          "value": "justify-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "justify-end"
+    },
+    {
+      "type": "select",
+      "id": "media_height",
+      "label": "Media height",
+      "info": "Adapt to video will use the height of the video.",
+      "options": [
+        {
+          "value": "bg-video--adapt",
+          "label": "Adapt to video"
+        },
+        {
+          "value": "bg-video--sm",
+          "label": "Small"
+        },
+        {
+          "value": "bg-video--md",
+          "label": "Medium"
+        },
+        {
+          "value": "bg-video--full",
+          "label": "Full height"
+        }
+      ],
+      "default": "bg-video--md"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "section-full",
+          "label": "Full width"
+        },
+        {
+          "value": "container",
+          "label": "Page width"
+        }
+      ],
+      "default": "section-full"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video background"
+    }
+  ]
+}
+{% endschema %}
