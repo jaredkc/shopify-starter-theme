@@ -67,6 +67,8 @@
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
+      "available": "Available",
+      "backorder": "Backorder",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",
@@ -76,6 +78,7 @@
       "inventory_low_stock_show_count": "Low stock: {{ quantity }} left",
       "inventory_out_of_stock": "Out of stock",
       "inventory_out_of_stock_continue_selling": "In stock",
+      "next_shipment": "Next shipment {{ date }}",
       "sku": "SKU",
       "on_sale": "Sale",
       "product_variants": "Product variants",
