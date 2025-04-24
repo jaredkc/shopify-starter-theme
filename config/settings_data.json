@@ -8,39 +8,33 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {
-    "sections": {
-      "footer": {
-        "type": "footer",
-        "settings": {}
-      }
-    },
-    "content_for_index": [],
-    "blocks": {
-      "7570552984445421165": {
-        "type": "shopify://apps/yotpo-product-reviews-ugc/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-        "disabled": false,
-        "settings": {}
-      },
-      "17151115064775110295": {
-        "type": "shopify://apps/recharge-subscriptions/blocks/recharge-theme/371eed76-0b44-4869-9813-730372ea378e",
-        "disabled": false,
-        "settings": {
-          "color_brand": "#172554",
-          "contrast_color": "#FFFFFF",
-          "color_brand_secondary": "#2563eb",
-          "corners": "8px",
-          "app_background": "#f9f8f4",
-          "app_container": 1200,
-          "app_vertical_padding": 32,
-          "images_aspect_ratio": "1",
-          "cards_background": "#FFFFFF",
-          "cards_border_color": "rgba(0,0,0,0)"
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#242833",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#000000",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
         }
       }
     }
-  },
-  "presets": {
-    "Default": {}
   }
 }

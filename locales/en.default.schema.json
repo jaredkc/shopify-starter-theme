@@ -7,6 +7,33 @@
           "label": "Page width"
         }
       }
+    },
+    "colors": {
+      "name": "Colors",
+      "settings": {
+        "background": {
+          "label": "Background"
+        },
+        "background_gradient": {
+          "label": "Background gradient",
+          "info": "Background gradient replaces background where possible."
+        },
+        "text": {
+          "label": "Text"
+        },
+        "button_background": {
+          "label": "Solid button background"
+        },
+        "button_label": {
+          "label": "Solid button label"
+        },
+        "secondary_button_label": {
+          "label": "Outline button"
+        },
+        "shadow": {
+          "label": "Shadow"
+        }
+      }
     }
   },
   "product-card": {
