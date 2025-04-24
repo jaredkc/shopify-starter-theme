@@ -62,6 +62,71 @@
         "show_rating": false
       }
     },
+    "video_background_3tTcgy": {
+      "type": "video-background",
+      "blocks": {
+        "heading_BGTpJ7": {
+          "type": "heading",
+          "name": "Heading",
+          "settings": {
+            "text": "Welcome to our store",
+            "size": "text-4xl"
+          },
+          "blocks": {}
+        },
+        "flex_MnQU4U": {
+          "type": "flex",
+          "name": "Flex container",
+          "settings": {
+            "content_direction": "md:flex-row",
+            "content_direction_mobile": "flex-col",
+            "horizontal_alignment": "justify-start",
+            "vertical_alignment": "items-start",
+            "gap": 16,
+            "flex_wrap": "flex-wrap"
+          },
+          "blocks": {
+            "button_eCFWVf": {
+              "type": "button",
+              "name": "Button",
+              "settings": {
+                "button_label": "Primary CTA",
+                "button_link": "shopify://collections/all",
+                "button_style": "primary"
+              },
+              "blocks": {}
+            },
+            "button_Ybdwqy": {
+              "type": "button",
+              "name": "Button",
+              "settings": {
+                "button_label": "Secondary CTA",
+                "button_link": "shopify://collections/all",
+                "button_style": "primary"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "button_eCFWVf",
+            "button_Ybdwqy"
+          ]
+        }
+      },
+      "block_order": [
+        "heading_BGTpJ7",
+        "flex_MnQU4U"
+      ],
+      "name": "Video background",
+      "settings": {
+        "video": "shopify://files/videos/Clown fish in anemone.mp4",
+        "overlay_opacity": 0,
+        "text_color": "text-white",
+        "content_position": "justify-center",
+        "media_height": "bg-video--sm",
+        "width": "section-full"
+      }
+    },
     "email_signup": {
       "type": "email-signup",
       "settings": {
@@ -73,6 +138,7 @@
   "order": [
     "hero_banner",
     "featured_collection",
+    "video_background_3tTcgy",
     "email_signup"
   ]
 }
