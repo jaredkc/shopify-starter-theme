@@ -18,10 +18,10 @@
       }}
     {%- endif -%}
     <div
-      class="absolute inset-0 isolate z-0"
+      class="absolute inset-0 z-0 isolate"
       style="background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }})"
     ></div>
-    <div class="absolute inset-0 z-10 p-8 lg:p-16 flex flex-col gap-4 items-center isolate {{ section.settings.content_position }} {{ section.settings.text_color }}">
+    <div class="absolute inset-0 z-10 p-8 lg:p-16 flex flex-col gap-4 isolate {{ section.settings.content_position }} {{ section.settings.text_color }}">
       {% content_for 'blocks' %}
     </div>
   </div>
@@ -76,19 +76,43 @@
       "label": "Content position",
       "options": [
         {
-          "value": "justify-start",
-          "label": "Top"
+          "value": "justify-start items-start",
+          "label": "Top left"
         },
         {
-          "value": "justify-center",
-          "label": "Center"
+          "value": "justify-start items-center",
+          "label": "Top center"
         },
         {
-          "value": "justify-end",
-          "label": "Bottom"
+          "value": "justify-start items-end",
+          "label": "Top right"
+        },
+        {
+          "value": "justify-center items-start",
+          "label": "Center left"
+        },
+        {
+          "value": "justify-center items-center",
+          "label": "Center center"
+        },
+        {
+          "value": "justify-center items-end",
+          "label": "Center right"
+        },
+        {
+          "value": "justify-end items-start",
+          "label": "Bottom left"
+        },
+        {
+          "value": "justify-end items-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "justify-end items-end",
+          "label": "Bottom right"
         }
       ],
-      "default": "justify-end"
+      "default": "justify-end items-center"
     },
     {
       "type": "select",
