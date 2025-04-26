@@ -1,6 +1,6 @@
 <div
   class="flex {{ block.settings.horizontal_alignment }} {{ block.settings.vertical_alignment }} {{ block.settings.content_direction }} {{ block.settings.content_direction_mobile }}"
-  style="gap: {{ block.settings.gap }}px;"
+  style="gap: {{ block.settings.gap }}px; margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px;"
   {{ block.shopify_attributes }}
 >
   {% content_for 'blocks' %}
@@ -120,6 +120,26 @@
         }
       ],
       "default": "flex-wrap"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
     }
   ],
   "blocks": [
