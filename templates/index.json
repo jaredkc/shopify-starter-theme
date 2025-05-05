@@ -15,7 +15,7 @@
         "heading_74dpCk": {
           "type": "heading",
           "settings": {
-            "heading": "Hero Banner edit example",
+            "heading": "Hero Banner",
             "heading_size": "text-3xl"
           }
         },
@@ -83,7 +83,9 @@
             "horizontal_alignment": "justify-start",
             "vertical_alignment": "items-start",
             "gap": 16,
-            "flex_wrap": "flex-wrap"
+            "flex_wrap": "flex-wrap",
+            "margin_top": 0,
+            "margin_bottom": 0
           },
           "blocks": {
             "button_eCFWVf": {
