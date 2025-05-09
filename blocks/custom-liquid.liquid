@@ -1,0 +1,53 @@
+<div class="custom-liquid {{ block.settings.horizontal_alignment }}" style="max-width: {{ block.settings.max_width }}px;">
+  {{ block.settings.custom_code }}
+</div>
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_code",
+      "label": "liquid code",
+      "info": "Add app snippets or other code to create advanced customizations. [Learn more](https://shopify.dev/docs/api/liquid)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 320,
+      "max": 1440,
+      "step": 20,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment",
+      "label": "Horizontal alignment",
+      "options": [
+        {
+          "value": "mr-auto",
+          "label": "Left"
+        },
+        {
+          "value": "mx-auto",
+          "label": "Center"
+        },
+        {
+          "value": "ml-auto",
+          "label": "Right"
+        }
+      ],
+      "default": "mx-auto"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

@@ -232,12 +232,20 @@
   margin-left: 1rem
 }
 
+.ml-auto {
+  margin-left: auto
+}
+
 .mr-4 {
   margin-right: 1rem
 }
 
 .mr-6 {
   margin-right: 1.5rem
+}
+
+.mr-auto {
+  margin-right: auto
 }
 
 .mt-0 {
@@ -478,12 +486,12 @@
 
 .bg-gray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1))
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
 .bg-slate-800 {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1))
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity))
 }
 
 .object-contain {
@@ -625,22 +633,22 @@
 
 .text-black {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1))
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .text-gray-700 {
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity, 1))
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .text-slate-50 {
   --tw-text-opacity: 1;
-  color: rgb(248 250 252 / var(--tw-text-opacity, 1))
+  color: rgb(248 250 252 / var(--tw-text-opacity))
 }
 
 .text-white {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1))
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .underline {
@@ -650,6 +658,12 @@
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale
+}
+
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .transition {
@@ -676,7 +690,7 @@
 
 .hover\:bg-blue-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1))
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity))
 }
 
 .hover\:shadow-md:hover {
