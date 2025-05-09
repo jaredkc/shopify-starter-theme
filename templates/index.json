@@ -74,9 +74,9 @@
           },
           "blocks": {}
         },
-        "flex_MnQU4U": {
-          "type": "flex",
-          "name": "Flex container",
+        "group_MnQU4U": {
+          "type": "group",
+          "name": "Group",
           "settings": {
             "content_direction": "md:flex-row",
             "content_direction_mobile": "flex-col",
@@ -117,7 +117,7 @@
       },
       "block_order": [
         "heading_BGTpJ7",
-        "flex_MnQU4U"
+        "group_MnQU4U"
       ],
       "name": "Video background",
       "settings": {

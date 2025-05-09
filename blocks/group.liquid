@@ -8,29 +8,13 @@
 
 {% schema %}
 {
-  "name": "Flex container",
+  "name": "Group",
   "tag": null,
   "settings": [
     {
       "type": "select",
-      "id": "content_direction",
-      "label": "Content direction",
-      "options": [
-        {
-          "value": "md:flex-row",
-          "label": "Row"
-        },
-        {
-          "value": "md:flex-col",
-          "label": "Column"
-        }
-      ],
-      "default": "md:flex-row"
-    },
-    {
-      "type": "select",
       "id": "content_direction_mobile",
-      "label": "Mobile content direction",
+      "label": "Mobile layout",
       "options": [
         {
           "value": "flex-row",
@@ -42,6 +26,22 @@
         }
       ],
       "default": "flex-col"
+    },
+    {
+      "type": "select",
+      "id": "content_direction",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "md:flex-row",
+          "label": "Row"
+        },
+        {
+          "value": "md:flex-col",
+          "label": "Column"
+        }
+      ],
+      "default": "md:flex-row"
     },
     {
       "type": "select",
@@ -152,7 +152,7 @@
   ],
   "presets": [
     {
-      "name": "Flex container"
+      "name": "Group"
     }
   ]
 }
