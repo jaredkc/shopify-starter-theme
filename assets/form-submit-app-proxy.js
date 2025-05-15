@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form-submit-app-proxy');
-
+  const getForm = document.getElementById('form-get-app-proxy');
   if (form) {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -28,11 +28,31 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Form submission response:', result);
 
         // Optional: Show success message to user
-        alert('Form submitted successfully!');
+        alert(`Thanks ${name}, we've received your message.`);
 
       } catch (error) {
         console.error('Error submitting form:', error);
         alert('There was an error submitting the form. Please try again.');
+      }
+    });
+  }
+
+  if (getForm) {
+    getForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      try {
+        const response = await fetch(getForm.action, {
+          method: 'GET',
+        });
+
+        const result = await response.json();
+        console.log('Form submission response:', result);
+
+        alert(`Response from app proxy: ${JSON.stringify(result.body)}`);
+
+      } catch (error) {
+        console.error('Error submitting form:', error);
       }
     });
   }
