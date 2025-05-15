@@ -9,6 +9,13 @@
  */
 {
   "sections": {
+    "form_submit_app_proxy_MwGgkU": {
+      "type": "form-submit-app-proxy",
+      "name": "Form Submit App Proxy",
+      "settings": {
+        "form_action": "/apps/bb-api/v1/form-handler"
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {}
@@ -86,6 +93,7 @@
       "block_order": [
         "group_DbabYT"
       ],
+      "disabled": true,
       "name": "Custom section",
       "settings": {
         "color_scheme": "scheme-2"
@@ -99,6 +107,7 @@
     }
   },
   "order": [
+    "form_submit_app_proxy_MwGgkU",
     "main",
     "custom_section_axBcwp",
     "form"
