@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json();
         console.log('Form submission response:', result);
 
-        alert(`Response from app proxy: ${JSON.stringify(result.body)}`);
+        alert(result.message);
 
       } catch (error) {
         console.error('Error submitting form:', error);
