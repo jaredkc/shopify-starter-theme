@@ -1,0 +1,99 @@
+<script src="{{ 'site-geolocation.js' | asset_url }}" defer="defer"></script>
+
+<div class="flex items-center justify-between gap-8 p-4 bg-slate-100">
+  <div class="flex w-full gap-4">
+    <div class="flex flex-col gap-2">
+      <button id="proxy-1" class="text-sm btn btn--outlined whitespace-nowrap">
+        {{ section.settings.proxy_1_text }}
+      </button>
+      <button id="proxy-2" class="text-sm btn btn--outlined whitespace-nowrap">
+        {{ section.settings.proxy_2_text }}
+      </button>
+    </div>
+    <textarea
+      id="api-response"
+      class="w-full font-mono text-sm bg-transparent field-textarea"
+      placeholder="App proxy response will go here..."
+    ></textarea>
+  </div>
+  <dialog-opener data-dialog="#location-dialog">
+    <button class="btn btn--outlined">{{ section.settings.country_button_text }}</button>
+  </dialog-opener>
+</div>
+
+<dialog-modal id="location-dialog">
+  <dialog>
+    <div class="flex flex-col items-center justify-center gap-4 p-8 mb-8 dialog-content">
+      <h2 class="text-lg">Are you in the right place?</h2>
+      <ul class="flex flex-col gap-4 p-0 m-0 list-none">
+        <li>
+          <a class="flex items-center gap-2 p-2" href="/?set-location=CA">
+            <img src="{{ 'Flag_CA.svg' | file_url }}" alt="Canada Flag" width="32" height="32">
+            <div><b>Canada</b> <span class="block text-xs opacity-75">ca.example.com</span></div>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-2 p-2" href="/?set-location=JP">
+            <img src="{{ 'Flag_JP.svg' | file_url }}" alt="Japan Flag" width="32" height="32">
+            <div><b>Japan</b> <span class="block text-xs opacity-75">jp.example.com</span></div>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-2 p-2" href="/?set-location=KR">
+            <img src="{{ 'Flag_KR.svg' | file_url }}" alt="Korea Flag" width="32" height="32">
+            <div><b>Korea</b> <span class="block text-xs opacity-75">example.co.kr</span></div>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-2 p-2" href="/?set-location=GB">
+            <img src="{{ 'Flag_UK.svg' | file_url }}" alt="United Kingdom Flag" width="32" height="32">
+            <div><b>United Kingdom</b> <span class="block text-xs opacity-75">gb.example.com</span></div>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-2 p-2" href="/?set-location=US">
+            <img src="{{ 'Flag_US.svg' | file_url }}" alt="Canada Flag" width="32" height="32">
+            <div><b>United States</b> <span class="block text-xs opacity-75">example.com</span></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <form method="dialog" class="dialog-close">
+      <button>
+        <span class="sr-only">{{ 'accessibility.close' | t }}</span>
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </button>
+    </form>
+  </dialog>
+</dialog-modal>
+
+{% schema %}
+{
+  "name": "Site Geolocation",
+  "settings": [
+    {
+      "type": "text",
+      "id": "proxy_1_text",
+      "label": "First Proxy Button Text",
+      "default": "Geolocation via Proxy"
+    },
+    {
+      "type": "text",
+      "id": "proxy_2_text",
+      "label": "Second Proxy Button Text",
+      "default": "Another Proxy"
+    },
+    {
+      "type": "text",
+      "id": "country_button_text",
+      "label": "Country Button Text",
+      "default": "Country"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Site Geolocation"
+    }
+  ]
+}
+{% endschema %}
