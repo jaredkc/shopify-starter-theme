@@ -3,8 +3,12 @@
 <div class="flex items-center justify-between gap-8 p-4 bg-slate-100">
   <div class="flex w-full gap-4">
     <div class="flex flex-col gap-2">
-      <button id="proxy-1" class="text-sm btn btn--outlined whitespace-nowrap">Geolocation via Proxy</button>
-      <button id="proxy-2" class="text-sm btn btn--outlined whitespace-nowrap">Another Proxy</button>
+      <button id="proxy-1" class="text-sm btn btn--outlined whitespace-nowrap">
+        {{ section.settings.proxy_1_text }}
+      </button>
+      <button id="proxy-2" class="text-sm btn btn--outlined whitespace-nowrap">
+        {{ section.settings.proxy_2_text }}
+      </button>
     </div>
     <textarea
       id="api-response"
@@ -13,7 +17,7 @@
     ></textarea>
   </div>
   <dialog-opener data-dialog="#location-dialog">
-    <button class="btn btn--outlined">Country</button>
+    <button class="btn btn--outlined">{{ section.settings.country_button_text }}</button>
   </dialog-opener>
 </div>
 
@@ -62,3 +66,34 @@
     </form>
   </dialog>
 </dialog-modal>
+
+{% schema %}
+{
+  "name": "Site Geolocation",
+  "settings": [
+    {
+      "type": "text",
+      "id": "proxy_1_text",
+      "label": "First Proxy Button Text",
+      "default": "Geolocation via Proxy"
+    },
+    {
+      "type": "text",
+      "id": "proxy_2_text",
+      "label": "Second Proxy Button Text",
+      "default": "Another Proxy"
+    },
+    {
+      "type": "text",
+      "id": "country_button_text",
+      "label": "Country Button Text",
+      "default": "Country"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Site Geolocation"
+    }
+  ]
+}
+{% endschema %}

@@ -1,7 +1,7 @@
 <script src="{{ 'form-submit-app-proxy.js' | asset_url }}" defer="defer"></script>
 
 <section class="flex flex-col max-w-md gap-4 p-4 m-4 mx-auto border">
-  <form id="form-submit-app-proxy" action="/apps/bb-api/v1/form-handler" method="POST">
+  <form id="form-submit-app-proxy" action="{{ section.settings.form_action }}" method="POST">
     <p>
       <label for="ContactFormName" class="field-label field-block">
         Name
@@ -17,8 +17,26 @@
     <button type="submit" class="btn">Submit form</button>
   </form>
 
-  <form id="form-get-app-proxy" action="/apps/bb-api/v1/form-handler" method="GET">
+  <form id="form-get-app-proxy" action="{{ section.settings.form_action }}" method="GET">
     <button type="submit" class="btn">Get form</button>
   </form>
-
 </section>
+
+{% schema %}
+{
+  "name": "Form Submit App Proxy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "form_action",
+      "label": "Form Action URL",
+      "default": "/apps/bb-api/v1/form-handler"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Form Submit App Proxy"
+    }
+  ]
+}
+{% endschema %}
