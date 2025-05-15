@@ -188,6 +188,10 @@
   margin: 0px
 }
 
+.m-4 {
+  margin: 1rem
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto
@@ -428,6 +432,10 @@
   gap: 1rem
 }
 
+.gap-8 {
+  gap: 2rem
+}
+
 .gap-px {
   gap: 1px
 }
@@ -489,9 +497,18 @@
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity))
+}
+
 .bg-slate-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity))
+}
+
+.bg-transparent {
+  background-color: transparent
 }
 
 .object-contain {
@@ -568,6 +585,10 @@
 
 .text-right {
   text-align: right
+}
+
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }
 
 .font-sans {
@@ -658,6 +679,10 @@
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale
+}
+
+.opacity-75 {
+  opacity: 0.75
 }
 
 .shadow {
