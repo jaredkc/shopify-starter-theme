@@ -1,0 +1,39 @@
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {}
+    },
+    "footer-utilities": {
+      "type": "footer-utilities",
+      "settings": {},
+      "blocks": {
+        "copyright": {
+          "type": "copyright",
+          "settings": {}
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share your brand tagline.</p>"
+          }
+        },
+        "policy-list": {
+          "type": "policy_list",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "copyright",
+        "text",
+        "policy-list"
+      ]
+    }
+  },
+  "order": [
+    "footer",
+    "footer-utilities"
+  ]
+}

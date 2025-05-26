@@ -1,0 +1,101 @@
+<div class="footer-utilities">
+  <div class="page-width">
+    <div class="footer-utilities__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'text' -%}
+            <div class="footer-utilities__text" {{ block.shopify_attributes }}>
+              {%- if block.settings.text != blank -%}
+                {{ block.settings.text }}
+              {%- endif -%}
+            </div>
+          {%- when 'copyright' -%}
+            <div class="footer-utilities__copyright" {{ block.shopify_attributes }}>
+              <p>
+                {%- if block.settings.copyright_text != blank -%}
+                  {{ block.settings.copyright_text }}
+                {%- else -%}
+                  &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
+                {%- endif -%}
+              </p>
+            </div>
+          {%- when 'policy_list' -%}
+            <div class="footer-utilities__policies" {{ block.shopify_attributes }}>
+              <ul class="list-unstyled">
+                {%- for policy in shop.policies -%}
+                  {%- if policy != blank -%}
+                    <li>
+                      <a href="{{ policy.url }}">
+                        {{- policy.title | escape -}}
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer Utilities",
+  "max_blocks": 3,
+  "limit": 1,
+  "class": "footer-utilities-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share your brand tagline.</p>"
+        }
+      ]
+    },
+    {
+      "type": "copyright",
+      "name": "Copyright",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "copyright_text",
+          "label": "Copyright text",
+          "info": "Leave blank to use the shop name and dynamic year"
+        }
+      ]
+    },
+    {
+      "type": "policy_list",
+      "name": "Policy List",
+      "limit": 1,
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer Utilities",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "copyright"
+        },
+        {
+          "type": "policy_list"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
