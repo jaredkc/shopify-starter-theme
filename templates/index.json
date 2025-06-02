@@ -15,7 +15,7 @@
         "heading_74dpCk": {
           "type": "heading",
           "settings": {
-            "heading": "Hero Banner",
+            "heading": "Hero Banner - new",
             "heading_size": "text-3xl"
           }
         },
@@ -78,8 +78,8 @@
           "type": "group",
           "name": "Group",
           "settings": {
-            "content_direction": "md:flex-row",
             "content_direction_mobile": "flex-col",
+            "content_direction": "md:flex-row",
             "horizontal_alignment": "justify-start",
             "vertical_alignment": "items-start",
             "gap": 16,
