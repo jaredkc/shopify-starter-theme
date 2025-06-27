@@ -579,6 +579,43 @@ Field stack
 }
 
 /**
+ * Accordions via <details>
+ */
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion {
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.accordion + .accordion {
+  margin-top: 0;
+  border-top: none;
+}
+
+.accordion summary .icon-caret {
+  color: var(--c-primary-medium);
+  height: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.accordion[open] > summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+.accordion summary {
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+/**
  * Form errors output by {{ form.errors | default_errors }}
  * Aligns with .banner styles
  * https://shopify.dev/docs/liquid/reference/objects/form#form-errors
