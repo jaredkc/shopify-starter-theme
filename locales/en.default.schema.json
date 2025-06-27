@@ -1,37 +1,34 @@
 {
+  "content": {
+    "typography": "Typography",
+    "typography_primary": "Primary typography",
+    "typography_secondary": "Secondary typography"
+  },
+  "names": {
+    "announcement": "Announcement",
+    "announcement_bar": "Announcement bar"
+  },
+  "settings": {
+    "color": "Color",
+    "color_scheme": "Color scheme",
+    "colors": "Colors",
+    "case": "Case",
+    "background": "Background",
+    "text": "Text",
+    "button_background": "Solid button background",
+    "button_label": "Solid button label",
+    "secondary_button_label": "Outline button"
+  },
+  "options": {
+    "default": "Default",
+    "uppercase": "Uppercase"
+  },
   "settings_schema": {
     "layout": {
       "name": "Layout",
       "settings": {
         "page_width": {
           "label": "Page width"
-        }
-      }
-    },
-    "colors": {
-      "name": "Colors",
-      "settings": {
-        "background": {
-          "label": "Background"
-        },
-        "background_gradient": {
-          "label": "Background gradient",
-          "info": "Background gradient replaces background where possible."
-        },
-        "text": {
-          "label": "Text"
-        },
-        "button_background": {
-          "label": "Solid button background"
-        },
-        "button_label": {
-          "label": "Solid button label"
-        },
-        "secondary_button_label": {
-          "label": "Outline button"
-        },
-        "shadow": {
-          "label": "Shadow"
         }
       }
     }

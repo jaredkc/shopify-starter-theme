@@ -23,7 +23,7 @@
     ]
   },
   {
-    "name": "t:settings_schema.colors.name",
+    "name": "t:names.colors",
     "settings": [
       {
         "type": "color_scheme_group",
@@ -32,43 +32,31 @@
           {
             "type": "color",
             "id": "background",
-            "label": "t:settings_schema.colors.settings.background.label",
+            "label": "t:settings.background",
             "default": "#FFFFFF"
-          },
-          {
-            "type": "color_background",
-            "id": "background_gradient",
-            "label": "t:settings_schema.colors.settings.background_gradient.label",
-            "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
             "type": "color",
             "id": "text",
-            "label": "t:settings_schema.colors.settings.text.label",
+            "label": "t:settings.text",
             "default": "#121212"
           },
           {
             "type": "color",
             "id": "button",
-            "label": "t:settings_schema.colors.settings.button_background.label",
+            "label": "t:settings.button_background",
             "default": "#121212"
           },
           {
             "type": "color",
             "id": "button_label",
-            "label": "t:settings_schema.colors.settings.button_label.label",
+            "label": "t:settings.button_label",
             "default": "#FFFFFF"
           },
           {
             "type": "color",
             "id": "secondary_button_label",
-            "label": "t:settings_schema.colors.settings.secondary_button_label.label",
-            "default": "#121212"
-          },
-          {
-            "type": "color",
-            "id": "shadow",
-            "label": "t:settings_schema.colors.settings.shadow.label",
+            "label": "t:settings.secondary_button_label",
             "default": "#121212"
           }
         ],
