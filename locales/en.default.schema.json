@@ -9,19 +9,31 @@
     "announcement_bar": "Announcement bar"
   },
   "settings": {
-    "color": "Color",
-    "color_scheme": "Color scheme",
-    "colors": "Colors",
-    "case": "Case",
     "background": "Background",
-    "text": "Text",
     "button_background": "Solid button background",
     "button_label": "Solid button label",
-    "secondary_button_label": "Outline button"
+    "case": "Case",
+    "color_scheme": "Color scheme",
+    "color": "Color",
+    "colors": "Colors",
+    "link": "Link",
+    "secondary_button_label": "Outline button",
+    "text": "Text"
   },
   "options": {
     "default": "Default",
     "uppercase": "Uppercase"
+  },
+  "text_defaults": {
+    "accordion_heading": "Accordion heading",
+    "button_label": "Shop now",
+    "collapsible_row": "Collapsible row",
+    "contact_form_button_label": "Submit",
+    "email_signup_button_label": "Subscribe",
+    "heading": "Heading",
+    "shop_our_latest_arrivals": "Shop our latest arrivals!",
+    "sign_up": "Sign up",
+    "welcome_to_our_store": "Welcome to our store"
   },
   "settings_schema": {
     "layout": {
