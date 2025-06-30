@@ -9,13 +9,6 @@
  */
 {
   "sections": {
-    "form_submit_app_proxy_TNeLRY": {
-      "type": "form-submit-app-proxy",
-      "name": "Form Submit App Proxy",
-      "settings": {
-        "form_action": "/apps/bb-api/v1/form-handler"
-      }
-    },
     "hero_banner": {
       "type": "hero-banner",
       "blocks": {
@@ -145,7 +138,6 @@
     }
   },
   "order": [
-    "form_submit_app_proxy_TNeLRY",
     "hero_banner",
     "featured_collection",
     "video_background_3tTcgy",
