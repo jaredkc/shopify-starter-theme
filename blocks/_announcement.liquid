@@ -1,0 +1,49 @@
+{% assign plain_text = block.settings.text | strip_newlines | strip_html | strip %}
+{%- assign block_index = section.blocks | find_index: 'id', block.id -%}
+
+{%- unless plain_text == '' -%}
+  <div
+    aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    <p class="announcement-bar__text">
+      {{ block.settings.text }}
+    </p>
+
+    {% if block.settings.link != blank %}
+      <a
+        class="announcement-bar__link"
+        href="{{ block.settings.link }}"
+      >
+        <span class="sr-only">
+          {{ block.settings.text | strip_html }}
+        </span>
+      </a>
+    {% endif %}
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "t:names.announcement",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "t:settings.text",
+      "default": "t:text_defaults.shop_our_latest_arrivals"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.announcement"
+    }
+  ]
+}
+{% endschema %}

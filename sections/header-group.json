@@ -1,22 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Header",
   "type": "header",
   "sections": {
-    "announcement-bar": {
+    "announcement_bar": {
       "type": "announcement-bar",
-      "settings": {},
       "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
+        "announcement_1": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "<a href=\"/collections/all\" title=\"All products\">Shop</a> our <em><strong>latest arrivals</strong></em>!",
             "link": ""
-          }
+          },
+          "blocks": {}
+        },
+        "announcement_2": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Free shipping on orders over $100",
+            "link": "shopify://products/all"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "announcement-bar-0"
-      ]
+        "announcement_1",
+        "announcement_2"
+      ],
+      "name": "Announcement bar",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "case": "none"
+      }
     },
     "header": {
       "type": "header",
@@ -26,7 +51,7 @@
     }
   },
   "order": [
-    "announcement-bar",
+    "announcement_bar",
     "header"
   ]
 }

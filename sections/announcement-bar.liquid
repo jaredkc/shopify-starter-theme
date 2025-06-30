@@ -1,58 +1,52 @@
-<div class="flex flex-col gap-px text-xs text-slate-50">
-  {%- for block in section.blocks -%}
-    <div class="p-2 bg-slate-800" {{ block.shopify_attributes }}>
-      {%- if block.settings.text != blank -%}
-        <p class="m-0">
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="underline">
-          {%- endif -%}
-          {{ block.settings.text | escape }}
-          {%- if block.settings.link != blank -%}
-            </a>
-          {%- endif -%}
-        </p>
-      {%- endif -%}
-    </div>
-  {%- endfor -%}
+<div class="announcement-bar">
+  <div class="page-width">
+    {% content_for 'blocks' %}
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "Announcement bar",
-  "max_blocks": 3,
-  "limit": 2,
   "class": "announcement-bar-section",
   "enabled_on": {
     "groups": ["header"]
   },
-  "settings": [],
   "blocks": [
     {
-      "type": "announcement",
-      "name": "Announcement",
-      "settings": [
+      "type": "_announcement",
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "case",
+      "label": "t:settings.case",
+      "options": [
         {
-          "type": "text",
-          "id": "text",
-          "default": "Welcome to our store",
-          "label": "Text"
+          "value": "none",
+          "label": "t:options.default"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
+          "value": "uppercase",
+          "label": "t:options.uppercase"
         }
-      ]
+      ],
+      "default": "none"
     }
   ],
   "presets": [
     {
-      "name": "Announcement bar",
-      "blocks": [
-        {
-          "type": "announcement"
-        }
-      ]
+      "name": "Announcement bar"
     }
   ]
 }
