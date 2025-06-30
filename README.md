@@ -19,13 +19,18 @@ A Shopify 2.0 starter theme that focuses on performance, user experience, and si
 
 2. Run `npm install` to install dependencies.
 
-3. Run `shopify theme dev` to start a local development. This uploads the current theme to a store so you can preview it. The first time you run Shopify CLI, or anytime you switch stores, you must pass the `--store` parameter.
+3. In the `package.json` file, enter your Shopify domain in the `shop:dev` script
 
       ```bash
-      shopify theme dev --store=mystore.myshopify.com
+      "shop:dev": "shopify theme dev --store=your-domain.myshopify.com",
       ```
 
-4. In another terminal window, run `npm run dev` to build TailwindCSS styles. Before deploying to production, run `npm run build` to minify and optimize TailwindCSS styles.
+4. Run `npm run dev` to start a local development.
+
+      - This uploads the current theme to a store so you can preview it and keeps the TailwindCSS styles updated.
+      - The first time you run Shopify CLI, or anytime you switch stores, you must pass the `--store` parameter.
+
+5.  Before deploying to production, run `npm run build` to minify and optimize TailwindCSS styles.
 
 References for Shopify theme development:
 

@@ -4,15 +4,15 @@
   "description": "Using TailwindCSS in your Shopify theme",
   "scripts": {
     "test": "shopify theme check",
-    "dev": "concurrently \"shopify theme dev\" \"npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w\"",
-    "shop:dev": "shopify theme dev",
+    "dev": "npm-run-all --parallel shop:dev tw:dev",
+    "shop:dev": "shopify theme dev --store=bb-staged.myshopify.com",
     "tw:dev": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m -w",
     "tw:build": "npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.min.css -m && npx tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.build.css"
   },
   "author": "Jared Cornwall (https://github.com/jaredkc)",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^9.1.2",
+    "npm-run-all": "^4.1.5",
     "tailwindcss": "^3.4.17"
   }
 }
