@@ -354,6 +354,16 @@
     "main-page": {
       "name": "Page"
     },
+    "slideshow": {
+      "carousel": "Carousel",
+      "load_slide": "Load slide",
+      "loading": "Load slide",
+      "name": "Slideshow",
+      "next_slide": "Next slide",
+      "of": "of",
+      "previous_slide": "Previous slide",
+      "slide": "Slide"
+    },
     "quick_order_list": {
       "product_total": "Product subtotal",
       "view_cart": "View cart",
