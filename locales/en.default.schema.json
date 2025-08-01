@@ -15,12 +15,15 @@
   },
   "names": {
     "announcement": "Announcement",
-    "announcement_bar": "Announcement bar"
+    "announcement_bar": "Announcement bar",
+    "cart": "Cart"
   },
   "settings": {
     "background": "Background",
     "button_background": "Solid button background",
     "button_label": "Solid button label",
+    "cart_menu_info": "Shown when the cart is empty.",
+    "cart_menu": "Cart menu",
     "case": "Case",
     "color_scheme": "Color scheme",
     "color": "Color",

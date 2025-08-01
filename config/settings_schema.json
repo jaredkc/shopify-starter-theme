@@ -23,6 +23,17 @@
     ]
   },
   {
+    "name": "t:names:cart",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "cart_menu",
+        "label": "t:settings.cart_menu",
+        "info": "t:settings.cart_menu_info"
+      }
+    ]
+  },
+  {
     "name": "t:names.colors",
     "settings": [
       {
