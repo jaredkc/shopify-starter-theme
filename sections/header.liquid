@@ -1,13 +1,13 @@
 {% render 'search-dialog-modal' %}
 
 <sticky-header>
-  <header class="flex items-center justify-between px-4 py-2 text-center border-b md:py-4 md:px-8">
+  <header class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
     {%- if template.name == 'index' -%}
       <h1 class="m-0 text-base font-bold" itemscope itemtype="http://schema.org/Organization">
     {%- else -%}
       <div class="m-0 text-base font-bold" itemscope itemtype="http://schema.org/Organization">
     {%- endif -%}
-    <a href="/" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
+    <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
     {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
 
     {%- if section.settings.menu != blank -%}
