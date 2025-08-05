@@ -1,0 +1,70 @@
+<script src="{{ 'collection-links.js' | asset_url }}" defer="defer"></script>
+
+<div class="section-{{ section.id }}">
+  <collection-links>
+    <ul class="gap-2 pt-4 m-0 list-none scroll-x">
+      {%- for block in section.blocks -%}
+        {% comment %}
+          The common_section_id can be used to target the product-grid,
+          thanks to the Shopify [Section Rendering API](https://shopify.dev/docs/api/ajax/section-rendering).
+          Every section ID follows this format: `shopify-section-template--[section-id]__[section-name]
+        {% endcomment %}
+        {%- assign common_section_id = section.id | split: '__' -%}
+        <li {{ block.shopify_attributes }}>
+          <a
+            href="{{ block.settings.collection.url }}"
+            class="collection-link{% if collection.handle == block.settings.collection.handle %} collection-link--active{% endif %}"
+            data-section="{{ block.settings.collection.url }}?section_id={{ common_section_id[0] }}__product-grid"
+            data-target="#shopify-section-{{ common_section_id[0] }}__product-grid"
+          >
+            {%- if block.settings.collection.title != blank -%}
+              {{- block.settings.collection.title | escape -}}
+            {%- else -%}
+              {{ 'onboarding.collection_title' | t }}
+            {%- endif -%}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </collection-links>
+</div>
+
+{% schema %}
+{
+  "name": "Collection links",
+  "max_blocks": 12,
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [],
+  "blocks": [
+    {
+      "type": "featured_collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection links",
+      "blocks": [
+        {
+          "type": "featured_collection"
+        },
+        {
+          "type": "featured_collection"
+        },
+        {
+          "type": "featured_collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
