@@ -101,18 +101,13 @@
     }
 
     init() {
-      console.log('VideoAnimation initialized for:', this.container);
-      console.log('Video element found:', this.video);
-
       // Create intersection observer to detect when video is in viewport
       this.observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              console.log('Video entering viewport, playing...');
               this.playVideo();
             } else {
-              console.log('Video leaving viewport, pausing...');
               this.pauseVideo();
             }
           });
@@ -136,23 +131,13 @@
 
       // Handle video events
       this.video.addEventListener('loadedmetadata', () => {
-        console.log('Video metadata loaded, ready to play');
         // Check if video is already in viewport on load
         this.checkInitialVisibility();
       });
 
       this.video.addEventListener('canplay', () => {
-        console.log('Video can start playing');
         // Additional check when video is ready to play
         this.checkInitialVisibility();
-      });
-
-      this.video.addEventListener('play', () => {
-        console.log('Video started playing');
-      });
-
-      this.video.addEventListener('pause', () => {
-        console.log('Video paused');
       });
 
       // Handle video errors
@@ -174,12 +159,7 @@
         videoRect.width > 0 && videoRect.height > 0 && videoRect.top < window.innerHeight && videoRect.bottom > 0;
 
       if (isVisible && videoVisible && this.video.paused) {
-        console.log('Video already visible on page load, starting playback...');
         this.playVideo();
-      } else if (isVisible && videoVisible) {
-        console.log('Video already visible and playing on page load');
-      } else {
-        console.log('Video not visible on page load, waiting for scroll...');
       }
     }
 
@@ -210,27 +190,20 @@
 
   // Initialize all video animations on the page
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, looking for video animation blocks...');
     const videoContainers = document.querySelectorAll('.video-animation');
-    console.log('Found video animation containers:', videoContainers.length);
-
     initializeAndCheckVisibleVideos(videoContainers);
   });
 
   // Handle dynamic content loading (if using AJAX)
   document.addEventListener('shopify:section:load', (event) => {
-    console.log('Shopify section loaded:', event.target);
     const videoContainers = event.target.querySelectorAll('.video-animation');
-    console.log('Found video animation containers in section:', videoContainers.length);
-
     initializeAndCheckVisibleVideos(videoContainers);
   });
 
   // Reusable function to initialize video animations and check for already visible videos
   function initializeAndCheckVisibleVideos(videoContainers) {
     // Initialize all video animations
-    videoContainers.forEach((container, index) => {
-      console.log(`Initializing video animation ${index + 1}:`, container);
+    videoContainers.forEach((container) => {
       new VideoAnimation(container);
     });
 
@@ -245,7 +218,6 @@
             rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0;
 
           if (isVisible && video.paused) {
-            console.log(`Video ${index + 1} already visible and ready, starting playback...`);
             video.play().catch((error) => {
               console.warn(`Video ${index + 1} autoplay failed:`, error);
             });
