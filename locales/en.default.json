@@ -364,6 +364,19 @@
       "previous_slide": "Previous slide",
       "slide": "Slide"
     },
+    "video_animation": {
+      "name": "Video animation",
+      "video": "Video",
+      "video_info": "Shopify video files only. Will autoplay when in viewport.",
+      "video_settings": "Video settings",
+      "loop": "Loop video",
+      "aspect_ratio": "Aspect ratio",
+      "aspect_ratio_16_9": "16:9",
+      "aspect_ratio_5_4": "5:4",
+      "aspect_ratio_1_1": "1:1",
+      "aspect_ratio_match": "Match video",
+      "aspect_ratio_info": "Choose aspect ratio or match the video's natural ratio"
+    },
     "quick_order_list": {
       "product_total": "Product subtotal",
       "view_cart": "View cart",
