@@ -616,6 +616,39 @@ summary::-webkit-details-marker {
 }
 
 /**
+ * Alert messages
+ * TODO: connect to css variables. And theme color schemes?
+ */
+.alert {
+  background-color: var(--c-error-bg);
+  color: var(--c-error);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+}
+
+.alert--info {
+  background-color: #eff6ff;
+  border-color: #1e40af;
+  color: #1d4ed8;
+}
+
+.alert--success {
+  background-color: #f0fdf4;
+  border-color: #166534;
+  color: #047857;
+}
+
+.alert--error {
+  background-color: #fef2f2;
+  border-color: #f87171;
+  color: #991b1b;
+}
+
+.alert:empty {
+  display: none;
+}
+
+/**
  * Form errors output by {{ form.errors | default_errors }}
  * Aligns with .banner styles
  * https://shopify.dev/docs/liquid/reference/objects/form#form-errors
