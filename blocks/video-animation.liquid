@@ -11,7 +11,6 @@
 >
   {% if block.settings.video %}
     <div class="video-animation__container">
-      {% comment %} Video element - autoplays when in viewport {% endcomment %}
       {{
         block.settings.video
         | video_tag:
@@ -214,13 +213,28 @@
     console.log('DOM loaded, looking for video animation blocks...');
     const videoContainers = document.querySelectorAll('.video-animation');
     console.log('Found video animation containers:', videoContainers.length);
+
+    initializeAndCheckVisibleVideos(videoContainers);
+  });
+
+  // Handle dynamic content loading (if using AJAX)
+  document.addEventListener('shopify:section:load', (event) => {
+    console.log('Shopify section loaded:', event.target);
+    const videoContainers = event.target.querySelectorAll('.video-animation');
+    console.log('Found video animation containers in section:', videoContainers.length);
+
+    initializeAndCheckVisibleVideos(videoContainers);
+  });
+
+  // Reusable function to initialize video animations and check for already visible videos
+  function initializeAndCheckVisibleVideos(videoContainers) {
+    // Initialize all video animations
     videoContainers.forEach((container, index) => {
       console.log(`Initializing video animation ${index + 1}:`, container);
       new VideoAnimation(container);
     });
 
-    // Additional check for videos that might already be visible after a short delay
-    // This handles cases where videos load quickly and are already in viewport
+    // Check for videos already visible after a short delay
     setTimeout(() => {
       videoContainers.forEach((container, index) => {
         const video = container.querySelector('video');
@@ -239,38 +253,7 @@
         }
       });
     }, 100); // Small delay to ensure everything is rendered
-  });
-
-  // Handle dynamic content loading (if using AJAX)
-  document.addEventListener('shopify:section:load', (event) => {
-    console.log('Shopify section loaded:', event.target);
-    const videoContainers = event.target.querySelectorAll('.video-animation');
-    console.log('Found video animation containers in section:', videoContainers.length);
-    videoContainers.forEach((container, index) => {
-      console.log(`Initializing video animation ${index + 1} in section:`, container);
-      new VideoAnimation(container);
-    });
-
-    // Check for videos already visible in newly loaded sections
-    setTimeout(() => {
-      videoContainers.forEach((container, index) => {
-        const video = container.querySelector('video');
-        if (video && video.readyState >= 2) {
-          // HAVE_CURRENT_DATA
-          const rect = container.getBoundingClientRect();
-          const isVisible =
-            rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0;
-
-          if (isVisible && video.paused) {
-            console.log(`Section video ${index + 1} already visible and ready, starting playback...`);
-            video.play().catch((error) => {
-              console.warn(`Section video ${index + 1} autoplay failed:`, error);
-            });
-          }
-        }
-      });
-    }, 100);
-  });
+  }
 {% endjavascript %}
 
 {% schema %}
