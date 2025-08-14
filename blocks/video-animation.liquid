@@ -234,49 +234,41 @@
   "tag": null,
   "settings": [
     {
-      "type": "header",
-      "content": "Media"
-    },
-    {
       "type": "video",
       "id": "video",
-      "label": "t:sections.video_animation.settings.video.label",
-      "info": "t:sections.video_animation.settings.video.info"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.video_animation.settings.video_settings.content"
+      "label": "t:settings.video_source",
+      "info": "t:info.video_animation"
     },
     {
       "type": "checkbox",
       "id": "loop",
-      "label": "t:sections.video_animation.settings.loop.label",
+      "label": "t:settings.video_loop",
       "default": true
     },
     {
       "type": "select",
       "id": "aspect_ratio",
-      "label": "t:sections.video_animation.settings.aspect_ratio.label",
+      "label": "t:settings.aspect_ratio",
+      "info": "t:info.aspect_ratio",
       "options": [
         {
           "value": "56.25%",
-          "label": "t:sections.video_animation.settings.aspect_ratio.options__1.label"
+          "label": "t:options.aspect_ratio_16_9"
         },
         {
           "value": "125%",
-          "label": "t:sections.video_animation.settings.aspect_ratio.options__2.label"
+          "label": "t:options.aspect_ratio_5_4"
         },
         {
           "value": "100%",
-          "label": "t:sections.video_animation.settings.aspect_ratio.options__3.label"
+          "label": "t:options.aspect_ratio_1_1"
         },
         {
           "value": "match",
-          "label": "t:sections.video_animation.settings.aspect_ratio.options__4.label"
+          "label": "t:options.aspect_ratio_match"
         }
       ],
-      "default": "56.25%",
-      "info": "t:sections.video_animation.settings.aspect_ratio.info"
+      "default": "56.25%"
     }
   ],
   "presets": [
