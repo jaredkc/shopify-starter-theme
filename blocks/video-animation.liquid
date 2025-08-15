@@ -1,0 +1,280 @@
+{% comment %}
+  Video animation block that displays an image by default and autoplays video when in viewport
+  Supports Shopify video files only (no YouTube/Vimeo)
+  No video controls or audio
+{% endcomment %}
+
+<div
+  class="video-animation"
+  style="--aspect-ratio: {{ block.settings.aspect_ratio }};"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.video %}
+    <div class="video-animation__container">
+      {{
+        block.settings.video
+        | video_tag:
+          autoplay: false,
+          loop: block.settings.loop,
+          controls: false,
+          muted: true,
+          playsinline: true,
+          preload: 'metadata',
+          class: 'video-animation__video'
+      }}
+    </div>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .video-animation {
+    width: 100%;
+    position: relative;
+  }
+
+  .video-animation__container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: var(--aspect-ratio);
+    overflow: hidden;
+  }
+
+  .video-animation__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* When aspect ratio is set to match, video displays normally */
+  .video-animation[style*='--aspect-ratio: match'] video {
+    position: static;
+    width: auto;
+    height: auto;
+    object-fit: none;
+  }
+
+  /* Aspect ratio styles */
+  .video-animation[style*='--aspect-ratio: 100%'] .video-animation__container {
+    padding-bottom: 100%;
+  }
+
+  .video-animation[style*='--aspect-ratio: 80%'] .video-animation__container {
+    padding-bottom: 80%;
+  }
+
+  .video-animation[style*='--aspect-ratio: 56.25%'] .video-animation__container {
+    padding-bottom: 56.25%;
+  }
+
+  /* When aspect ratio is set to match video, let the video determine the size */
+  .video-animation[style*='--aspect-ratio: match'] .video-animation__container {
+    height: auto;
+    padding-bottom: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .video-animation__container {
+      padding-bottom: 75%; /* Default mobile aspect ratio */
+    }
+
+    /* Keep match aspect ratio videos normal on mobile */
+    .video-animation[style*='--aspect-ratio: match'] .video-animation__container {
+      padding-bottom: 0;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class VideoAnimation {
+    constructor(container) {
+      this.container = container;
+      this.video = container.querySelector('video');
+
+      if (this.video) {
+        this.init();
+      }
+    }
+
+    init() {
+      // Create intersection observer to detect when video is in viewport
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.playVideo();
+            } else {
+              this.pauseVideo();
+            }
+          });
+        },
+        {
+          threshold: 0.1, // Start playing when 10% visible
+          rootMargin: '50px', // Start playing 50px before entering viewport
+        }
+      );
+
+      this.observer.observe(this.container);
+
+      // Create resize observer to handle layout changes
+      this.resizeObserver = new ResizeObserver(() => {
+        // Re-check visibility when container size changes
+        if (this.video && this.video.readyState >= 2) {
+          this.checkInitialVisibility();
+        }
+      });
+      this.resizeObserver.observe(this.container);
+
+      // Handle video events
+      this.video.addEventListener('loadedmetadata', () => {
+        // Check if video is already in viewport on load
+        this.checkInitialVisibility();
+      });
+
+      this.video.addEventListener('canplay', () => {
+        // Additional check when video is ready to play
+        this.checkInitialVisibility();
+      });
+
+      // Handle video errors
+      this.video.addEventListener('error', (e) => {
+        console.error('Video error:', e);
+        console.warn('Video failed to load');
+      });
+    }
+
+    checkInitialVisibility() {
+      // Check if the video is already visible in the viewport on page load
+      const rect = this.container.getBoundingClientRect();
+      const isVisible =
+        rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0;
+
+      // Additional check: ensure the video element itself is visible
+      const videoRect = this.video.getBoundingClientRect();
+      const videoVisible =
+        videoRect.width > 0 && videoRect.height > 0 && videoRect.top < window.innerHeight && videoRect.bottom > 0;
+
+      if (isVisible && videoVisible && this.video.paused) {
+        this.playVideo();
+      }
+    }
+
+    playVideo() {
+      if (this.video && this.video.readyState >= 2) {
+        // HAVE_CURRENT_DATA
+        this.video.play().catch((error) => {
+          console.warn('Video autoplay failed:', error);
+        });
+      }
+    }
+
+    pauseVideo() {
+      if (this.video) {
+        this.video.pause();
+      }
+    }
+
+    destroy() {
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+      }
+    }
+  }
+
+  // Initialize all video animations on the page
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoContainers = document.querySelectorAll('.video-animation');
+    initializeAndCheckVisibleVideos(videoContainers);
+  });
+
+  // Handle dynamic content loading (if using AJAX)
+  document.addEventListener('shopify:section:load', (event) => {
+    const videoContainers = event.target.querySelectorAll('.video-animation');
+    initializeAndCheckVisibleVideos(videoContainers);
+  });
+
+  // Reusable function to initialize video animations and check for already visible videos
+  function initializeAndCheckVisibleVideos(videoContainers) {
+    // Initialize all video animations
+    videoContainers.forEach((container) => {
+      new VideoAnimation(container);
+    });
+
+    // Check for videos already visible after a short delay
+    setTimeout(() => {
+      videoContainers.forEach((container, index) => {
+        const video = container.querySelector('video');
+        if (video && video.readyState >= 2) {
+          // HAVE_CURRENT_DATA
+          const rect = container.getBoundingClientRect();
+          const isVisible =
+            rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0;
+
+          if (isVisible && video.paused) {
+            video.play().catch((error) => {
+              console.warn(`Video ${index + 1} autoplay failed:`, error);
+            });
+          }
+        }
+      });
+    }, 100); // Small delay to ensure everything is rendered
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:names.video_animation",
+  "tag": null,
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:settings.video_source",
+      "info": "t:info.video_animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "t:settings.video_loop",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "t:settings.aspect_ratio",
+      "info": "t:info.aspect_ratio",
+      "options": [
+        {
+          "value": "56.25%",
+          "label": "t:options.aspect_ratio_16_9"
+        },
+        {
+          "value": "80%",
+          "label": "t:options.aspect_ratio_5_4"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.aspect_ratio_1_1"
+        },
+        {
+          "value": "match",
+          "label": "t:options.aspect_ratio_match"
+        }
+      ],
+      "default": "56.25%"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.video_animation"
+    }
+  ]
+}
+{% endschema %}

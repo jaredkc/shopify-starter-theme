@@ -16,7 +16,8 @@
   "names": {
     "announcement": "Announcement",
     "announcement_bar": "Announcement bar",
-    "cart": "Cart"
+    "cart": "Cart",
+    "video_animation": "Video animation"
   },
   "settings": {
     "background": "Background",
@@ -30,11 +31,22 @@
     "colors": "Colors",
     "link": "Link",
     "secondary_button_label": "Outline button",
-    "text": "Text"
+    "text": "Text",
+    "video_source": "Video",
+    "video_loop": "Loop video",
+    "aspect_ratio": "Aspect ratio"
   },
   "options": {
     "default": "Default",
-    "uppercase": "Uppercase"
+    "uppercase": "Uppercase",
+    "aspect_ratio_16_9": "16:9",
+    "aspect_ratio_5_4": "5:4",
+    "aspect_ratio_1_1": "1:1",
+    "aspect_ratio_match": "Match media"
+  },
+  "info": {
+    "video_animation": "Will autoplay when in viewport.",
+    "aspect_ratio": "Choose aspect ratio or match the video's natural ratio"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
