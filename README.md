@@ -9,7 +9,6 @@ A Shopify 2.0 starter theme that focuses on performance, user experience, and si
 - For CSS, you will find a combination of TailwindCSS and traditional stylesheets. If something is used throughout the theme, standard CSS is used for consistency.
 - I have included solutions I have found helpful across multiple Shopify themes, many of which may be unique and useful.
 - English string translations for customer-facing content are included in the `locales` directory.
-- Translations for theme and section settings are not included. All the theme development I have done has been for custom themes in English, so managing translations for settings has not been a priority.
 
 ## Development
 

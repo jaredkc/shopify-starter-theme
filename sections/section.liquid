@@ -1,20 +1,23 @@
-<div
-  class="
-    spacing-style flex
-    {% if block.settings.column_on_mobile %}flex-col{% else %}flex-row{% endif %}
-    {% if block.settings.flex_wrap %}flex-wrap{% else %}flex-nowrap{% endif %}
-    {{ block.settings.justify_content }} {{ block.settings.align_items }} {{ block.settings.content_direction }}
-  "
-  style="gap: {{ block.settings.gap }}px; {% render 'spacing-style', settings: block.settings %}"
-  {{ block.shopify_attributes }}
->
-  {% content_for 'blocks' %}
+<div class="section section--height-{{ section.settings.section_height }} color-{{ section.settings.color_scheme }}">
+  <div class="{{ section.settings.section_width }}">
+    <div
+      class="
+        spacing-style flex
+        {% if section.settings.column_on_mobile %}flex-col{% else %}flex-row{% endif %}
+        {% if section.settings.flex_wrap %}flex-wrap{% else %}flex-nowrap{% endif %}
+        {{ section.settings.justify_content }} {{ section.settings.align_items }} {{ section.settings.content_direction }}
+      "
+      style="gap: {{ section.settings.gap }}px; {% render 'spacing-style', settings: section.settings %}"
+    >
+      {% content_for 'blocks' %}
+    </div>
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "t:names.group",
-  "tag": null,
+  "name": "t:names.custom_section",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
   "settings": [
     {
       "type": "header",
@@ -41,14 +44,14 @@
       "id": "column_on_mobile",
       "label": "t:settings.column_on_mobile",
       "default": true,
-      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' }}"
+      "visible_if": "{{ section.settings.content_direction == 'md:flex-row' }}"
     },
     {
       "type": "checkbox",
       "id": "flex_wrap",
       "label": "t:settings.wrap_items",
       "default": false,
-      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' or block.settings.column_on_mobile == false }}"
+      "visible_if": "{{ section.settings.content_direction == 'md:flex-row' or section.settings.column_on_mobile == false }}"
     },
     {
       "type": "select",
@@ -114,6 +117,64 @@
     },
     {
       "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "small",
+          "label": "t:options.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.large"
+        },
+        {
+          "value": "full-screen",
+          "label": "t:options.full_screen"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
       "content": "t:content.padding"
     },
     {
@@ -124,7 +185,7 @@
       "max": 104,
       "step": 8,
       "unit": "px",
-      "default": 0
+      "default": 24
     },
     {
       "type": "range",
@@ -134,40 +195,12 @@
       "max": 104,
       "step": 8,
       "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-start",
-      "label": "t:settings.left",
-      "min": 0,
-      "max": 104,
-      "step": 8,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-end",
-      "label": "t:settings.right",
-      "min": 0,
-      "max": 104,
-      "step": 8,
-      "unit": "px",
-      "default": 0
-    }
-  ],
-  "blocks": [
-    {
-      "type": "@theme"
-    },
-    {
-      "type": "@app"
+      "default": 24
     }
   ],
   "presets": [
     {
-      "name": "t:names.group"
+      "name": "t:names.custom_section"
     }
   ]
 }
