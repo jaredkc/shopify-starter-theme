@@ -27,6 +27,7 @@
     "video_animation": "Video animation"
   },
   "settings": {
+    "align_items": "Align items",
     "aspect_ratio": "Aspect ratio",
     "auto": "Auto",
     "background": "Background",
@@ -41,10 +42,15 @@
     "color": "Color",
     "colors": "Colors",
     "column": "Column",
+    "content_direction": "Content direction",
     "default": "Default",
     "end": "End",
     "full_screen": "Full screen",
     "full": "Full",
+    "gap": "Gap",
+    "height": "Height",
+    "inherit_color_scheme": "Inherit color scheme",
+    "justify_content": "Justify content",
     "large": "Large",
     "left": "Left",
     "link": "Link",
@@ -64,6 +70,7 @@
     "uppercase": "Uppercase",
     "video_loop": "Loop video",
     "video_source": "Video",
+    "width": "Width",
     "wrap": "Wrap"
   },
   "options": {

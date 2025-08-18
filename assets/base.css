@@ -170,6 +170,47 @@ h5,
 /**
  * Common layout
  */
+.section {
+  --section-min-height: var(--section-min-height, auto);
+  min-height: var(--section-min-height);
+}
+
+.section--height-small {
+  --section-min-height: var(--section-height-small);
+}
+
+.section--height-medium {
+  --section-min-height: var(--section-height-medium);
+}
+
+.section--height-large {
+  --section-min-height: var(--section-height-large);
+}
+
+.section--height-full-screen {
+  --section-min-height: 100svh;
+}
+
+.spacing-style {
+  --spacing-scale: 0.66;
+
+  @media screen and (min-width: 990px) {
+    --spacing-scale: 1;
+  }
+
+  --padding-block: 0px;
+  --padding-block-start: var(--padding-block, 0px);
+  --padding-block-end: var(--padding-block, 0px);
+  --padding-inline: 0px;
+  --padding-inline-start: var(--padding-inline, 0px);
+  --padding-inline-end: var(--padding-inline, 0px);
+}
+
+.spacing-style {
+  padding-block: var(--padding-block-start) var(--padding-block-end);
+  padding-inline: var(--padding-inline-start) var(--padding-inline-end);
+}
+
 .section-pt-sm {
   padding-top: 2rem;
 }

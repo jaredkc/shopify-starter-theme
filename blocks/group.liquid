@@ -4,6 +4,7 @@
     {% if block.settings.column_on_mobile %}flex-col{% else %}flex-row{% endif %}
     {% if block.settings.flex_wrap %}flex-wrap{% else %}flex-nowrap{% endif %}
     {{ block.settings.justify_content }} {{ block.settings.align_items }} {{ block.settings.content_direction }}
+    {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }}{% endif %}
   "
   style="gap: {{ block.settings.gap }}px; {% render 'spacing-style', settings: block.settings %}"
   {{ block.shopify_attributes }}
@@ -111,6 +112,23 @@
       "unit": "px",
       "label": "t:settings.gap",
       "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:settings.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
     },
     {
       "type": "header",
