@@ -23,6 +23,7 @@
     "cart": "Cart",
     "custom_section": "Custom section",
     "group": "Group",
+    "image": "Image",
     "section": "Section",
     "video_animation": "Video animation"
   },
@@ -42,6 +43,7 @@
     "color": "Color",
     "colors": "Colors",
     "column": "Column",
+    "column_on_mobile": "Column on mobile",
     "content_direction": "Content direction",
     "default": "Default",
     "end": "End",
@@ -49,17 +51,21 @@
     "full": "Full",
     "gap": "Gap",
     "height": "Height",
+    "image": "Image",
     "inherit_color_scheme": "Inherit color scheme",
     "justify_content": "Justify content",
     "large": "Large",
+    "layout": "Layout",
     "left": "Left",
     "link": "Link",
+    "max_width": "Max width",
     "medium": "Medium",
     "no_wrap": "No wrap",
     "page": "Page",
     "right": "Right",
     "row": "Row",
     "secondary_button_label": "Outline button",
+    "set_max_width": "Set max width",
     "small": "Small",
     "space_around": "Space around",
     "space_between": "Space between",
@@ -71,7 +77,8 @@
     "video_loop": "Loop video",
     "video_source": "Video",
     "width": "Width",
-    "wrap": "Wrap"
+    "wrap": "Wrap",
+    "wrap_items": "Wrap items"
   },
   "options": {
     "aspect_ratio_1_1": "1:1",
@@ -100,11 +107,12 @@
     "stretch": "Stretch",
     "top": "Top",
     "uppercase": "Uppercase",
-    "wrap": "Wrap"
+    "wrap_items": "Wrap items"
   },
   "info": {
-    "video_animation": "Will autoplay when in viewport.",
-    "aspect_ratio": "Choose aspect ratio or match the video's natural ratio"
+    "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
+    "max_width": "Maximum width of the container (in pixels)",
+    "video_animation": "Will autoplay when in viewport."
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

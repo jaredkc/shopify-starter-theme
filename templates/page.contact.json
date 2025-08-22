@@ -20,85 +20,6 @@
       "type": "main-page",
       "settings": {}
     },
-    "custom_section_axBcwp": {
-      "type": "section",
-      "blocks": {
-        "group_DbabYT": {
-          "type": "group",
-          "name": "Group",
-          "settings": {
-            "content_direction_mobile": "flex-col",
-            "content_direction": "md:flex-row",
-            "horizontal_alignment": "justify-start",
-            "vertical_alignment": "items-start",
-            "gap": 16,
-            "flex_wrap": "flex-wrap",
-            "margin_top": 0,
-            "margin_bottom": 0
-          },
-          "blocks": {
-            "image_arLAxH": {
-              "type": "image",
-              "name": "Image",
-              "settings": {
-                "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png"
-              },
-              "blocks": {}
-            },
-            "group_KJJnVW": {
-              "type": "group",
-              "name": "Group",
-              "settings": {
-                "content_direction_mobile": "flex-col",
-                "content_direction": "md:flex-col",
-                "horizontal_alignment": "justify-start",
-                "vertical_alignment": "items-start",
-                "gap": 16,
-                "flex_wrap": "flex-wrap",
-                "margin_top": 0,
-                "margin_bottom": 0
-              },
-              "blocks": {
-                "heading_r4JBpA": {
-                  "type": "heading",
-                  "name": "Heading",
-                  "settings": {
-                    "text": "Welcome to our store",
-                    "size": "text-2xl"
-                  },
-                  "blocks": {}
-                },
-                "paragraph_dkid9n": {
-                  "type": "paragraph",
-                  "name": "Paragraph",
-                  "settings": {
-                    "text": "Insert your catchphrase here (or something else).",
-                    "size": "text-lg"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "heading_r4JBpA",
-                "paragraph_dkid9n"
-              ]
-            }
-          },
-          "block_order": [
-            "image_arLAxH",
-            "group_KJJnVW"
-          ]
-        }
-      },
-      "block_order": [
-        "group_DbabYT"
-      ],
-      "disabled": true,
-      "name": "Custom section",
-      "settings": {
-        "color_scheme": "scheme-2"
-      }
-    },
     "form": {
       "type": "contact-form",
       "settings": {
@@ -109,7 +30,6 @@
   "order": [
     "form_submit_app_proxy_MwGgkU",
     "main",
-    "custom_section_axBcwp",
     "form"
   ]
 }

@@ -1,26 +1,74 @@
-<div {{ block.shopify_attributes }}>
-  {% render 'image',
-    image: block.settings.image,
-    widths: '320, 375, 640, 750, 960, 1125, 1280, 1440, 1536, 1920, 2250, 2560, 2880, 3840, 640, 750, 1280, 1500, 1920, 2250, 2560, 2880, 3072, 3840, 4500, 5120, 5760, 7680, 960, 1920, 2250, 2880, 3375, 3840, 4320, 4608, 5760, 6750, 7680, 8640, 11520',
-    sizes: '(min-width: 1200px) 1200px, 100vw',
-    placeholder: true
-  %}
+{% liquid
+  assign media_width_desktop = '100vw'
+  assign media_width_mobile = '100vw'
+  assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+  assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+%}
+
+<div
+  class="media-container image-block"
+  style="--aspect-ratio: {{ block.settings.aspect_ratio }};"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.image %}
+    <div class="media-container__wrapper">
+      {{
+        block.settings.image
+        | image_url: width: 3840
+        | image_tag:
+          width: block.settings.image.width,
+          widths: widths,
+          height: block.settings.image.height,
+          sizes: sizes,
+          placeholder: true
+      }}
+    </div>
+  {% else %}
+    <div class="media-container__wrapper">
+      {{ 'image' | placeholder_svg_tag: 'media-container__placeholder' }}
+    </div>
+  {% endif %}
 </div>
 
 {% schema %}
 {
-  "name": "Image",
+  "name": "t:names.image",
   "tag": null,
   "settings": [
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "t:settings.image"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "t:settings.aspect_ratio",
+      "info": "t:info.aspect_ratio",
+      "options": [
+        {
+          "value": "56.25%",
+          "label": "t:options.aspect_ratio_16_9"
+        },
+        {
+          "value": "80%",
+          "label": "t:options.aspect_ratio_5_4"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.aspect_ratio_1_1"
+        },
+        {
+          "value": "match",
+          "label": "t:options.aspect_ratio_match"
+        }
+      ],
+      "default": "56.25%"
     }
   ],
   "presets": [
     {
-      "name": "Image"
+      "name": "t:names.image"
     }
   ]
 }
