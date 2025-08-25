@@ -1,0 +1,132 @@
+{% liquid
+  assign modal_id = 'modal-' | append: block.id
+  assign button_id = 'button-' | append: block.id
+%}
+
+<div class="modal-button-block" {{ block.shopify_attributes }}>
+  {% comment %} Button that opens the modal  {% endcomment %}
+  <dialog-opener data-dialog="#{{ modal_id }}">
+    <button
+      id="{{ button_id }}"
+      class="btn btn--{{ block.settings.button_style }}"
+      type="button"
+    >
+      {{ block.settings.button_label | escape }}
+    </button>
+  </dialog-opener>
+
+  {% comment %} Modal dialog {% endcomment %}
+  <dialog-modal id="{{ modal_id }}">
+    <dialog
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="{{ modal_id }}-heading"
+    >
+      {% comment %} Close button {% endcomment %}
+      <form method="dialog" class="dialog-close">
+        <button aria-label="{{ 'accessibility.close' | t }}">
+          <span class="sr-only">{{ 'accessibility.close' | t }}</span>
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </button>
+      </form>
+
+      {% comment %} Modal content {% endcomment %}
+      <div class="dialog-content">
+        {% if block.settings.modal_image %}
+          {% comment %} TODO: image aspect ratio? {% endcomment %}
+          <div class="modal-image">
+            {{
+              block.settings.modal_image
+              | image_url: width: 800
+              | image_tag: alt: block.settings.modal_image.alt
+              | default: 'Modal image', loading: 'lazy'
+            }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.modal_heading != blank %}
+          <h2 id="{{ modal_id }}-heading">
+            {{ block.settings.modal_heading }}
+          </h2>
+        {% endif %}
+
+        {% if block.settings.modal_description != blank %}
+          <div class="rte">
+            {{ block.settings.modal_description }}
+          </div>
+        {% endif %}
+      </div>
+    </dialog>
+  </dialog-modal>
+</div>
+
+{% schema %}
+{
+  "name": "t:names.modal_button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:settings.label",
+      "default": "Open modal"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:settings.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings.secondary"
+        },
+        {
+          "value": "text",
+          "label": "t:settings.text"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "t:content.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "modal_image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "modal_heading",
+      "label": "t:settings.heading",
+      "default": "Modal Title"
+    },
+    {
+      "type": "richtext",
+      "id": "modal_description",
+      "label": "t:settings.description",
+      "default": "<p>Add your modal content description here.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.modal_button",
+      "settings": {
+        "button_label": "Open Modal",
+        "button_style": "primary",
+        "modal_heading": "Welcome to our store",
+        "modal_description": "<p>This is a sample modal that can contain any content you'd like to display to your customers.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}

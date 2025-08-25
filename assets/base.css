@@ -417,6 +417,19 @@ h5,
   color: var(--input-accent-dark);
 }
 
+.btn--text {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--c-link);
+  padding: var(--input-pad-y) var(--input-pad-x);
+}
+.btn--text:hover,
+.btn--text:focus,
+.btn--text:active {
+  background-color: var(--input-accent-light);
+  color: var(--c-link-dark);
+}
+
 .btn-link {
   background-color: transparent;
   color: var(--c-link);
@@ -928,7 +941,12 @@ summary::-webkit-details-marker {
 /**
  * Dialog modals
  */
+/* !important is to reset Tailwind's dialog positioning to restore default centered behavior */
 dialog {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  margin: 0 !important;
   max-height: 90dvh;
   max-width: 90dvw;
   padding: 0;
@@ -951,12 +969,12 @@ dialog {
 
 dialog[open] {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, -50%) translateY(0);
 }
 
 dialog {
   opacity: 0;
-  transform: translateY(10%);
+  transform: translate(-50%, -50%) translateY(10%);
   transition: opacity 250ms ease-out, transform 250ms ease-out, overlay 250ms ease-out allow-discrete,
     display 250ms ease-out allow-discrete;
   /* Equivalent to: transition: all 250ms allow-discrete; */
@@ -965,7 +983,7 @@ dialog {
 @starting-style {
   dialog[open] {
     opacity: 0;
-    transform: translateY(10%);
+    transform: translate(-50%, -50%) translateY(10%);
   }
 }
 
