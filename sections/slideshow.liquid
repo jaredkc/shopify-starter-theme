@@ -116,7 +116,7 @@
     </div>
 
     {% comment %} Slide show controls {% endcomment %}
-    {% if section.settings.show_controls %}
+    {% if section.settings.show_controls and section.blocks.size > 1 %}
       <div class="mb-4 lg:mb-8 slideshow__controls">
         <button
           class="slideshow__button"
