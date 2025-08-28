@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - 'templates/*.json'
       - 'config/*.json'
-      - 'locales/*.json'
       - 'sections/*.json'
   pull_request:
     types: [closed]
@@ -16,7 +15,6 @@ on:
     paths-ignore:
       - 'templates/*.json'
       - 'config/*.json'
-      - 'locales/*.json'
       - 'sections/*.json'
 
 jobs:
