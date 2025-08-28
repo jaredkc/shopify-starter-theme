@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -14,13 +14,15 @@
       "blocks": {
         "intro": {
           "type": "intro",
-          "settings": {
-          }
+          "settings": {}
+        },
+        "description_EMMFBK": {
+          "type": "description",
+          "settings": {}
         },
         "price": {
           "type": "price",
-          "settings": {
-          }
+          "settings": {}
         },
         "variant_select": {
           "type": "variant_select",
@@ -30,14 +32,7 @@
         },
         "quantity_select": {
           "type": "quantity_select",
-          "settings": {
-          }
-        },
-        "recharge_subscriptions_subscription_widget_4HJdGb": {
-          "type": "shopify:\/\/apps\/recharge-subscriptions\/blocks\/subscription-widget\/371eed76-0b44-4869-9813-730372ea378e",
-          "settings": {
-            "product": "{{product}}"
-          }
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -49,30 +44,17 @@
       },
       "block_order": [
         "intro",
+        "description_EMMFBK",
         "price",
         "variant_select",
         "quantity_select",
-        "recharge_subscriptions_subscription_widget_4HJdGb",
         "buy_buttons"
       ],
-      "settings": {
-      }
+      "settings": {}
     },
     "1715788398f5a9d7ec": {
       "type": "apps",
-      "blocks": {
-        "yotpo_product_reviews_ugc_reviews_4EKHnJ": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        }
-      },
-      "block_order": [
-        "yotpo_product_reviews_ugc_reviews_4EKHnJ"
-      ],
-      "settings": {
-      }
+      "settings": {}
     },
     "recommendations": {
       "type": "product-recommendations",
