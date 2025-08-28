@@ -9,23 +9,24 @@
  */
 {
   "current": {
+    "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#FFFFFF",
+          "background": "#ffffff",
           "text": "#121212",
           "button": "#121212",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button_label": "#121212"
         }
       },
       "scheme-2": {
         "settings": {
           "background": "#242833",
-          "text": "#FFFFFF",
-          "button": "#FFFFFF",
+          "text": "#ffffff",
+          "button": "#467C99",
           "button_label": "#000000",
-          "secondary_button_label": "#FFFFFF"
+          "secondary_button_label": "#ffffff"
         }
       }
     }
