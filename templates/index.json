@@ -55,82 +55,11 @@
         "title": "Featured collection",
         "description": "<p>From the customizer</p>",
         "show_description": true,
-        "collection": "test-products",
-        "products_to_show": 8,
+        "collection": "automated-collection",
+        "products_to_show": 4,
         "show_view_all": true,
         "show_vendor": true,
         "show_rating": false
-      }
-    },
-    "video_background_3tTcgy": {
-      "type": "video-background",
-      "blocks": {
-        "heading_BGTpJ7": {
-          "type": "heading",
-          "name": "Heading",
-          "settings": {
-            "text": "Welcome to our store",
-            "size": "text-4xl"
-          },
-          "blocks": {}
-        },
-        "group_MnQU4U": {
-          "type": "group",
-          "name": "Group",
-          "settings": {
-            "content_direction": "md:flex-row",
-            "column_on_mobile": true,
-            "flex_wrap": false,
-            "justify_content": "justify-start",
-            "align_items": "items-start",
-            "gap": 16,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "button_eCFWVf": {
-              "type": "button",
-              "name": "Button",
-              "settings": {
-                "button_label": "Primary CTA",
-                "button_link": "shopify://collections/all",
-                "button_style": "primary"
-              },
-              "blocks": {}
-            },
-            "button_Ybdwqy": {
-              "type": "button",
-              "name": "Button",
-              "settings": {
-                "button_label": "Secondary CTA",
-                "button_link": "shopify://collections/all",
-                "button_style": "primary"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "button_eCFWVf",
-            "button_Ybdwqy"
-          ]
-        }
-      },
-      "block_order": [
-        "heading_BGTpJ7",
-        "group_MnQU4U"
-      ],
-      "name": "Video background",
-      "settings": {
-        "video": "",
-        "overlay_opacity": 0,
-        "text_color": "text-white",
-        "content_position": "justify-center",
-        "media_height": "bg-video--sm",
-        "width": "section-full"
       }
     },
     "email_signup": {
@@ -144,7 +73,6 @@
   "order": [
     "hero_banner",
     "featured_collection",
-    "video_background_3tTcgy",
     "email_signup"
   ]
 }
