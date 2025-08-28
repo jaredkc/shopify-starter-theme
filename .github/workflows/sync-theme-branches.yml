@@ -1,0 +1,86 @@
+name: Sync Theme Branches
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'templates/*.json'
+      - 'config/*.json'
+      - 'sections/*.json'
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths-ignore:
+      - 'templates/*.json'
+      - 'config/*.json'
+      - 'sections/*.json'
+
+jobs:
+  sync-stores:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        store: [live/site2]  # Add your store branches here: [live/US, live/CA]
+      fail-fast: false  # Continue with other stores if one fails
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better merge resolution
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Checkout target branch
+        run: |
+          # Check if the target branch exists remotely
+          if git ls-remote --heads origin ${{ matrix.store }} | grep -q ${{ matrix.store }}; then
+            # Branch exists, checkout and track it
+            git checkout -b ${{ matrix.store }} origin/${{ matrix.store }}
+          else
+            # Branch doesn't exist, create it from main
+            echo "Branch ${{ matrix.store }} doesn't exist, creating from main..."
+            git checkout -b ${{ matrix.store }} main
+            git push -u origin ${{ matrix.store }}
+          fi
+
+      - name: Merge main into ${{ matrix.store }}
+        id: merge
+        run: |
+          # Check if we're already up to date
+          if git merge-base --is-ancestor main HEAD; then
+            echo "Branch ${{ matrix.store }} is already up to date with main"
+            exit 0
+          fi
+
+          # Perform the merge directly
+          if git merge --no-ff main -m "Auto-sync from main branch [skip ci]"; then
+            echo "Merge successful, pushing changes..."
+            git push origin ${{ matrix.store }}
+          else
+            echo "Merge conflict detected in ${{ matrix.store }} branch"
+            echo "::error::Merge conflict in ${{ matrix.store }} branch"
+            git merge --abort
+            exit 1
+          fi
+
+      - name: Verify merge
+        run: |
+          # Check if the merge was successful
+          git log --oneline -5
+
+      - name: Notify success
+        if: success()
+        run: |
+          echo "✅ Successfully synced ${{ matrix.store }} with main branch"
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Failed to sync ${{ matrix.store }} with main branch"
+          echo "Please check for merge conflicts and resolve manually"
