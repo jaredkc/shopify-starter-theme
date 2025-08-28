@@ -23,7 +23,7 @@
     ]
   },
   {
-    "name": "t:names:cart",
+    "name": "t:names.cart",
     "settings": [
       {
         "type": "link_list",
