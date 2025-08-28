@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "cart_menu": "customer-account-main-menu",
     "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
