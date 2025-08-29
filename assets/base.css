@@ -96,11 +96,6 @@ pre {
 /**
  * Typography
  */
-h1,
-h2,
-h3,
-h4,
-h5,
 .h0,
 .h1,
 .h2,
@@ -117,27 +112,22 @@ h5,
   font-size: 2.5rem; /* 40px */
 }
 
-h1,
 .h1 {
   font-size: 1.875rem; /* 30px */
 }
 
-h2,
 .h2 {
   font-size: 1.75rem; /* 28px */
 }
 
-h3,
 .h3 {
   font-size: 1.25rem; /* 20px */
 }
 
-h4,
 .h4 {
   font-size: 1.125rem; /* 18px */
 }
 
-h5,
 .h5 {
   font-size: 1rem; /* 16px */
 }
@@ -146,15 +136,12 @@ h5,
   .h0 {
     font-size: 3.25rem; /* 52px */
   }
-  h1,
   .h1 {
     font-size: 2.5rem; /* 40px */
   }
-  h2,
   .h2 {
     font-size: 1.875rem; /* 30px */
   }
-  h3,
   .h3 {
     font-size: 1.5rem; /* 24px */
   }
@@ -290,6 +277,26 @@ h5,
 .rte h6 {
   margin-top: 1.25em;
   margin-bottom: 1rem;
+}
+
+.rte h1 {
+  font-size: clamp(32px, 2.78vw, 40px);
+}
+
+.rte h2 {
+  font-size: clamp(24px, 2.22vw, 32px);
+}
+
+.rte h3 {
+  font-size: clamp(20px, 1.67vw, 24px);
+}
+
+.rte h4 {
+  font-size: clamp(18px, 1.39vw, 20px);
+}
+
+.rte h5 {
+  font-size: clamp(16px, 1.25vw, 18px);
 }
 
 .rte > p:first-child {
