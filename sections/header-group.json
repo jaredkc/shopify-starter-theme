@@ -11,6 +11,28 @@
   "name": "Header",
   "type": "header",
   "sections": {
+    "announcement_bar_QEwdcb": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_NajVCp": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Shop our latest arrivals!",
+            "link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "announcement_NajVCp"
+      ],
+      "name": "Announcement bar",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "case": "none"
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -19,6 +41,7 @@
     }
   },
   "order": [
+    "announcement_bar_QEwdcb",
     "header"
   ]
 }
