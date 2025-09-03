@@ -15,8 +15,8 @@
         "heading_74dpCk": {
           "type": "heading",
           "settings": {
-            "heading": "Hero Banner - new",
-            "heading_size": "text-3xl"
+            "heading": "Hero banner title",
+            "heading_size": "text-5xl"
           }
         },
         "text_jpAPVk": {
@@ -40,6 +40,7 @@
         "button_kajMGD"
       ],
       "settings": {
+        "image": "shopify://shop_images/theme_cover_image.jpg",
         "height": "h-[600px] md:h-[750px]",
         "desktop_content_position": "md:justify-start md:items-start",
         "content_alignment": "text-left",
