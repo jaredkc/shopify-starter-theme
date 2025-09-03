@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Shop our latest arrivals!",
+            "text": "Free shipping, because we don't actually ship anything.",
             "link": ""
           },
           "blocks": {}
