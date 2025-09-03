@@ -30,7 +30,7 @@
       "name": "Announcement bar",
       "settings": {
         "color_scheme": "scheme-2",
-        "case": "none"
+        "case": "text-caps"
       }
     },
     "header": {
