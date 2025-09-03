@@ -16,9 +16,32 @@
       "settings": {
         "menu": "main-menu"
       }
+    },
+    "announcement_bar_BmmHrC": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_bgtUQa": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Shop our latest arrivals!",
+            "link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "announcement_bgtUQa"
+      ],
+      "name": "Announcement bar",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "case": "none"
+      }
     }
   },
   "order": [
-    "header"
+    "header",
+    "announcement_bar_BmmHrC"
   ]
 }
