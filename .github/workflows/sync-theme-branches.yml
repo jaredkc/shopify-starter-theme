@@ -5,17 +5,19 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'templates/*.json'
-      - 'config/*.json'
+      - 'config/markets.json'
+      - 'config/settings_data.json'
       - 'sections/*.json'
+      - 'templates/*.json'
   pull_request:
     types: [closed]
     branches:
       - main
     paths-ignore:
-      - 'templates/*.json'
-      - 'config/*.json'
+      - 'config/markets.json'
+      - 'config/settings_data.json'
       - 'sections/*.json'
+      - 'templates/*.json'
 
 jobs:
   sync-stores:
