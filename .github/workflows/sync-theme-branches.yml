@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
+    paths-ignore: # Theme specific files, also needed in .gitattributes below.
       - 'config/markets.json'
       - 'config/settings_data.json'
       - 'sections/*.json'
@@ -60,16 +60,33 @@ jobs:
             exit 0
           fi
 
-          # Perform the merge directly
+          # Merge main into target branch, automatically resolving conflicts in ignored files
+          echo "Merging main into ${{ matrix.store }} with automatic conflict resolution..."
+
+          # Set up merge strategy to automatically resolve conflicts in ignored files
+          git config merge.ours.driver true
+
+          # Create .gitattributes to use 'ours' strategy for ignored files
+          cat > .gitattributes << 'EOF'
+          config/markets.json merge=ours
+          config/settings_data.json merge=ours
+          sections/*.json merge=ours
+          templates/*.json merge=ours
+          EOF
+
+          # Perform the merge
           if git merge --no-ff main -m "Auto-sync from main branch [skip ci]"; then
             echo "Merge successful, pushing changes..."
             git push origin ${{ matrix.store }}
           else
-            echo "Merge conflict detected in ${{ matrix.store }} branch"
-            echo "::error::Merge conflict in ${{ matrix.store }} branch"
+            echo "::error::Merge conflict in non-ignored files"
             git merge --abort
             exit 1
           fi
+
+          # Clean up
+          rm -f .gitattributes
+          git config --unset merge.ours.driver
 
       - name: Verify merge
         run: |
