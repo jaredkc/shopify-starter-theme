@@ -35,13 +35,36 @@
       ],
       "name": "Announcement bar",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "case": "none"
+      }
+    },
+    "announcement_bar_TwkdpM": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_yr7j3j": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Shop our latest arrivals!",
+            "link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "announcement_yr7j3j"
+      ],
+      "name": "Announcement bar",
+      "settings": {
+        "color_scheme": "scheme-2",
         "case": "none"
       }
     }
   },
   "order": [
+    "announcement_bar_BmmHrC",
     "header",
-    "announcement_bar_BmmHrC"
+    "announcement_bar_TwkdpM"
   ]
 }
