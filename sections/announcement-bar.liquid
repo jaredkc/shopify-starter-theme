@@ -1,4 +1,4 @@
-<div class="announcement-bar color-{{ section.settings.color_scheme }}">
+<div class="announcement-bar py-2 text-sm {{ section.settings.case }} color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     {% content_for 'blocks' %}
   </div>
@@ -13,7 +13,7 @@
   },
   "blocks": [
     {
-      "type": "_announcement",
+      "type": "_announcement"
     }
   ],
   "settings": [
@@ -37,7 +37,7 @@
           "label": "t:options.default"
         },
         {
-          "value": "uppercase",
+          "value": "text-caps",
           "label": "t:options.uppercase"
         }
       ],
