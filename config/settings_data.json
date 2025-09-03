@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "cart_menu": "customer-account-main-menu",
+    "cart_menu": "footer",
     "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
@@ -25,7 +25,7 @@
         "settings": {
           "background": "#242833",
           "text": "#ffffff",
-          "button": "#467C99",
+          "button": "#467c99",
           "button_label": "#000000",
           "secondary_button_label": "#ffffff"
         }
