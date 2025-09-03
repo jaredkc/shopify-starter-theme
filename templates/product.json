@@ -12,8 +12,8 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "intro": {
-          "type": "intro",
+        "title_qCNKqc": {
+          "type": "title",
           "settings": {}
         },
         "description_EMMFBK": {
@@ -43,7 +43,7 @@
         }
       },
       "block_order": [
-        "intro",
+        "title_qCNKqc",
         "description_EMMFBK",
         "price",
         "variant_select",
