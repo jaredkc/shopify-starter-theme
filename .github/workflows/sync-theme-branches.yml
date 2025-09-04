@@ -75,6 +75,7 @@ jobs:
           EOF
 
           # Perform the merge
+          # [skip ci] is used to skip the CI/CD pipeline and avoid infinite loops
           if git merge --no-ff main -m "Auto-sync from main branch [skip ci]"; then
             echo "Merge successful, pushing changes..."
             git push origin ${{ matrix.store }}
