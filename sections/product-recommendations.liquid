@@ -12,13 +12,18 @@
       <ul class="flex flex-wrap p-0 list-none">
         {%- for product in recommendations.products -%}
           <li class="w-1/2 md:w-1/4">
-            <a href="{{ product.url }}" class="block p-4 text-center transition duration-150 ease-in-out hover:scale-105 hover:shadow-md">
-              <img
-                src="{{ product.featured_image | image_url: '300x300' }}"
-                alt="{{ product.featured_image.alt }}"
-                width="300"
-                height="300"
-              >
+            <a
+              href="{{ product.url }}"
+              class="block p-4 text-center transition duration-150 ease-in-out hover:scale-105 hover:shadow-md"
+            >
+              {{
+                product.featured_image
+                | image_url: width: 600
+                | image_tag:
+                  alt: product.featured_image.alt,
+                  widths: '150, 300, 600',
+                  sizes: '(min-width: 768px) 25vw, 50vw'
+              }}
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
