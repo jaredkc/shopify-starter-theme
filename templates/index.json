@@ -41,8 +41,8 @@
       ],
       "settings": {
         "image": "shopify://shop_images/theme_cover_image.jpg",
-        "height": "h-[600px] md:h-[750px]",
-        "desktop_content_position": "md:justify-start md:items-start",
+        "height": "adapt",
+        "desktop_content_position": "md:justify-start md:items-center",
         "content_alignment": "text-left",
         "content_theme": "light",
         "content_background_opacity": 90,
@@ -62,18 +62,10 @@
         "show_vendor": true,
         "show_rating": false
       }
-    },
-    "email_signup": {
-      "type": "email-signup",
-      "settings": {
-        "headline": "Subscribe to our emails",
-        "description": ""
-      }
     }
   },
   "order": [
     "hero_banner",
-    "featured_collection",
-    "email_signup"
+    "featured_collection"
   ]
 }
