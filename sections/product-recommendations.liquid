@@ -16,14 +16,18 @@
               href="{{ product.url }}"
               class="block p-4 text-center transition duration-150 ease-in-out hover:scale-105 hover:shadow-md"
             >
-              {{
-                product.featured_image
-                | image_url: width: 600
-                | image_tag:
-                  alt: product.featured_image.alt,
-                  widths: '150, 300, 600',
-                  sizes: '(min-width: 768px) 25vw, 50vw'
-              }}
+              {% if product.featured_image %}
+                {{
+                  product.featured_image
+                  | image_url: width: 600
+                  | image_tag:
+                    alt: product.featured_image.alt,
+                    widths: '150, 300, 600',
+                    sizes: '(min-width: 768px) 25vw, 50vw'
+                }}
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder-svg' }}
+              {% endif %}
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
