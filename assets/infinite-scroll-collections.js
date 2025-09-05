@@ -1,8 +1,5 @@
 /**
  * Simple Infinite Scroll for Shopify Collections
- *
- * TODO: keep pagination links updated for when infinite scroll is maxed out.
- *
  */
 class InfiniteScrollCollections extends HTMLElement {
   constructor() {
@@ -28,11 +25,6 @@ class InfiniteScrollCollections extends HTMLElement {
     // Get initial state
     this.currentPage = parseInt(this.getAttribute('data-current-page')) || 1;
     this.totalPages = parseInt(this.getAttribute('data-total-pages')) || null;
-
-    // Hide pagination
-    if (this.pagination) {
-      this.pagination.style.display = 'none';
-    }
 
     // Set up scroll listener
     this.handleScroll = this.handleScroll.bind(this);
@@ -86,6 +78,7 @@ class InfiniteScrollCollections extends HTMLElement {
 
         const newProducts = tempDiv.querySelector('#product-grid');
         const newProductsList = newProducts.querySelectorAll('li');
+        const newPagination = tempDiv.querySelector('.pagination');
 
         if (newProducts && newProductsList.length > 0) {
           console.log(`Found ${newProductsList.length} new products`);
@@ -94,6 +87,10 @@ class InfiniteScrollCollections extends HTMLElement {
           Array.from(newProductsList).forEach(product => {
             this.grid.appendChild(product.cloneNode(true));
           });
+
+          if (newPagination) {
+            this.pagination.innerHTML = newPagination.innerHTML;
+          }
 
           this.currentPage = nextPage;
 
