@@ -1,8 +1,21 @@
 <div class="page-width">
   {%- paginate collection.products by section.settings.products_per_page -%}
+    <!-- Add product count and loading live region -->
+    <div
+      role="status"
+      class="sr-only"
+      id="product-count-announcer"
+      aria-live="polite"
+    >
+      {{ collection.products.size }}
+      {{ 'accessibility.products_count' | t }}
+    </div>
+
     <infinite-scroll-collections
       data-current-page="{{ paginate.current_page }}"
       data-total-pages="{{ paginate.pages }}"
+      data-loading-label="{{ 'accessibility.loading' | t }}"
+      data-products-count-label="{{ 'accessibility.products_count' | t }}"
     >
       {%- if collection.products.size == 0 -%}
         <div id="product-grid" data-id="{{ section.id }}">
@@ -17,6 +30,9 @@
             data-id="{{ section.id }}"
             class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
             role="list"
+            {%- if section.settings.enable_infinite_scroll -%}
+              aria-live="polite"
+            {%- endif -%}
           >
             {%- for product in collection.products -%}
               {% assign lazy_load = false %}
@@ -36,10 +52,14 @@
           </ul>
 
           <!-- Loading Indicator -->
-          <div class="infinite-scroll-loading" style="display: none;">
-            {% comment %} TODO: translate {% endcomment %}
-            <p class="text-center py-4">Loading more products...</p>
-          </div>
+          {%- if section.settings.enable_infinite_scroll -%}
+            <div
+              class="infinite-scroll-loading py-20"
+              style="display: none;"
+            >
+              <div class="loading"></div>
+            </div>
+          {%- endif -%}
 
           {%- if paginate.pages > 1 -%}
             {% render 'pagination', paginate: paginate, anchor: '' %}

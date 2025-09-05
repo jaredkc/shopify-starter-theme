@@ -9,6 +9,7 @@ class InfiniteScrollCollections extends HTMLElement {
     this.isLoading = false;
     this.hasMorePages = true;
     this.maxPages = 8; // Prevent too many infinite loads
+    this.productCount = 0;
   }
 
   connectedCallback() {
@@ -19,12 +20,14 @@ class InfiniteScrollCollections extends HTMLElement {
     this.grid = this.querySelector('#product-grid');
     this.pagination = this.querySelector('.pagination');
     this.loadingIndicator = this.querySelector('.infinite-scroll-loading');
+    this.productCountAnnouncer = document.getElementById('product-count-announcer');
 
     if (!this.grid) return;
 
     // Get initial state
     this.currentPage = parseInt(this.getAttribute('data-current-page')) || 1;
     this.totalPages = parseInt(this.getAttribute('data-total-pages')) || null;
+    this.productCount = this.grid.querySelectorAll('li').length;
 
     // Set up scroll listener
     this.handleScroll = this.handleScroll.bind(this);
@@ -88,6 +91,10 @@ class InfiniteScrollCollections extends HTMLElement {
             this.grid.appendChild(product.cloneNode(true));
           });
 
+          // Update product count and announce to screen readers
+          this.productCount += newProductsList.length;
+          this.announceProductCount();
+
           if (newPagination) {
             this.pagination.innerHTML = newPagination.innerHTML;
           }
@@ -115,6 +122,12 @@ class InfiniteScrollCollections extends HTMLElement {
     }
   }
 
+  announceProductCount() {
+    if (this.productCountAnnouncer) {
+      this.productCountAnnouncer.textContent = `${this.productCount} ${this.getAttribute('data-products-count-label')}`;
+    }
+  }
+
   reattachScrollListener() {
     // Only reattach if we still have more pages
     if (this.hasMorePages) {
@@ -127,12 +140,23 @@ class InfiniteScrollCollections extends HTMLElement {
   showLoading() {
     if (this.loadingIndicator) {
       this.loadingIndicator.style.display = 'block';
+      // Announce loading to screen readers using the single live region
+      if (this.productCountAnnouncer) {
+        this.productCountAnnouncer.textContent = this.getAttribute('data-loading-label');
+      }
     }
   }
 
   hideLoading() {
     if (this.loadingIndicator) {
       this.loadingIndicator.style.display = 'none';
+    }
+    // Clear loading message from live region
+    if (this.productCountAnnouncer) {
+      // Small delay to ensure loading message was announced before clearing
+      setTimeout(() => {
+        this.announceProductCount();
+      }, 100);
     }
   }
 
