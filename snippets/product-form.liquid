@@ -78,7 +78,7 @@
 
   {%- for variant in product.variants -%}
     {% if variant.inventory_management == "shopify" %}
-      <div id="stock-message-{{ variant.id }}" class="bg-gray-200 text-sm mt-4 px-2 py-3 {% unless variant == current_variant %} hidden{% endunless %}" data-stock-message>
+      <div id="stock-message-{{ variant.id }}" class="bg-gray-200 text-sm mt-4 p-2 {% unless variant == current_variant %} hidden{% endunless %}" data-stock-message>
         {% if variant.title != "Default Title" %}{{ variant.title }} &middot; {% endif %}
         {% if variant.inventory_quantity > 0 %}
           {{ variant.inventory_quantity }} {{ 'products.product.available' | t }}
