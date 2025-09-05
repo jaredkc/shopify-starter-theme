@@ -28,6 +28,7 @@
     "group": "Group",
     "image": "Image",
     "modal_button": "Modal button",
+    "product-grid": "Product grid",
     "section": "Section",
     "video_animation": "Video animation"
   },
@@ -69,6 +70,10 @@
     "no_wrap": "No wrap",
     "page": "Page",
     "primary": "Primary",
+    "products_per_page": "Products per page",
+    "show_vendor": "Show vendor",
+    "show_rating": "Show product rating",
+    "enable_infinite_scroll": "Enable infinite scroll",
     "right": "Right",
     "row": "Row",
     "secondary_button_label": "Outline button",
@@ -120,8 +125,10 @@
   },
   "info": {
     "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
+    "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
     "max_width": "Maximum width of the container (in pixels)",
-    "video_animation": "Will autoplay when in viewport."
+    "video_animation": "Will autoplay when in viewport.",
+    "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
@@ -144,20 +151,6 @@
       }
     }
   },
-  "product-card": {
-    "settings": {
-      "products_per_page": {
-        "label": "Products per page"
-      },
-      "show_vendor": {
-        "label": "Show vendor"
-      },
-      "show_rating": {
-        "label": "Show product rating",
-        "info": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
-      }
-    }
-  },
   "sections": {
     "main-collection-banner": {
       "name": "Collection banner",
@@ -173,9 +166,6 @@
           "info": "For best results, use an image with a 16:9 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
         }
       }
-    },
-    "main-collection-product-grid": {
-      "name": "Product grid"
     },
     "main-product": {
       "name": "Product information",

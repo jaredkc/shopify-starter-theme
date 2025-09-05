@@ -12,7 +12,7 @@
 {% endcomment %}
 
 {%- if paginate.parts.size > 0 -%}
-  <nav role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+  <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
     <ul class="flex justify-center">
       {%- if paginate.previous -%}
         <li>

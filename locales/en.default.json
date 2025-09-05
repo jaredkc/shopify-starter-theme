@@ -32,22 +32,23 @@
     }
   },
   "accessibility": {
-    "skip_to_text": "Skip to content",
-    "skip_to_product_info": "Skip to product information",
     "close": "Close",
-    "unit_price_separator": "per",
-    "vendor": "Vendor:",
+    "collapsible_content_title": "Collapsible content",
+    "complementary_products": "Complementary products",
     "error": "Error",
-    "refresh_page": "Choosing a selection results in a full page refresh.",
     "link_messages": {
       "new_window": "Opens in a new window.",
       "external": "Opens external website."
     },
     "loading": "Loading...",
-    "total_reviews": "total reviews",
+    "products_count": "products",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "skip_to_product_info": "Skip to product information",
+    "skip_to_text": "Skip to content",
     "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
-    "collapsible_content_title": "Collapsible content",
-    "complementary_products": "Complementary products"
+    "total_reviews": "total reviews",
+    "unit_price_separator": "per",
+    "vendor": "Vendor:"
   },
   "blogs": {
     "article": {
