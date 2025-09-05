@@ -1,15 +1,5 @@
 <div class="page-width">
   {%- paginate collection.products by section.settings.products_per_page -%}
-    <!-- Add product count and loading live region -->
-    <div
-      role="status"
-      class="sr-only"
-      id="product-count-announcer"
-      aria-live="polite"
-    >
-      {{ collection.products.size }}
-      {{ 'accessibility.products_count' | t }}
-    </div>
 
     <infinite-scroll-collections
       data-current-page="{{ paginate.current_page }}"
@@ -17,6 +7,17 @@
       data-loading-label="{{ 'accessibility.loading' | t }}"
       data-products-count-label="{{ 'accessibility.products_count' | t }}"
     >
+      <!-- Add product count and loading live region -->
+      <div
+        role="status"
+        class="sr-only"
+        id="product-count-announcer"
+        aria-live="polite"
+      >
+        {{ collection.products.size }}
+        {{ 'accessibility.products_count' | t }}
+      </div>
+
       {%- if collection.products.size == 0 -%}
         <div id="product-grid" data-id="{{ section.id }}">
           <div>

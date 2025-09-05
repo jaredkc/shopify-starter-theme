@@ -18,16 +18,16 @@ class InfiniteScrollCollections extends HTMLElement {
 
   init() {
     this.grid = this.querySelector('#product-grid');
-    this.pagination = this.querySelector('.pagination');
     this.loadingIndicator = this.querySelector('.infinite-scroll-loading');
-    this.productCountAnnouncer = document.getElementById('product-count-announcer');
+    this.pagination = this.querySelector('.pagination');
+    this.productCountAnnouncer = this.querySelector('#product-count-announcer');
 
     if (!this.grid) return;
 
     // Get initial state
     this.currentPage = parseInt(this.getAttribute('data-current-page')) || 1;
-    this.totalPages = parseInt(this.getAttribute('data-total-pages')) || null;
     this.productCount = this.grid.querySelectorAll('li').length;
+    this.totalPages = parseInt(this.getAttribute('data-total-pages')) || null;
 
     // Set up scroll listener
     this.handleScroll = this.handleScroll.bind(this);
