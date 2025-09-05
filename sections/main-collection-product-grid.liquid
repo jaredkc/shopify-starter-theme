@@ -1,6 +1,9 @@
 <div class="page-width">
   {%- paginate collection.products by section.settings.products_per_page -%}
-    <div id="ProductGridContainer">
+    <infinite-scroll-collections
+      data-current-page="{{ paginate.current_page }}"
+      data-total-pages="{{ paginate.pages }}"
+    >
       {%- if collection.products.size == 0 -%}
         <div id="product-grid" data-id="{{ section.id }}">
           <div>
@@ -32,18 +35,28 @@
             {%- endfor -%}
           </ul>
 
+          <!-- Loading Indicator -->
+          <div class="infinite-scroll-loading" style="display: none;">
+            {% comment %} TODO: translate {% endcomment %}
+            <p class="text-center py-4">Loading more products...</p>
+          </div>
+
           {%- if paginate.pages > 1 -%}
             {% render 'pagination', paginate: paginate, anchor: '' %}
           {%- endif -%}
         </div>
       {%- endif -%}
-    </div>
+    </infinite-scroll-collections>
   {%- endpaginate -%}
 </div>
 
+{%- if section.settings.enable_infinite_scroll -%}
+  <script src="{{ 'infinite-scroll-collections.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 {% schema %}
 {
-  "name": "t:sections.main-collection-product-grid.name",
+  "name": "t:names.product-grid",
   "class": "section",
   "settings": [
     {
@@ -53,20 +66,27 @@
       "max": 36,
       "step": 4,
       "default": 16,
-      "label": "t:product-card.settings.products_per_page.label"
+      "label": "t:settings.products_per_page"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_infinite_scroll",
+      "default": false,
+      "label": "t:settings.enable_infinite_scroll",
+      "info": "t:info.enable_infinite_scroll"
     },
     {
       "type": "checkbox",
       "id": "show_vendor",
       "default": true,
-      "label": "t:product-card.settings.show_vendor.label"
+      "label": "t:settings.show_vendor"
     },
     {
       "type": "checkbox",
       "id": "show_rating",
       "default": false,
-      "label": "t:product-card.settings.show_rating.label",
-      "info": "t:product-card.settings.show_rating.info"
+      "label": "t:settings.show_rating",
+      "info": "t:info.show_rating"
     }
   ]
 }
