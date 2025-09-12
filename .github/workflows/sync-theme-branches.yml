@@ -24,11 +24,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+      # Always create the sync branch locally from the target branch, do NOT try to fetch it from remote
       - name: Create sync branch from ${{ matrix.store }}
         run: |
-          git fetch origin ${{ matrix.store }}
-          git checkout ${{ matrix.store }}
-          git pull origin ${{ matrix.store }}
+          git fetch origin
+          git checkout origin/${{ matrix.store }}
           git checkout -b sync/main-to-${{ matrix.store }}
 
       - name: Merge main into sync branch
