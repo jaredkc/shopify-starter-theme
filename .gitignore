@@ -52,3 +52,5 @@ Thumbs.db
 ######################
 node_modules
 .shopify
+.cursor
+.kiro
