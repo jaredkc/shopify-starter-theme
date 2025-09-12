@@ -28,6 +28,7 @@
     "group": "Group",
     "image": "Image",
     "modal_button": "Modal button",
+    "product-grid": "Product grid",
     "section": "Section",
     "video_animation": "Video animation"
   },
@@ -50,6 +51,7 @@
     "content_direction": "Content direction",
     "default": "Default",
     "description": "Description",
+    "enable_infinite_scroll": "Enable infinite scroll",
     "end": "End",
     "full_screen": "Full screen",
     "full": "Full",
@@ -69,11 +71,14 @@
     "no_wrap": "No wrap",
     "page": "Page",
     "primary": "Primary",
+    "products_per_page": "Products per page",
     "right": "Right",
     "row": "Row",
     "secondary_button_label": "Outline button",
     "secondary": "Secondary",
     "set_max_width": "Set max width",
+    "show_rating": "Show product rating",
+    "show_vendor": "Show vendor",
     "small": "Small",
     "space_around": "Space around",
     "space_between": "Space between",
@@ -86,8 +91,8 @@
     "video_loop": "Loop video",
     "video_source": "Video",
     "width": "Width",
-    "wrap": "Wrap",
-    "wrap_items": "Wrap items"
+    "wrap_items": "Wrap items",
+    "wrap": "Wrap"
   },
   "options": {
     "aspect_ratio_1_1": "1:1",
@@ -120,7 +125,9 @@
   },
   "info": {
     "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
+    "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
     "max_width": "Maximum width of the container (in pixels)",
+    "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)",
     "video_animation": "Will autoplay when in viewport."
   },
   "text_defaults": {
@@ -144,20 +151,6 @@
       }
     }
   },
-  "product-card": {
-    "settings": {
-      "products_per_page": {
-        "label": "Products per page"
-      },
-      "show_vendor": {
-        "label": "Show vendor"
-      },
-      "show_rating": {
-        "label": "Show product rating",
-        "info": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)"
-      }
-    }
-  },
   "sections": {
     "main-collection-banner": {
       "name": "Collection banner",
@@ -173,9 +166,6 @@
           "info": "For best results, use an image with a 16:9 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
         }
       }
-    },
-    "main-collection-product-grid": {
-      "name": "Product grid"
     },
     "main-product": {
       "name": "Product information",
