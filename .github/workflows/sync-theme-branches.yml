@@ -2,7 +2,7 @@ name: Sync main to Store Branches via PR
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
     branches:
       - main
 
