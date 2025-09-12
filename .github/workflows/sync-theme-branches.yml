@@ -1,106 +1,74 @@
-name: Sync Theme Branches
+name: Sync main to Store Branches via PR
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore: # Theme specific files, also needed in .gitattributes below.
-      - 'config/markets.json'
-      - 'config/settings_data.json'
-      - 'sections/*.json'
-      - 'templates/*.json'
   pull_request:
-    types: [closed]
+    types: [opened]
     branches:
       - main
-    paths-ignore:
-      - 'config/markets.json'
-      - 'config/settings_data.json'
-      - 'sections/*.json'
-      - 'templates/*.json'
 
 jobs:
   sync-stores:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        store: [live/site2]  # Add your store branches here: [live/US, live/CA]
-      fail-fast: false  # Continue with other stores if one fails
+        store: [live/site2] # Add more store branches as needed
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Full history for better merge resolution
+          fetch-depth: 0
 
-      - name: Configure Git
+      - name: Set up Git user
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Checkout target branch
+      - name: Create sync branch from ${{ matrix.store }}
         run: |
-          # Check if the target branch exists remotely
-          if git ls-remote --heads origin ${{ matrix.store }} | grep -q ${{ matrix.store }}; then
-            # Branch exists, checkout and track it
-            git checkout -b ${{ matrix.store }} origin/${{ matrix.store }}
-          else
-            # Branch doesn't exist, create it from main
-            echo "Branch ${{ matrix.store }} doesn't exist, creating from main..."
-            git checkout -b ${{ matrix.store }} main
-            git push -u origin ${{ matrix.store }}
-          fi
+          git fetch origin ${{ matrix.store }}
+          git checkout ${{ matrix.store }}
+          git pull origin ${{ matrix.store }}
+          git checkout -b sync/main-to-${{ matrix.store }}
 
-      - name: Merge main into ${{ matrix.store }}
-        id: merge
+      - name: Merge main into sync branch
         run: |
-          # Check if we're already up to date
-          if git merge-base --is-ancestor main HEAD; then
-            echo "Branch ${{ matrix.store }} is already up to date with main"
-            exit 0
-          fi
+          git fetch origin main
+          git merge --no-ff origin/main -m "Sync main into ${{ matrix.store }} [skip ci]" || true
 
-          # Merge main into target branch, automatically resolving conflicts in ignored files
-          echo "Merging main into ${{ matrix.store }} with automatic conflict resolution..."
-
-          # Set up merge strategy to automatically resolve conflicts in ignored files
-          git config merge.ours.driver true
-
-          # Create .gitattributes to use 'ours' strategy for ignored files
-          cat > .gitattributes << 'EOF'
-          config/markets.json merge=ours
-          config/settings_data.json merge=ours
-          sections/*.json merge=ours
-          templates/*.json merge=ours
-          EOF
-
-          # Perform the merge
-          # [skip ci] is used to skip the CI/CD pipeline and avoid infinite loops
-          if git merge --no-ff main -m "Auto-sync from main branch [skip ci]"; then
-            echo "Merge successful, pushing changes..."
-            git push origin ${{ matrix.store }}
-          else
-            echo "::error::Merge conflict in non-ignored files"
-            git merge --abort
-            exit 1
-          fi
-
-          # Clean up
-          rm -f .gitattributes
-          git config --unset merge.ours.driver
-
-      - name: Verify merge
+      - name: Remove ignored files from merge
         run: |
-          # Check if the merge was successful
-          git log --oneline -5
+          git restore --staged config/markets.json || true
+          git restore --staged config/settings_data.json || true
+          git restore --staged 'sections/**/*.json' || true
+          git restore --staged 'templates/*.json' || true
 
-      - name: Notify success
-        if: success()
-        run: |
-          echo "✅ Successfully synced ${{ matrix.store }} with main branch"
+          git checkout -- config/markets.json || true
+          git checkout -- config/settings_data.json || true
+          git checkout -- 'sections/**/*.json' || true
+          git checkout -- 'templates/*.json' || true
 
-      - name: Notify failure
-        if: failure()
+      - name: Commit changes (if any)
         run: |
-          echo "❌ Failed to sync ${{ matrix.store }} with main branch"
-          echo "Please check for merge conflicts and resolve manually"
+          git add .
+          git diff --cached --quiet || git commit -m "Sync main into ${{ matrix.store }} (excluding ignored files)"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: sync/main-to-${{ matrix.store }}
+          base: ${{ matrix.store }}
+          title: "Sync main into ${{ matrix.store }} (excluding ignored files)"
+          body: |
+            This PR was created automatically by a workflow to sync changes from main into ${{ matrix.store }}, **excluding** the following files:
+            - config/markets.json
+            - config/settings_data.json
+            - sections/**/*.json
+            - templates/*.json
+
+      - name: Cleanup sync branch (optional)
+        if: always()
+        run: |
+          git checkout ${{ matrix.store }}
+          git branch -D sync/main-to-${{ matrix.store }} || true
