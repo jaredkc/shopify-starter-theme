@@ -7,7 +7,7 @@
       data-loading-label="{{ 'accessibility.loading' | t }}"
       data-products-count-label="{{ 'accessibility.products_count' | t }}"
     >
-      <!-- Add product count and loading live region -->
+      {% comment %} Add product count and loading live region {% endcomment %}
       <div
         role="status"
         class="sr-only"
@@ -52,7 +52,7 @@
             {%- endfor -%}
           </ul>
 
-          <!-- Loading Indicator -->
+          {% comment %} Loading Indicator {% endcomment %}
           {%- if section.settings.enable_infinite_scroll -%}
             <div
               class="infinite-scroll-loading py-20"

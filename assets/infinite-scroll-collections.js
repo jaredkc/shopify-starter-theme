@@ -1,6 +1,5 @@
-/**
- * Simple Infinite Scroll for Shopify Collections
- */
+// TODO: Remove console.logs before merging into production
+
 class InfiniteScrollCollections extends HTMLElement {
   constructor() {
     super();
@@ -39,8 +38,8 @@ class InfiniteScrollCollections extends HTMLElement {
 
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const distanceFromBottom = documentHeight - (scrollTop + windowHeight);
+    const thisHeight = this.offsetHeight;
+    const distanceFromBottom = thisHeight - (scrollTop + windowHeight);
 
     if (distanceFromBottom < 200) {
       // Prevent multiple rapid calls
@@ -58,7 +57,7 @@ class InfiniteScrollCollections extends HTMLElement {
     console.log(`Loading page ${nextPage} of ${this.totalPages}`);
 
     // Check if we've reached the end
-    if (this.totalPages && nextPage > this.totalPages || nextPage > this.maxPages) {
+    if ((this.totalPages && nextPage > this.totalPages) || nextPage > this.maxPages) {
       console.log('Reached end of pages');
       this.hasMorePages = false;
       this.isLoading = false;
@@ -69,7 +68,9 @@ class InfiniteScrollCollections extends HTMLElement {
     try {
       this.showLoading();
 
-      const url = `${window.location.pathname}?section_id=main-collection-product-grid&page=${nextPage}`;
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('page')) urlParams.delete('page');
+      const url = `${window.location.pathname}?section_id=main-collection-product-grid&page=${nextPage}&${urlParams.toString()}`;
       console.log('Fetching:', url);
 
       const response = await fetch(url);
@@ -87,7 +88,7 @@ class InfiniteScrollCollections extends HTMLElement {
           console.log(`Found ${newProductsList.length} new products`);
 
           // Append new products
-          Array.from(newProductsList).forEach(product => {
+          Array.from(newProductsList).forEach((product) => {
             this.grid.appendChild(product.cloneNode(true));
           });
 
@@ -158,6 +159,31 @@ class InfiniteScrollCollections extends HTMLElement {
         this.announceProductCount();
       }, 100);
     }
+  }
+
+  // Call this externally to reset the infinite scroll state, as when filters are applied.
+  reset() {
+    this.currentPage = 1;
+    this.isLoading = false;
+    this.hasMorePages = true;
+    // Re-find the grid element and pagination in case it was replaced
+    this.grid = this.querySelector('#product-grid');
+    this.pagination = this.querySelector('.pagination');
+    this.productCount = this.grid ? this.grid.querySelectorAll('li').length : 0;
+
+    this.announceProductCount();
+
+    // Remove scroll listener temporarily
+    window.removeEventListener('scroll', this.handleScroll);
+
+    // Reattach scroll listener after a short delay
+    setTimeout(() => {
+      if (this.hasMorePages) {
+        window.addEventListener('scroll', this.handleScroll);
+      }
+    }, 100);
+
+    console.log('Infinite scroll reset - current page:', this.currentPage, 'product count:', this.productCount);
   }
 
   disconnectedCallback() {
