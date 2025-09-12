@@ -1,27 +1,58 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "section_aichTw": {
+      "type": "section",
+      "blocks": {
+        "heading_dPCX4N": {
+          "type": "heading",
+          "name": "Heading",
+          "settings": {
+            "text": "Illustration files provided by Shopify",
+            "size": "text-2xl"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading_dPCX4N"
+      ],
+      "name": "t:names.custom_section",
       "settings": {
+        "content_direction": "md:flex-col",
+        "column_on_mobile": true,
+        "flex_wrap": false,
+        "justify_content": "justify-start",
+        "align_items": "items-start",
+        "gap": 8,
+        "section_width": "page-width",
+        "section_height": "small",
+        "color_scheme": "",
+        "padding-block-start": 24,
+        "padding-block-end": 24
       }
     },
     "placeholder-svgs": {
       "type": "placeholder-svgs",
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [
     "main",
+    "section_aichTw",
     "placeholder-svgs"
   ]
 }
