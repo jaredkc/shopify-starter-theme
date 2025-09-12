@@ -50,6 +50,15 @@ jobs:
           git checkout -- 'sections/**/*.json' || true
           git checkout -- 'templates/*.json' || true
 
+      - name: Commit changes (if any)
+        run: |
+          git add .
+          git diff --cached --quiet || git commit -m "Sync main into ${{ matrix.store }} (excluding ignored files)"
+
+      - name: Push sync branch to remote
+        run: |
+          git push origin sync-main-to-${{ matrix.store }}
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
@@ -63,7 +72,6 @@ jobs:
             - config/settings_data.json
             - sections/**/*.json
             - templates/*.json
-          commit-message: "Sync main into ${{ matrix.store }} (excluding ignored files)"
 
       - name: Cleanup sync branch (optional)
         if: always()
