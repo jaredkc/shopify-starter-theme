@@ -9,6 +9,8 @@ on:
 jobs:
   sync-stores:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         store: [live/site2] # Add more store branches as needed
