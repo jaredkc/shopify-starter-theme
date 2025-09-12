@@ -22,6 +22,8 @@ on:
 jobs:
   sync-stores:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         store: [live/site2]  # Add your store branches here: [live/US, live/CA]
@@ -66,7 +68,7 @@ jobs:
           # Set up merge strategy to automatically resolve conflicts in ignored files
           git config merge.ours.driver true
 
-          # Create .gitattributes to use 'ours' strategy for ignored files
+          # Create .gitattributes to handle ignored files properly
           cat > .gitattributes << 'EOF'
           config/markets.json merge=ours
           config/settings_data.json merge=ours
@@ -75,14 +77,54 @@ jobs:
           EOF
 
           # Perform the merge
-          # [skip ci] is used to skip the CI/CD pipeline and avoid infinite loops
           if git merge --no-ff main -m "Auto-sync from main branch [skip ci]"; then
             echo "Merge successful, pushing changes..."
             git push origin ${{ matrix.store }}
           else
-            echo "::error::Merge conflict in non-ignored files"
-            git merge --abort
-            exit 1
+            echo "Handling merge conflicts in ignored files..."
+
+            # Check if conflicts are only in ignored files
+            CONFLICT_FILES=$(git diff --name-only --diff-filter=U)
+            IGNORED_CONFLICTS=""
+            NON_IGNORED_CONFLICTS=""
+
+            for file in $CONFLICT_FILES; do
+              if [[ "$file" =~ ^(config/markets\.json|config/settings_data\.json|sections/.*\.json|templates/.*\.json)$ ]]; then
+                IGNORED_CONFLICTS="$IGNORED_CONFLICTS $file"
+              else
+                NON_IGNORED_CONFLICTS="$NON_IGNORED_CONFLICTS $file"
+              fi
+            done
+
+            if [ -n "$NON_IGNORED_CONFLICTS" ]; then
+              echo "::error::Merge conflict in non-ignored files:$NON_IGNORED_CONFLICTS"
+              git merge --abort
+              exit 1
+            fi
+
+            # Resolve conflicts in ignored files by keeping target branch version
+            echo "Resolving conflicts in ignored files:$IGNORED_CONFLICTS"
+            for file in $IGNORED_CONFLICTS; do
+              echo "Resolving conflict for $file by keeping target branch version"
+              # Check if file exists in target branch (HEAD)
+              if git show HEAD:"$file" >/dev/null 2>&1; then
+                # File exists in target branch, keep it
+                echo "  File exists in target branch, keeping target version"
+                git checkout --ours "$file"
+                git add "$file"
+              else
+                # File doesn't exist in target branch, remove it
+                echo "  File doesn't exist in target branch, removing it"
+                git rm --cached "$file" 2>/dev/null || true
+                # Also remove from working directory if it exists
+                rm -f "$file"
+              fi
+            done
+
+            # Complete the merge
+            git commit --no-edit
+            echo "Merge successful after resolving ignored file conflicts, pushing changes..."
+            git push origin ${{ matrix.store }}
           fi
 
           # Clean up
