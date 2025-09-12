@@ -29,7 +29,7 @@ jobs:
         run: |
           git fetch origin
           git checkout origin/${{ matrix.store }}
-          git checkout -b sync/main-to-${{ matrix.store }}
+          git checkout -b sync-main-to-${{ matrix.store }}
 
       - name: Merge main into sync branch
         run: |
@@ -57,7 +57,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: sync/main-to-${{ matrix.store }}
+          branch: sync-main-to-${{ matrix.store }}
           base: ${{ matrix.store }}
           title: "Sync main into ${{ matrix.store }} (excluding ignored files)"
           body: |
@@ -70,5 +70,5 @@ jobs:
       - name: Cleanup sync branch (optional)
         if: always()
         run: |
-          git checkout ${{ matrix.store }}
-          git branch -D sync/main-to-${{ matrix.store }} || true
+          git checkout main
+          git branch -D sync-main-to-${{ matrix.store }} || true
