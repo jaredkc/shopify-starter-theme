@@ -1,0 +1,156 @@
+{% comment %}
+  Breadcrumbs features:
+
+  Display a list of collections as breadcrumbs on collection and product pages.
+
+  1. On collection page
+    - Check if the current collection has a metafield 'related_collections', then render each as a breadcrumb in the order of the list
+  2. On product page
+    - Loop through the 'breadcrumb_collections' list, if the product is in the collection, render the collection as a breadcrumb
+
+  TODO: test and finalize if breadcrumbs will be a section setting or product metafield. Metafield is likely the better option.
+{% endcomment %}
+
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+  {%- assign t = template | split: '.' | first -%}
+
+  <nav class="breadcrumbs border" role="navigation" aria-label="breadcrumbs">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ routes.root_url }}">Home</a>
+      </li>
+      {%- case t -%}
+        {%- when 'page' -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+          </li>
+        {%- when 'product' -%}
+          {%- for breadcrumb_collection in section.settings.breadcrumb_collections -%}
+            {%- if product.collections contains breadcrumb_collection -%}
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if collection.url -%}
+            <li class="breadcrumbs__item">
+              {{ collection.title | link_to: collection.url }}
+            </li>
+          {%- endif -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+          </li>
+        {%- when 'collection' and collection.handle -%}
+          {%- if collection.metafields.custom.related_collections -%}
+            {%- assign related_collections = collection.metafields.custom.related_collections.value -%}
+            {%- for related_collection in related_collections -%}
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="{{ related_collection.url }}">{{ related_collection.title }}</a>
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              {{ collection.title | link_to: collection.url }}
+            </li>
+            <li class="breadcrumbs__item">
+              {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+              <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: ' + ' }}</a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+            </li>
+          {%- endif -%}
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              {{ blog.title | link_to: blog.url }}
+            </li>
+            <li class="breadcrumbs__item">
+              {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+              <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: ' + ' }}</a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+            </li>
+          {%- endif -%}
+        {%- when 'article' -%}
+          <li class="breadcrumbs__item">
+            {{ blog.title | link_to: blog.url }}
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+          </li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endunless -%}
+
+<style>
+  .breadcrumbs {
+    padding: 1rem;
+  }
+
+  .breadcrumbs__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumbs__item {
+    display: inline-block;
+  }
+
+  .breadcrumbs__item:not(:last-child):after {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.2em;
+    margin: 0 0.2em;
+    position: relative;
+    transform: rotate(45deg);
+    vertical-align: middle;
+    width: 0.2em;
+  }
+
+  .breadcrumbs__link {
+    text-decoration: underline;
+  }
+
+  .breadcrumbs__link[aria-current='page'] {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+  }
+
+  .breadcrumbs__link[aria-current='page']:hover,
+  .breadcrumbs__link[aria-current='page']:focus {
+    text-decoration: underline;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Breadcrumbs",
+  "class": "breadcrumbs-section",
+  "settings": [
+    {
+      "type": "collection_list",
+      "id": "breadcrumb_collections",
+      "label": "Breadcrumb collections"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breadcrumbs"
+    }
+  ]
+}
+{% endschema %}
