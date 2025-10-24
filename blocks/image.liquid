@@ -3,32 +3,51 @@
   assign media_width_mobile = '100vw'
   assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
   assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+
+  if block.settings.aspect_ratio == 'auto'
+    assign ratio = block.settings.image.aspect_ratio
+  else
+    assign ratio = block.settings.aspect_ratio
+  endif
 %}
 
 <div
-  class="media-container image-block"
-  style="--aspect-ratio: {{ block.settings.aspect_ratio }};"
+  class="image-block size-style spacing-style image-block--height-{{ block.settings.height }}"
+  style="
+    --aspect-ratio: {{ ratio }};
+    {% render 'size-style', settings: block.settings %}
+    {% render 'spacing-style', settings: block.settings %}
+  "
   {{ block.shopify_attributes }}
 >
   {% if block.settings.image %}
-    <div class="media-container__wrapper">
-      {{
-        block.settings.image
-        | image_url: width: 3840
-        | image_tag:
-          width: block.settings.image.width,
-          widths: widths,
-          height: block.settings.image.height,
-          sizes: sizes,
-          placeholder: true
-      }}
-    </div>
+    {{
+      block.settings.image
+      | image_url: width: 3840
+      | image_tag:
+        width: block.settings.image.width,
+        widths: widths,
+        height: block.settings.image.height,
+        class: 'image-block__image border-style',
+        sizes: sizes
+    }}
   {% else %}
-    <div class="media-container__wrapper">
-      {{ 'image' | placeholder_svg_tag: 'media-container__placeholder' }}
+    <div class="placeholder-image">
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
     </div>
   {% endif %}
 </div>
+
+{% stylesheet %}
+  .image-block--height-fill .image-block__image {
+    height: 100%;
+  }
+
+  .image-block .image-block__image {
+    aspect-ratio: var(--aspect-ratio);
+    object-fit: cover;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -67,6 +86,68 @@
     },
     {
       "type": "select",
+      "id": "width",
+      "label": "t:settings.width_desktop",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:settings.custom_width",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:settings.width_mobile",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:settings.custom_width",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "select",
       "id": "height",
       "label": "t:settings.height",
       "options": [
@@ -80,7 +161,7 @@
         }
       ],
       "default": "fit",
-      "visible_if": "{{ block.settings.aspect_ratio == 'match' }}"
+      "visible_if": "{{ block.settings.aspect_ratio == 'auto' }}"
     }
   ],
   "presets": [

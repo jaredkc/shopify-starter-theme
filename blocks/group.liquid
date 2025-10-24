@@ -1,12 +1,17 @@
 <div
   class="
-    spacing-style flex
+    flex
     {% if block.settings.column_on_mobile %}flex-col{% else %}flex-row{% endif %}
     {% if block.settings.flex_wrap %}flex-wrap{% else %}flex-nowrap{% endif %}
     {{ block.settings.justify_content }} {{ block.settings.align_items }} {{ block.settings.content_direction }}
     {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }}{% endif %}
+    size-style spacing-style
   "
-  style="gap: {{ block.settings.gap }}px; {% render 'spacing-style', settings: block.settings %}"
+  style="
+    gap: {{ block.settings.gap }}px;
+    {% render 'size-style', settings: block.settings %}
+    {% render 'spacing-style', settings: block.settings %}
+  "
   {{ block.shopify_attributes }}
 >
   {% content_for 'blocks' %}
@@ -112,6 +117,72 @@
       "unit": "px",
       "label": "t:settings.gap",
       "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:settings.custom_width",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:settings.width_mobile",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:settings.custom_width",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
     },
     {
       "type": "header",

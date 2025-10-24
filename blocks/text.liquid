@@ -1,16 +1,16 @@
-<div class="rte {{ block.settings.font_size }} {{ block.settings.max_width }}" {{ block.shopify_attributes }}>
+<div class="rte {{ block.settings.font_size }} content-{{ block.settings.max_width }}" {{ block.shopify_attributes }}>
   {{ block.settings.text }}
 </div>
 
 {% schema %}
 {
-  "name": "Text",
+  "name": "t:names.text",
   "tag": null,
   "settings": [
     {
       "type": "richtext",
       "id": "text",
-      "label": "Text",
+      "label": "t:settings.text",
       "default": "<p>Insert your catchphrase here (or something else).</p>"
     },
     {
@@ -40,35 +40,35 @@
     {
       "type": "select",
       "id": "max_width",
-      "label": "Max width",
+      "label": "t:settings.max_width",
       "options": [
         {
-          "value": "content-xs",
+          "value": "xs",
           "label": "t:options.xs"
         },
         {
-          "value": "content-md",
+          "value": "sm",
+          "label": "t:options.sm"
+        },
+        {
+          "value": "md",
           "label": "t:options.md"
         },
         {
-          "value": "content-lg",
+          "value": "lg",
           "label": "t:options.lg"
         },
         {
-          "value": "content-xl",
-          "label": "t:options.xl"
-        },
-        {
-          "value": "content-full",
+          "value": "full",
           "label": "t:options.full"
         }
       ],
-      "default": "content-md"
+      "default": "md"
     }
   ],
   "presets": [
     {
-      "name": "Text"
+      "name": "t:names.text"
     }
   ]
 }
