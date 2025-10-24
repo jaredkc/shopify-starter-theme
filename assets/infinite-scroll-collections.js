@@ -1,5 +1,3 @@
-// TODO: Remove console.logs before merging into production
-
 class InfiniteScrollCollections extends HTMLElement {
   constructor() {
     super();
@@ -7,8 +5,12 @@ class InfiniteScrollCollections extends HTMLElement {
     this.totalPages = null;
     this.isLoading = false;
     this.hasMorePages = true;
-    this.maxPages = 8; // Prevent too many infinite loads
+    this.maxPages = 4; // Prevent too many infinite loads
     this.productCount = 0;
+
+    // IntersectionObserver sentinel + observer instance
+    this.sentinel = null;
+    this.observer = null;
   }
 
   connectedCallback() {
@@ -28,24 +30,59 @@ class InfiniteScrollCollections extends HTMLElement {
     this.productCount = this.grid.querySelectorAll('li').length;
     this.totalPages = parseInt(this.getAttribute('data-total-pages')) || null;
 
-    // Set up scroll listener
-    this.handleScroll = this.handleScroll.bind(this);
-    window.addEventListener('scroll', this.handleScroll);
+    // Create sentinel element (sibling after the grid)
+    this.createSentinel();
+
+    // Only set up IntersectionObserver-based infinite scroll if supported.
+    if ('IntersectionObserver' in window) {
+      this.setupObserver();
+    }
   }
 
-  handleScroll() {
-    if (this.isLoading || !this.hasMorePages) return;
-
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const thisHeight = this.offsetHeight;
-    const distanceFromBottom = thisHeight - (scrollTop + windowHeight);
-
-    if (distanceFromBottom < 200) {
-      // Prevent multiple rapid calls
-      window.removeEventListener('scroll', this.handleScroll);
-      this.loadNextPage();
+  createSentinel() {
+    // If a sentinel already exists (e.g., after reset), remove it so we create a fresh one
+    if (this.sentinel && this.sentinel.parentNode) {
+      this.sentinel.parentNode.removeChild(this.sentinel);
     }
+
+    this.sentinel = document.createElement('div');
+    this.sentinel.className = 'infinite-scroll-sentinel';
+    this.sentinel.setAttribute('aria-hidden', 'true');
+    // Place sentinel after the grid so IntersectionObserver will detect when the end is near
+    this.grid.after(this.sentinel);
+  }
+
+  setupObserver() {
+    // Disconnect any existing observer
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
+    // rootMargin uses percentages relative to viewport size. 20% bottom margin causes the observer to
+    // fire when the sentinel is within ~20% of the viewport bottom, which adapts well to mobile.
+    const rootMargin = '0px 0px 20% 0px';
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Prevent multiple triggers while loading and when there are no more pages
+          if (!this.isLoading && this.hasMorePages) {
+            // Temporarily stop observing until load completes to avoid duplicate triggers
+            this.observer.unobserve(this.sentinel);
+            this.loadNextPage().then(() => {
+              // Re-observe only if we still have pages to load
+              if (this.observer && this.hasMorePages) {
+                // small delay to avoid immediate re-trigger in some browsers
+                setTimeout(() => this.observer.observe(this.sentinel), 200);
+              }
+            });
+          }
+        }
+      });
+    }, { root: null, rootMargin, threshold: 0 });
+
+    // Start observing
+    this.observer.observe(this.sentinel);
   }
 
   async loadNextPage() {
@@ -54,14 +91,10 @@ class InfiniteScrollCollections extends HTMLElement {
     this.isLoading = true;
     const nextPage = this.currentPage + 1;
 
-    console.log(`Loading page ${nextPage} of ${this.totalPages}`);
-
     // Check if we've reached the end
     if ((this.totalPages && nextPage > this.totalPages) || nextPage > this.maxPages) {
-      console.log('Reached end of pages');
       this.hasMorePages = false;
       this.isLoading = false;
-      this.reattachScrollListener();
       return;
     }
 
@@ -71,7 +104,6 @@ class InfiniteScrollCollections extends HTMLElement {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('page')) urlParams.delete('page');
       const url = `${window.location.pathname}?section_id=main-collection-product-grid&page=${nextPage}&${urlParams.toString()}`;
-      console.log('Fetching:', url);
 
       const response = await fetch(url);
       const htmlText = await response.text();
@@ -81,12 +113,10 @@ class InfiniteScrollCollections extends HTMLElement {
         tempDiv.innerHTML = htmlText;
 
         const newProducts = tempDiv.querySelector('#product-grid');
-        const newProductsList = newProducts.querySelectorAll('li');
+        const newProductsList = newProducts ? newProducts.querySelectorAll('li') : [];
         const newPagination = tempDiv.querySelector('.pagination');
 
         if (newProducts && newProductsList.length > 0) {
-          console.log(`Found ${newProductsList.length} new products`);
-
           // Append new products
           Array.from(newProductsList).forEach((product) => {
             this.grid.appendChild(product.cloneNode(true));
@@ -96,27 +126,25 @@ class InfiniteScrollCollections extends HTMLElement {
           this.productCount += newProductsList.length;
           this.announceProductCount();
 
-          if (newPagination) {
+          if (newPagination && this.pagination) {
             this.pagination.innerHTML = newPagination.innerHTML;
           }
 
           this.currentPage = nextPage;
-
-          // Wait before reattaching scroll listener
-          setTimeout(() => this.reattachScrollListener(), 500);
         } else {
-          console.log('No more products found');
+          // No products found on this next page => end
           this.hasMorePages = false;
-          this.reattachScrollListener();
         }
       } else {
-        console.log('Empty response');
+        // Empty response => stop
         this.hasMorePages = false;
-        this.reattachScrollListener();
       }
     } catch (error) {
       console.error('Failed to load more products:', error);
-      this.reattachScrollListener();
+      // Re-observe sentinel after a short delay to allow retry if desired
+      if (this.observer && this.sentinel) {
+        setTimeout(() => this.observer.observe(this.sentinel), 500);
+      }
     } finally {
       this.hideLoading();
       this.isLoading = false;
@@ -126,15 +154,6 @@ class InfiniteScrollCollections extends HTMLElement {
   announceProductCount() {
     if (this.productCountAnnouncer) {
       this.productCountAnnouncer.textContent = `${this.productCount} ${this.getAttribute('data-products-count-label')}`;
-    }
-  }
-
-  reattachScrollListener() {
-    // Only reattach if we still have more pages
-    if (this.hasMorePages) {
-      setTimeout(() => {
-        window.addEventListener('scroll', this.handleScroll);
-      }, 100);
     }
   }
 
@@ -166,6 +185,7 @@ class InfiniteScrollCollections extends HTMLElement {
     this.currentPage = 1;
     this.isLoading = false;
     this.hasMorePages = true;
+
     // Re-find the grid element and pagination in case it was replaced
     this.grid = this.querySelector('#product-grid');
     this.pagination = this.querySelector('.pagination');
@@ -173,23 +193,29 @@ class InfiniteScrollCollections extends HTMLElement {
 
     this.announceProductCount();
 
-    // Remove scroll listener temporarily
-    window.removeEventListener('scroll', this.handleScroll);
+    // Remove observer temporarily
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
 
-    // Reattach scroll listener after a short delay
+    // Recreate sentinel (in case grid was replaced) and re-attach observer if supported
+    this.createSentinel();
+
     setTimeout(() => {
-      if (this.hasMorePages) {
-        window.addEventListener('scroll', this.handleScroll);
+      if ('IntersectionObserver' in window) {
+        this.setupObserver();
       }
+      // otherwise do nothing
     }, 100);
-
-    console.log('Infinite scroll reset - current page:', this.currentPage, 'product count:', this.productCount);
   }
 
   disconnectedCallback() {
-    window.removeEventListener('scroll', this.handleScroll);
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
   }
 }
 
-// Register the custom element
 customElements.define('infinite-scroll-collections', InfiniteScrollCollections);
