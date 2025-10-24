@@ -198,6 +198,16 @@ pre {
   padding-inline: var(--padding-inline-start) var(--padding-inline-end);
 }
 
+.size-style {
+  width: var(--size-style-width-mobile, var(--size-style-width));
+  height: var(--size-style-height-mobile, var(--size-style-height));
+
+  @media screen and (min-width: 750px) {
+    width: var(--size-style-width);
+    height: var(--size-style-height);
+  }
+}
+
 .page-width {
   max-width: var(--page-width, 1440px);
   margin-left: auto;
