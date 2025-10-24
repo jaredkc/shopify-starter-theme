@@ -1,4 +1,4 @@
-<div class="rte" {{ block.shopify_attributes }}>
+<div class="rte {{ block.settings.font_size }} {{ block.settings.max_width }}" {{ block.shopify_attributes }}>
   {{ block.settings.text }}
 </div>
 
@@ -12,6 +12,58 @@
       "id": "text",
       "label": "Text",
       "default": "<p>Insert your catchphrase here (or something else).</p>"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:options.font_size",
+      "options": [
+        {
+          "value": "text-sm",
+          "label": "t:options.sm"
+        },
+        {
+          "value": "text-base",
+          "label": "t:options.md"
+        },
+        {
+          "value": "text-lg",
+          "label": "t:options.lg"
+        },
+        {
+          "value": "text-xl",
+          "label": "t:options.xl"
+        }
+      ],
+      "default": "text-lg"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "Max width",
+      "options": [
+        {
+          "value": "content-xs",
+          "label": "t:options.xs"
+        },
+        {
+          "value": "content-md",
+          "label": "t:options.md"
+        },
+        {
+          "value": "content-lg",
+          "label": "t:options.lg"
+        },
+        {
+          "value": "content-xl",
+          "label": "t:options.xl"
+        },
+        {
+          "value": "content-full",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "content-md"
     }
   ],
   "presets": [
