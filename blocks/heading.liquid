@@ -1,6 +1,9 @@
-<h2 class="m-0 {{ block.settings.size }}" {{ block.shopify_attributes }}>
+<{{ block.settings.element }}
+  class="m-0 {{ block.settings.size }}{% if block.settings.size == 'default' %} {{ block.settings.element }}{% else %} {{ block.settings.size }}{% endif %}"
+  {{ block.shopify_attributes }}
+>
   {{ block.settings.text }}
-</h2>
+</{{ block.settings.element }}>
 
 {% schema %}
 {
@@ -15,9 +18,45 @@
     },
     {
       "type": "select",
+      "id": "element",
+      "label": "t:options.heading",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
       "id": "size",
       "label": "Size",
       "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
         {
           "value": "text-2xl",
           "label": "2xl"
