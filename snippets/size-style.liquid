@@ -17,7 +17,7 @@
   --size-style-height:
   {{- settings.custom_height }}%;
 {%- elsif settings.height == 'fill' -%}
-  --size-style-height: 100%;
+  --size-style-height: auto;
 {%- else -%}
   --size-style-height: {{ settings.height }};
 {%- endif -%}
