@@ -8,6 +8,26 @@
  * ------------------------------------------------------------
  */
 {
+  "categories": {
+    "banners": "Banners",
+    "basic": "Basic",
+    "collection": "Collection",
+    "collections": "Collections",
+    "collection_list": "Collection list",
+    "custom": "Custom",
+    "decorative": "Decorative",
+    "footer": "Footer",
+    "forms": "Forms",
+    "header": "Header",
+    "layout": "Layout",
+    "links": "Links",
+    "product": "Product",
+    "products": "Products",
+    "product_list": "Featured collection",
+    "other_sections": "Other",
+    "storytelling": "Storytelling",
+    "text": "Text"
+  },
   "content": {
     "appearance": "Appearance",
     "button": "Button",
