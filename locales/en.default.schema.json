@@ -39,6 +39,16 @@
     "typography_secondary": "Secondary typography",
     "typography": "Typography"
   },
+  "html_defaults": {
+    "insert_catchphrase": "<p>Insert your catchphrase here (or something else).</p>",
+  },
+  "info": {
+    "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
+    "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
+    "max_width": "Maximum width of the container (in pixels)",
+    "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)",
+    "video_animation": "Will autoplay when in viewport."
+  },
   "names": {
     "announcement_bar": "Announcement bar",
     "announcement": "Announcement",
@@ -47,6 +57,7 @@
     "custom_section": "Custom section",
     "group": "Group",
     "image": "Image",
+    "image_with_text": "Image with text",
     "modal_button": "Modal button",
     "paragraph": "Paragraph",
     "product-grid": "Product grid",
@@ -158,13 +169,6 @@
     "width": "Width",
     "wrap_items": "Wrap items",
     "wrap": "Wrap"
-  },
-  "info": {
-    "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
-    "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
-    "max_width": "Maximum width of the container (in pixels)",
-    "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)",
-    "video_animation": "Will autoplay when in viewport."
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
