@@ -1,5 +1,5 @@
 <{{ block.settings.element }}
-  class="m-0 {{ block.settings.size }}{% if block.settings.size == 'default' %} {{ block.settings.element }}{% else %} {{ block.settings.size }}{% endif %}"
+  class="m-0{% if block.settings.font_size == 'default' %} {{ block.settings.element }}{% else %} {{ block.settings.font_size }}{% endif %}"
   {{ block.shopify_attributes }}
 >
   {{ block.settings.text }}
@@ -19,7 +19,7 @@
     {
       "type": "select",
       "id": "element",
-      "label": "t:options.heading",
+      "label": "t:settings.heading",
       "options": [
         {
           "value": "h1",
@@ -50,8 +50,8 @@
     },
     {
       "type": "select",
-      "id": "size",
-      "label": "Size",
+      "id": "font_size",
+      "label": "t:settings.font_size",
       "options": [
         {
           "value": "default",
