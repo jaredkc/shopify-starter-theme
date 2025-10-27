@@ -200,7 +200,99 @@
   ],
   "presets": [
     {
-      "name": "t:names.section"
+      "name": "t:names.custom_section",
+      "category": "t:categories.layout",
+      "settings": {
+        "section_height": "small"
+      }
+    },
+    {
+      "name": "t:names.image_with_text",
+      "category": "t:categories.storytelling",
+      "settings": {
+        "content_direction": "md:flex-row",
+        "align_items": "items-center",
+        "gap": 0,
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      },
+      "blocks": {
+        "image": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "aspect_ratio": "auto",
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "height": "fill"
+          }
+        },
+        "group": {
+          "type": "group",
+          "settings": {
+            "content_direction": "md:flex-col",
+            "column_on_mobile": true,
+            "flex_wrap": false,
+            "justify_content": "justify-start",
+            "align_items": "items-start",
+            "gap": 8,
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "padding-block-start": 48,
+            "padding-block-end": 48,
+            "padding-inline-start": 16,
+            "padding-inline-end": 16
+          },
+          "blocks": {
+            "heading": {
+              "type": "heading",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "t:text_defaults.welcome",
+                "element": "h2",
+              }
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "t:html_defaults.insert_catchphrase"
+              }
+            },
+            "group_buttons": {
+              "type": "group",
+              "name": "t:names.button_group",
+              "settings": {
+                "content_direction": "md:flex-row",
+                "column_on_mobile": false,
+                "flex_wrap": true,
+                "justify_content": "justify-start",
+                "align_items": "items-start",
+                "gap": 8,
+                "padding-block-start": 24
+              },
+              "blocks": {
+                "button": {
+                  "type": "button",
+                  "settings": {
+                    "button_label": "t:text_defaults.button_label",
+                    "button_link": "shopify://collections/all"
+                  }
+                }
+              },
+              "block_order": ["button"]
+            }
+          },
+          "block_order": ["heading", "text", "group_buttons"]
+        }
+      },
+      "block_order": ["image", "group"]
     }
   ]
 }
