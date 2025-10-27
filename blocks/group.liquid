@@ -29,7 +29,7 @@
     {
       "type": "select",
       "id": "content_direction",
-      "label": "t:settings.content_direction",
+      "label": "t:settings.direction",
       "options": [
         {
           "value": "md:flex-col",
@@ -82,7 +82,8 @@
           "label": "t:options.space_around"
         }
       ],
-      "default": "justify-start"
+      "default": "justify-start",
+      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' }}"
     },
     {
       "type": "select",
