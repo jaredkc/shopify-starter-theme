@@ -1,5 +1,11 @@
-<div class="rte {{ block.settings.font_size }} content-{{ block.settings.max_width }}" {{ block.shopify_attributes }}>
-  {{ block.settings.text }}
+<div
+  class="rte {{ block.settings.font_size }}{% if block.settings.width == '100%' %} text-{{ block.settings.alignment }}{% endif %}"
+  style="width: {{ block.settings.width }};"
+  {{ block.shopify_attributes }}
+>
+  <div class="content-{{ block.settings.max_width }}">
+    {{ block.settings.text }}
+  </div>
 </div>
 
 {% schema %}
@@ -14,28 +20,24 @@
       "default": "<p>Insert your catchphrase here (or something else).</p>"
     },
     {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
       "type": "select",
-      "id": "font_size",
-      "label": "t:settings.font_size",
+      "id": "width",
+      "label": "t:settings.width",
       "options": [
         {
-          "value": "text-sm",
-          "label": "t:options.sm"
+          "value": "fit-content",
+          "label": "t:options.fit"
         },
         {
-          "value": "text-base",
-          "label": "t:options.md"
-        },
-        {
-          "value": "text-lg",
-          "label": "t:options.lg"
-        },
-        {
-          "value": "text-xl",
-          "label": "t:options.xl"
+          "value": "100%",
+          "label": "t:options.fill"
         }
       ],
-      "default": "text-lg"
+      "default": "fit-content"
     },
     {
       "type": "select",
@@ -64,6 +66,41 @@
         }
       ],
       "default": "md"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left",
+      "visible_if": "{{ block.settings.width == '100%' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "text-sm",
+          "label": "t:options.sm"
+        },
+        {
+          "value": "text-base",
+          "label": "t:options.md"
+        },
+        {
+          "value": "text-lg",
+          "label": "t:options.lg"
+        },
+        {
+          "value": "text-xl",
+          "label": "t:options.xl"
+        }
+      ],
+      "default": "text-lg"
     }
   ],
   "presets": [

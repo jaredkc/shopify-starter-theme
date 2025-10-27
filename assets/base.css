@@ -261,22 +261,22 @@ pre {
 }
 
 .content-xs {
-  max-width: 35rem; /* 560px */
+  max-width: 20rem; /* 320px */
 }
 .content-sm {
-  max-width: 40rem; /* 640px */
+  max-width: 30rem; /* 480px */
 }
 .content-md {
-  max-width: 46rem; /* 736px */
+  max-width: 36rem; /* 576px */
 }
 .content-lg {
-  max-width: 50rem; /* 800px */
+  max-width: 40rem; /* 640px */
 }
 .content-xl {
-  max-width: 60rem; /* 960px */
+  max-width: 50rem; /* 800px */
 }
 .content-2xl {
-  max-width: 70rem; /* 1120px */
+  max-width: 60rem; /* 960px */
 }
 
 /**
