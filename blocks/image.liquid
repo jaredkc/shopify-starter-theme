@@ -20,13 +20,11 @@
         width: block.settings.image.width,
         widths: widths,
         height: block.settings.image.height,
-        class: 'image-block__image border-style',
+        class: 'image-block__image',
         sizes: sizes
     }}
   {% else %}
-    <div class="placeholder-image">
-      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--fill' }}
   {% endif %}
 {% endcapture %}
 

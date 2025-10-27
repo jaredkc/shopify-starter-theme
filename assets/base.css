@@ -869,9 +869,15 @@ summary::-webkit-details-marker {
 }
 
 .placeholder-svg {
+  background-color: var(--c-primary-light);
   display: block;
-  max-width: 100%;
   height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+.placeholder-svg--fill {
+  aspect-ratio: var(--aspect-ratio, 16/9);
+  object-fit: cover;
 }
 
 /* Account for JavaScript disabled */
