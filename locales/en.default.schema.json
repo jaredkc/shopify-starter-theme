@@ -52,6 +52,7 @@
   "names": {
     "announcement_bar": "Announcement bar",
     "announcement": "Announcement",
+    "button_group": "Button group",
     "cart": "Cart",
     "colors": "Colors",
     "custom_section": "Custom section",
@@ -179,7 +180,7 @@
     "heading": "Heading",
     "shop_our_latest_arrivals": "Shop our latest arrivals!",
     "sign_up": "Sign up",
-    "welcome_to_our_store": "Welcome to our store"
+    "welcome": "Welcome to our store"
   },
   "settings_schema": {
     "layout": {
