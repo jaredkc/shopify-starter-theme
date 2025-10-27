@@ -80,6 +80,7 @@
     "end": "End",
     "fill": "Fill",
     "fit_content": "Fit",
+    "fit": "Fit",
     "full_screen": "Full screen",
     "full": "Full",
     "large": "Large",
@@ -104,6 +105,7 @@
     "xs": "Xs",
   },
   "settings": {
+    "alignment": "Alignment",
     "align_items": "Align items",
     "aspect_ratio": "Aspect ratio",
     "auto": "Auto",

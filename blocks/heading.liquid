@@ -1,5 +1,6 @@
 <{{ block.settings.element }}
-  class="m-0{% if block.settings.font_size == 'default' %} {{ block.settings.element }}{% else %} {{ block.settings.font_size }}{% endif %}"
+  class="m-0 content-{{ block.settings.max_width }}{% if block.settings.font_size == 'default' %} {{ block.settings.element }}{% else %} {{ block.settings.font_size }}{% endif %} {% if block.settings.width == '100%' %} text-{{ block.settings.alignment }}{% endif %}"
+  style="width: {{ block.settings.width }};"
   {{ block.shopify_attributes }}
 >
   {{ block.settings.text }}
@@ -15,6 +16,65 @@
       "id": "text",
       "label": "Text",
       "default": "Welcome to our store"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.fill"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "t:settings.max_width",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:options.xs"
+        },
+        {
+          "value": "sm",
+          "label": "t:options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:options.md"
+        },
+        {
+          "value": "lg",
+          "label": "t:options.lg"
+        },
+        {
+          "value": "full",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left",
+      "visible_if": "{{ block.settings.width == '100%' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
     },
     {
       "type": "select",
