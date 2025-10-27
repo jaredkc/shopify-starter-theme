@@ -11,15 +11,7 @@
   endif
 %}
 
-<div
-  class="image-block size-style spacing-style image-block--height-{{ block.settings.height }}"
-  style="
-    --aspect-ratio: {{ ratio }};
-    {% render 'size-style', settings: block.settings %}
-    {% render 'spacing-style', settings: block.settings %}
-  "
-  {{ block.shopify_attributes }}
->
+{% capture image %}
   {% if block.settings.image %}
     {{
       block.settings.image
@@ -35,6 +27,24 @@
     <div class="placeholder-image">
       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
     </div>
+  {% endif %}
+{% endcapture %}
+
+<div
+  class="image-block size-style spacing-style image-block--height-{{ block.settings.height }}"
+  style="
+    --aspect-ratio: {{ ratio }};
+    {% render 'size-style', settings: block.settings %}
+    {% render 'spacing-style', settings: block.settings %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.link == blank %}
+    {{ image }}
+  {% else %}
+    <a href="{{ block.settings.link }}">
+      {{ image }}
+    </a>
   {% endif %}
 </div>
 
@@ -60,6 +70,15 @@
       "type": "image_picker",
       "id": "image",
       "label": "t:settings.image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link"
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
     },
     {
       "type": "select",
