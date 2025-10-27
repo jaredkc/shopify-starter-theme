@@ -57,8 +57,9 @@
     "colors": "Colors",
     "custom_section": "Custom section",
     "group": "Group",
-    "image": "Image",
+    "heading": "Heading",
     "image_with_text": "Image with text",
+    "image": "Image",
     "modal_button": "Modal button",
     "paragraph": "Paragraph",
     "product-grid": "Product grid",
@@ -102,7 +103,7 @@
     "uppercase": "Uppercase",
     "wrap_items": "Wrap items",
     "xl": "Xl",
-    "xs": "Xs",
+    "xs": "Xs"
   },
   "settings": {
     "alignment": "Alignment",
