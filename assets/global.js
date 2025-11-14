@@ -103,11 +103,15 @@ class StickyHeader extends HTMLElement {
   }
 
   connectedCallback() {
+    // The section schema enforces `.section-sticky-header` on the wrapper around this component.
+    // Keep this lookup in sync with `sections/header.liquid` to avoid breaking sticky behaviour.
     this.header =
-      this.querySelector('[data-sticky-header-target]') || this.firstElementChild;
+      this.querySelector('.section-sticky-header') ||
+      this.closest('.section-sticky-header') ||
+      document.querySelector('.section-sticky-header');
 
     if (!this.header) {
-      console.warn('StickyHeader: no sticky target found inside the component.');
+      console.warn('StickyHeader: .section-sticky-header element not found.');
       return;
     }
 

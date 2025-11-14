@@ -1,6 +1,11 @@
+{% comment %}
+  For sticky-header to work, we need to target the wrapper around this Shopify section.
+  The schema enforces `.section-sticky-header` on the wrapper around this component.
+  Keep this lookup in sync with `assets/global.js` to avoid breaking sticky behaviour.
+{% endcomment %}
 {% render 'search-dialog-modal' %}
 <sticky-header>
-  <header data-sticky-header-target class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8 bg-white">
+  <header class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
     {%- if template.name == 'index' -%}
       <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
     {%- else -%}
@@ -67,6 +72,7 @@
 {% schema %}
 {
   "name": "Header",
+  "class": "section-sticky-header",
   "settings": [
     {
       "type": "link_list",
