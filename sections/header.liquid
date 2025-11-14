@@ -73,17 +73,16 @@
 
 {% stylesheet %}
   .section-sticky-header {
-    background-color: #fff;
+    --bg-color: #fff;
+    background-color: var(--bg-color);
     top: 0;
     isolation: isolate;
-    z-index: 10;
+    z-index: 100;
   }
 
   .sticky-header-hidden,
   .sticky-header-stuck {
     position: sticky;
-    top: 0;
-    z-index: 10;
     will-change: transform;
     transition: all var(--duration-medium) ease-out;
   }
@@ -106,7 +105,7 @@
   }
 
   .nav-submemu {
-    background: #fff;
+    background: var(--bg-color);
     display: none;
     left: 0;
     list-style-type: none;
