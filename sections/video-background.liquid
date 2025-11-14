@@ -3,7 +3,7 @@
 {% endcomment %}
 {{ 'video-background.css' | asset_url | stylesheet_tag }}
 
-<div class="{{ section.settings.width }} mx-auto">
+<div class="{{ section.settings.width }} mx-auto isolate">
   <div class="relative bg-video overflow-hidden w-full {{ section.settings.media_height }}">
     {%- if section.settings.video -%}
       {{
