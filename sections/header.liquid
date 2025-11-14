@@ -69,6 +69,65 @@
   </header>
 </sticky-header>
 
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+
+{% stylesheet %}
+  .section-sticky-header {
+    background-color: #fff;
+    top: 0;
+    isolation: isolate;
+    z-index: 10;
+  }
+
+  .sticky-header-hidden,
+  .sticky-header-stuck {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    will-change: transform;
+    transition: all var(--duration-medium) ease-out;
+  }
+
+  .sticky-header-hidden {
+    transform: translateY(-100%);
+    box-shadow: none;
+  }
+
+  .sticky-header-stuck {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+
+  .nav-menu > li {
+    display: inline-block;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    position: relative;
+  }
+
+  .nav-submemu {
+    background: #fff;
+    display: none;
+    left: 0;
+    list-style-type: none;
+    padding: 0.5rem 0;
+    position: absolute;
+    text-align-last: left;
+    top: 100%;
+    z-index: 1;
+  }
+
+  .nav-submemu a {
+    display: block;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .nav-menu > li:hover .nav-submemu {
+    display: block;
+    z-index: 100;
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Header",
