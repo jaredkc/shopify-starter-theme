@@ -377,16 +377,20 @@ pre {
 
 .sticky-header-hidden,
 .sticky-header-stuck {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  will-change: transform;
   transition: all var(--duration-medium) ease-out;
 }
 
 .sticky-header-hidden {
   transform: translateY(-100%);
+  box-shadow: none;
 }
 
 .sticky-header-stuck {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: sticky;
   transform: translateY(0);
 }
 
