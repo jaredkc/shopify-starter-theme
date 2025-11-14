@@ -369,14 +369,15 @@ pre {
 /**
  * Header
  */
-.section-header {
-  background-color: #fff;
-  top: 0;
-  z-index: 10;
+sticky-header {
+  display: block;
 }
 
 .sticky-header-hidden,
 .sticky-header-stuck {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   transition: all var(--duration-medium) ease-out;
 }
 
