@@ -104,12 +104,10 @@ class StickyHeader extends HTMLElement {
 
   connectedCallback() {
     this.header =
-      this.querySelector('.section-header') ||
-      this.closest('.section-header') ||
-      document.querySelector('.section-header');
+      this.querySelector('[data-sticky-header-target]') || this.firstElementChild;
 
     if (!this.header) {
-      console.warn('StickyHeader: .section-header element not found.');
+      console.warn('StickyHeader: no sticky target found inside the component.');
       return;
     }
 

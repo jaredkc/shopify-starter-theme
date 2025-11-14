@@ -1,6 +1,6 @@
 {% render 'search-dialog-modal' %}
 <sticky-header>
-  <header class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
+  <header data-sticky-header-target class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8 bg-white">
     {%- if template.name == 'index' -%}
       <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
     {%- else -%}
@@ -67,7 +67,6 @@
 {% schema %}
 {
   "name": "Header",
-  "class": "section-header",
   "settings": [
     {
       "type": "link_list",
