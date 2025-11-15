@@ -8,7 +8,6 @@ class StickyHeader extends HTMLElement {
     super();
 
     this.onScroll = this.onScroll.bind(this);
-    this.reset = this.reset.bind(this);
     this.show = this.show.bind(this);
     this.hide = this.hide.bind(this);
     this.updateMeasurements = this.updateMeasurements.bind(this);
@@ -56,10 +55,6 @@ class StickyHeader extends HTMLElement {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     this.updateMeasurements();
 
-    if (scrollTop === 0) {
-      window.requestAnimationFrame(this.reset);
-    }
-
     if (scrollTop < this.height) return;
 
     if (scrollTop < this.currentScrollTop) {
@@ -78,13 +73,6 @@ class StickyHeader extends HTMLElement {
     if (height !== this.height) {
       this.height = height;
     }
-  }
-
-  reset() {
-    if (!this.header) return;
-
-    this.header.classList.remove(this.stuckClass);
-    this.header.classList.remove(this.hiddenClass);
   }
 
   hide() {
