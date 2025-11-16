@@ -22,14 +22,6 @@
     data-carousel-track
   >
     {{ slides }}
-    {% for i in (1..3) %}
-      {% assign placeholder_svg = 'hero-apparel-' | append: i %}
-      <div class="carousel__slide text-center">
-        <h3 class="text-sunrise text-caps">Model {{ i }}</h3>
-        <p class="mb-2">Description {{ i }}</p>
-        {{ placeholder_svg | placeholder_svg_tag: 'placeholder-svg' }}
-      </div>
-    {% endfor %}
   </div>
 
   {% render 'carousel-controls', id: id %}
