@@ -1,0 +1,28 @@
+{%- doc -%}
+  Renders carousel controls that are used for all carousel using the
+  CarouselComponent or ProductCarouselComponent components.
+
+  @param {string} id - The id of the carousel track
+
+  @example
+  {% render 'carousel-controls', id: carousel_id %}
+{%- enddoc -%}
+
+<div class="carousel__controls">
+  <button
+    aria-controls="{{ id }}"
+    aria-label="{{ 'accessibility.previous_slide' | t }}"
+    class="carousel__button carousel__button--left"
+    data-carousel-direction="left"
+  >
+    ←
+  </button>
+  <button
+    aria-controls="{{ id }}"
+    aria-label="{{ 'accessibility.next_slide' | t }}"
+    class="carousel__button carousel__button--right"
+    data-carousel-direction="right"
+  >
+    →
+  </button>
+</div>
