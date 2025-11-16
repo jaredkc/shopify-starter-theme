@@ -1,0 +1,140 @@
+/*
+ * Carousel Component
+ *
+ * Base styles for a functional carousel using CSS scroll-snap.
+ */
+
+carousel-component,
+product-carousel {
+  --gap: 16px;
+  --slide-max-width: 100%;
+  --slide-min-width: 160px;
+
+  display: block;
+  position: relative;
+}
+
+.carousel__controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.carousel__track {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--gap);
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.carousel__track--pad {
+  padding-left: 1rem;
+	padding-right: 1rem;
+  scroll-padding-left: 1rem;
+	scroll-padding-right: 1rem;
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.carousel__slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  /* Fixed width for consistent sizing, override as necessary */
+  max-width: var(--slide-max-width);
+  min-width: var(--slide-min-width);
+  width: 100%;
+}
+
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 18px;
+  height: 44px;
+  justify-content: center;
+  pointer-events: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+  width: 44px;
+}
+
+.carousel__button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.carousel__button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.carousel__button:disabled {
+  opacity: 0;
+  cursor: not-allowed;
+}
+
+.carousel__button--left {
+  left: 16px;
+  transform: translateY(-50%) translateX(0);
+}
+
+.carousel__button--left:disabled {
+  transform: translateY(-50%) translateX(-60px);
+}
+
+.carousel__button--right {
+  right: 16px;
+  transform: translateY(-50%) translateX(0);
+}
+
+.carousel__button--right:disabled {
+  transform: translateY(-50%) translateX(60px);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .carousel__button {
+    transition: none;
+  }
+
+  .carousel__track {
+    scroll-behavior: auto;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+carousel-component:focus-within .carousel__button {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Max width options */
+@media (min-width: 1440px) {
+	.carousel__track--xl {
+		padding-left: calc(50vw - var(1440px) / 2);
+		padding-right: calc(50vw - var(1440px) / 2);
+		scroll-padding-left: calc(50vw - var(1440px) / 2);
+		scroll-padding-right: calc(50vw - var(1440px) / 2);
+	}
+	.carousel__track--xl > * {
+		scroll-snap-align: center;
+	}
+}

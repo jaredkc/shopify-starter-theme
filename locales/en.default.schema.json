@@ -31,10 +31,12 @@
   "content": {
     "appearance": "Appearance",
     "button": "Button",
-    "layout": "Layout",
     "content": "Content",
+    "layout": "Layout",
     "padding": "Padding",
     "size": "Size",
+    "slides": "Slides",
+    "track": "Track",
     "typography_primary": "Primary typography",
     "typography_secondary": "Secondary typography",
     "typography": "Typography"
@@ -44,6 +46,7 @@
   },
   "info": {
     "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
+    "pixel_unit": "(pixels)",
     "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
     "max_width": "Maximum width of the container (in pixels)",
     "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)",
@@ -53,6 +56,7 @@
     "announcement_bar": "Announcement bar",
     "announcement": "Announcement",
     "button_group": "Button group",
+    "carousel": "Carousel",
     "cart": "Cart",
     "colors": "Colors",
     "custom_section": "Custom section",
@@ -64,6 +68,7 @@
     "paragraph": "Paragraph",
     "product-grid": "Product grid",
     "section": "Section",
+    "slide": "Slide",
     "text": "Text",
     "video_animation": "Video animation"
   },
@@ -146,7 +151,9 @@
     "link": "Link",
     "max_width": "Max width",
     "medium": "Medium",
+    "min_width": "Min width",
     "no_wrap": "No wrap",
+    "padding": "Padding",
     "page": "Page",
     "primary": "Primary",
     "products_per_page": "Products per page",

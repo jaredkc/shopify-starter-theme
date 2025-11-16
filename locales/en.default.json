@@ -8,6 +8,24 @@
  * ------------------------------------------------------------
  */
 {
+  "accessibility": {
+    "carousel": "Carousel",
+    "close": "Close",
+    "collapsible_content_title": "Collapsible content",
+    "complementary_products": "Complementary products",
+    "error": "Error",
+    "loading": "Loading...",
+    "next_slide": "Next slide",
+    "previous_slide": "Previous slide",
+    "products_count": "products",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "skip_to_product_info": "Skip to product information",
+    "skip_to_text": "Skip to content",
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "total_reviews": "total reviews",
+    "unit_price_separator": "per",
+    "vendor": "Vendor:"
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Enter store using password:",
@@ -30,25 +48,6 @@
       "search": "Search",
       "reset": "Clear search term"
     }
-  },
-  "accessibility": {
-    "close": "Close",
-    "collapsible_content_title": "Collapsible content",
-    "complementary_products": "Complementary products",
-    "error": "Error",
-    "link_messages": {
-      "new_window": "Opens in a new window.",
-      "external": "Opens external website."
-    },
-    "loading": "Loading...",
-    "products_count": "products",
-    "refresh_page": "Choosing a selection results in a full page refresh.",
-    "skip_to_product_info": "Skip to product information",
-    "skip_to_text": "Skip to content",
-    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
-    "total_reviews": "total reviews",
-    "unit_price_separator": "per",
-    "vendor": "Vendor:"
   },
   "blogs": {
     "article": {

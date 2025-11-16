@@ -1,0 +1,36 @@
+{%- doc -%}
+  @param {object[]} slides - the slides of the carousel
+  @param {number} gap - gap between the slides
+  @param {string} id - unique ID for carousel
+  @param {boolean} slide_custom_width - custom width of the carousel
+  @param {number} slide_max_width - max width of the carousel
+  @param {boolean} track_padding - whether to pad the track
+  @param {string} track_width - width of the track
+
+  @example
+  {% render 'carousel', slides: slides, id: carousel_id  %}
+{%- enddoc -%}
+
+<carousel-component
+  aria-roledescription="{{ 'accessibility.carousel' | t }}"
+  style="--gap: {{ gap }}px;{% if slide_custom_width == true and slide_max_width != blank %} --slide-max-width: {{ slide_max_width }}px;{% endif %}"
+  role="region"
+>
+  <div
+    id="{{ id }}"
+    class="carousel__track carousel__track--{{ track_width}}{% if track_padding %} carousel__track--pad{% endif %}"
+    data-carousel-track
+  >
+    {{ slides }}
+    {% for i in (1..3) %}
+      {% assign placeholder_svg = 'hero-apparel-' | append: i %}
+      <div class="carousel__slide text-center">
+        <h3 class="text-sunrise text-caps">Model {{ i }}</h3>
+        <p class="mb-2">Description {{ i }}</p>
+        {{ placeholder_svg | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% render 'carousel-controls', id: id %}
+</carousel-component>
