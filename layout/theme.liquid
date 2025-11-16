@@ -19,12 +19,7 @@
     {% endif %}
 
     {%- render 'meta-tags' -%}
-
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
-
-    {{ content_for_header }}
+    {%- render 'scripts' -%}
 
     {% style %}
     {% for scheme in settings.color_schemes -%}
@@ -71,6 +66,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'carousel.css' | asset_url | stylesheet_tag }}
     {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
 
     {%- comment -%}
@@ -86,6 +82,8 @@
         moneyFormat: {{ shop.money_format | json }}
       };
     </script>
+
+    {{ content_for_header }}
   </head>
   <body>
     {% sections 'header-group' %}
