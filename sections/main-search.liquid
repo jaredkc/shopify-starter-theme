@@ -1,7 +1,7 @@
 <div class="page-width">
   {% paginate search.results by section.settings.results_per_page %}
     <div class="px-4 py-8 text-center border-b">
-      <form action="/search" method="get" role="search">
+      <form action="{{ routes.search_url }}" method="get" role="search">
         <input type="search" name="q" value="{{ search.terms | escape }}" class="field-input">
         <button type="submit" class="btn">Search</button>
       </form>
