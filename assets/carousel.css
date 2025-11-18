@@ -129,10 +129,10 @@ carousel-component:focus-within .carousel__button {
 /* Max width options */
 @media (min-width: 1440px) {
 	.carousel__track--xl {
-		padding-left: calc(50vw - var(1440px) / 2);
-		padding-right: calc(50vw - var(1440px) / 2);
-		scroll-padding-left: calc(50vw - var(1440px) / 2);
-		scroll-padding-right: calc(50vw - var(1440px) / 2);
+		padding-left: calc(50vw - (1440px / 2));
+		padding-right: calc(50vw - (1440px / 2));
+		scroll-padding-left: calc(50vw - (1440px / 2));
+		scroll-padding-right: calc(50vw - (1440px / 2));
 	}
 	.carousel__track--xl > * {
 		scroll-snap-align: center;
