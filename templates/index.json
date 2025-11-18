@@ -267,6 +267,7 @@
         "heading_BGTpJ7",
         "group_MnQU4U"
       ],
+      "disabled": true,
       "name": "Video background",
       "settings": {
         "video": "shopify://files/videos/Clown fish in anemone.mp4",
