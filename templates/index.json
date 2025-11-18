@@ -62,6 +62,142 @@
         "show_rating": false
       }
     },
+    "section_JENKbx": {
+      "type": "section",
+      "blocks": {
+        "image_iQ8BNf": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "link": "",
+            "aspect_ratio": "auto",
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "height": "fill"
+          },
+          "blocks": {}
+        },
+        "video_animation_XqDqpK": {
+          "type": "video-animation",
+          "name": "t:names.video_animation",
+          "settings": {
+            "video": "shopify://files/videos/Clown fish in anemone.mp4",
+            "loop": false,
+            "aspect_ratio": "auto"
+          },
+          "blocks": {}
+        },
+        "group_9GWBUd": {
+          "type": "group",
+          "settings": {
+            "content_direction": "md:flex-col",
+            "column_on_mobile": true,
+            "flex_wrap": false,
+            "justify_content": "justify-start",
+            "align_items": "items-start",
+            "gap": 8,
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "padding-block-start": 48,
+            "padding-block-end": 48,
+            "padding-inline-start": 16,
+            "padding-inline-end": 16
+          },
+          "blocks": {
+            "heading_8X6Vnx": {
+              "type": "heading",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "Welcome to our store",
+                "width": "100%",
+                "max_width": "md",
+                "alignment": "left",
+                "element": "h2",
+                "font_size": "text-2xl"
+              },
+              "blocks": {}
+            },
+            "text_6WETNK": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Insert your catchphrase here (or something else).</p>",
+                "width": "fit-content",
+                "max_width": "md",
+                "alignment": "left",
+                "font_size": "text-lg"
+              },
+              "blocks": {}
+            },
+            "group_RLXETy": {
+              "type": "group",
+              "name": "t:names.button_group",
+              "settings": {
+                "content_direction": "md:flex-row",
+                "column_on_mobile": false,
+                "flex_wrap": true,
+                "justify_content": "justify-start",
+                "align_items": "items-start",
+                "gap": 8,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "padding-block-start": 24,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "button_JCEKb4": {
+                  "type": "button",
+                  "settings": {
+                    "button_label": "Shop now",
+                    "button_link": "shopify://collections/all",
+                    "button_style": "primary"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "button_JCEKb4"
+              ]
+            }
+          },
+          "block_order": [
+            "heading_8X6Vnx",
+            "text_6WETNK",
+            "group_RLXETy"
+          ]
+        }
+      },
+      "block_order": [
+        "image_iQ8BNf",
+        "video_animation_XqDqpK",
+        "group_9GWBUd"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "md:flex-row",
+        "column_on_mobile": true,
+        "flex_wrap": false,
+        "justify_content": "justify-start",
+        "align_items": "items-center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "small",
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "video_background_3tTcgy": {
       "type": "video-background",
       "blocks": {
@@ -70,7 +206,11 @@
           "name": "Heading",
           "settings": {
             "text": "Welcome to our store",
-            "size": "text-4xl"
+            "width": "100%",
+            "max_width": "md",
+            "alignment": "left",
+            "element": "h2",
+            "font_size": "text-2xl"
           },
           "blocks": {}
         },
@@ -78,14 +218,22 @@
           "type": "group",
           "name": "Group",
           "settings": {
-            "content_direction_mobile": "flex-col",
             "content_direction": "md:flex-row",
-            "horizontal_alignment": "justify-start",
-            "vertical_alignment": "items-start",
+            "column_on_mobile": true,
+            "flex_wrap": false,
+            "justify_content": "justify-start",
+            "align_items": "items-start",
             "gap": 16,
-            "flex_wrap": "flex-wrap",
-            "margin_top": 0,
-            "margin_bottom": 0
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "button_eCFWVf": {
@@ -140,6 +288,7 @@
   "order": [
     "hero_banner",
     "featured_collection",
+    "section_JENKbx",
     "video_background_3tTcgy",
     "email_signup"
   ]
