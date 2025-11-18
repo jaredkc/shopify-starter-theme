@@ -46,7 +46,6 @@
   },
   "info": {
     "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
-    "pixel_unit": "(pixels)",
     "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
     "max_width": "Maximum width of the container (in pixels)",
     "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)",
