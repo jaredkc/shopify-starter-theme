@@ -4,9 +4,16 @@
   No video controls or audio
 {% endcomment %}
 
+{% liquid
+  assign aspect_ratio = block.settings.aspect_ratio
+  if aspect_ratio == 'auto' and block.settings.video != blank
+    assign aspect_ratio = block.settings.video.aspect_ratio
+  endif
+%}
+
 <div
   class="media-container video-animation"
-  style="--aspect-ratio: {{ block.settings.aspect_ratio }};"
+  style="--aspect-ratio: {{ aspect_ratio }};"
   {{ block.shopify_attributes }}
 >
   {% if block.settings.video %}
@@ -192,15 +199,15 @@
           "label": "t:options.aspect_ratio_auto"
         },
         {
-          "value": "16/9",
+          "value": "56.25%",
           "label": "t:options.aspect_ratio_16_9"
         },
         {
-          "value": "5/4",
+          "value": "80%",
           "label": "t:options.aspect_ratio_5_4"
         },
         {
-          "value": "1/1",
+          "value": "100%",
           "label": "t:options.aspect_ratio_1_1"
         }
       ],
