@@ -37,9 +37,9 @@ product-carousel {
 
 .carousel__track--pad {
   padding-left: 1rem;
-	padding-right: 1rem;
+  padding-right: 1rem;
   scroll-padding-left: 1rem;
-	scroll-padding-right: 1rem;
+  scroll-padding-right: 1rem;
 }
 
 .carousel__track::-webkit-scrollbar {
@@ -49,35 +49,38 @@ product-carousel {
 .carousel__slide {
   flex: 0 0 auto;
   scroll-snap-align: start;
-  /* Fixed width for consistent sizing, override as necessary */
   max-width: var(--slide-max-width);
   min-width: var(--slide-min-width);
-  width: 100%;
+  width: calc(var(--slide-mobile-width, 100%) - var(--gap) * (100% - var(--slide-mobile-width, 100%)) / 100%);
+  @media (min-width: 768px) {
+    width: calc(var(--slide-desktop-width, 100%) - var(--gap) * (100% - var(--slide-desktop-width, 100%)) / 100%);
+  }
 }
 
 .carousel__button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   align-items: center;
-  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px) saturate(180%);
   border-radius: 50%;
-  border: 1px solid #e5e7eb;
-  color: var(--color-primary);
   cursor: pointer;
   display: flex;
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 18px;
   height: 44px;
   justify-content: center;
   pointer-events: auto;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
   user-select: none;
   width: 44px;
+  /* Reversed from .btn on purposes for theme color scheme integration*/
+  background: rgba(var(--color-button-text, 255, 255, 255), 0.75);
+  color: rgba(var(--color-button, 0, 0, 0), 1);
 }
 
 .carousel__button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 1);
+  background: rgba(var(--color-button-text, 255, 255, 255), 1);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
@@ -128,13 +131,13 @@ carousel-component:focus-within .carousel__button {
 
 /* Max width options */
 @media (min-width: 1440px) {
-	.carousel__track--xl {
-		padding-left: calc(50vw - (1440px / 2));
-		padding-right: calc(50vw - (1440px / 2));
-		scroll-padding-left: calc(50vw - (1440px / 2));
-		scroll-padding-right: calc(50vw - (1440px / 2));
-	}
-	.carousel__track--xl > * {
-		scroll-snap-align: center;
-	}
+  .carousel__track--xl {
+    padding-left: calc(50vw - (1440px / 2));
+    padding-right: calc(50vw - (1440px / 2));
+    scroll-padding-left: calc(50vw - (1440px / 2));
+    scroll-padding-right: calc(50vw - (1440px / 2));
+  }
+  .carousel__track--xl > * {
+    scroll-snap-align: center;
+  }
 }

@@ -2,18 +2,58 @@
   @param {object[]} slides - the slides of the carousel
   @param {number} gap - gap between the slides
   @param {string} id - unique ID for carousel
-  @param {boolean} slide_custom_width - custom width of the carousel
+  @param {boolean} slide_set_max_width - whether to set custom max width
   @param {number} slide_max_width - max width of the carousel
+  @param {number} slide_mobile_columns - number of columns on mobile (1-4)
+  @param {number} slide_desktop_columns - number of columns on desktop (1-12)
   @param {boolean} track_padding - whether to pad the track
   @param {string} track_width - width of the track
 
   @example
-  {% render 'carousel', slides: slides, id: carousel_id  %}
+  {% render 'carousel',
+    slides: slides,
+    id: carousel_id,
+    gap: gap,
+    slide_set_max_width: slide_set_max_width,
+    slide_max_width: slide_max_width,
+    slide_mobile_columns: slide_mobile_columns,
+    slide_desktop_columns: slide_desktop_columns,
+    track_padding: track_padding,
+    track_width: track_width
+  %}
 {%- enddoc -%}
+
+{%- liquid
+  assign mobile_columns = slide_mobile_columns | default: 1
+  assign desktop_columns = slide_desktop_columns | default: 2
+  # Calculate percentage: 100 / columns
+  # Use 1000000 for precision, then format as decimal
+  assign mobile_raw = 1000000 | divided_by: mobile_columns
+  assign mobile_int = mobile_raw | divided_by: 10000
+  assign mobile_dec = mobile_raw | modulo: 10000
+  if mobile_dec > 0
+    assign mobile_width = mobile_int | append: '.' | append: mobile_dec
+  else
+    assign mobile_width = mobile_int
+  endif
+  assign desktop_raw = 1000000 | divided_by: desktop_columns
+  assign desktop_int = desktop_raw | divided_by: 10000
+  assign desktop_dec = desktop_raw | modulo: 10000
+  if desktop_dec > 0
+    assign desktop_width = desktop_int | append: '.' | append: desktop_dec
+  else
+    assign desktop_width = desktop_int
+  endif
+-%}
 
 <carousel-component
   aria-roledescription="{{ 'accessibility.carousel' | t }}"
-  style="--gap: {{ gap }}px;{% if slide_custom_width == true and slide_max_width != blank %} --slide-max-width: {{ slide_max_width }}px;{% endif %}"
+  style="
+    --gap: {{ gap }}px;
+    --slide-mobile-width: {{ mobile_width }}%;
+    --slide-desktop-width: {{ desktop_width }}%;
+    {%- if slide_set_max_width == true and slide_max_width != blank %} --slide-max-width: {{ slide_max_width }}px;{% endif -%}
+  "
   role="region"
 >
   <div
@@ -23,6 +63,5 @@
   >
     {{ slides }}
   </div>
-
   {% render 'carousel-controls', id: id %}
 </carousel-component>

@@ -1,5 +1,22 @@
 <div class="carousel__slide">
-  {% content_for 'blocks' %}
+  <div
+    class="
+      flex
+      {% if block.settings.column_on_mobile %}flex-col{% else %}flex-row{% endif %}
+      {% if block.settings.flex_wrap %}flex-wrap{% else %}flex-nowrap{% endif %}
+      {{ block.settings.justify_content }} {{ block.settings.align_items }} {{ block.settings.content_direction }}
+      {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }}{% endif %}
+      size-style spacing-style
+    "
+    style="
+      gap: {{ block.settings.gap }}px;
+      {% render 'size-style', settings: block.settings %}
+      {% render 'spacing-style', settings: block.settings %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {% content_for 'blocks' %}
+  </div>
 </div>
 
 {% schema %}
@@ -14,7 +31,162 @@
       "type": "@app"
     }
   ],
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "content_direction",
+      "label": "t:settings.direction",
+      "options": [
+        {
+          "value": "md:flex-col",
+          "label": "t:options.column"
+        },
+        {
+          "value": "md:flex-row",
+          "label": "t:options.row"
+        }
+      ],
+      "default": "md:flex-col"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_on_mobile",
+      "label": "t:settings.column_on_mobile",
+      "default": true,
+      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "flex_wrap",
+      "label": "t:settings.wrap_items",
+      "default": false,
+      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' or block.settings.column_on_mobile == false }}"
+    },
+    {
+      "type": "select",
+      "id": "justify_content",
+      "label": "t:settings.justify_content",
+      "options": [
+        {
+          "value": "justify-start",
+          "label": "t:options.start"
+        },
+        {
+          "value": "justify-center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "justify-end",
+          "label": "t:options.end"
+        },
+        {
+          "value": "justify-between",
+          "label": "t:options.space_between"
+        },
+        {
+          "value": "justify-around",
+          "label": "t:options.space_around"
+        }
+      ],
+      "default": "justify-start",
+      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' }}"
+    },
+    {
+      "type": "select",
+      "id": "align_items",
+      "label": "t:settings.align_items",
+      "options": [
+        {
+          "value": "items-start",
+          "label": "t:options.start"
+        },
+        {
+          "value": "items-center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "items-end",
+          "label": "t:options.end"
+        },
+        {
+          "value": "items-stretch",
+          "label": "t:options.stretch"
+        }
+      ],
+      "default": "items-start"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "t:settings.gap",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:settings.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    }
+  ],
   "presets": [
     {
       "name": "t:names.slide"
