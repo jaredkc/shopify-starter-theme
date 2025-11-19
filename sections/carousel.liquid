@@ -14,8 +14,10 @@
     slides: slides,
     id: carousel_id,
     gap: section.settings.gap,
-    slide_custom_width: section.settings.slide_custom_width,
+    slide_set_max_width: section.settings.slide_set_max_width,
     slide_max_width: section.settings.slide_max_width,
+    slide_mobile_columns: section.settings.slide_mobile_columns,
+    slide_desktop_columns: section.settings.slide_desktop_columns,
     track_padding: section.settings.track_padding,
     track_width: section.settings.track_width
   %}
@@ -58,6 +60,24 @@
       "content": "t:content.slides"
     },
     {
+      "type": "range",
+      "id": "slide_mobile_columns",
+      "label": "t:settings.mobile_columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "slide_desktop_columns",
+      "label": "t:settings.desktop_columns",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 2
+    },
+    {
       "id": "gap",
       "type": "range",
       "min": 0,
@@ -69,7 +89,7 @@
     },
     {
       "type": "checkbox",
-      "id": "slide_custom_width",
+      "id": "slide_set_max_width",
       "label": "t:settings.custom_width",
       "default": false
     },
@@ -82,7 +102,7 @@
       "unit": "px",
       "label": "t:settings.max_width",
       "default": 560,
-      "visible_if": "{{ section.settings.slide_custom_width == true }}"
+      "visible_if": "{{ section.settings.slide_set_max_width == true }}"
     },
     {
       "type": "header",
@@ -106,7 +126,7 @@
       "max": 104,
       "step": 8,
       "unit": "px",
-      "default": 24
+      "default": 48
     },
     {
       "type": "range",
@@ -116,7 +136,7 @@
       "max": 104,
       "step": 8,
       "unit": "px",
-      "default": 24
+      "default": 48
     }
   ],
   "presets": [
@@ -124,6 +144,17 @@
       "name": "t:names.carousel",
       "category": "t:categories.banners",
       "blocks": [
+        {
+          "type": "_carousel-slide",
+          "blocks": [
+            {
+              "type": "image",
+              "settings": {
+                "aspect_ratio": "16/9"
+              }
+            }
+          ]
+        },
         {
           "type": "_carousel-slide",
           "blocks": [
