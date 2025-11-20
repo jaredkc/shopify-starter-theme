@@ -10,7 +10,7 @@
 {%- elsif settings.width == 'fill' -%}
   --size-style-width: 100%;
 {%- else -%}
-  --size-style-width: here{{ settings.width }};
+  --size-style-width: {{ settings.width }};
 {%- endif -%}
 
 {%- if settings.height == 'custom' -%}
