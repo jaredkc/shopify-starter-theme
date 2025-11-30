@@ -1,0 +1,166 @@
+<blockquote
+  class="quote spacing-style content-{{ block.settings.max_width }} text-{{ block.settings.alignment }}"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="quote__body rte {{ block.settings.font_size }}">
+    {{ block.settings.quote }}
+  </div>
+  {% if block.settings.source != blank %}
+    <cite class="quote__source text-xs">&mdash; {{ block.settings.source }}</cite>
+  {% endif %}
+</blockquote>
+
+{% stylesheet %}
+  .quote {
+    border: 0;
+    color: inherit;
+  }
+
+  .quote__body {
+    font-style: italic;
+  }
+
+  .quote__source {
+    display: block;
+    font-style: normal;
+    margin-top: 1rem;
+    opacity: 0.5;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.quote",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "t:settings.quote",
+      "default": "t:html_defaults.insert_quote"
+    },
+    {
+      "type": "text",
+      "id": "source",
+      "label": "t:settings.source",
+      "default": "t:text_defaults.source_name"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "t:settings.max_width",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:options.xs"
+        },
+        {
+          "value": "sm",
+          "label": "t:options.sm"
+        },
+        {
+          "value": "md",
+          "label": "t:options.md"
+        },
+        {
+          "value": "lg",
+          "label": "t:options.lg"
+        },
+        {
+          "value": "full",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        {
+          "value": "text-sm",
+          "label": "t:options.sm"
+        },
+        {
+          "value": "text-md",
+          "label": "t:options.md"
+        },
+        {
+          "value": "text-lg",
+          "label": "t:options.lg"
+        },
+        {
+          "value": "text-xl",
+          "label": "t:options.xl"
+        }
+      ],
+      "default": "text-lg"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 104,
+      "step": 8,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.quote"
+    }
+  ]
+}
+{% endschema %}
