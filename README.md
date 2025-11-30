@@ -1,14 +1,13 @@
 # Shopify Starter Theme
 
 > [!NOTE]
-> This is a work in progress. An archive for the Shopify 1.0 starter theme is available in the `1.0-theme-archive` branch.
+> This is a work in progress. I use this for a work-in-progress and testing ground for new Shopify features. Not all core Shopify theme features are accounted for.
 
 A Shopify 2.0 starter theme that focuses on performance, user experience, and simplicity.
 
 - Everything is intentionally basic. So you can focus on building what you need without the hassle of complex settings and functionality you don’t.
 - For CSS, you will find a combination of TailwindCSS and traditional stylesheets. If something is used throughout the theme, standard CSS is used for consistency.
 - I have included solutions I have found helpful across multiple Shopify themes, many of which may be unique and useful.
-- English string translations for customer-facing content are included in the `locales` directory.
 
 ## Development
 
