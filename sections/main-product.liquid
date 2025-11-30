@@ -109,7 +109,7 @@
 
 {% schema %}
 {
-  "name": "t:sections.main-product.name",
+  "name": "t:names.product_information",
   "tag": "section",
   "class": "section",
   "blocks": [
@@ -130,27 +130,27 @@
     },
     {
       "type": "title",
-      "name": "t:sections.main-product.blocks.title.name",
+      "name": "t:names.title",
       "limit": 1
     },
     {
       "type": "description",
-      "name": "t:sections.main-product.blocks.description.name",
+      "name": "t:names.description",
       "limit": 1
     },
     {
       "type": "price",
-      "name": "t:sections.main-product.blocks.price.name",
+      "name": "t:names.price",
       "limit": 1
     },
     {
       "type": "quantity_select",
-      "name": "t:sections.main-product.blocks.quantity_select.name",
+      "name": "t:names.quantity_selector",
       "limit": 1
     },
     {
       "type": "variant_select",
-      "name": "t:sections.main-product.blocks.variant_select.name",
+      "name": "t:names.variant_select",
       "limit": 1,
       "settings": [
         {
@@ -160,36 +160,36 @@
           "options": [
             {
               "value": "dropdown",
-              "label": "t:sections.main-product.blocks.variant_select.settings.select_type.options__1.label"
+              "label": "t:options.dropdown"
             },
             {
               "value": "button",
-              "label": "t:sections.main-product.blocks.variant_select.settings.select_type.options__2.label"
+              "label": "t:options.pills"
             }
           ],
           "default": "dropdown",
-          "label": "t:sections.main-product.blocks.variant_select.settings.select_type.label"
+          "label": "t:settings.type"
         }
       ]
     },
     {
       "type": "buy_buttons",
-      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "name": "t:names.buy_buttons",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_dynamic_checkout",
           "default": true,
-          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
-          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+          "label": "t:settings.show_dynamic_checkout",
+          "info": "t:info.dynamic_checkout_help"
         },
         {
           "type": "checkbox",
           "id": "show_gift_card_recipient",
           "default": true,
-          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
-          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+          "label": "t:settings.show_gift_card_recipient",
+          "info": "t:info.gift_card_recipient_help"
         }
       ]
     }
@@ -197,8 +197,8 @@
   "settings": [
     {
       "type": "header",
-      "content": "t:sections.main-product.settings.header.content",
-      "info": "t:sections.main-product.settings.header.info"
+      "content": "t:content.media",
+      "info": "t:info.media_types_help"
     }
   ]
 }
