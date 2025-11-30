@@ -32,25 +32,25 @@
 
 {% schema %}
 {
-  "name": "t:sections.main-collection-banner.name",
+  "name": "t:names.collection_banner",
   "class": "section",
   "settings": [
     {
       "type": "paragraph",
-      "content": "t:sections.main-collection-banner.settings.paragraph.content"
+      "content": "t:info.collection_description_help"
     },
     {
       "type": "checkbox",
       "id": "show_collection_description",
       "default": true,
-      "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
+      "label": "t:settings.show_collection_description"
     },
     {
       "type": "checkbox",
       "id": "show_collection_image",
       "default": false,
-      "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
-      "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+      "label": "t:settings.show_collection_image",
+      "info": "t:info.collection_image_help"
     }
   ]
 }

@@ -8,7 +8,7 @@
     "theme_support_url": "https://github.com/jaredkc/shopify-starter-theme/issues"
   },
   {
-    "name": "t:settings_schema.layout.name",
+    "name": "t:settings.layout",
     "settings": [
       {
         "type": "range",
@@ -18,7 +18,7 @@
         "step": 20,
         "default": 1440,
         "unit": "px",
-        "label": "t:settings_schema.layout.settings.page_width.label"
+        "label": "t:settings.page_width"
       }
     ]
   },

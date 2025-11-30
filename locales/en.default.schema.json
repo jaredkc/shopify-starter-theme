@@ -33,6 +33,7 @@
     "button": "Button",
     "content": "Content",
     "layout": "Layout",
+    "media": "Media",
     "padding": "Padding",
     "size": "Size",
     "slides": "Slides",
@@ -47,30 +48,45 @@
   },
   "info": {
     "aspect_ratio": "Choose aspect ratio or match the media's natural ratio",
+    "collection_description_help": "Add a description or image by editing your collection. [Learn more](https://help.shopify.com/manual/products/collections/collection-layout)",
+    "collection_image_help": "For best results, use an image with a 16:9 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)",
+    "dynamic_checkout_help": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
     "enable_infinite_scroll": "Load more products as the user scrolls. Max of 8 pages then falls back to pagination.",
+    "gift_card_recipient_help": "Allows buyers to send gift cards on a scheduled date along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
+    "liquid_code_help": "Add app snippets or other code to create advanced customizations. [Learn more](https://shopify.dev/docs/api/liquid)",
     "max_width": "Maximum width of the container (in pixels)",
+    "media_types_help": "Learn more about [media types.](https://help.shopify.com/manual/products/product-media)",
     "show_rating": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-grid-section-settings)",
     "video_animation": "Will autoplay when in viewport."
   },
   "names": {
     "announcement_bar": "Announcement bar",
     "announcement": "Announcement",
+    "button": "Button",
     "button_group": "Button group",
+    "buy_buttons": "Buy buttons",
     "carousel": "Carousel",
     "cart": "Cart",
+    "collection_banner": "Collection banner",
     "colors": "Colors",
+    "custom_liquid": "Custom Liquid",
     "custom_section": "Custom section",
+    "description": "Description",
     "group": "Group",
     "heading": "Heading",
     "image_with_text": "Image with text",
     "image": "Image",
     "modal_button": "Modal button",
-    "paragraph": "Paragraph",
+    "price": "Price",
     "product-grid": "Product grid",
+    "product_information": "Product information",
+    "quantity_selector": "Quantity selector",
     "quote": "Quote",
     "section": "Section",
     "slide": "Slide",
     "text": "Text",
+    "title": "Title",
+    "variant_select": "Variant select",
     "video_animation": "Video animation"
   },
   "options": {
@@ -84,6 +100,7 @@
     "column": "Column",
     "custom": "Custom",
     "default": "Default",
+    "dropdown": "Dropdown",
     "end": "End",
     "fill": "Fill",
     "fit_content": "Fit",
@@ -97,6 +114,7 @@
     "medium": "Medium",
     "no_wrap": "No wrap",
     "page": "Page",
+    "pills": "Pills",
     "right": "Right",
     "row": "Row",
     "sm": "Sm",
@@ -142,6 +160,7 @@
     "gap": "Gap",
     "heading": "Heading",
     "height": "Height",
+    "horizontal_alignment": "Horizontal alignment",
     "image": "Image",
     "inherit_color_scheme": "Inherit color scheme",
     "justify_content": "Justify content",
@@ -150,12 +169,14 @@
     "layout": "Layout",
     "left": "Left",
     "link": "Link",
+    "liquid_code": "Liquid code",
     "max_width": "Max width",
     "medium": "Medium",
     "min_width": "Min width",
     "no_wrap": "No wrap",
     "padding": "Padding",
     "page": "Page",
+    "page_width": "Page width",
     "primary": "Primary",
     "products_per_page": "Products per page",
     "quote": "Quote",
@@ -164,6 +185,10 @@
     "secondary_button_label": "Outline button",
     "secondary": "Secondary",
     "set_max_width": "Set max width",
+    "show_collection_description": "Show collection description",
+    "show_collection_image": "Show collection image",
+    "show_dynamic_checkout": "Show dynamic checkout buttons",
+    "show_gift_card_recipient": "Show recipient information form for gift cards",
     "show_rating": "Show product rating",
     "show_vendor": "Show vendor",
     "small": "Small",
@@ -175,6 +200,7 @@
     "style": "Style",
     "text": "Text",
     "top": "Top",
+    "type": "Type",
     "uppercase": "Uppercase",
     "video_loop": "Loop video",
     "video_source": "Video",
@@ -191,86 +217,12 @@
     "contact_form_button_label": "Submit",
     "email_signup_button_label": "Subscribe",
     "heading": "Heading",
+    "modal_description": "<p>Add your modal content description here.</p>",
+    "modal_title": "Modal Title",
+    "open_modal": "Open modal",
     "shop_our_latest_arrivals": "Shop our latest arrivals!",
     "sign_up": "Sign up",
     "source_name": "Source name",
     "welcome": "Welcome to our store"
-  },
-  "settings_schema": {
-    "layout": {
-      "name": "Layout",
-      "settings": {
-        "page_width": {
-          "label": "Page width"
-        }
-      }
-    }
-  },
-  "sections": {
-    "main-collection-banner": {
-      "name": "Collection banner",
-      "settings": {
-        "paragraph": {
-          "content": "Add a description or image by editing your collection. [Learn more](https://help.shopify.com/manual/products/collections/collection-layout)"
-        },
-        "show_collection_description": {
-          "label": "Show collection description"
-        },
-        "show_collection_image": {
-          "label": "Show collection image",
-          "info": "For best results, use an image with a 16:9 aspect ratio. [Learn more](https://help.shopify.com/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
-        }
-      }
-    },
-    "main-product": {
-      "name": "Product information",
-      "blocks": {
-        "title": {
-          "name": "Title"
-        },
-        "price": {
-          "name": "Price"
-        },
-        "quantity_select": {
-          "name": "Quantity selector"
-        },
-        "variant_select": {
-          "name": "Variant select",
-          "settings": {
-            "select_type": {
-              "label": "Type",
-              "options__1": {
-                "label": "Dropdown"
-              },
-              "options__2": {
-                "label": "Pills"
-              }
-            }
-          }
-        },
-        "buy_buttons": {
-          "name": "Buy buttons",
-          "settings": {
-            "show_dynamic_checkout": {
-              "label": "Show dynamic checkout buttons",
-              "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
-            },
-            "show_gift_card_recipient": {
-              "label": "Show recipient information form for gift cards",
-              "info": "Allows buyers to send gift cards on a scheduled date along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)"
-            }
-          }
-        },
-        "description": {
-          "name": "Description"
-        }
-      },
-      "settings": {
-        "header": {
-          "content": "Media",
-          "info": "Learn more about [media types.](https://help.shopify.com/manual/products/product-media)"
-        }
-      }
-    }
   }
 }

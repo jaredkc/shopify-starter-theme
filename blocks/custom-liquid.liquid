@@ -4,19 +4,19 @@
 
 {% schema %}
 {
-  "name": "Custom Liquid",
+  "name": "t:names.custom_liquid",
   "tag": "div",
   "settings": [
     {
       "type": "liquid",
       "id": "custom_code",
-      "label": "liquid code",
-      "info": "Add app snippets or other code to create advanced customizations. [Learn more](https://shopify.dev/docs/api/liquid)"
+      "label": "t:settings.liquid_code",
+      "info": "t:info.liquid_code_help"
     },
     {
       "type": "range",
       "id": "max_width",
-      "label": "Max width",
+      "label": "t:settings.max_width",
       "min": 320,
       "max": 1440,
       "step": 20,
@@ -26,19 +26,19 @@
     {
       "type": "select",
       "id": "horizontal_alignment",
-      "label": "Horizontal alignment",
+      "label": "t:settings.horizontal_alignment",
       "options": [
         {
           "value": "mr-auto",
-          "label": "Left"
+          "label": "t:options.left"
         },
         {
           "value": "mx-auto",
-          "label": "Center"
+          "label": "t:options.center"
         },
         {
           "value": "ml-auto",
-          "label": "Right"
+          "label": "t:options.right"
         }
       ],
       "default": "mx-auto"
@@ -46,7 +46,7 @@
   ],
   "presets": [
     {
-      "name": "Custom Liquid"
+      "name": "t:names.custom_liquid"
     }
   ]
 }
