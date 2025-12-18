@@ -94,7 +94,6 @@
           "settings": {
             "content_direction": "md:flex-col",
             "column_on_mobile": true,
-            "flex_wrap": false,
             "justify_content": "justify-start",
             "align_items": "items-start",
             "gap": 8,
@@ -140,7 +139,6 @@
               "settings": {
                 "content_direction": "md:flex-row",
                 "column_on_mobile": false,
-                "flex_wrap": true,
                 "justify_content": "justify-start",
                 "align_items": "items-start",
                 "gap": 8,
@@ -187,7 +185,6 @@
       "settings": {
         "content_direction": "md:flex-row",
         "column_on_mobile": true,
-        "flex_wrap": false,
         "justify_content": "justify-start",
         "align_items": "items-center",
         "gap": 0,
@@ -220,7 +217,6 @@
           "settings": {
             "content_direction": "md:flex-row",
             "column_on_mobile": true,
-            "flex_wrap": false,
             "justify_content": "justify-start",
             "align_items": "items-start",
             "gap": 16,

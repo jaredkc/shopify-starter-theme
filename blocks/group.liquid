@@ -2,7 +2,6 @@
   class="
     flex
     {% if block.settings.column_on_mobile %}flex-col{% else %}flex-row{% endif %}
-    {% if block.settings.flex_wrap %}flex-wrap{% else %}flex-nowrap{% endif %}
     {{ block.settings.justify_content }} {{ block.settings.align_items }} {{ block.settings.content_direction }}
     {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }}{% endif %}
     size-style spacing-style
@@ -48,13 +47,6 @@
       "label": "t:settings.column_on_mobile",
       "default": true,
       "visible_if": "{{ block.settings.content_direction == 'md:flex-row' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "flex_wrap",
-      "label": "t:settings.wrap_items",
-      "default": false,
-      "visible_if": "{{ block.settings.content_direction == 'md:flex-row' or block.settings.column_on_mobile == false }}"
     },
     {
       "type": "select",

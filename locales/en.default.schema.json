@@ -126,7 +126,6 @@
     "stretch": "Stretch",
     "top": "Top",
     "uppercase": "Uppercase",
-    "wrap_items": "Wrap items",
     "xl": "Xl",
     "xs": "Xs"
   },
@@ -208,7 +207,6 @@
     "width_desktop": "Desktop width",
     "width_mobile": "Mobile width",
     "width": "Width",
-    "wrap_items": "Wrap items",
     "wrap": "Wrap"
   },
   "text_defaults": {

@@ -34,7 +34,6 @@
       "settings": {
         "content_direction": "md:flex-col",
         "column_on_mobile": true,
-        "flex_wrap": false,
         "justify_content": "justify-start",
         "align_items": "items-start",
         "gap": 8,
