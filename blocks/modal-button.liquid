@@ -8,7 +8,7 @@
   <dialog-opener data-dialog="#{{ modal_id }}">
     <button
       id="{{ button_id }}"
-      class="btn btn--{{ block.settings.button_style }}"
+      class="btn {{ block.settings.button_style }}"
       type="button"
     >
       {{ block.settings.button_label | escape }}
@@ -81,19 +81,19 @@
       "label": "t:settings.style",
       "options": [
         {
-          "value": "primary",
+          "value": "btn--primary",
           "label": "t:settings.primary"
         },
         {
-          "value": "secondary",
+          "value": "btn--secondary",
           "label": "t:settings.secondary"
         },
         {
-          "value": "text",
+          "value": "btn--text",
           "label": "t:settings.text"
         }
       ],
-      "default": "primary"
+      "default": "btn--primary"
     },
     {
       "type": "header",
@@ -122,7 +122,7 @@
       "name": "t:names.modal_button",
       "settings": {
         "button_label": "t:text_defaults.open_modal",
-        "button_style": "primary",
+        "button_style": "btn--primary",
         "modal_heading": "t:text_defaults.welcome",
         "modal_description": "t:text_defaults.modal_description"
       }

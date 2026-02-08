@@ -39,6 +39,23 @@
   --input-text-sm: 0.875rem;
   --input-text-md: 1rem;
   --input-transition-speed: 200ms;
+
+  /* Section Heights */
+  --section-height-small: 15rem;
+  --section-height-medium: 25rem;
+  --section-height-large: 35rem;
+
+  @media screen and (min-width: 640px) {
+    --section-height-small: 40svh;
+    --section-height-medium: 55svh;
+    --section-height-large: 70svh;
+  }
+
+  @media screen and (min-width: 1024px) {
+    --section-height-small: 50svh;
+    --section-height-medium: 65svh;
+    --section-height-large: 80svh;
+  }
 }
 
 /**
@@ -216,6 +233,59 @@ pre {
   padding-right: var(--page-pad);
 }
 
+.page-width-narrow {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 3rem);
+}
+
+.full-width {
+  width: 100%;
+  max-width: none;
+}
+
+@media (min-width: 1280px) {
+  .section-margins {
+    margin: 3rem;
+  }
+}
+
+.page-width .section-margins,
+.page-width-narrow .section-margins {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Flex layouts for sections and blocks */
+.layout-flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+  height: 100%;
+  flex-wrap: var(--flex-wrap, nowrap);
+}
+
+.layout-flex--row {
+  align-items: var(--row-position, stretch);
+  justify-content: var(--row-alignment, normal);
+}
+
+.layout-flex--row.layout-flex--row-reverse {
+  flex-direction: row-reverse;
+}
+
+.layout-flex--column {
+  flex-direction: column;
+  align-items: var(--column-alignment, stretch);
+  justify-content: var(--column-position, normal);
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-column,
+  .mobile-column.layout-flex--row-reverse {
+    flex-direction: column;
+  }
+}
+
 .section-pt-sm {
   padding-top: 2rem;
 }
@@ -366,7 +436,6 @@ pre {
   margin: 3em 0;
 }
 
-
 /**
  * Buttons
  */
@@ -435,8 +504,11 @@ pre {
  */
 [class^='field'] {
   /* Using transition all here causes CLS */
-  transition: box-shadow var(--input-transition-speed) ease, outline var(--input-transition-speed) ease,
-    outline-offset var(--input-transition-speed) ease, border var(--input-transition-speed) ease,
+  transition:
+    box-shadow var(--input-transition-speed) ease,
+    outline var(--input-transition-speed) ease,
+    outline-offset var(--input-transition-speed) ease,
+    border var(--input-transition-speed) ease,
     color var(--input-transition-speed) ease;
 }
 
@@ -545,7 +617,9 @@ label:has(.field-radio) {
 .field-select:focus,
 .field-checkbox:focus,
 .field-radio:focus {
-  box-shadow: 0 0 0 2px var(--input-background), 0 0 0 calc(2px + 2px) var(--input-accent-medium);
+  box-shadow:
+    0 0 0 2px var(--input-background),
+    0 0 0 calc(2px + 2px) var(--input-accent-medium);
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
@@ -970,7 +1044,10 @@ dialog[open] {
 dialog {
   opacity: 0;
   transform: translate(-50%, -50%) translateY(10%);
-  transition: opacity 250ms ease-out, transform 250ms ease-out, overlay 250ms ease-out allow-discrete,
+  transition:
+    opacity 250ms ease-out,
+    transform 250ms ease-out,
+    overlay 250ms ease-out allow-discrete,
     display 250ms ease-out allow-discrete;
   /* Equivalent to: transition: all 250ms allow-discrete; */
 }
@@ -984,7 +1061,10 @@ dialog {
 
 dialog::backdrop {
   background-color: rgb(0 0 0 / 0%);
-  transition: display 250ms allow-discrete, overlay 250ms allow-discrete, background-color 250ms;
+  transition:
+    display 250ms allow-discrete,
+    overlay 250ms allow-discrete,
+    background-color 250ms;
   /* Equivalent to: transition: all 250ms allow-discrete; */
 }
 

@@ -1,0 +1,77 @@
+{%- doc -%}
+  Renders background media (image or video) with optional overlay.
+
+  @param {object} [settings] - Settings object containing background_media_type, background_image, background_video, show_overlay, overlay_color, show_gradient_overlay, background_gradient
+
+  @example
+  {% render 'background-media', settings: block.settings %}
+{%- enddoc -%}
+
+{%- if settings.background_media_type != 'none' -%}
+  {% liquid
+    assign sizes = '100vw'
+    assign widths = '832, 1200, 1600, 1920, 2560, 3840'
+  %}
+
+  <div class="absolute inset-0 h-full w-full overflow-hidden" aria-hidden="true">
+    {%- if settings.background_media_type == 'video' and settings.background_video != blank -%}
+      {{
+        settings.background_video
+        | video_tag:
+          image_size: '1600x',
+          autoplay: true,
+          loop: true,
+          controls: false,
+          muted: true,
+          class: 'h-full w-full object-cover'
+      }}
+    {%- elsif settings.background_media_type == 'image' -%}
+      {% if settings.background_image != blank %}
+        {{
+          settings.background_image
+          | image_url: width: 3840
+          | image_tag:
+            loading: 'lazy',
+            class: 'h-full w-full object-cover',
+            alt: settings.background_image.alt,
+            sizes: sizes,
+            widths: widths,
+            fetchpriority: 'auto'
+        }}
+      {% else %}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'h-full w-full object-cover' }}
+      {% endif %}
+    {%- endif -%}
+  </div>
+
+  {%- if settings.show_overlay -%}
+    {%- assign overlay_r = settings.overlay_color.red | default: 0 -%}
+    {%- assign overlay_g = settings.overlay_color.green | default: 0 -%}
+    {%- assign overlay_b = settings.overlay_color.blue | default: 0 -%}
+    {%- assign overlay_alpha = settings.overlay_color.alpha | default: 1.0 -%}
+    <div
+      class="absolute inset-0 z-0"
+      style="background: rgba({{ overlay_r }}, {{ overlay_g }}, {{ overlay_b }}, {{ overlay_alpha }})"
+      aria-hidden="true"
+    ></div>
+  {%- endif -%}
+
+  {%- if settings.show_gradient_overlay -%}
+    <div
+      class="background-media__gradient absolute inset-0 z-0 mix-blend-multiply pointer-events-none opacity-80"
+      style="--gradient-mobile: {{ settings.background_gradient_mobile | default: settings.background_gradient }}; --gradient-desktop: {{ settings.background_gradient }};"
+      aria-hidden="true"
+    ></div>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  .background-media__gradient {
+    background: var(--gradient-desktop);
+  }
+  @media (max-width: 768px) {
+    .background-media__gradient {
+      background: var(--gradient-mobile);
+    }
+  }
+{% endstylesheet %}

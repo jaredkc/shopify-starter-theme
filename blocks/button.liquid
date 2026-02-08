@@ -1,5 +1,5 @@
 <a
-  class="btn btn--{{ block.settings.button_style }}"
+  class="btn {{ block.settings.button_style }}"
   {% if block.settings.button_link == blank %}
     role="link" aria-disabled="true"
   {% else %}
@@ -37,15 +37,19 @@
       "label": "t:settings.style",
       "options": [
         {
-          "value": "primary",
+          "value": "btn--primary",
           "label": "t:settings.primary"
         },
         {
-          "value": "secondary",
+          "value": "btn--secondary",
           "label": "t:settings.secondary"
+        },
+        {
+          "value": "btn--text",
+          "label": "t:settings.text"
         }
       ],
-      "default": "primary"
+      "default": "btn--primary"
     }
   ],
   "presets": [
