@@ -1,0 +1,42 @@
+{%- doc -%}
+  Renders a flex group container with optional background, size, spacing, and color scheme.
+  Use in the group block or anywhere you need the same layout with a settings object.
+
+  @param {string} children - The DOM content of the group block.
+  @param {object} settings - The settings of the group block (e.g. block.settings or section.settings).
+  @param {string} shopify_attributes - String with Shopify attributes for the editor.
+  @param {string} [class] - Custom classes for the group wrapper.
+  @param {string} [custom_style] - Custom inline styles for the group wrapper.
+
+  @example
+  {% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
+{%- enddoc -%}
+
+<div
+  class="relative size-style{% if settings.inherit_color_scheme == false %} color-{{ settings.color_scheme }}{% endif %} {{ class }}"
+  style="{% render 'size-style', settings: settings %} {{ custom_style }}"
+  {{ shopify_attributes }}
+>
+  {%- comment -%} Background Media {%- endcomment -%}
+  {% render 'background-media', settings: settings %}
+
+  <div
+    class="
+      relative
+      layout-flex
+      layout-flex--{{ settings.content_direction }}
+      spacing-style
+      {% if settings.column_on_mobile %}mobile-column{% endif %}
+    "
+    style="
+      --column-alignment: {{ settings.column_alignment }};
+      --column-position: {{ settings.column_position }};
+      --gap: {{ settings.gap }}px;
+      --row-alignment: {{ settings.row_alignment }};
+      --row-position: {{ settings.row_position }};
+      {% render 'spacing-style', settings: settings %}
+    "
+  >
+    {{- children -}}
+  </div>
+</div>
