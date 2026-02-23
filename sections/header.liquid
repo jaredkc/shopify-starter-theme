@@ -3,17 +3,23 @@
   The schema enforces `.section-sticky-header` on the wrapper around this component.
   Keep this lookup in sync with `assets/global.js` to avoid breaking sticky behaviour.
 {% endcomment %}
+{{ 'component-header.css' | asset_url | stylesheet_tag }}
+
 {% render 'search-dialog-modal' %}
+
 <sticky-header>
-  <header class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
+  <header class="header flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
     {%- if template.name == 'index' -%}
       <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
     {%- else -%}
       <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
     {%- endif -%}
-    <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
+    <a href="{{ routes.root_url }}" itemprop="url" class="header__logo">{{ shop.name }}</a>
     {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
 
+    {% comment %}
+      Support for Shopify menu driven navigation, or blocks based navigation.
+    {% endcomment %}
     {%- if section.settings.menu != blank -%}
       <nav id="site-navigation" class="site-navigation">
         <ul class="nav-menu">
@@ -36,6 +42,12 @@
               </li>
             {%- endif -%}
           {%- endfor -%}
+        </ul>
+      </nav>
+    {%- else -%}
+      <nav class="header__nav">
+        <ul class="header__menu">
+          {% content_for 'blocks' %}
         </ul>
       </nav>
     {%- endif -%}
@@ -97,6 +109,7 @@
     transform: translateY(0);
   }
 
+  /* Menu driven navigation */
   .nav-menu > li {
     display: inline-block;
     margin-left: 1rem;
@@ -131,12 +144,103 @@
 {
   "name": "Header",
   "class": "section-sticky-header sticky-header-stuck",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "blocks": [
+    {
+      "type": "_nav-item"
+    },
+    {
+      "type": "_nav-item-submenu"
+    }
+  ],
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "default": "main-menu",
       "label": "Menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": {
+        "nav_item_1": {
+          "type": "_nav-item",
+          "name": "Nav item 1",
+          "settings": {
+            "label": "Home",
+            "link": "/"
+          },
+          "blocks": {}
+        },
+        "nav_item_submenu_1": {
+          "type": "_nav-item-submenu",
+          "name": "Nav item submenu",
+          "settings": {
+            "label": "Submenu"
+          },
+          "blocks": {
+            "nav_group_1": {
+              "type": "_nav-group",
+              "name": "Nav group 1",
+              "settings": {},
+              "blocks": {
+                "nav_featured_item_1": {
+                  "type": "_nav-featured-item",
+                  "name": "Nav featured item 1",
+                  "settings": {
+                    "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
+                    "label": "Featured item 1",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                },
+                "nav_featured_item_2": {
+                  "type": "_nav-featured-item",
+                  "name": "Nav featured item 2",
+                  "settings": {
+                    "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
+                    "label": "Featured item 2",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                },
+                "nav_menu_1": {
+                  "type": "_nav-menu",
+                  "name": "Nav menu",
+                  "settings": {
+                    "menu": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["nav_featured_item_1", "nav_featured_item_2", "nav_menu_1"]
+            },
+            "nav_group_2": {
+              "type": "_nav-group",
+              "name": "Nav group 2",
+              "settings": {},
+              "blocks": {
+                "nav_card_1": {
+                  "type": "_nav-card",
+                  "name": "Nav card",
+                  "settings": {
+                    "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
+                    "title": "Featured collection",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["nav_card_1"]
+            }
+          },
+          "block_order": ["nav_group_1", "nav_group_2"]
+        }
+      },
+      "block_order": ["nav_item_1", "nav_item_submenu_1"]
     }
   ]
 }

@@ -299,7 +299,7 @@
   font-size: var(--text-sm);
 }
 
-.subnav__section {
+.subnav__group {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -370,7 +370,7 @@
     flex-direction: row;
     padding-top: 3rem;
   }
-  .subnav__section {
+  .subnav__group {
     flex: 1;
   }
   .submenu__back {
@@ -413,7 +413,7 @@
     box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
-  .subnav__section {
+  .subnav__group {
     flex: 1;
     width: 400px;
   }
