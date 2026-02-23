@@ -9,13 +9,13 @@
  */
 
 .header {
-  align-items: stretch;
+  align-items: center;
   display: flex;
   height: 70px;
   border-bottom: 1px solid var(--c-border-light);
   justify-content: space-between;
   position: relative;
-  padding: 0 0.5rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .header > * {
@@ -83,7 +83,7 @@
   transition: transform 0.1s ease-in-out;
 }
 
-.header-hide-sm {
+.header--hide-sm {
   display: none;
 }
 
@@ -101,12 +101,12 @@
   body.mobile-menu-open {
     overflow: hidden;
   }
-  .menu-toggle {
+  .header__menu-toggle {
     position: relative;
     height: 24px;
     width: 24px;
   }
-  .menu-toggle svg {
+  .header__menu-toggle svg {
     position: absolute;
     top: 0;
     left: 0;
@@ -170,12 +170,12 @@
  */
 @media (min-width: 900px) {
   .header {
-    padding: 0 2rem;
+    padding: 1rem 2rem;
   }
-  .header-hide-sm {
+  .header--hide-sm {
     display: block;
   }
-  .header-hide-lg {
+  .header--hide-lg {
     display: none;
   }
 
@@ -345,7 +345,45 @@
   display: block;
 }
 
-.submenu__back {
+.subnav__menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.subnav__menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.subnav__menu a {
+  display: block;
+  padding: 0.25rem 0;
+}
+
+.subnav__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.subnav__card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.subnav__card-link {
+  display: block;
+  font-weight: bold;
+}
+
+.subnav__featured-item-link {
+  background-color: #fff;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  align-items: center;
+}
+
+.subnav__back {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' d='M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18' /></svg>");
   background-position: left center;
   background-repeat: no-repeat;
@@ -373,7 +411,7 @@
   .subnav__group {
     flex: 1;
   }
-  .submenu__back {
+  .subnav__back {
     position: fixed;
     top: 0;
   }
@@ -398,7 +436,7 @@
 }
 
 @media (min-width: 900px) {
-  .submenu__back {
+  .subnav__back {
     display: none;
   }
   .subnav {

@@ -8,7 +8,7 @@
 {% render 'search-dialog-modal' %}
 
 <sticky-header>
-  <header class="header flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
+  <header class="header">
     {%- if template.name == 'index' -%}
       <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
     {%- else -%}
@@ -21,14 +21,14 @@
       Support for Shopify menu driven navigation, or blocks based navigation.
     {% endcomment %}
     {%- if section.settings.menu != blank -%}
-      <nav id="site-navigation" class="site-navigation">
-        <ul class="nav-menu">
+      <nav id="site-navigation" class="header__site-nav">
+        <ul class="header__nav-menu">
           {%- for link in section.settings.menu.links -%}
             {%- assign child_list_handle = link.title | handleize -%}
             {%- if linklists[child_list_handle].links != blank -%}
               <li>
                 <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-                <ul class="nav-submemu">
+                <ul class="header__nav-submenu">
                   {%- for childlink in linklists[child_list_handle].links -%}
                     <li>
                       <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
@@ -110,14 +110,14 @@
   }
 
   /* Menu driven navigation */
-  .nav-menu > li {
+  .header__nav-menu > li {
     display: inline-block;
     margin-left: 1rem;
     margin-right: 1rem;
     position: relative;
   }
 
-  .nav-submemu {
+  .header__nav-submenu {
     background: var(--bg-color);
     display: none;
     left: 0;
@@ -129,12 +129,12 @@
     z-index: 1;
   }
 
-  .nav-submemu a {
+  .header__nav-submenu a {
     display: block;
     padding: 0.5rem 0.7rem;
   }
 
-  .nav-menu > li:hover .nav-submemu {
+  .header__nav-menu > li:hover .header__nav-submenu {
     display: block;
     z-index: 100;
   }

@@ -1,8 +1,8 @@
-<div class="nav-card">
+<div class="subnav__card" {{ block.shopify_attributes }}>
   {% if block.settings.image %}
     {{ block.settings.image | image_url: width: 100 | image_tag }}
   {% endif %}
-  <a href="{{ block.settings.link }}">
+  <a href="{{ block.settings.link }}" class="subnav__card-link">
     {{- block.settings.title -}}
   </a>
 </div>
