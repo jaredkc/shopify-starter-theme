@@ -1,0 +1,49 @@
+<div class="nav-featured-item">
+  <a class="nav-featured-item-link" href="{{ block.settings.link }}">
+    {% if block.settings.image %}
+      {{ block.settings.image | image_url: width: 100 | image_tag }}
+    {% endif %}
+    {{- block.settings.label -}}
+  </a>
+</div>
+
+{% stylesheet %}
+  .nav-featured-item-link {
+    background-color: #fff;
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    align-items: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Nav featured item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:settings.label",
+      "default": "Featured item"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link",
+      "default": "shopify://collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nav featured item"
+    }
+  ]
+}
+{% endschema %}

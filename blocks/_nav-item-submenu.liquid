@@ -1,0 +1,50 @@
+<li class="nav-item">
+  <details open>
+    <summary>
+      {{- block.settings.label -}}
+    </summary>
+    <div class="nav-submenu">
+      {% content_for 'blocks' %}
+    </div>
+  </details>
+</li>
+
+{% stylesheet %}
+  .nav-submenu {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #d3d3d3;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Nav item submenu",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_nav-card"
+    },
+    {
+      "type": "_nav-group"
+    },
+    {
+      "type": "_nav-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:settings.label",
+      "default": "Submenu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nav item submenu"
+    }
+  ]
+}
+{% endschema %}

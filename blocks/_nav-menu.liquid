@@ -1,0 +1,30 @@
+<div class="nav-menu">
+  <ul>
+    {% for link in block.settings.menu.links %}
+      <li>
+        <a href="{{ link.url }}">
+          {{- link.title -}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Nav menu",
+  "tag": null,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:settings.menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nav menu"
+    }
+  ]
+}
+{% endschema %}

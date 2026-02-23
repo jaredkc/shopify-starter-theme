@@ -1,0 +1,39 @@
+<div class="nav-card">
+  {% if block.settings.image %}
+    {{ block.settings.image | image_url: width: 100 | image_tag }}
+  {% endif %}
+  <a href="{{ block.settings.link }}">
+    {{- block.settings.title -}}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Nav card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings.label",
+      "default": "t:text_defaults.featured_collection"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link",
+      "default": "shopify://collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nav card"
+    }
+  ]
+}
+{% endschema %}
