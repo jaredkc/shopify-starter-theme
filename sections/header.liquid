@@ -9,13 +9,15 @@
 
 <sticky-header>
   <header class="header">
-    {%- if template.name == 'index' -%}
-      <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
-    {%- else -%}
-      <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
-    {%- endif -%}
-    <a href="{{ routes.root_url }}" itemprop="url" class="header__logo">{{ shop.name }}</a>
-    {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+    <div class="header__logo">
+      {%- if template.name == 'index' -%}
+        <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
+      {%- else -%}
+        <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
+      {%- endif -%}
+      <a href="{{ routes.root_url }}" itemprop="url" class="header__logo">{{ shop.name }}</a>
+      {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+    </div>
 
     {% comment %}
       Support for Shopify menu driven navigation, or blocks based navigation.
@@ -52,7 +54,7 @@
       </nav>
     {%- endif -%}
 
-    <nav class="flex gap-4">
+    <nav class="header__icons">
       <dialog-opener data-dialog="#search-dialog">
         <button class="btn-link">
           <span class="sr-only">Open Search</span>
@@ -183,12 +185,12 @@
           },
           "blocks": {
             "nav_group_1": {
-              "type": "_nav-group",
+              "type": "_nav-sub-group",
               "name": "Nav group 1",
               "settings": {},
               "blocks": {
                 "nav_featured_item_1": {
-                  "type": "_nav-featured-item",
+                  "type": "_nav-sub-primary",
                   "name": "Nav featured item 1",
                   "settings": {
                     "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
@@ -198,7 +200,7 @@
                   "blocks": {}
                 },
                 "nav_featured_item_2": {
-                  "type": "_nav-featured-item",
+                  "type": "_nav-sub-primary",
                   "name": "Nav featured item 2",
                   "settings": {
                     "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
@@ -208,7 +210,7 @@
                   "blocks": {}
                 },
                 "nav_menu_1": {
-                  "type": "_nav-menu",
+                  "type": "_nav-sub-secondary",
                   "name": "Nav menu",
                   "settings": {
                     "menu": ""
@@ -219,12 +221,12 @@
               "block_order": ["nav_featured_item_1", "nav_featured_item_2", "nav_menu_1"]
             },
             "nav_group_2": {
-              "type": "_nav-group",
+              "type": "_nav-sub-group",
               "name": "Nav group 2",
               "settings": {},
               "blocks": {
                 "nav_card_1": {
-                  "type": "_nav-card",
+                  "type": "_nav-sub-card",
                   "name": "Nav card",
                   "settings": {
                     "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",

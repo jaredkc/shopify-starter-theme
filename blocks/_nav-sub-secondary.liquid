@@ -1,4 +1,4 @@
-<div class="subnav__menu" {{ block.shopify_attributes }}>
+<div class="subnav__secondary" {{ block.shopify_attributes }}>
   <ul>
     {% for link in block.settings.menu.links %}
       <li>
@@ -12,7 +12,7 @@
 
 {% schema %}
 {
-  "name": "Nav menu",
+  "name": "Subnav secondary menu",
   "tag": null,
   "settings": [
     {
@@ -23,7 +23,7 @@
   ],
   "presets": [
     {
-      "name": "Nav menu"
+      "name": "Subnav secondary menu"
     }
   ]
 }

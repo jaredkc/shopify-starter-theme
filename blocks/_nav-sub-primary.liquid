@@ -1,5 +1,5 @@
-<div class="subnav__featured-item" {{ block.shopify_attributes }}>
-  <a class="subnav__featured-item-link" href="{{ block.settings.link }}">
+<div class="subnav__primary" {{ block.shopify_attributes }}>
+  <a href="{{ block.settings.link }}">
     {% if block.settings.image %}
       {{ block.settings.image | image_url: width: 100 | image_tag }}
     {% endif %}
@@ -9,7 +9,7 @@
 
 {% schema %}
 {
-  "name": "Nav featured item",
+  "name": "Subnav primary item",
   "tag": null,
   "settings": [
     {
@@ -21,7 +21,7 @@
       "type": "text",
       "id": "label",
       "label": "t:settings.label",
-      "default": "Featured item"
+      "default": "Primary item"
     },
     {
       "type": "url",
@@ -32,7 +32,7 @@
   ],
   "presets": [
     {
-      "name": "Nav featured item"
+      "name": "Subnav primary item"
     }
   ]
 }

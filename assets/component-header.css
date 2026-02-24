@@ -18,10 +18,6 @@
   padding: 0.5rem 0.5rem;
 }
 
-.header > * {
-  flex: 1 1 0px;
-}
-
 .header__logo {
   align-self: center;
   display: flex;
@@ -44,12 +40,6 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-}
-.header__icons--left {
-  justify-content: left;
-}
-.header__icons--right {
-  justify-content: right;
 }
 .header__icons a,
 .header__icons button {
@@ -323,7 +313,6 @@
   align-items: center;
 }
 .subnav__primary img {
-  background: #ddd;
   width: 3.5rem;
 }
 .subnav__primary span {
@@ -373,14 +362,6 @@
 .subnav__card-link {
   display: block;
   font-weight: bold;
-}
-
-.subnav__featured-item-link {
-  background-color: #fff;
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  align-items: center;
 }
 
 .subnav__back {

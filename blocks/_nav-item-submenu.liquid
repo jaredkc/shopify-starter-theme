@@ -2,7 +2,8 @@
   <nav-details>
     <details class="header__menu-details">
       <summary class="header__menu-summary">
-        {{- block.settings.label -}}
+        <span>{{- block.settings.label -}}</span>
+        {{ 'icon-caret.svg' | inline_asset_content }}
       </summary>
       <div class="subnav">
         {% content_for 'blocks' %}
@@ -55,10 +56,10 @@
   "tag": null,
   "blocks": [
     {
-      "type": "_nav-card"
+      "type": "_nav-sub-card"
     },
     {
-      "type": "_nav-group"
+      "type": "_nav-sub-group"
     },
     {
       "type": "_nav-item"
