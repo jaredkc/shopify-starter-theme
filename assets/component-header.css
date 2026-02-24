@@ -189,12 +189,14 @@
     align-items: stretch;
   }
 
+  .header__menu-link,
   .header__menu-details,
   .header__menu-summary {
     height: 100%;
   }
+  .header__menu-link,
   .header__menu-summary {
-    padding: 0 0.75rem 0.25rem 0.75rem;
+    padding: 0 0.75rem;
     position: relative;
   }
   .header__menu-summary .icon-caret {
@@ -212,7 +214,7 @@
     display: block;
     height: 4px;
     position: absolute;
-    bottom: 12px;
+    bottom: -4px;
     left: 4px;
     right: 4px;
   }
