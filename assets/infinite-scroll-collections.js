@@ -94,6 +94,7 @@ class InfiniteScrollCollections extends HTMLElement {
     // Check if we've reached the end
     if ((this.totalPages && nextPage > this.totalPages) || nextPage > this.maxPages) {
       this.hasMorePages = false;
+      this.hidePagination();
       this.isLoading = false;
       return;
     }
@@ -134,10 +135,12 @@ class InfiniteScrollCollections extends HTMLElement {
         } else {
           // No products found on this next page => end
           this.hasMorePages = false;
+          this.hidePagination();
         }
       } else {
         // Empty response => stop
         this.hasMorePages = false;
+        this.hidePagination();
       }
     } catch (error) {
       console.error('Failed to load more products:', error);
@@ -180,6 +183,18 @@ class InfiniteScrollCollections extends HTMLElement {
     }
   }
 
+  hidePagination() {
+    if (this.pagination) {
+      this.pagination.hidden = true;
+    }
+  }
+
+  showPagination() {
+    if (this.pagination) {
+      this.pagination.hidden = false;
+    }
+  }
+
   // Call this externally to reset the infinite scroll state, as when filters are applied.
   reset() {
     this.currentPage = 1;
@@ -192,6 +207,7 @@ class InfiniteScrollCollections extends HTMLElement {
     this.productCount = this.grid ? this.grid.querySelectorAll('li').length : 0;
 
     this.announceProductCount();
+    this.showPagination();
 
     // Remove observer temporarily
     if (this.observer) {
