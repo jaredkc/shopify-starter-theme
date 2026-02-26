@@ -91,10 +91,11 @@ class InfiniteScrollCollections extends HTMLElement {
     this.isLoading = true;
     const nextPage = this.currentPage + 1;
 
-    // Check if we've reached the end
-    if ((this.totalPages && nextPage > this.totalPages) || nextPage > this.maxPages) {
+    // Check if we've reached the end (real last page vs. maxPages limit)
+    const atRealEnd = this.totalPages && nextPage > this.totalPages;
+    if (atRealEnd || nextPage > this.maxPages) {
       this.hasMorePages = false;
-      this.hidePagination();
+      if (atRealEnd) this.hidePagination();
       this.isLoading = false;
       return;
     }
