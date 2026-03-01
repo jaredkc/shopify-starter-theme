@@ -1,6 +1,14 @@
 <div class="subnav__card" {{ block.shopify_attributes }}>
   {% if block.settings.image %}
-    {{ block.settings.image | image_url: width: 100 | image_tag }}
+    {{
+      block.settings.image
+      | image_url: width: 768
+      | image_tag:
+        widths: '165, 360, 384, 768',
+        sizes: '24rem',
+        loading: 'lazy',
+        alt: block.settings.image.alt | default: block.settings.title
+    }}
   {% endif %}
   <a href="{{ block.settings.link }}" class="subnav__card-link">
     {{- block.settings.title -}}
