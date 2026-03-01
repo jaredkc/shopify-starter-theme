@@ -375,6 +375,8 @@
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 2/1;
+  object-fit: cover;
 }
 .subnav__card-link {
   display: block;
@@ -435,6 +437,13 @@
 @media (min-width: 900px) {
   .subnav__back {
     display: none;
+  }
+  .subnav__card {
+    flex-grow: 1;
+  }
+  .subnav__card img {
+    flex-grow: 1;
+    min-height: 13rem;
   }
   .subnav {
     flex-direction: row;
