@@ -324,12 +324,7 @@
 }
 
 .subnav__secondary {
-  list-style-type: none;
   margin: 1.5rem 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1rem;
 }
 .subnav__secondary:first-child {
   margin-top: 0;
@@ -337,8 +332,13 @@
 .subnav__secondary:last-child {
   margin-bottom: 0;
 }
-.subnav__secondary li {
-  width: calc(50% - 1rem);
+.subnav__secondary ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem 1rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 .subnav__secondary a {
   display: block;
