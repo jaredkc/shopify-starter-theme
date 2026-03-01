@@ -8,79 +8,91 @@
 {% render 'search-dialog-modal' %}
 
 <sticky-header>
-  <header class="header">
-    <div class="header__logo">
-      {%- if template.name == 'index' -%}
-        <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
-      {%- else -%}
-        <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
-      {%- endif -%}
-      <a href="{{ routes.root_url }}" itemprop="url" class="header__logo">{{ shop.name }}</a>
-      {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
-    </div>
-
-    {% comment %}
-      Support for Shopify menu driven navigation, or blocks based navigation.
-    {% endcomment %}
-    {%- if section.settings.menu != blank -%}
-      <nav id="site-navigation" class="header__site-nav">
-        <ul class="header__nav-menu">
-          {%- for link in section.settings.menu.links -%}
-            {%- assign child_list_handle = link.title | handleize -%}
-            {%- if linklists[child_list_handle].links != blank -%}
-              <li>
-                <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-                <ul class="header__nav-submenu">
-                  {%- for childlink in linklists[child_list_handle].links -%}
-                    <li>
-                      <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </li>
-            {%- else -%}
-              <li>
-                <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      </nav>
-    {%- else -%}
-      <nav class="header__nav">
-        <ul class="header__menu">
-          {% content_for 'blocks' %}
-        </ul>
-      </nav>
-    {%- endif -%}
-
-    <nav class="header__icons">
-      <dialog-opener data-dialog="#search-dialog">
-        <button class="btn-link">
-          <span class="sr-only">Open Search</span>
-          {{- 'icon-search.svg' | inline_asset_content -}}
-        </button>
-      </dialog-opener>
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
-          {{- 'icon-user.svg' | inline_asset_content -}}
-          <span class="sr-only">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
+  <header-navigation>
+    <header id="header" class="header">
+      <div class="header__icons header__items header--hide-lg">
+        <button type="button" class="menu-btn header__menu-toggle" aria-expanded="false" aria-controls="main-menu" aria-label="{{ 'accessibility.menu' | t }}" data-menu-label="{{ 'accessibility.menu' | t }}" data-close-label="{{ 'accessibility.close_menu' | t }}">
+          <span class="header__menu-toggle-icons">
+            {{ 'icon-menu.svg' | inline_asset_content }}
+            {{ 'icon-close.svg' | inline_asset_content }}
           </span>
-        </a>
+          <span class="sr-only">{{ 'accessibility.menu' | t }}</span>
+        </button>
+      </div>
+
+      <div class="header__logo">
+        {%- if template.name == 'index' -%}
+          <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
+        {%- else -%}
+          <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
+        {%- endif -%}
+        <a href="{{ routes.root_url }}" itemprop="url" class="header__logo">{{ shop.name }}</a>
+        {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+      </div>
+
+      {% comment %}
+        Support for Shopify menu driven navigation, or blocks based navigation.
+      {% endcomment %}
+      {%- if section.settings.menu != blank -%}
+        <nav id="main-menu" class="header__site-nav" aria-label="{{ 'accessibility.main_nav' | t }}">
+          <ul class="header__nav-menu">
+            {%- for link in section.settings.menu.links -%}
+              {%- assign child_list_handle = link.title | handleize -%}
+              {%- if linklists[child_list_handle].links != blank -%}
+                <li>
+                  <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+                  <ul class="header__nav-submenu">
+                    {%- for childlink in linklists[child_list_handle].links -%}
+                      <li>
+                        <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </li>
+              {%- else -%}
+                <li>
+                  <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- else -%}
+        <nav id="main-menu" class="header__nav" aria-label="{{ 'accessibility.main_nav' | t }}">
+          <ul class="header__menu">
+            {% content_for 'blocks' %}
+          </ul>
+        </nav>
       {%- endif -%}
-      <a href="{{ routes.cart_url }}">
-        {{- 'icon-cart.svg' | inline_asset_content -}}
-        <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
-      </a>
-    </nav>
-  </header>
+
+      <nav class="header__icons">
+        <dialog-opener data-dialog="#search-dialog">
+          <button class="btn-link">
+            <span class="sr-only">Open Search</span>
+            {{- 'icon-search.svg' | inline_asset_content -}}
+          </button>
+        </dialog-opener>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+            {{- 'icon-user.svg' | inline_asset_content -}}
+            <span class="sr-only">
+              {%- liquid
+                if customer
+                  echo 'customer.account_fallback' | t
+                else
+                  echo 'customer.log_in' | t
+                endif
+              -%}
+            </span>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}">
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+          <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
+        </a>
+      </nav>
+    </header>
+  </header-navigation>
 </sticky-header>
 
 <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>

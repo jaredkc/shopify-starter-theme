@@ -6,6 +6,9 @@
         {{ 'icon-caret.svg' | inline_asset_content }}
       </summary>
       <div class="subnav">
+        <button type="button" class="subnav__back" details-close>
+          {{ 'accessibility.back' | t }}
+        </button>
         {% content_for 'blocks' %}
       </div>
     </details>
@@ -16,34 +19,85 @@
   class NavDetails extends HTMLElement {
     constructor() {
       super();
-      this.mainDetailsToggle = this.querySelector('details');
-      this.content = this.mainDetailsToggle.querySelector('summary').nextElementSibling;
+      this.onFocusOut = this.onFocusOut.bind(this);
+      this.onToggle = this.onToggle.bind(this);
+      this.onSummaryClick = this.onSummaryClick.bind(this);
+      this.close = this.close.bind(this);
+      this.onTransitionEnd = this.onTransitionEnd.bind(this);
+    }
+
+    connectedCallback() {
+      this.details = this.querySelector('details');
+      if (!this.details) return;
+
+      const summary = this.details.querySelector('summary');
+      this.subnav = summary?.nextElementSibling;
       this.closeBtn = this.querySelector('[details-close]');
 
-      this.mainDetailsToggle.addEventListener('focusout', this.onFocusOut.bind(this));
-      this.mainDetailsToggle.addEventListener('toggle', this.onToggle.bind(this));
-      this.closeBtn.addEventListener('click', this.close.bind(this));
+      this.details.addEventListener('focusout', this.onFocusOut);
+      this.details.addEventListener('toggle', this.onToggle);
+      if (summary) summary.addEventListener('click', this.onSummaryClick);
+      if (this.closeBtn) this.closeBtn.addEventListener('click', this.close);
+
+      if (this.subnav && this.details.hasAttribute('open')) this.animateOpen();
     }
 
-    onFocusOut() {
-      setTimeout(() => {
-        if (!this.contains(document.activeElement)) this.close();
-      });
+    disconnectedCallback() {
+      if (this.details) {
+        this.details.removeEventListener('focusout', this.onFocusOut);
+        this.details.removeEventListener('toggle', this.onToggle);
+      }
+      const summary = this.details?.querySelector('summary');
+      if (summary) summary.removeEventListener('click', this.onSummaryClick);
+      if (this.closeBtn) this.closeBtn.removeEventListener('click', this.close);
+      if (this.subnav) this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
     }
 
-    onToggle() {
-      if (!this.animations) this.animations = this.content.getAnimations();
-
-      if (this.mainDetailsToggle.hasAttribute('open')) {
-        this.animations.forEach((animation) => animation.play());
-      } else {
-        this.animations.forEach((animation) => animation.cancel());
+    onSummaryClick(event) {
+      if (this.details.hasAttribute('open')) {
+        event.preventDefault();
+        this.close();
       }
     }
 
+    onFocusOut() {
+      if (window.matchMedia('(max-width: 899px)').matches) return;
+      setTimeout(() => {
+        if (!this.contains(document.activeElement)) this.close();
+      }, 0);
+    }
+
+    onTransitionEnd(event) {
+      if (event.target !== this.subnav || event.propertyName !== 'transform') return;
+      this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
+      this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      this.details.removeAttribute('open');
+    }
+
+    onToggle() {
+      if (!this.subnav) return;
+      if (this.details.hasAttribute('open')) {
+        this.animateOpen();
+      } else {
+        this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      }
+    }
+
+    animateOpen() {
+      this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      this.subnav.offsetHeight;
+      requestAnimationFrame(() => this.subnav.classList.add('subnav--open'));
+    }
+
     close() {
-      this.mainDetailsToggle.removeAttribute('open');
-      this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false);
+      if (!this.subnav) {
+        this.details.removeAttribute('open');
+        return;
+      }
+      if (this.subnav.classList.contains('subnav--closing')) return;
+      this.subnav.classList.add('subnav--closing');
+      this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
+      this.subnav.addEventListener('transitionend', this.onTransitionEnd);
     }
   }
 

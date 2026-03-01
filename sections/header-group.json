@@ -35,8 +35,55 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "nav_item_dJ9rBB": {
+          "type": "_nav-item",
+          "name": "Nav item",
+          "settings": {
+            "label": "Products",
+            "link": "shopify://collections/all"
+          },
+          "blocks": {}
+        },
+        "nav_item_submenu_bGWNLr": {
+          "type": "_nav-item-submenu",
+          "name": "Nav item submenu",
+          "settings": {
+            "label": "Submenu"
+          },
+          "blocks": {
+            "nav_group_XfYRDg": {
+              "type": "_nav-sub-group",
+              "name": "Nav group",
+              "settings": {},
+              "blocks": {
+                "nav_featured_item_KMY77h": {
+                  "type": "_nav-sub-primary",
+                  "name": "Nav featured item",
+                  "settings": {
+                    "image": "shopify://shop_images/12ozbag.png",
+                    "label": "Featured item",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "nav_featured_item_KMY77h"
+              ]
+            }
+          },
+          "block_order": [
+            "nav_group_XfYRDg"
+          ]
+        }
+      },
+      "block_order": [
+        "nav_item_dJ9rBB",
+        "nav_item_submenu_bGWNLr"
+      ],
       "settings": {
-        "menu": "main-menu"
+        "menu": ""
       }
     }
   },

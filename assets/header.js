@@ -92,3 +92,135 @@ class StickyHeader extends HTMLElement {
 }
 
 customElements.define('sticky-header', StickyHeader);
+
+/**
+ * Returns focusable elements within a container (for focus trap).
+ * @param {HTMLElement} container
+ * @returns {HTMLElement[]}
+ */
+function getFocusableElements(container) {
+  if (!container) return [];
+  const selector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(', ');
+  return Array.from(container.querySelectorAll(selector));
+}
+
+/**
+ * Traps focus within the container. Call removeTrapFocus to release.
+ * @param {HTMLElement} container - Element that contains the focusable region
+ */
+function trapFocus(container) {
+  const focusable = getFocusableElements(container);
+  if (focusable.length === 0) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  first.focus();
+
+  const handleKeyDown = (e) => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  };
+
+  container.addEventListener('keydown', handleKeyDown);
+  container._trapFocusHandler = handleKeyDown;
+}
+
+/**
+ * Removes focus trap and optionally returns focus to an element.
+ * @param {HTMLElement} [returnElement] - Element to focus when releasing trap
+ */
+function removeTrapFocus(returnElement) {
+  const container = returnElement?.closest('header-navigation') || document.querySelector('header-navigation');
+  if (container?._trapFocusHandler) {
+    container.removeEventListener('keydown', container._trapFocusHandler);
+    container._trapFocusHandler = null;
+  }
+  if (returnElement && typeof returnElement.focus === 'function') {
+    returnElement.focus();
+  }
+}
+
+/**
+ * HeaderNavigation
+ * Handles the mobile menu toggle, keyboard (Escape), focus trap, and ARIA.
+ */
+class HeaderNavigation extends HTMLElement {
+  constructor() {
+    super();
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+  }
+
+  connectedCallback() {
+    this.menuToggle = this.querySelector('.menu-btn');
+    this.menu =
+      this.querySelector('#main-menu') ||
+      this.querySelector('.header__nav') ||
+      this.querySelector('.header__site-nav');
+
+    if (!this.menuToggle || !this.menu) return;
+
+    this.menuToggle.addEventListener('click', this.toggleMenu);
+    this.addEventListener('keyup', this.onKeyUp);
+    this.menu.setAttribute('aria-hidden', 'true');
+  }
+
+  disconnectedCallback() {
+    if (this.menuToggle) this.menuToggle.removeEventListener('click', this.toggleMenu);
+    this.removeEventListener('keyup', this.onKeyUp);
+    removeTrapFocus(null);
+  }
+
+  onKeyUp(event) {
+    if (event.code?.toUpperCase() !== 'ESCAPE') return;
+    if (document.body.classList.contains('mobile-menu-open')) this.closeMenu();
+  }
+
+  toggleMenu() {
+    document.body.classList.contains('mobile-menu-open') ? this.closeMenu() : this.openMenu();
+  }
+
+  openMenu() {
+    const header = document.getElementById('header');
+    if (header) {
+      const headerBottom = header.getBoundingClientRect().bottom;
+      this.menu.style.height = `${window.innerHeight - headerBottom + 1}px`;
+    }
+    this.menu.style.height = this.menu.style.height || '100vh';
+    document.body.classList.add('mobile-menu-open');
+    this.menu.setAttribute('aria-hidden', 'false');
+    this.menuToggle.setAttribute('aria-expanded', 'true');
+    const closeLabel = this.menuToggle.getAttribute('data-close-label');
+    if (closeLabel) this.menuToggle.setAttribute('aria-label', closeLabel);
+    trapFocus(this);
+  }
+
+  closeMenu() {
+    document.body.classList.remove('mobile-menu-open');
+    this.menu.style.height = '';
+    this.menu.setAttribute('aria-hidden', 'true');
+    this.menuToggle.setAttribute('aria-expanded', 'false');
+    const menuLabel = this.menuToggle.getAttribute('data-menu-label');
+    if (menuLabel) this.menuToggle.setAttribute('aria-label', menuLabel);
+    removeTrapFocus(this.menuToggle);
+  }
+}
+
+customElements.define('header-navigation', HeaderNavigation);
