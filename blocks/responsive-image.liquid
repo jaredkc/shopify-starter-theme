@@ -1,0 +1,143 @@
+{% doc %}
+  Renders a responsive image that shows one image on mobile and a different one on desktop.
+  Uses the <picture> element so the browser only downloads the appropriate image per viewport,
+  improving page speed (smaller payload on mobile, no duplicate downloads).
+
+  @example
+  {% content_for 'block', type: 'responsive-image', id: 'responsive-image' %}
+{% enddoc %}
+
+{% assign mobile_image = block.settings.mobile_image %}
+{% assign desktop_image = block.settings.desktop_image %}
+
+<div
+  class="responsive-image-block spacing-style{% unless block.settings.full_width_mobile %} responsive-image-block--constrained-mobile{% endunless %}{% unless block.settings.full_width_desktop %} responsive-image-block--constrained-desktop{% endunless %}"
+  style="
+    {% render 'spacing-style', settings: block.settings %}
+    {% unless block.settings.full_width_mobile %}
+      --responsive-image-max-width-mobile: {{ block.settings.max_width_mobile }}px;
+    {% endunless %}
+    {% unless block.settings.full_width_desktop %}
+      --responsive-image-max-width-desktop: {{ block.settings.max_width_desktop }}px;
+    {% endunless %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if mobile_image != blank and desktop_image != blank %}
+    <picture class="responsive-image-block__picture">
+      {%- comment -%} Desktop: only loaded when viewport >= 768px {%- endcomment -%}
+      <source
+        media="(min-width: 768px)"
+        srcset="
+          {{ desktop_image | image_url: width: 768 }} 768w,
+          {{ desktop_image | image_url: width: 1200 }} 1200w,
+          {{ desktop_image | image_url: width: 1920 }} 1920w
+        "
+      >
+      {%- comment -%} Mobile: default source (no media), only loaded when viewport < 768px {%- endcomment -%}
+      {{
+        mobile_image
+        | image_url: width: 768
+        | image_tag:
+          width: mobile_image.width,
+          widths: '375, 550, 768',
+          sizes: '100vw',
+          height: mobile_image.height,
+          class: 'responsive-image-block__image',
+          loading: 'lazy',
+          decoding: 'async',
+          alt: mobile_image.alt
+      }}
+    </picture>
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--fill responsive-image-block__image' }}
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .responsive-image-block {
+    width: 100%;
+  }
+  .responsive-image-block--constrained-mobile {
+    max-width: var(--responsive-image-max-width-mobile);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 768px) {
+    .responsive-image-block--constrained-mobile {
+      max-width: none;
+    }
+    .responsive-image-block--constrained-desktop {
+      max-width: var(--responsive-image-max-width-desktop);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .responsive-image-block__picture {
+    display: block;
+    width: 100%;
+  }
+  .responsive-image-block__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.responsive_image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:settings.mobile_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:settings.mobile_image"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_mobile",
+      "label": "t:settings.full_width",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "max_width_mobile",
+      "label": "t:settings.max_width",
+      "info": "t:info.max_width",
+      "visible_if": "{{ block.settings.full_width_mobile == false }}"
+    },
+    {
+      "type": "header",
+      "content": "t:settings.desktop_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "t:settings.desktop_image"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_desktop",
+      "label": "t:settings.full_width",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "max_width_desktop",
+      "label": "t:settings.max_width",
+      "info": "t:info.max_width",
+      "visible_if": "{{ block.settings.full_width_desktop == false }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.responsive_image"
+    }
+  ]
+}
+{% endschema %}

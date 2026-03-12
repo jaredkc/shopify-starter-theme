@@ -61,6 +61,7 @@
     "video_animation": "Will autoplay when in viewport."
   },
   "names": {
+    "responsive_image": "Responsive image",
     "announcement_bar": "Announcement bar",
     "announcement": "Announcement",
     "button": "Button",
@@ -157,6 +158,7 @@
     "columns_mobile": "Mobile columns",
     "custom_width": "Custom width",
     "default": "Default",
+    "desktop_image": "Desktop image",
     "description": "Description",
     "direction": "Direction",
     "enable_infinite_scroll": "Enable infinite scroll",
@@ -164,6 +166,7 @@
     "font_size": "Font size",
     "full_screen": "Full screen",
     "full": "Full",
+    "full_width": "Full width",
     "gap": "Gap",
     "heading": "Heading",
     "height": "Height",
@@ -179,6 +182,8 @@
     "liquid_code": "Liquid code",
     "max_width": "Max width",
     "medium": "Medium",
+    "menu": "Menu",
+    "mobile_image": "Mobile image",
     "min_width": "Min width",
     "no_wrap": "No wrap",
     "overlay_color": "Overlay color",
