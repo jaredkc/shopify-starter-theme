@@ -61,11 +61,10 @@
     "video_animation": "Will autoplay when in viewport."
   },
   "names": {
-    "responsive_image": "Responsive image",
     "announcement_bar": "Announcement bar",
     "announcement": "Announcement",
-    "button": "Button",
     "button_group": "Button group",
+    "button": "Button",
     "buy_buttons": "Buy buttons",
     "carousel": "Carousel",
     "cart": "Cart",
@@ -78,6 +77,7 @@
     "group": "Group",
     "heading": "Heading",
     "hero": "Hero",
+    "image_responsive": "Image responsive",
     "image_with_text": "Image with text",
     "image": "Image",
     "modal_button": "Modal button",
