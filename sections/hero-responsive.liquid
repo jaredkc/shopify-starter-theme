@@ -50,7 +50,7 @@
     -%}
   </div>
 
-  <div class="{{ section.settings.section_width }}">
+  <div class="hero-responsive__inner {{ section.settings.section_width }}">
     <div
       class="hero-responsive__content spacing-style"
       style="
@@ -76,14 +76,24 @@
 
 {% stylesheet %}
   .hero-responsive {
+    aspect-ratio: var(--hero-aspect-mobile, 5 / 4);
     overflow: hidden;
     position: relative;
+    width: 100%;
+    max-height: 90dvh;
   }
 
   .hero-responsive__media {
     inset: 0;
     position: absolute;
     z-index: 0;
+  }
+
+  .hero-responsive__inner {
+    display: flex;
+    inset: 0;
+    position: absolute;
+    z-index: 1;
   }
 
   .hero-responsive__picture {
@@ -109,24 +119,26 @@
 
   .hero-responsive__content {
     align-items: var(--mobile-align);
-    aspect-ratio: var(--hero-aspect-mobile, 5 / 4);
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: var(--gap-mobile);
     justify-content: var(--mobile-justify);
-    max-height: 100dvh;
+    min-width: 0;
     position: relative;
-    z-index: 1;
   }
 
   @media (min-width: 768px) {
+    .hero-responsive {
+      aspect-ratio: var(--hero-aspect-desktop, var(--hero-aspect-mobile, 16 / 9));
+    }
+
     .hero-responsive__media-image {
       object-position: var(--hero-focal-point-desktop, var(--hero-focal-point-mobile, center));
     }
 
     .hero-responsive__content {
       align-items: var(--desktop-align);
-      aspect-ratio: var(--hero-aspect-desktop, 16 / 9);
       flex-direction: var(--desktop-direction);
       gap: var(--gap);
       justify-content: var(--desktop-justify);
