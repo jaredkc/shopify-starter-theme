@@ -1,0 +1,68 @@
+{% doc %}
+  Renders a <picture> with optional desktop <source> and an <img> for mobile or desktop.
+  Uses single-line srcset and a manual img (no image_tag) so the caller can control
+  object-position via CSS vars per breakpoint without inline styles overriding.
+
+  @param {image} [mobile_image] - Image for viewports < 768px
+  @param {image} [desktop_image] - Image for viewports >= 768px (via <source>)
+  @param {string} image_class - Class applied to the <img>
+  @param {string} [loading=lazy] - loading attribute (e.g. lazy, eager)
+  @param {string} [fetch_priority=auto] - fetchpriority attribute (e.g. auto, high)
+  @param {string} [picture_class] - Class applied to the <picture>
+  @param {string} [placeholder=image] - Placeholder name when no images (e.g. image, hero-apparel-1)
+  @param {string} [placeholder_class] - Class for the placeholder SVG
+
+  @example
+  {% render 'responsive-picture',
+    mobile_image: section.settings.mobile_image,
+    desktop_image: section.settings.desktop_image,
+    image_class: 'hero-responsive__media-image',
+    loading: 'eager',
+    fetch_priority: 'high',
+    picture_class: 'hero-responsive__picture',
+    placeholder: 'hero-apparel-1',
+    placeholder_class: 'hero-responsive__placeholder'
+  %}
+{% enddoc %}
+
+{%- if mobile_image != blank or desktop_image != blank -%}
+  <picture class="{{ picture_class }}">
+    {%- if desktop_image != blank -%}
+      <source
+        media="(min-width: 768px)"
+        sizes="100vw"
+        srcset="{{ desktop_image | image_url: width: 768 }} 768w, {{ desktop_image | image_url: width: 1200 }} 1200w, {{ desktop_image | image_url: width: 1920 }} 1920w, {{ desktop_image | image_url: width: 3840 }} 3840w"
+      >
+    {%- endif -%}
+
+    {%- if mobile_image != blank -%}
+      <img
+        class="{{ image_class }}"
+        src="{{ mobile_image | image_url: width: 1200 }}"
+        srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 768 }} 768w, {{ mobile_image | image_url: width: 1200 }} 1200w"
+        sizes="100vw"
+        decoding="async"
+        loading="{{ loading | default: 'lazy' }}"
+        fetchpriority="{{ fetch_priority | default: 'auto' }}"
+        alt="{{ mobile_image.alt | escape }}"
+        width="{{ mobile_image.width }}"
+        height="{{ mobile_image.height }}"
+      >
+    {%- elsif desktop_image != blank -%}
+      <img
+        class="{{ image_class }}"
+        src="{{ desktop_image | image_url: width: 1200 }}"
+        srcset="{{ desktop_image | image_url: width: 375 }} 375w, {{ desktop_image | image_url: width: 550 }} 550w, {{ desktop_image | image_url: width: 768 }} 768w, {{ desktop_image | image_url: width: 1200 }} 1200w"
+        sizes="100vw"
+        decoding="async"
+        loading="{{ loading | default: 'lazy' }}"
+        fetchpriority="{{ fetch_priority | default: 'auto' }}"
+        alt="{{ desktop_image.alt | escape }}"
+        width="{{ desktop_image.width }}"
+        height="{{ desktop_image.height }}"
+      >
+    {%- endif -%}
+  </picture>
+{%- else -%}
+  {{- placeholder | default: 'image' | placeholder_svg_tag: placeholder_class -}}
+{%- endif -%}

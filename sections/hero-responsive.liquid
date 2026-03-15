@@ -38,47 +38,16 @@
   "
 >
   <div class="hero-responsive__media" aria-hidden="true">
-    {%- if mobile_image != blank or desktop_image != blank -%}
-      <picture class="hero-responsive__picture">
-        {%- if desktop_image != blank -%}
-          <source
-            media="(min-width: 768px)"
-            sizes="100vw"
-            srcset="{{ desktop_image | image_url: width: 768 }} 768w, {{ desktop_image | image_url: width: 1200 }} 1200w, {{ desktop_image | image_url: width: 1920 }} 1920w, {{ desktop_image | image_url: width: 3840 }} 3840w"
-          >
-        {%- endif -%}
-
-        {%- if mobile_image != blank -%}
-          <img
-            class="hero-responsive__media-image"
-            src="{{ mobile_image | image_url: width: 1200 }}"
-            srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 768 }} 768w, {{ mobile_image | image_url: width: 1200 }} 1200w"
-            sizes="100vw"
-            decoding="async"
-            loading="{{ loading }}"
-            fetchpriority="{{ fetch_priority }}"
-            alt="{{ mobile_image.alt | escape }}"
-            width="{{ mobile_image.width }}"
-            height="{{ mobile_image.height }}"
-          >
-        {%- elsif desktop_image != blank -%}
-          <img
-            class="hero-responsive__media-image"
-            src="{{ desktop_image | image_url: width: 1200 }}"
-            srcset="{{ desktop_image | image_url: width: 375 }} 375w, {{ desktop_image | image_url: width: 550 }} 550w, {{ desktop_image | image_url: width: 768 }} 768w, {{ desktop_image | image_url: width: 1200 }} 1200w"
-            sizes="100vw"
-            decoding="async"
-            loading="{{ loading }}"
-            fetchpriority="{{ fetch_priority }}"
-            alt="{{ desktop_image.alt | escape }}"
-            width="{{ desktop_image.width }}"
-            height="{{ desktop_image.height }}"
-          >
-        {%- endif -%}
-      </picture>
-    {%- else -%}
-      {{- 'hero-apparel-1' | placeholder_svg_tag: 'hero-responsive__placeholder' -}}
-    {%- endif -%}
+    {%- render 'responsive-picture',
+      mobile_image: mobile_image,
+      desktop_image: desktop_image,
+      image_class: 'hero-responsive__media-image',
+      loading: loading,
+      fetch_priority: fetch_priority,
+      picture_class: 'hero-responsive__picture',
+      placeholder: 'hero-apparel-1',
+      placeholder_class: 'hero-responsive__placeholder'
+    -%}
   </div>
 
   <div class="{{ section.settings.section_width }}">

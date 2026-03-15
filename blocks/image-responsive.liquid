@@ -7,51 +7,44 @@
   {% content_for 'block', type: 'responsive-image', id: 'responsive-image' %}
 {% enddoc %}
 
-{% assign mobile_image = block.settings.mobile_image %}
-{% assign desktop_image = block.settings.desktop_image %}
+{%- liquid
+  assign mobile_image = block.settings.mobile_image
+  assign desktop_image = block.settings.desktop_image
+-%}
 
 <div
   class="responsive-image-block spacing-style{% unless block.settings.full_width_mobile %} responsive-image-block--constrained-mobile{% endunless %}{% unless block.settings.full_width_desktop %} responsive-image-block--constrained-desktop{% endunless %}"
   style="
-    {% render 'spacing-style', settings: block.settings %}
-    {% unless block.settings.full_width_mobile %}
+    {%- if mobile_image != blank and mobile_image.presentation.focal_point -%}
+      --responsive-image-focal-point-mobile: {{ mobile_image.presentation.focal_point }};
+    {%- elsif desktop_image != blank and desktop_image.presentation.focal_point -%}
+      --responsive-image-focal-point-mobile: {{ desktop_image.presentation.focal_point }};
+    {%- endif -%}
+    {%- if desktop_image != blank and desktop_image.presentation.focal_point -%}
+      --responsive-image-focal-point-desktop: {{ desktop_image.presentation.focal_point }};
+    {%- elsif mobile_image != blank and mobile_image.presentation.focal_point -%}
+      --responsive-image-focal-point-desktop: {{ mobile_image.presentation.focal_point }};
+    {%- endif -%}
+    {%- render 'spacing-style', settings: block.settings -%}
+    {%- unless block.settings.full_width_mobile -%}
       --responsive-image-max-width-mobile: {{ block.settings.max_width_mobile }}px;
-    {% endunless %}
-    {% unless block.settings.full_width_desktop %}
+    {%- endunless -%}
+    {%- unless block.settings.full_width_desktop -%}
       --responsive-image-max-width-desktop: {{ block.settings.max_width_desktop }}px;
-    {% endunless %}
+    {%- endunless -%}
   "
   {{ block.shopify_attributes }}
 >
-  {% if mobile_image != blank and desktop_image != blank %}
-    <picture class="responsive-image-block__picture">
-      {%- comment -%} Desktop: only loaded when viewport >= 768px {%- endcomment -%}
-      <source
-        media="(min-width: 768px)"
-        srcset="
-          {{ desktop_image | image_url: width: 768 }} 768w,
-          {{ desktop_image | image_url: width: 1200 }} 1200w,
-          {{ desktop_image | image_url: width: 1920 }} 1920w
-        "
-      >
-      {%- comment -%} Mobile: default source (no media), only loaded when viewport < 768px {%- endcomment -%}
-      {{
-        mobile_image
-        | image_url: width: 768
-        | image_tag:
-          width: mobile_image.width,
-          widths: '375, 550, 768',
-          sizes: '100vw',
-          height: mobile_image.height,
-          class: 'responsive-image-block__image',
-          loading: 'lazy',
-          decoding: 'async',
-          alt: mobile_image.alt
-      }}
-    </picture>
-  {% else %}
-    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--fill responsive-image-block__image' }}
-  {% endif %}
+  {%- render 'responsive-picture',
+    mobile_image: mobile_image,
+    desktop_image: desktop_image,
+    image_class: 'responsive-image-block__image',
+    loading: 'lazy',
+    fetch_priority: 'auto',
+    picture_class: 'responsive-image-block__picture',
+    placeholder: 'image',
+    placeholder_class: 'placeholder-svg placeholder-svg--fill responsive-image-block__image'
+  -%}
 </div>
 
 {% stylesheet %}
@@ -78,9 +71,15 @@
     width: 100%;
   }
   .responsive-image-block__image {
-    width: 100%;
-    height: auto;
     display: block;
+    height: auto;
+    object-position: var(--responsive-image-focal-point-mobile, center);
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .responsive-image-block__image {
+      object-position: var(--responsive-image-focal-point-desktop, var(--responsive-image-focal-point-mobile, center));
+    }
   }
 {% endstylesheet %}
 
