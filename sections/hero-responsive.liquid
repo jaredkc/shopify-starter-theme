@@ -128,6 +128,16 @@
     position: relative;
   }
 
+  [style*='--mobile-align: flex-start'] > .text-block {
+    --text-align-default: left;
+  }
+  [style*='--mobile-align: center'] > .text-block {
+    --text-align-default: center;
+  }
+  [style*='--mobile-align: flex-end'] > .text-block {
+    --text-align-default: right;
+  }
+
   @media (min-width: 768px) {
     .hero-responsive {
       aspect-ratio: var(--hero-aspect-desktop, var(--hero-aspect-mobile, 16 / 9));
@@ -142,6 +152,16 @@
       flex-direction: var(--desktop-direction);
       gap: var(--gap);
       justify-content: var(--desktop-justify);
+    }
+
+    [style*='--desktop-align: flex-start'] > .text-block {
+      --text-align-default: left;
+    }
+    [style*='--desktop-align: center'] > .text-block {
+      --text-align-default: center;
+    }
+    [style*='--desktop-align: flex-end'] > .text-block {
+      --text-align-default: right;
     }
   }
 {% endstylesheet %}
