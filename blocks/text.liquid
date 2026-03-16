@@ -1,6 +1,9 @@
 <div
-  class="{{ block.settings.font_size }}{% if block.settings.width == '100%' %} text-{{ block.settings.alignment }}{% endif %}"
-  style="width: {{ block.settings.width }};"
+  class="text-block {{ block.settings.font_size }}"
+  style="
+    width: {{ block.settings.width }};
+    {% if block.settings.width == '100%' %}--text-align: {{ block.settings.alignment }};{% endif %}
+  "
   {{ block.shopify_attributes }}
 >
   <div class="rte content-{{ block.settings.max_width }}">

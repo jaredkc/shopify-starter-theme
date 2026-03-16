@@ -286,6 +286,23 @@ pre {
   }
 }
 
+.text-block {
+  text-align: var(--text-align, var(--text-align-default));
+}
+
+[style*='--column-alignment: flex-start'] > .text-block,
+[style*='--row-alignment: flex-start'] > .text-block {
+  --text-align-default: left;
+}
+[style*='--column-alignment: center'] > .text-block,
+[style*='--row-alignment: center'] > .text-block {
+  --text-align-default: center;
+}
+[style*='--column-alignment: flex-end'] > .text-block,
+[style*='--row-alignment: flex-end'] > .text-block {
+  --text-align-default: right;
+}
+
 .section-pt-sm {
   padding-top: 2rem;
 }

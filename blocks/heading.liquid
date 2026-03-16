@@ -1,6 +1,14 @@
 <{{ block.settings.element }}
-  class="m-0 content-{{ block.settings.max_width }}{% if block.settings.font_size == 'default' %} {{ block.settings.element }}{% else %} {{ block.settings.font_size }}{% endif %} {% if block.settings.width == '100%' %} text-{{ block.settings.alignment }}{% endif %}"
-  style="width: {{ block.settings.width }};"
+  class="
+    text-block
+    m-0
+    content-{{ block.settings.max_width }}
+    {% if block.settings.font_size == 'default' %}{{ block.settings.element }}{% else %}{{ block.settings.font_size }}{% endif %}
+  "
+  style="
+    width: {{ block.settings.width }};
+    {% if block.settings.width == '100%' %}--text-align: {{ block.settings.alignment }};{% endif %}
+  "
   {{ block.shopify_attributes }}
 >
   {{ block.settings.text }}
@@ -35,7 +43,7 @@
           "label": "t:options.fit"
         }
       ],
-      "default": "100%"
+      "default": "fit-content"
     },
     {
       "type": "select",
