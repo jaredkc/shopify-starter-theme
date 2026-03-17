@@ -1,4 +1,4 @@
-{%- liquid
+{% liquid
   assign mobile_image = section.settings.mobile_image
   assign desktop_image = section.settings.desktop_image
 
@@ -19,26 +19,29 @@
   id="hero-responsive-{{ section.id }}"
   class="hero-responsive color-{{ section.settings.color_scheme }}"
   style="
-    {%- if mobile_image != blank and mobile_image.width and mobile_image.height -%}
-      --hero-aspect-mobile: {{ mobile_image.width }} / {{ mobile_image.height }};
-    {%- endif -%}
-    {%- if desktop_image != blank and desktop_image.width and desktop_image.height -%}
-      --hero-aspect-desktop: {{ desktop_image.width }} / {{ desktop_image.height }};
-    {%- endif -%}
-    {%- if mobile_image != blank and mobile_image.presentation.focal_point -%}
-      --hero-focal-point-mobile: {{ mobile_image.presentation.focal_point }};
-    {%- elsif desktop_image != blank and desktop_image.presentation.focal_point -%}
-      --hero-focal-point-mobile: {{ desktop_image.presentation.focal_point }};
-    {%- endif -%}
-    {%- if desktop_image != blank and desktop_image.presentation.focal_point -%}
-      --hero-focal-point-desktop: {{ desktop_image.presentation.focal_point }};
-    {%- elsif mobile_image != blank and mobile_image.presentation.focal_point -%}
-      --hero-focal-point-desktop: {{ mobile_image.presentation.focal_point }};
-    {%- endif -%}
+    {% if mobile_image != blank %}
+      --mobile-aspect: {{ mobile_image.aspect_ratio }};
+      --mobile-focal-point: {{ mobile_image.presentation.focal_point }};
+    {% endif %}
+    {% if section.settings.mobile_section_height == 'custom' %}
+      --mobile-min-height: {{ section.settings.mobile_section_height_custom }}px;
+    {% elsif section.settings.mobile_section_height == 'full-screen' %}
+      --mobile-min-height: 100svh;
+    {% endif %}
+
+    {% if desktop_image != blank %}
+      --aspect-desktop: {{ desktop_image.aspect_ratio }};
+      --focal-point-desktop: {{ desktop_image.presentation.focal_point }};
+    {% endif %}
+    {% if section.settings.section_height == 'custom' %}
+      --min-height: {{ section.settings.section_height_custom }}px;
+    {% elsif section.settings.section_height == 'full-screen' %}
+      --min-height: 100svh;
+    {% endif %}
   "
 >
   <div class="hero-responsive__media" aria-hidden="true">
-    {%- render 'responsive-picture',
+    {% render 'responsive-picture',
       mobile_image: mobile_image,
       desktop_image: desktop_image,
       image_class: 'hero-responsive__media-image',
@@ -47,40 +50,40 @@
       picture_class: 'hero-responsive__picture',
       placeholder: 'hero-apparel-1',
       placeholder_class: 'hero-responsive__placeholder'
-    -%}
+    %}
   </div>
 
   <div class="hero-responsive__inner {{ section.settings.section_width }}">
     <div
       class="hero-responsive__content spacing-style"
       style="
-        --gap: {{ section.settings.gap }}px;
-        --gap-mobile: {{ section.settings.gap_mobile }}px;
-        --mobile-justify: {{ section.settings.column_position_mobile }};
-        --mobile-align: {{ section.settings.column_alignment_mobile }};
+        --mobile-gap: {{ section.settings.mobile_gap }}px;
+        --mobile-justify: {{ section.settings.mobile_column_position }};
+        --mobile-align: {{ section.settings.mobile_column_alignment }};
         --desktop-direction: {{ section.settings.content_direction }};
-        {%- if section.settings.content_direction == 'row' -%}
+        --desktop-gap: {{ section.settings.gap }}px;
+        {% if section.settings.content_direction == 'row' %}
           --desktop-justify: {{ section.settings.row_alignment }};
           --desktop-align: {{ section.settings.row_position }};
-        {%- else -%}
+        {% else %}
           --desktop-justify: {{ section.settings.column_position }};
           --desktop-align: {{ section.settings.column_alignment }};
-        {%- endif -%}
-        {%- render 'spacing-style', settings: section.settings -%}
+        {% endif %}
+        {% render 'spacing-style', settings: section.settings %}
       "
     >
-      {%- content_for 'blocks' -%}
+      {% content_for 'blocks' %}
     </div>
   </div>
 </div>
 
 {% stylesheet %}
   .hero-responsive {
-    aspect-ratio: var(--hero-aspect-mobile, 5 / 4);
+    aspect-ratio: var(--mobile-aspect, 5 / 4);
+    min-height: var(--mobile-min-height);
     overflow: hidden;
     position: relative;
     width: 100%;
-    max-height: 90dvh;
   }
 
   .hero-responsive__media {
@@ -106,7 +109,7 @@
     display: block;
     height: 100%;
     object-fit: cover;
-    object-position: var(--hero-focal-point-mobile, center);
+    object-position: var(--mobile-focal-point, center);
     width: 100%;
   }
 
@@ -122,12 +125,11 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: var(--gap-mobile);
+    gap: var(--mobile-gap);
     justify-content: var(--mobile-justify);
     min-width: 0;
     position: relative;
   }
-
   [style*='--mobile-align: flex-start'] > .text-block {
     --text-align-default: left;
   }
@@ -140,20 +142,20 @@
 
   @media (min-width: 768px) {
     .hero-responsive {
-      aspect-ratio: var(--hero-aspect-desktop, var(--hero-aspect-mobile, 16 / 9));
+      aspect-ratio: var(--aspect-desktop, 16 / 9);
+      min-height: var(--min-height);
     }
 
     .hero-responsive__media-image {
-      object-position: var(--hero-focal-point-desktop, var(--hero-focal-point-mobile, center));
+      object-position: var(--focal-point-desktop, center);
     }
 
     .hero-responsive__content {
       align-items: var(--desktop-align);
       flex-direction: var(--desktop-direction);
-      gap: var(--gap);
+      gap: var(--desktop-gap);
       justify-content: var(--desktop-justify);
     }
-
     [style*='--desktop-align: flex-start'] > .text-block {
       --text-align-default: left;
     }
@@ -171,6 +173,9 @@
   "name": "t:names.hero_responsive",
   "tag": "section",
   "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "header",
@@ -183,7 +188,7 @@
     },
     {
       "type": "select",
-      "id": "column_alignment_mobile",
+      "id": "mobile_column_alignment",
       "label": "t:settings.alignment",
       "options": [
         {
@@ -203,7 +208,7 @@
     },
     {
       "type": "select",
-      "id": "column_position_mobile",
+      "id": "mobile_column_position",
       "label": "t:settings.position",
       "options": [
         {
@@ -227,13 +232,44 @@
     },
     {
       "type": "range",
-      "id": "gap_mobile",
+      "id": "mobile_gap",
       "min": 0,
       "max": 60,
       "step": 4,
       "unit": "px",
       "label": "t:settings.gap",
       "default": 16
+    },
+    {
+      "type": "select",
+      "id": "mobile_section_height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "full-screen",
+          "label": "t:options.full_screen"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_height_custom",
+      "label": "t:settings.custom_height",
+      "min": 300,
+      "max": 1200,
+      "step": 20,
+      "default": 460,
+      "unit": "px",
+      "visible_if": "{{ section.settings.mobile_section_height == 'custom' }}"
     },
     {
       "type": "header",
@@ -363,8 +399,35 @@
       "default": 16
     },
     {
-      "type": "header",
-      "content": "t:content.size"
+      "type": "select",
+      "id": "section_height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "full-screen",
+          "label": "t:options.full_screen"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "section_height_custom",
+      "label": "t:settings.custom_height",
+      "min": 600,
+      "max": 1400,
+      "step": 20,
+      "default": 760,
+      "unit": "px",
+      "visible_if": "{{ section.settings.section_height == 'custom' }}"
     },
     {
       "type": "select",

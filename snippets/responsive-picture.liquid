@@ -25,6 +25,11 @@
   %}
 {% enddoc %}
 
+{%- comment -%}
+  Focal point via CSS vars per breakpoint; manual img so image_tag's
+  inline object-position doesn't override and break the desktop crop.
+{%- endcomment -%}
+
 {%- if mobile_image != blank or desktop_image != blank -%}
   <picture class="{{ picture_class }}">
     {%- if desktop_image != blank -%}
