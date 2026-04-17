@@ -46,16 +46,19 @@
   padding: 5px;
 }
 
+.header__menu-link,
 .header__menu-summary {
   align-items: center;
-  cursor: pointer;
   display: flex;
-  font-weight: bold;
   gap: 0.4rem;
   justify-content: space-between;
   line-height: 1;
-  list-style: none;
-  padding: 1rem 0;
+  padding-bottom: 1.25rem;
+  padding-top: 1.25rem;
+}
+
+.header__menu-summary {
+  cursor: pointer;
 }
 .header__menu-summary::-webkit-details-marker,
 .header__menu-summary::marker {
@@ -146,7 +149,6 @@
     border-bottom: 1px solid var(--c-border-light);
   }
   .header__menu-summary {
-    padding: 1.25rem 0;
     text-align: left;
     width: 100%;
   }
@@ -196,7 +198,8 @@
   }
   .header__menu-link,
   .header__menu-summary {
-    padding: 0 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
   }
   .header__menu-summary .icon-caret {
