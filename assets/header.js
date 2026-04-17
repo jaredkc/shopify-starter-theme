@@ -179,7 +179,6 @@ class HeaderNavigation extends HTMLElement {
 
     this.menuToggle.addEventListener('click', this.toggleMenu);
     this.addEventListener('keyup', this.onKeyUp);
-    this.menu.setAttribute('aria-hidden', 'true');
   }
 
   disconnectedCallback() {
@@ -205,7 +204,6 @@ class HeaderNavigation extends HTMLElement {
     }
     this.menu.style.height = this.menu.style.height || '100vh';
     document.body.classList.add('mobile-menu-open');
-    this.menu.setAttribute('aria-hidden', 'false');
     this.menuToggle.setAttribute('aria-expanded', 'true');
     const closeLabel = this.menuToggle.getAttribute('data-close-label');
     if (closeLabel) this.menuToggle.setAttribute('aria-label', closeLabel);
@@ -215,11 +213,10 @@ class HeaderNavigation extends HTMLElement {
   closeMenu() {
     document.body.classList.remove('mobile-menu-open');
     this.menu.style.height = '';
-    this.menu.setAttribute('aria-hidden', 'true');
+    removeTrapFocus(this.menuToggle);
     this.menuToggle.setAttribute('aria-expanded', 'false');
     const menuLabel = this.menuToggle.getAttribute('data-menu-label');
     if (menuLabel) this.menuToggle.setAttribute('aria-label', menuLabel);
-    removeTrapFocus(this.menuToggle);
   }
 }
 
