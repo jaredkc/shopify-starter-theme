@@ -19,9 +19,9 @@
   class NavDetails extends HTMLElement {
     constructor() {
       super();
-      this.onFocusOut = this.onFocusOut.bind(this);
       this.onToggle = this.onToggle.bind(this);
       this.onSummaryClick = this.onSummaryClick.bind(this);
+      this.onOutsidePointerDown = this.onOutsidePointerDown.bind(this);
       this.close = this.close.bind(this);
       this.onTransitionEnd = this.onTransitionEnd.bind(this);
     }
@@ -34,17 +34,17 @@
       this.subnav = summary?.nextElementSibling;
       this.closeBtn = this.querySelector('[details-close]');
 
-      this.details.addEventListener('focusout', this.onFocusOut);
       this.details.addEventListener('toggle', this.onToggle);
       if (summary) summary.addEventListener('click', this.onSummaryClick);
       if (this.closeBtn) this.closeBtn.addEventListener('click', this.close);
 
       if (this.subnav && this.details.hasAttribute('open')) this.animateOpen();
+      if (this.details.hasAttribute('open')) this.addOutsideCloseListener();
     }
 
     disconnectedCallback() {
+      this.removeOutsideCloseListener();
       if (this.details) {
-        this.details.removeEventListener('focusout', this.onFocusOut);
         this.details.removeEventListener('toggle', this.onToggle);
       }
       const summary = this.details?.querySelector('summary');
@@ -60,11 +60,19 @@
       }
     }
 
-    onFocusOut() {
-      if (window.matchMedia('(max-width: 899px)').matches) return;
-      setTimeout(() => {
-        if (!this.contains(document.activeElement)) this.close();
-      }, 0);
+    addOutsideCloseListener() {
+      document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
+      document.addEventListener('pointerdown', this.onOutsidePointerDown, true);
+    }
+
+    removeOutsideCloseListener() {
+      document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
+    }
+
+    onOutsidePointerDown(event) {
+      if (!this.details.hasAttribute('open')) return;
+      if (this.contains(event.target)) return;
+      this.close();
     }
 
     onTransitionEnd(event) {
@@ -75,11 +83,12 @@
     }
 
     onToggle() {
-      if (!this.subnav) return;
       if (this.details.hasAttribute('open')) {
-        this.animateOpen();
+        this.addOutsideCloseListener();
+        if (this.subnav) this.animateOpen();
       } else {
-        this.subnav.classList.remove('subnav--open', 'subnav--closing');
+        this.removeOutsideCloseListener();
+        if (this.subnav) this.subnav.classList.remove('subnav--open', 'subnav--closing');
       }
     }
 
