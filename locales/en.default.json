@@ -11,6 +11,10 @@
   "accessibility": {
     "carousel": "Carousel",
     "close": "Close",
+    "back": "Back",
+    "menu": "Menu",
+    "close_menu": "Close menu",
+    "main_nav": "Main navigation",
     "collapsible_content_title": "Collapsible content",
     "complementary_products": "Complementary products",
     "error": "Error",

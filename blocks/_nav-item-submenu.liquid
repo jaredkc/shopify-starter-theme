@@ -1,0 +1,145 @@
+<li class="header__menu-item">
+  <nav-details>
+    <details class="header__menu-details">
+      <summary class="header__menu-summary">
+        <span>{{- block.settings.label -}}</span>
+        {{ 'icon-caret.svg' | inline_asset_content }}
+      </summary>
+      <div class="subnav">
+        <button type="button" class="subnav__back" details-close>
+          {{ 'accessibility.back' | t }}
+        </button>
+        {% content_for 'blocks' %}
+      </div>
+    </details>
+  </nav-details>
+</li>
+
+{% javascript %}
+  class NavDetails extends HTMLElement {
+    constructor() {
+      super();
+      this.onToggle = this.onToggle.bind(this);
+      this.onSummaryClick = this.onSummaryClick.bind(this);
+      this.onOutsidePointerDown = this.onOutsidePointerDown.bind(this);
+      this.close = this.close.bind(this);
+      this.onTransitionEnd = this.onTransitionEnd.bind(this);
+    }
+
+    connectedCallback() {
+      this.details = this.querySelector('details');
+      if (!this.details) return;
+
+      const summary = this.details.querySelector('summary');
+      this.subnav = summary?.nextElementSibling;
+      this.closeBtn = this.querySelector('[details-close]');
+
+      this.details.addEventListener('toggle', this.onToggle);
+      if (summary) summary.addEventListener('click', this.onSummaryClick);
+      if (this.closeBtn) this.closeBtn.addEventListener('click', this.close);
+
+      if (this.subnav && this.details.hasAttribute('open')) this.animateOpen();
+      if (this.details.hasAttribute('open')) this.addOutsideCloseListener();
+    }
+
+    disconnectedCallback() {
+      this.removeOutsideCloseListener();
+      if (this.details) {
+        this.details.removeEventListener('toggle', this.onToggle);
+      }
+      const summary = this.details?.querySelector('summary');
+      if (summary) summary.removeEventListener('click', this.onSummaryClick);
+      if (this.closeBtn) this.closeBtn.removeEventListener('click', this.close);
+      if (this.subnav) this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
+    }
+
+    onSummaryClick(event) {
+      if (this.details.hasAttribute('open')) {
+        event.preventDefault();
+        this.close();
+      }
+    }
+
+    addOutsideCloseListener() {
+      document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
+      document.addEventListener('pointerdown', this.onOutsidePointerDown, true);
+    }
+
+    removeOutsideCloseListener() {
+      document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
+    }
+
+    onOutsidePointerDown(event) {
+      if (!this.details.hasAttribute('open')) return;
+      if (this.contains(event.target)) return;
+      this.close();
+    }
+
+    onTransitionEnd(event) {
+      if (event.target !== this.subnav || event.propertyName !== 'transform') return;
+      this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
+      this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      this.details.removeAttribute('open');
+    }
+
+    onToggle() {
+      if (this.details.hasAttribute('open')) {
+        this.addOutsideCloseListener();
+        if (this.subnav) this.animateOpen();
+      } else {
+        this.removeOutsideCloseListener();
+        if (this.subnav) this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      }
+    }
+
+    animateOpen() {
+      this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      this.subnav.offsetHeight;
+      requestAnimationFrame(() => this.subnav.classList.add('subnav--open'));
+    }
+
+    close() {
+      if (!this.subnav) {
+        this.details.removeAttribute('open');
+        return;
+      }
+      if (this.subnav.classList.contains('subnav--closing')) return;
+      this.subnav.classList.add('subnav--closing');
+      this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
+      this.subnav.addEventListener('transitionend', this.onTransitionEnd);
+    }
+  }
+
+  customElements.define('nav-details', NavDetails);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Nav item submenu",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_nav-sub-card"
+    },
+    {
+      "type": "_nav-sub-group"
+    },
+    {
+      "type": "_nav-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:settings.label",
+      "default": "Submenu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nav item submenu"
+    }
+  ]
+}
+{% endschema %}

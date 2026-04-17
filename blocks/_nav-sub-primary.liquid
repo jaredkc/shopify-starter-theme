@@ -1,0 +1,39 @@
+<div class="subnav__primary" {{ block.shopify_attributes }}>
+  <a href="{{ block.settings.link }}">
+    {% if block.settings.image %}
+      {{ block.settings.image | image_url: width: 100 | image_tag }}
+    {% endif %}
+    {{- block.settings.label -}}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Subnav primary item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:settings.label",
+      "default": "Primary item"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subnav primary item"
+    }
+  ]
+}
+{% endschema %}

@@ -2,6 +2,9 @@
   --c-text-light: #d1d5db; /* TW colors.gray.300 */
   --c-text-medium: #4b5563; /* TW colors.gray.600 */
   --c-text-dark: #111827; /* TW colors.gray.900 */
+  --c-border-light: #e5e7eb; /* TW colors.gray.200 */
+  --c-border-medium: #9ca3af; /* TW colors.gray.400 */
+  --c-border-dark: #6b7280; /* TW colors.gray.500 */
   --c-primary-light: #dbeafe; /* TW colors.blue.100 */
   --c-primary-medium: #2563eb; /* TW colors.blue.600 */
   --c-primary-dark: #1e3a8a; /* TW colors.blue.900 */

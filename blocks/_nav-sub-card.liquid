@@ -1,0 +1,47 @@
+<div class="subnav__card" {{ block.shopify_attributes }}>
+  {% if block.settings.image %}
+    {{
+      block.settings.image
+      | image_url: width: 768
+      | image_tag:
+        widths: '165, 360, 384, 768',
+        sizes: '24rem',
+        loading: 'lazy',
+        alt: block.settings.image.alt | default: block.settings.title
+    }}
+  {% endif %}
+  <a href="{{ block.settings.link }}" class="subnav__card-link">
+    {{- block.settings.title -}}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Subnav card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings.label",
+      "default": "t:text_defaults.featured_collection"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subnav card"
+    }
+  ]
+}
+{% endschema %}
