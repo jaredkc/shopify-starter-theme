@@ -1,7 +1,7 @@
 <li class="header__menu-item">
   <nav-details>
     <details class="header__menu-details">
-      <summary class="header__menu-summary">
+      <summary class="header__menu-summary" aria-expanded="false">
         <span>{{- block.settings.label -}}</span>
         {{ 'icon-caret.svg' | inline_asset_content }}
       </summary>
@@ -22,6 +22,7 @@
       this.onToggle = this.onToggle.bind(this);
       this.onSummaryClick = this.onSummaryClick.bind(this);
       this.onOutsidePointerDown = this.onOutsidePointerDown.bind(this);
+      this.onEscapeKey = this.onEscapeKey.bind(this);
       this.close = this.close.bind(this);
       this.onTransitionEnd = this.onTransitionEnd.bind(this);
     }
@@ -38,12 +39,16 @@
       if (summary) summary.addEventListener('click', this.onSummaryClick);
       if (this.closeBtn) this.closeBtn.addEventListener('click', this.close);
 
-      if (this.subnav && this.details.hasAttribute('open')) this.animateOpen();
-      if (this.details.hasAttribute('open')) this.addOutsideCloseListener();
+      if (this.details.hasAttribute('open')) {
+        if (this.subnav) this.animateOpen();
+        this.attachOpenListeners();
+        this.syncSummaryExpanded();
+      }
     }
 
     disconnectedCallback() {
-      this.removeOutsideCloseListener();
+      this.detachOpenListeners();
+      this.clearCloseTimers();
       if (this.details) {
         this.details.removeEventListener('toggle', this.onToggle);
       }
@@ -60,13 +65,17 @@
       }
     }
 
-    addOutsideCloseListener() {
+    /** Outside click + Escape while open (Escape bubbles here before `header-navigation`). */
+    attachOpenListeners() {
       document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
       document.addEventListener('pointerdown', this.onOutsidePointerDown, true);
+      this.removeEventListener('keydown', this.onEscapeKey);
+      this.addEventListener('keydown', this.onEscapeKey);
     }
 
-    removeOutsideCloseListener() {
+    detachOpenListeners() {
       document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
+      this.removeEventListener('keydown', this.onEscapeKey);
     }
 
     onOutsidePointerDown(event) {
@@ -75,24 +84,71 @@
       this.close();
     }
 
+    onEscapeKey(event) {
+      if (event.key !== 'Escape') return;
+      if (!this.details.hasAttribute('open')) return;
+      event.preventDefault();
+      event.stopPropagation();
+      this.close();
+    }
+
+    syncSummaryExpanded() {
+      const summary = this.details?.querySelector('summary');
+      if (!summary) return;
+      summary.setAttribute('aria-expanded', this.details.hasAttribute('open') ? 'true' : 'false');
+    }
+
+    /** Max transition duration in ms from computed styles (handles `transform` + `opacity`). */
+    getSubnavTransitionMs() {
+      if (!this.subnav) return 0;
+      const raw = getComputedStyle(this.subnav).transitionDuration;
+      if (!raw || raw === '0s' || raw === '0ms') return 0;
+      return Math.max(
+        0,
+        ...raw.split(',').map((t) => {
+          const s = t.trim();
+          const n = parseFloat(s);
+          if (Number.isNaN(n)) return 0;
+          return s.endsWith('ms') ? n : n * 1000;
+        })
+      );
+    }
+
+    clearCloseTimers() {
+      if (this._closeFallbackTimer != null) {
+        clearTimeout(this._closeFallbackTimer);
+        this._closeFallbackTimer = null;
+      }
+      if (this.subnav) this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
+    }
+
+    finalizeClose() {
+      this.clearCloseTimers();
+      if (this.subnav) this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      if (this.details?.hasAttribute('open')) this.details.removeAttribute('open');
+      this.syncSummaryExpanded();
+    }
+
     onTransitionEnd(event) {
-      if (event.target !== this.subnav || event.propertyName !== 'transform') return;
-      this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
-      this.subnav.classList.remove('subnav--open', 'subnav--closing');
-      this.details.removeAttribute('open');
+      if (event.target !== this.subnav) return;
+      if (event.propertyName !== 'transform' && event.propertyName !== 'opacity') return;
+      this.finalizeClose();
     }
 
     onToggle() {
+      this.syncSummaryExpanded();
       if (this.details.hasAttribute('open')) {
-        this.addOutsideCloseListener();
         if (this.subnav) this.animateOpen();
+        this.attachOpenListeners();
       } else {
-        this.removeOutsideCloseListener();
+        this.detachOpenListeners();
+        this.clearCloseTimers();
         if (this.subnav) this.subnav.classList.remove('subnav--open', 'subnav--closing');
       }
     }
 
     animateOpen() {
+      if (!this.subnav) return;
       this.subnav.classList.remove('subnav--open', 'subnav--closing');
       this.subnav.offsetHeight;
       requestAnimationFrame(() => this.subnav.classList.add('subnav--open'));
@@ -101,12 +157,15 @@
     close() {
       if (!this.subnav) {
         this.details.removeAttribute('open');
+        this.syncSummaryExpanded();
         return;
       }
       if (this.subnav.classList.contains('subnav--closing')) return;
+      this.clearCloseTimers();
       this.subnav.classList.add('subnav--closing');
-      this.subnav.removeEventListener('transitionend', this.onTransitionEnd);
       this.subnav.addEventListener('transitionend', this.onTransitionEnd);
+      const ms = this.getSubnavTransitionMs();
+      this._closeFallbackTimer = window.setTimeout(() => this.finalizeClose(), ms + 80);
     }
   }
 

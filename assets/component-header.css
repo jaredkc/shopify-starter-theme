@@ -177,7 +177,7 @@
   }
 
   .header__nav {
-    /* Incase viewport goes between mobile and desktop */
+    /* If viewport crosses the mobile/desktop breakpoint */
     height: auto !important;
   }
 
@@ -308,7 +308,6 @@
   font-weight: bold;
   list-style-type: none;
   margin: -1px 0 0 0;
-  padding: 0;
   padding: 0.25rem 0;
 }
 .subnav__primary a {
