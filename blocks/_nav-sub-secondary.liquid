@@ -1,0 +1,30 @@
+<div class="subnav__secondary" {{ block.shopify_attributes }}>
+  <ul>
+    {% for link in block.settings.menu.links %}
+      <li>
+        <a href="{{ link.url }}">
+          {{- link.title -}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Subnav secondary menu",
+  "tag": null,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:settings.menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subnav secondary menu"
+    }
+  ]
+}
+{% endschema %}

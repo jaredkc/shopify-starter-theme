@@ -3,70 +3,96 @@
   The schema enforces `.section-sticky-header` on the wrapper around this component.
   Keep this lookup in sync with `assets/global.js` to avoid breaking sticky behaviour.
 {% endcomment %}
+{{ 'component-header.css' | asset_url | stylesheet_tag }}
+
 {% render 'search-dialog-modal' %}
+
 <sticky-header>
-  <header class="flex justify-between items-center px-4 py-2 text-center border-b md:py-4 md:px-8">
-    {%- if template.name == 'index' -%}
-      <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
-    {%- else -%}
-      <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
-    {%- endif -%}
-    <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo">{{ shop.name }}</a>
-    {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
-
-    {%- if section.settings.menu != blank -%}
-      <nav id="site-navigation" class="site-navigation">
-        <ul class="nav-menu">
-          {%- for link in section.settings.menu.links -%}
-            {%- assign child_list_handle = link.title | handleize -%}
-            {%- if linklists[child_list_handle].links != blank -%}
-              <li>
-                <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-                <ul class="nav-submemu">
-                  {%- for childlink in linklists[child_list_handle].links -%}
-                    <li>
-                      <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </li>
-            {%- else -%}
-              <li>
-                <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      </nav>
-    {%- endif -%}
-
-    <nav class="flex gap-4">
-      <dialog-opener data-dialog="#search-dialog">
-        <button class="btn-link">
-          <span class="sr-only">Open Search</span>
-          {{- 'icon-search.svg' | inline_asset_content -}}
-        </button>
-      </dialog-opener>
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
-          {{- 'icon-user.svg' | inline_asset_content -}}
-          <span class="sr-only">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
+  <header-navigation>
+    <header id="header" class="header">
+      <div class="header__icons header__items header--hide-lg">
+        <button type="button" class="menu-btn header__menu-toggle" aria-expanded="false" aria-controls="main-menu" aria-label="{{ 'accessibility.menu' | t }}" data-menu-label="{{ 'accessibility.menu' | t }}" data-close-label="{{ 'accessibility.close_menu' | t }}">
+          <span class="header__menu-toggle-icons">
+            {{ 'icon-menu.svg' | inline_asset_content }}
+            {{ 'icon-close.svg' | inline_asset_content }}
           </span>
-        </a>
+          <span class="sr-only">{{ 'accessibility.menu' | t }}</span>
+        </button>
+      </div>
+
+      <div class="header__logo">
+        {%- if template.name == 'index' -%}
+          <h1 class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
+        {%- else -%}
+          <div class="m-0 text-base" itemscope itemtype="http://schema.org/Organization">
+        {%- endif -%}
+        <a href="{{ routes.root_url }}" itemprop="url" class="header__logo">{{ shop.name }}</a>
+        {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+      </div>
+
+      {% comment %}
+        Support for Shopify menu driven navigation, or blocks based navigation.
+      {% endcomment %}
+      {%- if section.settings.menu != blank -%}
+        <nav id="main-menu" class="header__site-nav" aria-label="{{ 'accessibility.main_nav' | t }}">
+          <ul class="header__nav-menu">
+            {%- for link in section.settings.menu.links -%}
+              {%- assign child_list_handle = link.title | handleize -%}
+              {%- if linklists[child_list_handle].links != blank -%}
+                <li>
+                  <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+                  <ul class="header__nav-submenu">
+                    {%- for childlink in linklists[child_list_handle].links -%}
+                      <li>
+                        <a href="{{ childlink.url }}" class="whitespace-nowrap">{{ childlink.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </li>
+              {%- else -%}
+                <li>
+                  <a href="{{ link.url }}" class="whitespace-nowrap">{{ link.title }}</a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- else -%}
+        <nav id="main-menu" class="header__nav" aria-label="{{ 'accessibility.main_nav' | t }}">
+          <ul class="header__menu">
+            {% content_for 'blocks' %}
+          </ul>
+        </nav>
       {%- endif -%}
-      <a href="{{ routes.cart_url }}">
-        {{- 'icon-cart.svg' | inline_asset_content -}}
-        <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
-      </a>
-    </nav>
-  </header>
+
+      <nav class="header__icons">
+        <dialog-opener data-dialog="#search-dialog">
+          <button class="btn-link">
+            <span class="sr-only">Open Search</span>
+            {{- 'icon-search.svg' | inline_asset_content -}}
+          </button>
+        </dialog-opener>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+            {{- 'icon-user.svg' | inline_asset_content -}}
+            <span class="sr-only">
+              {%- liquid
+                if customer
+                  echo 'customer.account_fallback' | t
+                else
+                  echo 'customer.log_in' | t
+                endif
+              -%}
+            </span>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}">
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+          <span class="sr-only">{{- 'templates.cart.cart' | t -}}</span>
+        </a>
+      </nav>
+    </header>
+  </header-navigation>
 </sticky-header>
 
 <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
@@ -97,14 +123,15 @@
     transform: translateY(0);
   }
 
-  .nav-menu > li {
+  /* Menu driven navigation */
+  .header__nav-menu > li {
     display: inline-block;
     margin-left: 1rem;
     margin-right: 1rem;
     position: relative;
   }
 
-  .nav-submemu {
+  .header__nav-submenu {
     background: var(--bg-color);
     display: none;
     left: 0;
@@ -116,12 +143,12 @@
     z-index: 1;
   }
 
-  .nav-submemu a {
+  .header__nav-submenu a {
     display: block;
     padding: 0.5rem 0.7rem;
   }
 
-  .nav-menu > li:hover .nav-submemu {
+  .header__nav-menu > li:hover .header__nav-submenu {
     display: block;
     z-index: 100;
   }
@@ -131,12 +158,103 @@
 {
   "name": "Header",
   "class": "section-sticky-header sticky-header-stuck",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "blocks": [
+    {
+      "type": "_nav-item"
+    },
+    {
+      "type": "_nav-item-submenu"
+    }
+  ],
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "default": "main-menu",
       "label": "Menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": {
+        "nav_item_1": {
+          "type": "_nav-item",
+          "name": "Nav item 1",
+          "settings": {
+            "label": "Home",
+            "link": "/"
+          },
+          "blocks": {}
+        },
+        "nav_item_submenu_1": {
+          "type": "_nav-item-submenu",
+          "name": "Nav item submenu",
+          "settings": {
+            "label": "Submenu"
+          },
+          "blocks": {
+            "nav_group_1": {
+              "type": "_nav-sub-group",
+              "name": "Nav group 1",
+              "settings": {},
+              "blocks": {
+                "nav_featured_item_1": {
+                  "type": "_nav-sub-primary",
+                  "name": "Nav featured item 1",
+                  "settings": {
+                    "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
+                    "label": "Featured item 1",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                },
+                "nav_featured_item_2": {
+                  "type": "_nav-sub-primary",
+                  "name": "Nav featured item 2",
+                  "settings": {
+                    "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
+                    "label": "Featured item 2",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                },
+                "nav_menu_1": {
+                  "type": "_nav-sub-secondary",
+                  "name": "Nav menu",
+                  "settings": {
+                    "menu": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["nav_featured_item_1", "nav_featured_item_2", "nav_menu_1"]
+            },
+            "nav_group_2": {
+              "type": "_nav-sub-group",
+              "name": "Nav group 2",
+              "settings": {},
+              "blocks": {
+                "nav_card_1": {
+                  "type": "_nav-sub-card",
+                  "name": "Nav card",
+                  "settings": {
+                    "image": "shopify://shop_images/ScreenShot2022-01-20at1.14.50PM.png",
+                    "title": "Featured collection",
+                    "link": "shopify://collections/all"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["nav_card_1"]
+            }
+          },
+          "block_order": ["nav_group_1", "nav_group_2"]
+        }
+      },
+      "block_order": ["nav_item_1", "nav_item_submenu_1"]
     }
   ]
 }

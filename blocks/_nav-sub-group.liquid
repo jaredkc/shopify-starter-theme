@@ -1,0 +1,27 @@
+<div class="subnav__group">
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Subnav group",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_nav-sub-card"
+    },
+    {
+      "type": "_nav-sub-primary"
+    },
+    {
+      "type": "_nav-sub-secondary"
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "Subnav group"
+    }
+  ]
+}
+{% endschema %}

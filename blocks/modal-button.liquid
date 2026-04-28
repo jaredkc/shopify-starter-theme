@@ -50,9 +50,9 @@
           </h2>
         {% endif %}
 
-        {% if block.settings.modal_description != blank %}
+        {% if block.settings.modal_content != blank %}
           <div class="rte">
-            {{ block.settings.modal_description }}
+            {{ block.settings.modal_content }}
           </div>
         {% endif %}
       </div>
@@ -112,20 +112,14 @@
     },
     {
       "type": "richtext",
-      "id": "modal_description",
+      "id": "modal_content",
       "label": "t:settings.description",
-      "default": "t:text_defaults.modal_description"
+      "default": "t:html_defaults.modal_content"
     }
   ],
   "presets": [
     {
       "name": "t:names.modal_button",
-      "settings": {
-        "button_label": "t:text_defaults.open_modal",
-        "button_style": "btn--primary",
-        "modal_heading": "t:text_defaults.welcome",
-        "modal_description": "t:text_defaults.modal_description"
-      }
     }
   ]
 }
