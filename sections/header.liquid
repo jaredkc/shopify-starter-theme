@@ -40,26 +40,39 @@
       </nav>
     {%- endif -%}
 
-    <nav class="flex gap-4">
+    <nav class="flex gap-4 items-center">
       <dialog-opener data-dialog="#search-dialog">
-        <button class="btn-link">
+        <button class="btn-link flex items-center">
           <span class="sr-only">Open Search</span>
           {{- 'icon-search.svg' | inline_asset_content -}}
         </button>
       </dialog-opener>
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
-          {{- 'icon-user.svg' | inline_asset_content -}}
-          <span class="sr-only">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
+        <div>
+          {% comment %}
+            Using {{- 'icon-user.svg' | inline_asset_content -}}
+            in the <shopify-account> componet does not work 🤷‍♂️
+          {% endcomment %}
+          <shopify-account menu="{{ section.settings.customer_account_menu }}">
+            <span slot="signed-out-avatar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span class="sr-only">{{- 'customer.log_in' | t -}}</span>
+            </span>
+          </shopify-account>
+        </div>
       {%- endif -%}
       <a href="{{ routes.cart_url }}">
         {{- 'icon-cart.svg' | inline_asset_content -}}
@@ -127,6 +140,34 @@
   }
 {% endstylesheet %}
 
+<style>
+  /* See available variables here: https://shopify.dev/docs/api/storefront-web-components/components/shopify-account */
+  shopify-account {
+    --shopify-account-color-accent: var(--c-primary-medium);
+    --shopify-account-radius-base: 0;
+    --shopify-account-signed-in-avatar-size: 24px;
+  }
+</style>
+
+{% comment %}
+  <script>
+    // The --shop-brand-color is not available to override,
+    // so if it is desired to change this JavaScript is needed. Lame!
+    setTimeout(() => {
+      const host = document.querySelector('shopify-account');
+
+      if (host && host.shadowRoot) {
+        const element = host.shadowRoot.querySelector('#shopify-element-wrapper');
+        if (element) {
+          element.style.setProperty('--shop-brand-color', '#ff0000');
+        }
+      } else {
+        console.error('Shadow host <shopify-account> not found or its shadowRoot is closed.');
+      }
+    }, 250);
+  </script>
+{% endcomment %}
+
 {% schema %}
 {
   "name": "Header",
@@ -137,6 +178,12 @@
       "id": "menu",
       "default": "main-menu",
       "label": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "customer_account_menu",
+      "default": "customer-account-main-menu",
+      "label": "t:settings.customer_account_menu"
     }
   ]
 }

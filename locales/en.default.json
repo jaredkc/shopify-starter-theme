@@ -49,6 +49,9 @@
       "reset": "Clear search term"
     }
   },
+  "labels": {
+    "customer_account_menu": "Customer account menu"
+  },
   "blogs": {
     "article": {
       "blog": "Blog",
