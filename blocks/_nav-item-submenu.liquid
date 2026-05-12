@@ -65,7 +65,6 @@
       }
     }
 
-    /** Outside click + Escape while open (Escape bubbles here before `header-navigation`). */
     attachOpenListeners() {
       document.removeEventListener('pointerdown', this.onOutsidePointerDown, true);
       document.addEventListener('pointerdown', this.onOutsidePointerDown, true);
@@ -98,7 +97,6 @@
       summary.setAttribute('aria-expanded', this.details.hasAttribute('open') ? 'true' : 'false');
     }
 
-    /** Max transition duration in ms from computed styles (handles `transform` + `opacity`). */
     getSubnavTransitionMs() {
       if (!this.subnav) return 0;
       const raw = getComputedStyle(this.subnav).transitionDuration;
@@ -125,8 +123,10 @@
     finalizeClose() {
       this.clearCloseTimers();
       if (this.subnav) this.subnav.classList.remove('subnav--open', 'subnav--closing');
+      const returnFocus = this.subnav?.contains(document.activeElement);
       if (this.details?.hasAttribute('open')) this.details.removeAttribute('open');
       this.syncSummaryExpanded();
+      if (returnFocus) this.details?.querySelector('summary')?.focus();
     }
 
     onTransitionEnd(event) {
@@ -150,8 +150,13 @@
     animateOpen() {
       if (!this.subnav) return;
       this.subnav.classList.remove('subnav--open', 'subnav--closing');
-      this.subnav.offsetHeight;
-      requestAnimationFrame(() => this.subnav.classList.add('subnav--open'));
+      // Double rAF: first frame commits the opacity-0 starting state painted by
+      // the [open] CSS rule; second frame triggers the transition into subnav--open.
+      // A single rAF (or offsetHeight alone) isn't reliable on first open because
+      // the toggle event fires before the browser has committed a paint frame.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => this.subnav?.classList.add('subnav--open'));
+      });
     }
 
     close() {
